@@ -18,3 +18,9 @@ RoxygenReady("~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R")
 
 
 # Setup ------------------------
+remotes::install_github('yonicd/sinew')
+require('sinew')
+makeOxyFile("~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R", overwrite = FALSE)
+
+
+
