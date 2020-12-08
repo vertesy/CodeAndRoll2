@@ -1350,7 +1350,7 @@ movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling averag
 }
 
 
-movingAve2 <- function(x,n = 5) {filter(x,rep(1/n,n), sides = 2)}
+movingAve2 <- function(x,n = 5) {filter(x,rep(1/n,n), sides = 2)} # Calculates the moving / rolling average of a numeric vector, using filter().
 
 movingSEM <- function(x, oneSide = 5) { # Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
   y = NULL
