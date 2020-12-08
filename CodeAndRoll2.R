@@ -51,7 +51,6 @@ print("Depends on MarkdownReports, gtools, readr, gdata, clipr. Some functions d
 
 
 # Alisases ----------------
-TitleCase = tools::toTitleCase
 sort.natural = gtools::mixedsort
 p0 = paste0
 l = length
@@ -301,6 +300,10 @@ write_clip.replace.dot <- function(var = df.markers, decimal_mark = ',') { # Cli
 
 ## Vector operations -------------------------------------------------------------------------------------------------
 
+trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combination of head() and tail() to see both ends.
+
+sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
+
 sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(string, pattern = pattern, n = n) } # Alias for str_split_fixed in the stringr package
 
 topN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 5)   { head(sort(df_Col, decreasing = TRUE), n = n) } # Find the n highest values in a named vector
@@ -454,6 +457,28 @@ zigzagger <- function(vec = 1:9) { # mix entries so that they differ
   intermingle2vec(vec, rev(vec))[1:length(vec)]
 }
 
+numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log10( max(abs(x), abs(y)) ) ) + 1) { # numerate from x to y with additonal zeropadding
+  z = x:y
+  if (zeropadding) { z = stringr::str_pad(z, pad = 0, width = pad_length)   }
+  return(z)
+}
+# (numerate(1, 122))
+
+
+MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) { # find second (third…) highest/lowest value in vector
+  topN = topN - 1
+  n <- length(vec)
+  sort(vec, partial = n - topN)[n - topN]
+}
+# https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column
+
+
+cumsubtract <- function(numericV = blanks) { # Cumulative subtraction, opposite of cumsum()
+  DiffZ = numericV[-1] - numericV[-length(numericV)]
+  print(table(DiffZ))
+  DiffZ
+}
+
 
 ### Vector filtering  -------------------------------------------------------------------------------------------------
 
@@ -540,15 +565,108 @@ simplify_categories <- function(category_vec, replaceit , to ) { # Replace every
   return(category_vec)
 }
 
-
-## Matrix operations -------------------------------------------------------------------------------------------------
-rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
-  if (clockwise) { t( apply(x, 2, rev))  #first reverse, then transpose, it's the same as rotate 90 degrees
-  } else {apply( t(x), 2, rev)}  #first transpose, then reverse, it's the same as rotate -90 degrees:
+lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
+  ls_out = as.list( c(ln_needle = length(needle), ln_haystack = length(haystack), ln_hits = "",  hit_poz = "", hits = "") )
+  Findings = numeric(0)
+  ln_needle = length(needle)
+  if (exact) {
+    for (i in 1:ln_needle) {      Findings = c(Findings, which(haystack == needle[i]) )    } # for
+  } else {
+    for (i in 1:ln_needle) {      Findings = c(Findings, grep(needle[i], haystack,  ignore.case = TRUE, perl = FALSE))    } # for
+  } # exact or partial match
+  ls_out$'hit_poz' = Findings
+  ls_out$'ln_hits' = length(Findings)
+  ls_out$'hits' = haystack[Findings]
+  if (length(Findings)) { ls_out$'nonhits' = haystack[-Findings]
+  } else {      ls_out$'nonhits' = haystack }
+  if (report) {
+    llprint(length(Findings), "/", ln_needle, '(', percentage_formatter(length(Findings)/ln_needle)
+            , ") of", substitute(needle), "were found among", length(haystack), substitute(haystack), "." )
+    if (length(Findings)) { llprint( substitute(needle), "findings: ", paste( haystack[Findings], sep = " " ) ) }
+  } else { iprint(length(Findings), "Hits:", haystack[Findings]) } # if (report)
+  return(ls_out)
 }
 
-sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column of a numeric matrix / data frame.
 
+
+## String operations  -------------------------------------------------------------------------------------------------
+parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value from a number to a string.
+
+eval_parse_kollapse <- function(...) { # evaluate and parse (dyn_var_caller)
+  substitute(eval(parse(text = kollapse( ... , print = FALSE))))
+}
+
+
+param.list.2.fname <- function(ls.of.params = p) { # Take a list of parameters and parse a string from their names and values.
+  paste(names(ls.of.params), ls.of.params, sep = ".", collapse = "_")
+}
+
+
+PasteDirNameFromFlags <- function(...) { # Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
+  flagList <- c(...)
+  pastedFlagList <- kpp(flagList)
+  CleanDirName <- gsub(x = pastedFlagList, pattern = '[\\..] + ',replacement = '\\.' )
+  return(CleanDirName)
+}
+# PasteDirNameFromFlags("HCAB"
+#                       , flag.nameiftrue(p$'premRNA')
+#                       , flag.nameiftrue(p$"dSample.Organoids")
+#                       , flag.names_list(p$'variables.2.regress')
+#                       ,  flag.nameiftrue(p$'Man.Int.Order') )
+
+
+### File name and path parsing ------------------------------------------------------------------------------------------------
+PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) { # Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
+  flagList <- c(path, ...)
+  pastedFlagList <- kpp(flagList)
+  CleanDirName <- gsub(x = pastedFlagList, pattern = '[\\..] + ',replacement = '\\.' )
+  # pastedOutDir <- kpps(path, CleanDirName, "/")
+  pastedOutDir <- p0(CleanDirName, "/")
+  CleanDirName <- gsub(x = pastedOutDir, pattern = '[//] + ',replacement = '/' )
+  return(CleanDirName)
+}
+# PasteOutdirFromFlags("~/Dropbox/Abel.IMBA/AnalysisD/HCAB"
+#                      , flag.nameiftrue(p$'premRNA')
+#                      , flag.nameiftrue(p$"dSample.Organoids")
+#                      , flag.names_list(p$'variables.2.regress')
+#                      ,  flag.nameiftrue(p$'Man.Int.Order') )
+
+flag.name_value <- function(toggle, Separator = "_") { # Returns the name and its value, if its not FALSE.
+  if (!isFALSE(toggle)) {
+    output = paste(substitute(toggle), toggle, sep = Separator)
+    if (length(output) > 1) output = output[length(output)]  # fix for when input is a list element like p$'myparam'
+    return(output)
+  }
+}
+# Xseed = p$'seed' = F; flag.name_value(Xseed); flag.name_value(p$'seed')
+
+flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = "") { # Returns the name and its value, if its TRUE.
+  output = if (toggle) { paste0(prefix, (substitute(toggle)), suffix)
+  } else {paste0(prefix, name.if.not, suffix)}
+  if (length(output) > 1) output = output[length(output)]  # fix for when input is a list element like p$'myparam'
+  return(output)
+} # returns the name if its value is true
+nameiftrue = flag.nameiftrue # backward compatible
+
+flag.names_list <- function(par = p$'umap.min_dist') { # Returns the name and value of each element in a list of parameters.
+  if (length(par)) paste(substitute(par), kppu(par) , sep = "_")[[3]]
+};  # param.list.flag(par = p$umap.n_neighbors)
+
+
+flag.names_list.all.new <- function(pl = p.hm) { # Returns the name and value of each element in a list of parameters.
+  # if (length(pl)) paste(kppu(names(pl)), kppu(pl) , sep = "_")
+  if (length(pl)) kppd(paste(names(pl), pl, sep = "_"))
+}
+
+
+param.list.flag <- function(par = p$'umap.min_dist') { # Returns the name and value of each element in a list of parameters.
+  paste(substitute(par), par, sep = "_")[[3]]
+};  # param.list.flag(par = p$umap.n_neighbors)
+
+
+## Matrix operations -------------------------------------------------------------------------------------------------
+
+### Matrix calculations  -------------------------------------------------------------------------------------------------
 rowMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, median, na.rm = na.rm) # Calculates the median of each row of a numeric matrix / data frame.
 colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm = na.rm) # Calculates the median of each column of a numeric matrix / data frame.
 
@@ -579,27 +697,6 @@ colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile, ..., na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
 colquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 2, quantile, ..., na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
 
-row.Zscore <- function(DF) t(scale(t(DF))) # Calculate Z-score over rows of data frame.
-
-# Auto correlation functions
-rowACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 1, acf, na.action = na_pass,  plot = plot, ...)} # RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-colACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 2, acf, na.action = na_pass,  plot = plot, ...)} # RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-
-
-acf.exactLag <- function(x, lag = 1, na_pass = na.pass, plot = FALSE, ... ) { # Autocorrelation with exact lag
-  x = acf(x, na.action = na_pass,  plot = plot, ...)
-  x[['acf']][(lag + 1)]
-}
-
-rowACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) { # RETURNS A Vector for the "lag" based autocorrelation. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-  signif(apply(x, 1, acf.exactLag, lag = lag, plot = plot, ...), digits = 2)
-}
-
-colACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) { # RETURNS A Vector for the "lag" based autocorrelation. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-  signif(apply(x, 2, acf.exactLag, lag = lag, plot = plot, ...), digits = 2)
-}
-
-
 colDivide <- function(mat, vec) { # divide by column # See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
   stopifnot(NCOL(mat) == length(vec))
   mat / vec[col(mat)] # fastest
@@ -609,7 +706,6 @@ colMutliply <- function(mat, vec) { # Mutliply by column # See more: https://sta
   stopifnot(NCOL(mat) == length(vec))
   mat * vec[col(mat)] # fastest
 }
-
 
 
 rowDivide <- function(mat, vec) { # divide by row
@@ -622,37 +718,7 @@ rowMutliply <- function(mat, vec) { # Mutliply by row
   mat * vec[row(mat)] # fastest
 }
 
-sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { # Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
-  if (length(colname_in_df) > 1) { print("cannot handle multi column sort") }
-  else {df[ order(df[, colname_in_df], decreasing = decrease, na.last = na_last), ]}
-}
-
-rowNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a plot (where you have different number of NA-values in each row).
-  matrix(rep(rownames(mat_w_dimnames), ncol(mat_w_dimnames) ), nrow = nrow(mat_w_dimnames), ncol = ncol(mat_w_dimnames))
-}
-
-colNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, where every entry is replaced by the corresponding column name. Useful if you want to color by column name in a plot (where you have different number of NA-values in each column).
-  x = rep(colnames(mat_w_dimnames), nrow(mat_w_dimnames) )
-  t(matrix(x, nrow = ncol(mat_w_dimnames), ncol = nrow(mat_w_dimnames)))
-}
-
-colsplit <- function(df, f = colnames(df)) { # split a data frame by a factor corresponding to columns.
-  ListOfDFs = NULL
-  levelz = unique(f)
-  for (i in 1:length(levelz)) {   ListOfDFs[[i]] = df[ , which(f == levelz[i]) ]  }
-  names(ListOfDFs) = levelz
-  return(ListOfDFs)
-}
-splitByCol = colsplit
-
-rowsplit <- function(df, f = rownames(df)) { # split a data frame by a factor corresponding to columns.
-  ListOfDFs = NULL
-  levelz = unique(f)
-  for (i in 1:length(levelz)) {   ListOfDFs[[i]] = df[ which(f == levelz[i]), ]  }
-  names(ListOfDFs) = levelz
-  return(ListOfDFs)
-}
-
+row.Zscore <- function(DF) t(scale(t(DF))) # Calculate Z-score over rows of data frame.
 
 TPM_normalize <- function(mat, SUM = 1e6) { # normalize each column to 1 million
   cs = colSums(mat, na.rm = TRUE)
@@ -675,10 +741,81 @@ mean_normalize <- function(mat) { # normalize each column to the median of the c
   return(norm_mat)
 }
 
+### Distance and correlation calculations --------------
+eucl.dist.pairwise <- function(df2col) { # Calculate pairwise euclidean distance
+  dist_ = abs(df2col[,1] - df2col[,2]) / sqrt(2)
+  if (!is.null(rownames(df2col)))   names(dist_) = rownames(df2col)
+  dist_
+}
+
+sign.dist.pairwise <- function(df2col) { # Calculate absolute value of the pairwise euclidean distance
+  dist_ = abs(df2col[,1] - df2col[,2]) / sqrt(2)
+  if (!is.null(rownames(df2col)))   names(dist_) = rownames(df2col)
+  dist_
+}
+
+# Auto correlation functions
+rowACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 1, acf, na.action = na_pass,  plot = plot, ...)} # RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix / data frame.
+colACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 2, acf, na.action = na_pass,  plot = plot, ...)} # RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix / data frame.
+
+acf.exactLag <- function(x, lag = 1, na_pass = na.pass, plot = FALSE, ... ) { # Autocorrelation with exact lag
+  x = acf(x, na.action = na_pass,  plot = plot, ...)
+  x[['acf']][(lag + 1)]
+}
+
+rowACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) { # RETURNS A Vector for the "lag" based autocorrelation. Calculates the autocorrelation of each row of a numeric matrix / data frame.
+  signif(apply(x, 1, acf.exactLag, lag = lag, plot = plot, ...), digits = 2)
+}
+
+colACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) { # RETURNS A Vector for the "lag" based autocorrelation. Calculates the autocorrelation of each row of a numeric matrix / data frame.
+  signif(apply(x, 2, acf.exactLag, lag = lag, plot = plot, ...), digits = 2)
+}
+
+
+### Matrix manipulations -------------------------------------------------------------------------------------------------
+rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
+  if (clockwise) { t( apply(x, 2, rev))  #first reverse, then transpose, it's the same as rotate 90 degrees
+  } else {apply( t(x), 2, rev)}  #first transpose, then reverse, it's the same as rotate -90 degrees:
+}
+
+sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column of a numeric matrix / data frame.
+
+sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { # Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
+  if (length(colname_in_df) > 1) { print("cannot handle multi column sort") }
+  else {df[ order(df[, colname_in_df], decreasing = decrease, na.last = na_last), ]}
+}
+
+rowNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a plot (where you have different number of NA-values in each row).
+  matrix(rep(rownames(mat_w_dimnames), ncol(mat_w_dimnames) ), nrow = nrow(mat_w_dimnames), ncol = ncol(mat_w_dimnames))
+}
+
+colNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, where every entry is replaced by the corresponding column name. Useful if you want to color by column name in a plot (where you have different number of NA-values in each column).
+  x = rep(colnames(mat_w_dimnames), nrow(mat_w_dimnames) )
+  t(matrix(x, nrow = ncol(mat_w_dimnames), ncol = nrow(mat_w_dimnames)))
+}
+
 rownames.trimws <- function(matrix1) { # trim whitespaces from the rownames
   rownames(matrix1) = trimws(rownames(matrix1))
   return(matrix1)
 }
+
+colsplit <- function(df, f = colnames(df)) { # split a data frame by a factor corresponding to columns.
+  ListOfDFs = NULL
+  levelz = unique(f)
+  for (i in 1:length(levelz)) {   ListOfDFs[[i]] = df[ , which(f == levelz[i]) ]  }
+  names(ListOfDFs) = levelz
+  return(ListOfDFs)
+}
+splitByCol = colsplit
+
+rowsplit <- function(df, f = rownames(df)) { # split a data frame by a factor corresponding to columns.
+  ListOfDFs = NULL
+  levelz = unique(f)
+  for (i in 1:length(levelz)) {   ListOfDFs[[i]] = df[ which(f == levelz[i]), ]  }
+  names(ListOfDFs) = levelz
+  return(ListOfDFs)
+}
+
 
 select.rows.and.columns <- function(df, RowIDs = NULL, ColIDs = NULL ) { # Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they aren't found.
   if (length(RowIDs)) {
@@ -737,7 +874,7 @@ combine.matrices.intersect <- function(matrix1, matrix2, k = 2) { # combine matr
   iprint("dim:", dim(merged)); return(merged)
 }
 
-# NEW
+
 merge_dfs_by_rn <- function(list_of_dfs) { # Merge any data frames by rownames. Required plyr package
   for (i in names(list_of_dfs) ) { colnames(list_of_dfs[[i]]) <- paste0(i,'.',colnames(list_of_dfs[[i]])) } # make unique column names
   for (i in names(list_of_dfs) ) { list_of_dfs[[i]]$rn <- rownames(list_of_dfs[[i]]) } #for
@@ -767,54 +904,6 @@ merge_numeric_df_by_rn <- function(x, y) { # Merge 2 numeric data frames by rown
   return(merged)
 }
 
-attach_w_rownames <- function(df_w_dimnames, removePreviousVariables = FALSE) { # Take a data frame (of e.g. metadata) from your memory space, split it into vectors so you can directly use them. E.g.: Instead of metadata$color[blabla] use color[blabla]
-  if (removePreviousVariables) { rm(list = colnames(df_w_dimnames), envir = .GlobalEnv); print("removed") }
-  if (!is.null(rownames(df_w_dimnames)) & !is.null(colnames(df_w_dimnames))) {
-    namez = rownames(df_w_dimnames)
-    iprint("Now directly available in the workspace:      ", colnames(df_w_dimnames))
-    attach(df_w_dimnames)
-    for (n in colnames(df_w_dimnames)) {
-      # x = get(n); # it failed at some point in some columns for unknown reason??
-      x = df_w_dimnames[, n]
-      names(x) = namez
-      assign(n, x, envir = .GlobalEnv) } # for
-  } else {print("ERROR: the DF does not have some of the dimnames!")}
-}
-
-panel.cor.pearson <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method = "pearson") { # A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
-  usr <- par("usr"); on.exit(par(usr))
-  par(usr = c(0, 1, 0, 1))
-  r <- abs(cor(x, y, method = method, use = "complete.obs"))
-  txt <- format(c(r, 0.123456789), digits = digits)[1]
-  txt <- paste(prefix, txt, sep = "")
-  if (missing(cex.cor)) cex <- 0.8/strwidth(txt)
-
-  test <- cor.test(x, y)
-  Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
-                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
-                   symbols = c("***", "**", "*", ".", " "))
-
-  text(0.5, 0.5, txt, cex = cex * r)
-  text(.8, .8, Signif, cex = cex,  col = 2)
-}
-
-panel.cor.spearman <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method = "spearman") { # A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
-  usr <- par("usr"); on.exit(par(usr))
-  par(usr = c(0, 1, 0, 1))
-  r <- abs(cor(x, y, method = method, use = "complete.obs"))
-  txt <- format(c(r, 0.123456789), digits = digits)[1]
-  txt <- paste(prefix, txt, sep = "")
-  if (missing(cex.cor)) cex <- 0.8/strwidth(txt)
-
-  test <- cor.test(x, y)
-  Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
-                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
-                   symbols = c("***", "**", "*", ".", " "))
-
-  text(0.5, 0.5, txt, cex = cex * r)
-  text(.8, .8, Signif, cex = cex, col = 2)
-}
-
 
 remove.na.rows <- function(mat, cols = 1:NCOL(mat)) { # cols have to be a vector of numbers corresponding to columns
   mat2 = mat[ , cols]
@@ -836,10 +925,12 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 }
 
 
-any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
+
 
 
 ## List operations -------------------------------------------------------------------------------------------------
+any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
+
 intersect.ls <- function(ls, ...) { Reduce(intersect, ls) } # Intersect any number of lists.
 
 union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) } # Intersect any number of list elements. Faster than reduce.
@@ -1014,7 +1105,15 @@ ls2categvec <- function(your_list ) { # Convert a list to a vector repeating lis
 }
 
 
-## Work with multi dimensional lists --------------------------------
+list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
+  NZ = names(ListWithNames)
+  LZ = unlapply(ListWithNames, length)
+  replicated.name.vec = rep(NZ, LZ)
+  names(replicated.name.vec) = unlist(ListWithNames)
+  return(replicated.name.vec)
+}
+
+### Work with multi dimensional lists --------------------------------
 
 copy.dimension.and.dimnames <- function(list.1D, obj.2D) { # copy dimension and dimnames
   dim(list.1D) <- dim(obj.2D)
@@ -1054,7 +1153,7 @@ symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of v
   lapply(ls, function(x) setdiff(x, duplicates))
 }
 
-## Math $ stats -------------------------------------------------------------------------------------------------
+## Math & stats -------------------------------------------------------------------------------------------------
 
 sem <- function(x, na.rm = TRUE) sd(unlist(x), na.rm = na.rm)/sqrt(length(na.omit.strip(as.numeric(x))))  # Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
 
@@ -1095,121 +1194,9 @@ imovingSEM <- function(x, oneSide = 5) { # Calculates the moving / rolling stand
   };  return(y)
 }
 
-## String operations  -------------------------------------------------------------------------------------------------
-eval_parse_kollapse <- function(...) { # evaluate and parse (dyn_var_caller)
-  substitute(eval(parse(text = kollapse( ... , print = FALSE))))
-}
-
-lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
-  ls_out = as.list( c(ln_needle = length(needle), ln_haystack = length(haystack), ln_hits = "",  hit_poz = "", hits = "") )
-  Findings = numeric(0)
-  ln_needle = length(needle)
-  if (exact) {
-    for (i in 1:ln_needle) {      Findings = c(Findings, which(haystack == needle[i]) )    } # for
-  } else {
-    for (i in 1:ln_needle) {      Findings = c(Findings, grep(needle[i], haystack,  ignore.case = TRUE, perl = FALSE))    } # for
-  } # exact or partial match
-  ls_out$'hit_poz' = Findings
-  ls_out$'ln_hits' = length(Findings)
-  ls_out$'hits' = haystack[Findings]
-  if (length(Findings)) { ls_out$'nonhits' = haystack[-Findings]
-  } else {      ls_out$'nonhits' = haystack }
-  if (report) {
-    llprint(length(Findings), "/", ln_needle, '(', percentage_formatter(length(Findings)/ln_needle)
-           , ") of", substitute(needle), "were found among", length(haystack), substitute(haystack), "." )
-    if (length(Findings)) { llprint( substitute(needle), "findings: ", paste( haystack[Findings], sep = " " ) ) }
-  } else { iprint(length(Findings), "Hits:", haystack[Findings]) } # if (report)
-  return(ls_out)
-}
-
-
-## Colors -----------------------------------------------------------------------------------------------------
-richColors <- function(n = 3) { gplots::rich.colors(n) } # Alias for rich.colors in gplots
-
-
-Color_Check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) { # Display the colors encoded by the numbers / color-ID-s you pass on to this function
-  if (incrBottMarginBy) { .ParMarDefault <- par("mar");   par(mar = c(par("mar")[1] + incrBottMarginBy, par("mar")[2:4]) ) }  # Tune the margin
-  Numbers = c(...)
-  if (length(names(Numbers)) == length(Numbers)) {labelz = names(Numbers)} else {labelz = Numbers}
-  barplot(rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
-  if (incrBottMarginBy) { par("mar" = .ParMarDefault )}
-
-  fname = substitute(...)
-  if (savefile) { dev.copy2pdf(file = ww.FnP_parser(fname, "ColorCheck.pdf")) }
-}
-
-HeatMapCol_BGR <- grDevices::colorRampPalette(c("blue", "cyan", "yellow", "red"), bias = 1)
-# HeatMapCol_BWR <- grDevices::colorRampPalette(c("blue", "white", "red"), bias = 1)
-HeatMapCol_RedBlackGreen <- grDevices::colorRampPalette(c("red", "black", "green"), bias = 1)
-
-## Plotting and Graphics -----------------------------------------------------------------------------------------------------
-colSums.barplot <- function(df, col = "seagreen2", na_rm = TRUE, ...) { barplot(colSums(df, na.rm = na_rm), col = col, ...) } # Draw a barplot from ColSums of a matrix.
-
-lm_equation_formatter <- function(lm) { # Renders the lm() function's output into a human readable text. (e.g. for subtitles)
-  eq = signif(lm$coefficients);
-  kollapse("Intercept: ", eq[1], " Slope: ", eq[2]);
-}
-
-lm_equation_formatter2 <- function(lm) { # Renders the lm() function's output into a human readable text. (e.g. for subtitles)
-  eq = signif(lm$coefficients, digits = 3);
-  kollapse("y = ", eq[2], "* x + ", eq[1]);
-}
-
-lm_equation_formatter3 <- function(lm, y.var.name = "y", x.var.name = "x") { # Renders the lm() function's output into a human readable text. (e.g. for subtitles)
-  eq = signif(lm$coefficients, digits = 3);
-  plusSign = if (sign(eq[1] == 1)) "" else "-"
-  kollapse(y.var.name, " = ", eq[2], "*",x.var.name," ",plusSign,"", eq[1]);
-}
-
-hist.XbyY <- function(dfw2col = NULL, toSplit = 1:100, splitby = rnorm(100), breaks_ = 20 ) { # Split a one variable by another. Calculates equal bins in splitby, and returns a list of the corresponding values in toSplit.
-  # http://stackoverflow.com/questions/8853735/get-index-of-the-histogram-bin-in-r
-  if (NCOL(dfw2col) == 2) { toSplit = dfw2col[ , 1]; splitby = dfw2col[ , 2]; print(11) }
-  xx = hist(splitby, breaks = breaks_, plot = TRUE)
-  IDX = findInterval(x = splitby, vec = xx$breaks)
-  ls = split(toSplit, IDX)
-  iprint("Range of data:", range(xx$breaks))
-  names(ls) = xx$breaks[-1]
-  return(ls)
-}#  ll = hist.XbyY(); wbarplot(unlapply(ll, length))
-
-
-flag.name_value <- function(toggle, Separator = "_") { # Returns the name and its value, if its not FALSE.
-  if (!isFALSE(toggle)) {
-    output = paste(substitute(toggle), toggle, sep = Separator)
-    if (length(output) > 1) output = output[length(output)]  # fix for when input is a list element like p$'myparam'
-    return(output)
-  }
-}
-# Xseed = p$'seed' = F; flag.name_value(Xseed); flag.name_value(p$'seed')
-
-flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = "") { # Returns the name and its value, if its TRUE.
-  output = if (toggle) { paste0(prefix, (substitute(toggle)), suffix)
-  } else {paste0(prefix, name.if.not, suffix)}
-  if (length(output) > 1) output = output[length(output)]  # fix for when input is a list element like p$'myparam'
-  return(output)
-} # returns the name if its value is true
-nameiftrue = flag.nameiftrue # backward compatible
-
-flag.names_list <- function(par = p$'umap.min_dist') { # Returns the name and value of each element in a list of parameters.
-  if (length(par)) paste(substitute(par), kppu(par) , sep = "_")[[3]]
-};  # param.list.flag(par = p$umap.n_neighbors)
-
-
-flag.names_list.all.new <- function(pl = p.hm) { # Returns the name and value of each element in a list of parameters.
-  # if (length(pl)) paste(kppu(names(pl)), kppu(pl) , sep = "_")
-  if (length(pl)) kppd(paste(names(pl), pl, sep = "_"))
-}
-
-
-param.list.flag <- function(par = p$'umap.min_dist') { # Returns the name and value of each element in a list of parameters.
-  paste(substitute(par), par, sep = "_")[[3]]
-};  # param.list.flag(par = p$umap.n_neighbors)
-
-
-
-quantile_breaks <- function(xs, n = 10, na.Rm = FALSE) { # Quantile breakpoints in any data vector http://slowkow.com/notes/heatmap-tutorial/
-  breaks <- quantile(xs, probs = seq(0, 1, length.out = n), na.rm = na.Rm)
-  breaks[!duplicated(breaks)]
+shannon.entropy <- function(p) { # Calculate shannon entropy
+  if (min(p) < 0 || sum(p) <= 0) return(NA)
+  p.norm <- p[p > 0]/sum(p) - sum(log2(p.norm)*p.norm)
 }
 
 
@@ -1280,35 +1267,178 @@ table_fixed_categories <- function(vector, categories_vec) { # generate a table(
   table(factor(unlist(vector), levels = categories_vec))
 }
 
+## Plotting and Graphics -----------------------------------------------------------------------------------------------------
 
-## Generic -------------------------------------------------------------------------------------------------
+legend.col <- function(col, lev) { # Legend color. # Source: https://aurelienmadouasse.wordpress.com/2012/01/13/legend-for-a-continuous-color-scale-in-r/
+  opar <- par
+  n <- length(col)
+  bx <- par("usr")
+  box.cx <- c(bx[2] + (bx[2] - bx[1]) / 1000,
+              bx[2] + (bx[2] - bx[1]) / 1000 + (bx[2] - bx[1]) / 50)
+  box.cy <- c(bx[3], bx[3])
+  box.sy <- (bx[4] - bx[3]) / n
+  xx <- rep(box.cx, each = 2)
 
-
-stopif2 <- function(condition, ...) { if (condition) {iprint(...); stop()} } # Stop script if the condition is met. You can parse anything (e.g. variables) in the message
-
-most_frequent_elements <- function(thingy, topN = 10) { # Show the most frequent elements of a table
-  tail(sort(table(thingy, useNA = "ifany")), topN)
+  par(xpd = TRUE)
+  for (i in 1:n) {
+    yy <- c(box.cy[1] + (box.sy * (i - 1)),
+            box.cy[1] + (box.sy * (i)),
+            box.cy[1] + (box.sy * (i)),
+            box.cy[1] + (box.sy * (i - 1)))
+    polygon(xx, yy, col = col[i], border = col[i])
+  }
+  par(new = TRUE)
+  plot(0, 0, type = "n",
+       ylim = c(min(lev), max(lev)),
+       yaxt = "n", ylab = "",
+       xaxt = "n", xlab = "",
+       frame.plot = FALSE)
+  axis(side = 4, las = 2, tick = FALSE, line = .25)
+  par <- opar
+  par(xpd = FALSE)
+  # print("You might need to set par('mar' = c( 5.1, 4.1, 4.1, 2.1)) to higher values.")
 }
 
-top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order
-  head( order(x, decreasing = top), n )
+
+#' val2col
+#'
+#' This function converts a vector of values("yourdata") to a vector of color levels.
+#' One must define the number of colors. The limits of the color scale("zlim") or
+#' the break points for the color changes("breaks") can also be defined.
+#' When breaks and zlim are defined, breaks overrides zlim.
+#' Source: http://menugget.blogspot.nl/2011/09/converting-values-to-color-levels.html
+#' @param yourdata The data, to what the colors will be scaled to.
+#' @param zlim Limits.
+#' @param col Color of the plot.
+#' @param breaks Number of bins.
+#' @param rename The returned color vector will be named with its previous values
+#' @export
+#' @examples val2col (yourdata = rpois(200, 20), zlim = c(0,5),col = rev(heat.colors(100)), breaks = 101  )
+
+
+### CONTAINS A QUICK FIX FOR THE NUMBER OF COLOR LEVELS. See #59 on GitHub ###
+val2col <- function(yourdata, # This function converts a vector of values("yourdata") to a vector of color levels. One must define the number of colors. The limits of the color scale("zlim") or the break points for the color changes("breaks") can also be defined. When breaks and zlim are defined, breaks overrides zlim.
+                    zlim,
+                    col = rev(heat.colors(max(12, 3 * length(unique(yourdata))))),
+                    breaks,
+                    rename = FALSE) {
+  if (!missing(breaks)) {
+    if (length(breaks) != (length(col) + 1)) {
+      stop("must have one more break than color")
+    }
+  }
+  if (missing(breaks) & !missing(zlim)) {
+    breaks <- seq(zlim[1], zlim[2], length.out = (length(col) + 1))
+  }
+  if (missing(breaks) & missing(zlim)) {
+    zlim <- range(yourdata, na.rm = TRUE)
+    zlim[2] <- zlim[2] + c(zlim[2] - zlim[1]) * (0.001)
+    zlim[1] <- zlim[1] - c(zlim[2] - zlim[1]) * (0.001)
+    breaks <- seq(zlim[1], zlim[2], length.out = (length(col) + 1))
+  }
+  colorlevels <- col[((as.vector(yourdata) - breaks[1]) /
+                        (range(breaks)[2] - range(breaks)[1])) * (length(breaks) - 1) + 1]
+  if (length(names(yourdata))) {
+    names(colorlevels) = yourdata
+  }
+
+  if (rename) {
+    names(colorlevels) = yourdata
+  } # works on vectors only"
+  colorlevels
 }
 
-percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercentile = TRUE) { # Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()'s "vline" paramter.
-  index = percentile * length(distribution)
-  if (FirstValOverPercentile) { index = ceiling(index)
-  } else {index = floor(index) }
-  value = sort(distribution)[index]
-  return(value)
+
+### Colors -----------------------------------------------------------------------------------------------------
+richColors <- function(n = 3) { gplots::rich.colors(n) } # Alias for rich.colors in gplots
+
+
+Color_Check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) { # Display the colors encoded by the numbers / color-ID-s you pass on to this function
+  if (incrBottMarginBy) { .ParMarDefault <- par("mar");   par(mar = c(par("mar")[1] + incrBottMarginBy, par("mar")[2:4]) ) }  # Tune the margin
+  Numbers = c(...)
+  if (length(names(Numbers)) == length(Numbers)) {labelz = names(Numbers)} else {labelz = Numbers}
+  barplot(rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
+  if (incrBottMarginBy) { par("mar" = .ParMarDefault )}
+
+  fname = substitute(...)
+  if (savefile) { dev.copy2pdf(file = ww.FnP_parser(fname, "ColorCheck.pdf")) }
+}
+
+HeatMapCol_BGR <- grDevices::colorRampPalette(c("blue", "cyan", "yellow", "red"), bias = 1)
+# HeatMapCol_BWR <- grDevices::colorRampPalette(c("blue", "white", "red"), bias = 1)
+HeatMapCol_RedBlackGreen <- grDevices::colorRampPalette(c("red", "black", "green"), bias = 1)
+
+
+colSums.barplot <- function(df, col = "seagreen2", na_rm = TRUE, ...) { barplot(colSums(df, na.rm = na_rm), col = col, ...) } # Draw a barplot from ColSums of a matrix.
+
+lm_equation_formatter <- function(lm) { # Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+  eq = signif(lm$coefficients);
+  kollapse("Intercept: ", eq[1], " Slope: ", eq[2]);
+}
+
+lm_equation_formatter2 <- function(lm) { # Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+  eq = signif(lm$coefficients, digits = 3);
+  kollapse("y = ", eq[2], "* x + ", eq[1]);
+}
+
+lm_equation_formatter3 <- function(lm, y.var.name = "y", x.var.name = "x") { # Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+  eq = signif(lm$coefficients, digits = 3);
+  plusSign = if (sign(eq[1] == 1)) "" else "-"
+  kollapse(y.var.name, " = ", eq[2], "*",x.var.name," ",plusSign,"", eq[1]);
+}
+
+hist.XbyY <- function(dfw2col = NULL, toSplit = 1:100, splitby = rnorm(100), breaks_ = 20 ) { # Split a one variable by another. Calculates equal bins in splitby, and returns a list of the corresponding values in toSplit.
+  # http://stackoverflow.com/questions/8853735/get-index-of-the-histogram-bin-in-r
+  if (NCOL(dfw2col) == 2) { toSplit = dfw2col[ , 1]; splitby = dfw2col[ , 2]; print(11) }
+  xx = hist(splitby, breaks = breaks_, plot = TRUE)
+  IDX = findInterval(x = splitby, vec = xx$breaks)
+  ls = split(toSplit, IDX)
+  iprint("Range of data:", range(xx$breaks))
+  names(ls) = xx$breaks[-1]
+  return(ls)
+}#  ll = hist.XbyY(); wbarplot(unlapply(ll, length))
+
+### Functions for pairs() plots  -----------------------------------------------------------------------------------------------------
+panel.cor.pearson <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method = "pearson") { # A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r <- abs(cor(x, y, method = method, use = "complete.obs"))
+  txt <- format(c(r, 0.123456789), digits = digits)[1]
+  txt <- paste(prefix, txt, sep = "")
+  if (missing(cex.cor)) cex <- 0.8/strwidth(txt)
+
+  test <- cor.test(x, y)
+  Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
+                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                   symbols = c("***", "**", "*", ".", " "))
+
+  text(0.5, 0.5, txt, cex = cex * r)
+  text(.8, .8, Signif, cex = cex,  col = 2)
+}
+
+panel.cor.spearman <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method = "spearman") { # A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r <- abs(cor(x, y, method = method, use = "complete.obs"))
+  txt <- format(c(r, 0.123456789), digits = digits)[1]
+  txt <- paste(prefix, txt, sep = "")
+  if (missing(cex.cor)) cex <- 0.8/strwidth(txt)
+
+  test <- cor.test(x, y)
+  Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
+                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                   symbols = c("***", "**", "*", ".", " "))
+
+  text(0.5, 0.5, txt, cex = cex * r)
+  text(.8, .8, Signif, cex = cex, col = 2)
 }
 
 
-MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) { # find second (third…) highest/lowest value in vector
-  topN = topN - 1
-  n <- length(vec)
-  sort(vec, partial = n - topN)[n - topN]
+quantile_breaks <- function(xs, n = 10, na.Rm = FALSE) { # Quantile breakpoints in any data vector http://slowkow.com/notes/heatmap-tutorial/
+  breaks <- quantile(xs, probs = seq(0, 1, length.out = n), na.rm = na.Rm)
+  breaks[!duplicated(breaks)]
 }
-# https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column
+
 
 
 
@@ -1422,159 +1552,6 @@ annot_row.create.pheatmap.df <- function(data, annot_df_per_row, annot_names = N
 
 
 
-## New additions -----------------------------------------------------------------------------------------------------
-
-numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log10( max(abs(x), abs(y)) ) ) + 1) { # numerate from x to y with additonal zeropadding
-  z = x:y
-  if (zeropadding) { z = stringr::str_pad(z, pad = 0, width = pad_length)   }
-  return(z)
-}
-# toClipboard(numerate(1, 122))
-
-printEveryN <- function(i, N = 1000) { if ((i %% N) == 0 ) iprint(i) } # Report at every e.g. 1000
-
-
-irequire <- function(package) { package_ = as.character(substitute(package)); print(package_); # Load a package. If it does not exist, try to install it from CRAN.
-if (!require(package = package_,  character.only = TRUE)) {
-  print("Not Installed yet.");install.packages(pkgs = package_);
-  Sys.sleep(1)
-  print("Loading package:")
-  require(package = package_, character.only = TRUE)
-}
-}  # install package if cannot be loaded
-
-
-
-#' IfExistsAndTrue
-#'
-#' Internal function. Checks if a variable is defined, and its value is TRUE.
-#' @param name Name of the varaible
-#' @export
-#' @examples IfExistsAndTrue()
-
-IfExistsAndTrue <- function(name = "pi" ) { # Internal function. Checks if a variable is defined, and its value is TRUE.
-  x = FALSE
-  if (exists(name)) {
-    if (isTRUE(get(name)))  {x = TRUE} else {x = FALSE; iprint(name, " exists, but != TRUE; ", get(name))}
-  }
-  return(x)
-}
-
-filter_InCircle <- function(df2col = cbind(rnorm(100),rnorm(100)) # Find points in/out-side of a circle.
-  , inside = TRUE, r = 1, coloffset = 0, drawCircle = FALSE
-  , center = list(c(0,0), "mean", "median")[[2]], ...) {
-  xi = df2col[ ,1]; yi = df2col[ ,2]
-  if (center == "mean") { x = mean(xi); y = mean(yi)
-  } else if (center == "median") { x = median(xi);  y = median(yi)
-  } else if  (length(center) == 2) { x = center[1]; y = center[1] }
-  side = if (inside) "inside" else "outside"
-  PASS = if (inside) ((xi - x)**2 + (yi - y)**2 < r**2) else ((xi - x)**2 + (yi - y)**2 > r**2)
-  PASSTXT = paste0(pc_TRUE(PASS, NumberAndPC = TRUE), " points are ", side," the circle.")
-  iprint(PASSTXT)
-
-  SMRY = paste0("Radius: ",iround(r)," | Center X, Y = ",iround(c(x , y )) ,"(",center,")")
-  iprint(SMRY)
-  if (drawCircle) plotrix::draw.circle(xi, yi, r, ...)
-  return(PASS + coloffset)
-}
-
-
-cumsubtract <- function(numericV = blanks) { # Cumulative subtraction, opposite of cumsum()
-  DiffZ = numericV[-1] - numericV[-length(numericV)]
-  print(table(DiffZ))
-  DiffZ
-}
-
-trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combination of head() and tail() to see both ends.
-
-sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
-
-
-list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
-  NZ = names(ListWithNames)
-  LZ = unlapply(ListWithNames, length)
-  replicated.name.vec = rep(NZ, LZ)
-  names(replicated.name.vec) = unlist(ListWithNames)
-  return(replicated.name.vec)
-}
-
-
-idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) } # Parse current date, dot separated.
-
-view.head <- function(matrix, enn = 10) { matrix[1:min(NROW(matrix), enn), 1:min(NCOL(matrix), enn)] } # view the head of an object by console.
-view.head2 <- function(matrix, enn = 10) { View(head(matrix, n = min(NROW(matrix), NCOL(matrix), enn))) } # view the head of an object by View().
-
-
-iidentical.names <- function(v1, v2) { # Test if names of two objects for being exactly equal
-  nv1 = names(v1)
-  nv2 = names(v2)
-  len.eq = (length(nv1) == length(nv2))
-  if (!len.eq) iprint("Lenghts differ by:", (length(nv1) - length(nv2)) )
-  Check = identical(nv1, nv2)
-  if (!Check) {
-    diff = setdiff(nv1, nv2)
-    ld = length(diff)
-    iprint(ld, "elements differ: ", head(diff))
-  }
-  Check
-}
-
-iidentical <- function(v1, v2) { # Test if two objects for being exactly equal
-  len.eq = (length(v1) == length(v2))
-  if (!len.eq) iprint("Lenghts differ by:", (length(v1) - length(v2)) )
-  Check = identical(v1,v2)
-  if (!Check) {
-    diff = setdiff(v1, v2)
-    ld = length(diff)
-    iprint(ld, "elements differ: ", head(diff))
-  }
-  Check
-}
-
-iidentical.all <- function(li) all(sapply(li, identical, li[[1]])) # Test if two objects for being exactly equal.
-
-
-parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value from a number to a string.
-
-
-shannon.entropy <- function(p) { # Calculate shannon entropy
-  if (min(p) < 0 || sum(p) <= 0) return(NA)
-  p.norm <- p[p > 0]/sum(p) - sum(log2(p.norm)*p.norm)
-}
-
-legend.col <- function(col, lev) { # Legend color. # Source: https://aurelienmadouasse.wordpress.com/2012/01/13/legend-for-a-continuous-color-scale-in-r/
-  opar <- par
-  n <- length(col)
-  bx <- par("usr")
-  box.cx <- c(bx[2] + (bx[2] - bx[1]) / 1000,
-              bx[2] + (bx[2] - bx[1]) / 1000 + (bx[2] - bx[1]) / 50)
-  box.cy <- c(bx[3], bx[3])
-  box.sy <- (bx[4] - bx[3]) / n
-  xx <- rep(box.cx, each = 2)
-
-  par(xpd = TRUE)
-  for (i in 1:n) {
-    yy <- c(box.cy[1] + (box.sy * (i - 1)),
-            box.cy[1] + (box.sy * (i)),
-            box.cy[1] + (box.sy * (i)),
-            box.cy[1] + (box.sy * (i - 1)))
-    polygon(xx, yy, col = col[i], border = col[i])
-  }
-  par(new = TRUE)
-  plot(0, 0, type = "n",
-       ylim = c(min(lev), max(lev)),
-       yaxt = "n", ylab = "",
-       xaxt = "n", xlab = "",
-       frame.plot = FALSE)
-  axis(side = 4, las = 2, tick = FALSE, line = .25)
-  par <- opar
-  par(xpd = FALSE)
-  # print("You might need to set par('mar' = c( 5.1, 4.1, 4.1, 2.1)) to higher values.")
-}
-
-
-
-
 # Memory management ----------------------------------------------------------------------------------
 # https://stackoverflow.com/questions/17218404/should-i-get-a-habit-of-removing-unused-variables-in-r
 
@@ -1643,129 +1620,88 @@ GC_content <- function(string, len = nchar(string), pattern = c("G","C")) { # GC
 }
 
 
-# Temporary  ------------------------------------------------------------
 
+## Generic -------------------------------------------------------------------------------------------------
 
-#' val2col
-#'
-#' This function converts a vector of values("yourdata") to a vector of color levels.
-#' One must define the number of colors. The limits of the color scale("zlim") or
-#' the break points for the color changes("breaks") can also be defined.
-#' When breaks and zlim are defined, breaks overrides zlim.
-#' Source: http://menugget.blogspot.nl/2011/09/converting-values-to-color-levels.html
-#' @param yourdata The data, to what the colors will be scaled to.
-#' @param zlim Limits.
-#' @param col Color of the plot.
-#' @param breaks Number of bins.
-#' @param rename The returned color vector will be named with its previous values
-#' @export
-#' @examples val2col (yourdata = rpois(200, 20), zlim = c(0,5),col = rev(heat.colors(100)), breaks = 101  )
+stopif2 <- function(condition, ...) { if (condition) {iprint(...); stop()} } # Stop script if the condition is met. You can parse anything (e.g. variables) in the message
 
+most_frequent_elements <- function(thingy, topN = 10) { # Show the most frequent elements of a table
+  tail(sort(table(thingy, useNA = "ifany")), topN)
+}
 
-### CONTAINS A QUICK FIX FOR THE NUMBER OF COLOR LEVELS. See #59 on GitHub ###
-val2col <- function(yourdata, # This function converts a vector of values("yourdata") to a vector of color levels. One must define the number of colors. The limits of the color scale("zlim") or the break points for the color changes("breaks") can also be defined. When breaks and zlim are defined, breaks overrides zlim.
-            zlim,
-            col = rev(heat.colors(max(12, 3 * length(unique(yourdata))))),
-            breaks,
-            rename = FALSE) {
-    if (!missing(breaks)) {
-      if (length(breaks) != (length(col) + 1)) {
-        stop("must have one more break than color")
-      }
-    }
-    if (missing(breaks) & !missing(zlim)) {
-      breaks <- seq(zlim[1], zlim[2], length.out = (length(col) + 1))
-    }
-    if (missing(breaks) & missing(zlim)) {
-      zlim <- range(yourdata, na.rm = TRUE)
-      zlim[2] <- zlim[2] + c(zlim[2] - zlim[1]) * (0.001)
-      zlim[1] <- zlim[1] - c(zlim[2] - zlim[1]) * (0.001)
-      breaks <- seq(zlim[1], zlim[2], length.out = (length(col) + 1))
-    }
-    colorlevels <- col[((as.vector(yourdata) - breaks[1]) /
-                          (range(breaks)[2] - range(breaks)[1])) * (length(breaks) - 1) + 1]
-    if (length(names(yourdata))) {
-      names(colorlevels) = yourdata
-    }
+top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order
+  head( order(x, decreasing = top), n )
+}
 
-    if (rename) {
-      names(colorlevels) = yourdata
-    } # works on vectors only"
-    colorlevels
+percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercentile = TRUE) { # Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()'s "vline" paramter.
+  index = percentile * length(distribution)
+  if (FirstValOverPercentile) { index = ceiling(index)
+  } else {index = floor(index) }
+  value = sort(distribution)[index]
+  return(value)
+}
+
+printEveryN <- function(i, N = 1000) { if ((i %% N) == 0 ) iprint(i) } # Report at every e.g. 1000
+
+irequire <- function(package) { package_ = as.character(substitute(package)); print(package_); # Load a package. If it does not exist, try to install it from CRAN.
+if (!require(package = package_,  character.only = TRUE)) {
+  print("Not Installed yet.");install.packages(pkgs = package_);
+  Sys.sleep(1)
+  print("Loading package:")
+  require(package = package_, character.only = TRUE)
+}
+}  # install package if cannot be loaded
+
+idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) } # Parse current date, dot separated.
+
+view.head <- function(matrix, enn = 10) { matrix[1:min(NROW(matrix), enn), 1:min(NCOL(matrix), enn)] } # view the head of an object by console.
+view.head2 <- function(matrix, enn = 10) { View(head(matrix, n = min(NROW(matrix), NCOL(matrix), enn))) } # view the head of an object by View().
+
+iidentical.names <- function(v1, v2) { # Test if names of two objects for being exactly equal
+  nv1 = names(v1)
+  nv2 = names(v2)
+  len.eq = (length(nv1) == length(nv2))
+  if (!len.eq) iprint("Lenghts differ by:", (length(nv1) - length(nv2)) )
+  Check = identical(nv1, nv2)
+  if (!Check) {
+    diff = setdiff(nv1, nv2)
+    ld = length(diff)
+    iprint(ld, "elements differ: ", head(diff))
   }
+  Check
+}
 
+iidentical <- function(v1, v2) { # Test if two objects for being exactly equal
+  len.eq = (length(v1) == length(v2))
+  if (!len.eq) iprint("Lenghts differ by:", (length(v1) - length(v2)) )
+  Check = identical(v1,v2)
+  if (!Check) {
+    diff = setdiff(v1, v2)
+    ld = length(diff)
+    iprint(ld, "elements differ: ", head(diff))
+  }
+  Check
+}
 
+iidentical.all <- function(li) all(sapply(li, identical, li[[1]])) # Test if two objects for being exactly equal.
 
-param.list.2.fname <- function(ls.of.params = p) { # Take a list of parameters and parse a string from their names and values.
-  paste(names(ls.of.params), ls.of.params, sep = ".", collapse = "_")
+#' IfExistsAndTrue
+#'
+#' Internal function. Checks if a variable is defined, and its value is TRUE.
+#' @param name Name of the varaible
+#' @export
+#' @examples IfExistsAndTrue()
+
+IfExistsAndTrue <- function(name = "pi" ) { # Internal function. Checks if a variable is defined, and its value is TRUE.
+  x = FALSE
+  if (exists(name)) {
+    if (isTRUE(get(name)))  {x = TRUE} else {x = FALSE; iprint(name, " exists, but != TRUE; ", get(name))}
+  }
+  return(x)
 }
 
 
-# -------------------------------------------------------------------------------------------------
-# SwapValues <- function(x,y) { # A handy function for swapping a vector with another values. Based on https://stackoverflow.com/questions/32585753/r-swap-two-variables-without-using-a-third
-#   iprint(substitute(x), substitute(y),"swapped values")
-#   ls.swap <- list(y, x)
-#   names(ls.swap) <- c(substitute(x), substitute(y))
-#   # list2env(ls.swap, envir = as.environment(environment()));
-#   list2env(ls.swap, envir = .GlobalEnv);
-#   "Bad - overwrites global env. needs fix"
-# }
-# SwapValues(x = height, y = width); height; width
-
-eucl.dist.pairwise <- function(df2col) { # Calculate pairwise euclidean distance
-  dist_ = abs(df2col[,1] - df2col[,2]) / sqrt(2)
-  if (!is.null(rownames(df2col)))   names(dist_) = rownames(df2col)
-  dist_
-}
-
-sign.dist.pairwise <- function(df2col) { # Calculate absolute value of the pairwise euclidean distance
-  dist_ = abs(df2col[,1] - df2col[,2]) / sqrt(2)
-  if (!is.null(rownames(df2col)))   names(dist_) = rownames(df2col)
-  dist_
-}
-
-# ------------------------------------------------------------------------------------------------
-
-PasteDirNameFromFlags <- function(...) { # Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
-  flagList <- c(...)
-  pastedFlagList <- kpp(flagList)
-  CleanDirName <- gsub(x = pastedFlagList, pattern = '[\\..] + ',replacement = '\\.' )
-  return(CleanDirName)
-}
-# PasteDirNameFromFlags("HCAB"
-#                       , flag.nameiftrue(p$'premRNA')
-#                       , flag.nameiftrue(p$"dSample.Organoids")
-#                       , flag.names_list(p$'variables.2.regress')
-#                       ,  flag.nameiftrue(p$'Man.Int.Order') )
-
-# ------------------------------------------------------------------------------------------------
-PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) { # Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
-  flagList <- c(path, ...)
-  pastedFlagList <- kpp(flagList)
-  CleanDirName <- gsub(x = pastedFlagList, pattern = '[\\..] + ',replacement = '\\.' )
-  # pastedOutDir <- kpps(path, CleanDirName, "/")
-  pastedOutDir <- p0(CleanDirName, "/")
-  CleanDirName <- gsub(x = pastedOutDir, pattern = '[//] + ',replacement = '/' )
-  return(CleanDirName)
-}
-# PasteOutdirFromFlags("~/Dropbox/Abel.IMBA/AnalysisD/HCAB"
-#                      , flag.nameiftrue(p$'premRNA')
-#                      , flag.nameiftrue(p$"dSample.Organoids")
-#                      , flag.names_list(p$'variables.2.regress')
-#                      ,  flag.nameiftrue(p$'Man.Int.Order') )
-
-
-
-# backup.obj <- function(obj) {
-#
-# }
+# Temporary  ------------------------------------------------------------
 
 # TMP ------------------------------------------------------------------------------------------------
 
-
-AddTrailingSlash <- function(string = InputD) {#
-  LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "/")
-    string = paste0(string, "/")
-  return(string)
-}
