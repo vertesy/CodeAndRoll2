@@ -5,14 +5,15 @@
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
 
 ## If something is not found:
-source("~/Github/TheCorvinas/R/RNA_seq_specific_functions.r")
+# try(source("https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpress.functions.R"), silent = T)
+
+# try(source("~/Github/TheCorvinas/R/RNA_seq_specific_functions.r"), silent = T)
 ## For Plotting From Clipboard or Files
 # source("~/Github/TheCorvinas/R/Plotting.From.Clipboard.And.Files.r")
 # # Load sequence length and base distribution check
 # source("~/Github/TheCorvinas/R/Gene.Stats.mm10.R")
 suppressMessages(try(require(clipr), silent = T))
 try(require(ggplot2),silent = T)
-
 
 
 ### CHAPTERS:
@@ -22,14 +23,18 @@ try(require(ggplot2),silent = T)
 #   - Writing files out
 # -  Vector operations
 #   - Vector filtering
+# -  String operations
 # -  Matrix operations
 # -  List operations
 # -  Set operations
 # -  Math and stats
-# -  String operations
 # -  Plotting and Graphics
+# -  Clustering heatmap tools
+# -  Search query links
+# -  Biology
+
+
 # -  Generic
-# -  Plots
 # -  New additions
 
 wA4 = 8.27 # A4 inches
@@ -725,7 +730,6 @@ TPM_normalize <- function(mat, SUM = 1e6) { # normalize each column to 1 million
   norm_mat = (t(t(mat) / cs)) * SUM
   return(norm_mat)
 }
-
 
 median_normalize <- function(mat) { # normalize each column to the median of all the column-sums
   cs = colSums(mat, na.rm = TRUE)
@@ -1551,31 +1555,6 @@ annot_row.create.pheatmap.df <- function(data, annot_df_per_row, annot_names = N
 
 
 
-
-# Memory management ----------------------------------------------------------------------------------
-# https://stackoverflow.com/questions/17218404/should-i-get-a-habit-of-removing-unused-variables-in-r
-
-
-## Show the ten largest objects:
-memory.biggest.objects <- function(n = 5, saveplot = F) { # Show distribution of the largest objects and return their names
-  try.dev.off()
-  gc()
-  ls.mem <- ls( envir = .GlobalEnv)
-  Sizes.of.objects.in.mem <- sapply( ls.mem, FUN = function(name) { object.size(get(name)) } );
-  topX = sort(Sizes.of.objects.in.mem,decreasing = TRUE)[1:n]
-
-  Memorty.usage.stat = c(topX, 'Other' = sum(sort(Sizes.of.objects.in.mem,decreasing = TRUE)[-(1:n)]))
-  pie(Memorty.usage.stat, cex = .5, sub = make.names(date()))
-  try(qpie(Memorty.usage.stat, w = 7  ), silent = T)
-  # Use wpie if you have MarkdownReports, from https://github.com/vertesy/MarkdownReports
-  dput(names(topX))
-  iprint("rm(list = c( 'objectA',  'objectB'))")
-  # inline_vec.char(names(topX))
-  # Use inline_vec.char if you have DataInCode, from https://github.com/vertesy/DataInCode
-}
-# memory.biggest.objects()
-
-
 # Search query links ------------------------------------------------------------------------
 
 # Google search URL / search query links
@@ -1699,6 +1678,27 @@ IfExistsAndTrue <- function(name = "pi" ) { # Internal function. Checks if a var
   }
   return(x)
 }
+
+memory.biggest.objects <- function(n = 5, saveplot = F) { # Show distribution of the largest objects and return their names. # https://stackoverflow.com/questions/17218404/should-i-get-a-habit-of-removing-unused-variables-in-r
+  try.dev.off()
+  gc()
+  ls.mem <- ls( envir = .GlobalEnv)
+  ls.obj <- lapply(ls.mem, get)
+  Sizes.of.objects.in.mem <- unlapply(ls.obj, object.size)
+  names(Sizes.of.objects.in.mem) <- ls.mem
+  topX = sort(Sizes.of.objects.in.mem,decreasing = TRUE)[1:n]
+
+  Memorty.usage.stat = c(topX, 'Other' = sum(sort(Sizes.of.objects.in.mem,decreasing = TRUE)[-(1:n)]))
+  pie(Memorty.usage.stat, cex = .5, sub = make.names(date()))
+  try(qpie(Memorty.usage.stat, w = 7,  ), silent = T)
+  # Use wpie if you have MarkdownReports, from https://github.com/vertesy/MarkdownReports
+  dput(names(topX))
+  iprint("rm(list = c( 'objectA',  'objectB'))")
+  # inline_vec.char(names(topX))
+  # Use inline_vec.char if you have DataInCode, from https://github.com/vertesy/DataInCode
+}
+# memory.biggest.objects()
+
 
 
 # Temporary  ------------------------------------------------------------
