@@ -206,3 +206,28 @@ val2col <- function(yourdata,
   colorlevels
 }
 
+
+
+
+#' @title Converts any vector into a numeric vector.
+#' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+#' @param vec PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname as.numeric.wNames.old
+#' @export
+
+
+as.numeric.wNames.old <- function(vec) {
+  numerified_vec = as.numeric(as.factor(vec))
+  if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
+  return(numerified_vec)
+}
+
+
