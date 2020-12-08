@@ -3656,8 +3656,8 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
   mat[ ,idx ]
 }
 
-#' @title FUNCTION_TITLE.
-#' @description FUNCTION_DESCRIPTION.
+#' @title Get odd or even columns or rows of a data frame
+#' @description Get odd or even columns or rows of a data frame
 #' @param df_ PARAM_DESCRIPTION, Default: NULL
 #' @param rows PARAM_DESCRIPTION, Default: FALSE
 #' @param odd PARAM_DESCRIPTION, Default: TRUE
@@ -3671,7 +3671,7 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
 #' }
 #' @rdname get.oddoreven
 #' @export
-Get odd or even columns or rows of a data frame
+
 
 get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
   counter = if (rows) NROW(df_) else NCOL(df_)
@@ -4514,20 +4514,6 @@ fano <- function(x, na.rm = TRUE, USE = "na.or.complete") var(x, na.rm = na.rm, 
 
 geomean <- function(x, na.rm = TRUE) {
   exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x)) }
-#' @title FUNCTION_TITLE.
-#' @description FUNCTION_DESCRIPTION.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname gm_mean
-#' @export
 
 
 #' @title Calculates the mean of the log.
