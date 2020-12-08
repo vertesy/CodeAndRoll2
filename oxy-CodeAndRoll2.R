@@ -3680,8 +3680,9 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
   return(df_out)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+#' @title combine matrices by rownames intersect
+#' @description combine matrices by rownames intersect
 #' @param matrix1 PARAM_DESCRIPTION
 #' @param matrix2 PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 2
@@ -3695,7 +3696,7 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
 #' }
 #' @rdname combine.matrices.intersect
 #' @export
-combine matrices by rownames intersect
+
 
 combine.matrices.intersect <- function(matrix1, matrix2, k = 2) {
   rn1 = rownames(matrix1); rn2 = rownames(matrix2);
@@ -3714,8 +3715,8 @@ combine.matrices.intersect <- function(matrix1, matrix2, k = 2) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Merge any data frames by rownames. Required plyr package
+#' @description Merge any data frames by rownames. Required plyr package
 #' @param list_of_dfs PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3730,7 +3731,7 @@ combine.matrices.intersect <- function(matrix1, matrix2, k = 2) {
 #' @rdname merge_dfs_by_rn
 #' @export
 #' @importFrom plyr join_all
-Merge any data frames by rownames. Required plyr package
+
 
 merge_dfs_by_rn <- function(list_of_dfs) {
   for (i in names(list_of_dfs) ) { colnames(list_of_dfs[[i]]) <- paste0(i,'.',colnames(list_of_dfs[[i]])) } # make unique column names
@@ -3741,8 +3742,8 @@ merge_dfs_by_rn <- function(list_of_dfs) {
   return(COMBINED)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Merge 2 numeric data frames by rownames
+#' @description Merge 2 numeric data frames by rownames
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3755,7 +3756,7 @@ merge_dfs_by_rn <- function(list_of_dfs) {
 #' }
 #' @rdname merge_numeric_df_by_rn
 #' @export
-Merge 2 numeric data frames by rownames
+
 
 merge_numeric_df_by_rn <- function(x, y) {
   rn1 = rownames(x); rn2 = rownames(y);
@@ -3778,8 +3779,8 @@ merge_numeric_df_by_rn <- function(x, y) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title cols have to be a vector of numbers corresponding to columns
+#' @description cols have to be a vector of numbers corresponding to columns
 #' @param mat PARAM_DESCRIPTION
 #' @param cols PARAM_DESCRIPTION, Default: 1:NCOL(mat)
 #' @return OUTPUT_DESCRIPTION
@@ -3792,7 +3793,7 @@ merge_numeric_df_by_rn <- function(x, y) {
 #' }
 #' @rdname remove.na.rows
 #' @export
-cols have to be a vector of numbers corresponding to columns
+
 
 remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
   mat2 = mat[ , cols]
@@ -3800,8 +3801,8 @@ remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
   mat[idxOK, ]
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title cols have to be a vector of numbers corresponding to columns
+#' @description cols have to be a vector of numbers corresponding to columns
 #' @param mat PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3813,15 +3814,15 @@ remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
 #' }
 #' @rdname remove.na.cols
 #' @export
-cols have to be a vector of numbers corresponding to columns
+
 
 remove.na.cols <- function(mat) {
   idxOK = !is.na(colSums(mat))
   return(mat[, idxOK])
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Omit rows with NA values from a matrix. Rows with any, or full of NA-s
+#' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s
 #' @param mat PARAM_DESCRIPTION
 #' @param any PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -3834,7 +3835,7 @@ remove.na.cols <- function(mat) {
 #' }
 #' @rdname na.omit.mat
 #' @export
-Omit rows with NA values from a matrix. Rows with any, or full of NA-s
+
 
 na.omit.mat <- function(mat, any = TRUE) {
   mat = as.matrix(mat)
@@ -3849,8 +3850,8 @@ na.omit.mat <- function(mat, any = TRUE) {
 
 
 ## List operations -------------------------------------------------------------------------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Check if there are any duplocated rownames in a list of dataframes.
+#' @description Check if there are any duplocated rownames in a list of dataframes.
 #' @param ls PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3862,12 +3863,12 @@ na.omit.mat <- function(mat, any = TRUE) {
 #' }
 #' @rdname any.duplicated.rownames.ls.of.df
 #' @export
-Check if there are any duplocated rownames in a list of dataframes.
+
 
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls))
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Intersect any number of lists.
+#' @description Intersect any number of lists.
 #' @param ls PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3880,12 +3881,12 @@ any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls))
 #' }
 #' @rdname intersect.ls
 #' @export
-Intersect any number of lists.
+
 
 intersect.ls <- function(ls, ...) { Reduce(intersect, ls) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Intersect any number of list elements. Faster than reduce.
+#' @description Intersect any number of list elements. Faster than reduce.
 #' @param ls PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3898,12 +3899,12 @@ intersect.ls <- function(ls, ...) { Reduce(intersect, ls) }
 #' }
 #' @rdname union.ls
 #' @export
-Intersect any number of list elements. Faster than reduce.
+
 
 union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title lapply, then unlist
+#' @description lapply, then unlist
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3915,12 +3916,12 @@ union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) }
 #' }
 #' @rdname unlapply
 #' @export
-lapply, then unlist
+
 
 unlapply <- function(...) { unlist(lapply(...)) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title create a list with names from ALL variables you pass on to the function
+#' @description create a list with names from ALL variables you pass on to the function
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3932,7 +3933,7 @@ unlapply <- function(...) { unlist(lapply(...)) }
 #' }
 #' @rdname list.wNames
 #' @export
-create a list with names from ALL variables you pass on to the function
+
 
 list.wNames <- function(...) {
   lst = list(...)
@@ -3940,8 +3941,8 @@ list.wNames <- function(...) {
   return(lst)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
+#' @description Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
 #' @param dtf PARAM_DESCRIPTION
 #' @param na.omit PARAM_DESCRIPTION, Default: TRUE
 #' @param zero.omit PARAM_DESCRIPTION, Default: FALSE
@@ -3956,7 +3957,7 @@ list.wNames <- function(...) {
 #' }
 #' @rdname as.list.df.by.row
 #' @export
-Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
+
 
 as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) {
   outList = as.list(as.data.frame(t( dtf ) ) )
@@ -3967,8 +3968,8 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
   return(outList)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Split a dataframe into a list by its rows.
+#' @description Split a dataframe into a list by its rows. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
 #' @param dtf PARAM_DESCRIPTION
 #' @param na.omit PARAM_DESCRIPTION, Default: TRUE
 #' @param zero.omit PARAM_DESCRIPTION, Default: FALSE
@@ -3983,7 +3984,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' }
 #' @rdname as.list.df.by.col
 #' @export
-oSplit a dataframe into a list by its rows. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
+
 
 as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) {
   outList = as.list(dtf)
@@ -3994,8 +3995,8 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
   return(outList)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title reorder elements of lists in your custom order of names / indices.
+#' @description reorder elements of lists in your custom order of names / indices.
 #' @param L PARAM_DESCRIPTION
 #' @param namesOrdered PARAM_DESCRIPTION, Default: mixedsort(names(L))
 #' @return OUTPUT_DESCRIPTION
@@ -4008,7 +4009,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' }
 #' @rdname reorder.list
 #' @export
-reorder elements of lists in your custom order of names / indices.
+
 
 reorder.list <- function(L, namesOrdered = mixedsort(names(L))) {
   Lout = list(NA)
@@ -4017,8 +4018,8 @@ reorder.list <- function(L, namesOrdered = mixedsort(names(L))) {
   return(Lout)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title range of values in whole list
+#' @description range of values in whole list
 #' @param L PARAM_DESCRIPTION
 #' @param namesOrdered PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4031,14 +4032,14 @@ reorder.list <- function(L, namesOrdered = mixedsort(names(L))) {
 #' }
 #' @rdname range.list
 #' @export
-range of values in whole list
+
 
 range.list <- function(L, namesOrdered) {
   return(range(unlist(L), na.rm = TRUE))
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Combine 2 lists (of the same length) so that form every odd and every even element of a unified list.
+#' @description Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 #' @param L1 PARAM_DESCRIPTION
 #' @param L2 PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4051,7 +4052,7 @@ range.list <- function(L, namesOrdered) {
 #' }
 #' @rdname intermingle2lists
 #' @export
-Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
+
 
 intermingle2lists <- function(L1, L2) {
   stopifnot(length(L1) == length(L2) )
@@ -4063,8 +4064,8 @@ intermingle2lists <- function(L1, L2) {
   return(Lout)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title convert a vector to a list with certain dimensions, taken from the list it wanna resemble
+#' @description convert a vector to a list with certain dimensions, taken from the list it wanna resemble
 #' @param vec PARAM_DESCRIPTION
 #' @param list_wannabe PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4077,7 +4078,7 @@ intermingle2lists <- function(L1, L2) {
 #' }
 #' @rdname as.listalike
 #' @export
-convert a vector to a list with certain dimensions, taken from the list it wanna resemble
+
 
 as.listalike <- function(vec, list_wannabe) {
   stopifnot(length(vec) == length(unlist(list_wannabe)))
@@ -4093,8 +4094,8 @@ as.listalike <- function(vec, list_wannabe) {
 
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title reverse list hierarchy
+#' @description reverse list hierarchy
 #' @param ll PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4106,7 +4107,7 @@ as.listalike <- function(vec, list_wannabe) {
 #' }
 #' @rdname reverse.list.hierarchy
 #' @export
-reverse list hierarchy
+
 
 reverse.list.hierarchy <- function(ll) {
   ## https://stackoverflow.com/a/15263737
@@ -4118,8 +4119,8 @@ reverse.list.hierarchy <- function(ll) {
 
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Convert a list to a full matrix.
+#' @description  Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
 #' @param your.list PARAM_DESCRIPTION, Default: list(set.1 = vec.fromNames(LETTERS[1:5], fill = 1), set.2 = vec.fromNames(LETTERS[3:9],
 #'    fill = 2))
 #' @param byRow PARAM_DESCRIPTION, Default: TRUE
@@ -4134,8 +4135,9 @@ reverse.list.hierarchy <- function(ll) {
 #' }
 #' @rdname list2fullDF.byNames
 #' @export
+
 list2fullDF.byNames <- function(your.list = list(
-  "set.1" = vec.fromNames(LETTERS[1:5], fill = 1),  # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
+  "set.1" = vec.fromNames(LETTERS[1:5], fill = 1),
   "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
 ), byRow = TRUE, FILL = NA) {
   length.list = length(your.list)
@@ -4152,8 +4154,8 @@ list2fullDF.byNames <- function(your.list = list(
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Convert a list to a full matrix.
+#' @description Convert a list to a full matrix. Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
 #' @param your.list PARAM_DESCRIPTION, Default: list(set.1 = LETTERS[1:5], set.2 = LETTERS[3:9])
 #' @param byRow PARAM_DESCRIPTION, Default: TRUE
 #' @param FILL PARAM_DESCRIPTION, Default: 0
@@ -4167,7 +4169,7 @@ list2fullDF.byNames <- function(your.list = list(
 #' }
 #' @rdname list2fullDF.presence
 #' @export
-Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
+
 
 list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]
                                                   , "set.2" = LETTERS[3:9]), byRow = TRUE, FILL = 0) {
@@ -4184,8 +4186,8 @@ list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]
   return(mat)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title split a list by its names
+#' @description split a list by its names
 #' @param namedVec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4197,15 +4199,15 @@ list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]
 #' }
 #' @rdname splitbyitsnames
 #' @export
-split a list by its names
+
 
 splitbyitsnames <- function(namedVec) {
   stopif(is.null(names(namedVec)), message = "NO NAMES")
   split(namedVec, f = names(namedVec))
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title split a list by its names
+#' @description split a list by its names
 #' @param namedVec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4217,15 +4219,15 @@ splitbyitsnames <- function(namedVec) {
 #' }
 #' @rdname splititsnames_byValues
 #' @export
-split a list by its names
+
 
 splititsnames_byValues <- function(namedVec) {
   stopif(is.null(names(namedVec)), message = "NO NAMES")
   split(names(namedVec), f = namedVec)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Combine 2 vectors.
+#' @description Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
 #' @param V1 PARAM_DESCRIPTION
 #' @param V2 PARAM_DESCRIPTION
 #' @param wNames PARAM_DESCRIPTION, Default: TRUE
@@ -4239,7 +4241,7 @@ splititsnames_byValues <- function(namedVec) {
 #' }
 #' @rdname intermingle2vec
 #' @export
-Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
+
 
 intermingle2vec <- function(V1, V2, wNames = TRUE) {
   stopifnot(length(V1) == length(V2) )
@@ -4250,8 +4252,8 @@ intermingle2vec <- function(V1, V2, wNames = TRUE) {
 
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Combine 2 data frames.
+#' @description Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 #' @param df1 PARAM_DESCRIPTION
 #' @param df2 PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4264,7 +4266,7 @@ intermingle2vec <- function(V1, V2, wNames = TRUE) {
 #' }
 #' @rdname intermingle.cbind
 #' @export
-Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
+
 
 intermingle.cbind <- function(df1, df2) {
   stopifnot(ncol(df1) == ncol(df2) )
@@ -4290,8 +4292,8 @@ intermingle.cbind <- function(df1, df2) {
   return(NewMatr)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Convert a list to a vector.
+#' @description Convert a list to a vector repeating list-element names, while vector names are the list elements
 #' @param your_list PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4303,7 +4305,7 @@ intermingle.cbind <- function(df1, df2) {
 #' }
 #' @rdname ls2categvec
 #' @export
-Convert a list to a vector repeating list-element names, while vector names are the list elements
+
 
 ls2categvec <- function(your_list ) {
   VEC = rep(names(your_list),unlapply(your_list, length))
@@ -4312,8 +4314,8 @@ ls2categvec <- function(your_list ) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Convert a list to a vector.
+#' @description Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
 #' @param ListWithNames PARAM_DESCRIPTION, Default: Sections.ls.Final
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4325,7 +4327,7 @@ ls2categvec <- function(your_list ) {
 #' }
 #' @rdname list.2.replicated.name.vec
 #' @export
-Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
+
 
 list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
   NZ = names(ListWithNames)
@@ -4337,8 +4339,9 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 
 ### Work with multi dimensional lists --------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+#' @title copy dimension and dimnames
+#' @description copy dimension and dimnames
 #' @param list.1D PARAM_DESCRIPTION
 #' @param obj.2D PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4351,7 +4354,6 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 #' }
 #' @rdname copy.dimension.and.dimnames
 #' @export
-copy dimension and dimnames
 
 copy.dimension.and.dimnames <- function(list.1D, obj.2D) {
   dim(list.1D) <- dim(obj.2D)
@@ -4359,8 +4361,8 @@ copy.dimension.and.dimnames <- function(list.1D, obj.2D) {
   list.1D
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title lapply for multidimensional arrays
+#' @description lapply for multidimensional arrays
 #' @param list_2D PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4373,7 +4375,7 @@ copy.dimension.and.dimnames <- function(list.1D, obj.2D) {
 #' }
 #' @rdname mdlapply
 #' @export
-lapply for multidimensional arrays
+
 
 mdlapply <- function(list_2D, ...) {
   x = lapply(list_2D, ...)
@@ -4381,8 +4383,8 @@ mdlapply <- function(list_2D, ...) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title simplify 2D-list-array to a DF
+#' @description simplify 2D-list-array to a DF
 #' @param two.dim.arr.of.lists PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4394,7 +4396,7 @@ mdlapply <- function(list_2D, ...) {
 #' }
 #' @rdname arr.of.lists.2.df
 #' @export
-simplify 2D-list-array to a DF
+
 
 arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
   list.1D = unlist(two.dim.arr.of.lists)
@@ -4404,8 +4406,8 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
+#' @description multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
 #' @param list_2D PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4418,7 +4420,7 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
 #' }
 #' @rdname mdlapply2df
 #' @export
-multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
+
 
 mdlapply2df <- function(list_2D, ...) {
   x = lapply(list_2D, ...)
@@ -4430,8 +4432,8 @@ mdlapply2df <- function(list_2D, ...) {
 
 ## Set operations -------------------------------------------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Symmetric difference of any number of vectors
+#' @description Quasy symmetric difference of any number of vectors
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
@@ -4445,7 +4447,7 @@ mdlapply2df <- function(list_2D, ...) {
 #' }
 #' @rdname symdiff
 #' @export
-Quasy symmetric difference of any number of vectors
+
 
 symdiff <- function(x, y, ...) {
   big.vec <- c(x, y, ...)
@@ -4457,8 +4459,8 @@ symdiff <- function(x, y, ...) {
 
 ## Math & stats -------------------------------------------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
+#' @description Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -4471,12 +4473,12 @@ symdiff <- function(x, y, ...) {
 #' }
 #' @rdname sem
 #' @export
-Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
+
 
 sem <- function(x, na.rm = TRUE) sd(unlist(x), na.rm = na.rm)/sqrt(length(na.omit.strip(as.numeric(x))))
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Calculates the fano factor on a numeric vector (it excludes NA-s by default)
+#' @description Calculates the fano factor on a numeric vector (it excludes NA-s by default)
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param USE PARAM_DESCRIPTION, Default: 'na.or.complete'
@@ -4490,12 +4492,12 @@ sem <- function(x, na.rm = TRUE) sd(unlist(x), na.rm = na.rm)/sqrt(length(na.omi
 #' }
 #' @rdname fano
 #' @export
-Calculates the fano factor on a numeric vector (it excludes NA-s by default)
+
 
 fano <- function(x, na.rm = TRUE, USE = "na.or.complete") var(x, na.rm = na.rm, use = USE )/mean(x, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Geometric mean.
+#' @description Calculates the geometric mean of a numeric vector (it excludes NA-s by default). Old alias gm_mean = geomean
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -4508,7 +4510,7 @@ fano <- function(x, na.rm = TRUE, USE = "na.or.complete") var(x, na.rm = na.rm, 
 #' }
 #' @rdname geomean
 #' @export
-Calculates the geometric mean of a numeric vector (it excludes NA-s by default)
+
 
 geomean <- function(x, na.rm = TRUE) {
   exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x)) }
@@ -4526,10 +4528,10 @@ geomean <- function(x, na.rm = TRUE) {
 #' }
 #' @rdname gm_mean
 #' @export
-gm_mean = geomean
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+#' @title Calculates the mean of the log
+#' @description Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
 #' @param x PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 2
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
@@ -4543,15 +4545,15 @@ gm_mean = geomean
 #' }
 #' @rdname mean_of_log
 #' @export
-Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
+
 
 mean_of_log <- function(x, k = 2, na.rm = TRUE) {
   negs = sum(x < 0);  zeros = sum(x == 0)
   if (negs | zeros) { iprint("The input vector has", negs, "negative values and", zeros, "zeros." ) }
   mean(log(x, base = k), na.rm = na.rm) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Moving / rolling average.
+#' @description Calculates the moving / rolling average of a numeric vector.
 #' @param x PARAM_DESCRIPTION
 #' @param oneSide PARAM_DESCRIPTION, Default: 5
 #' @return OUTPUT_DESCRIPTION
@@ -4564,7 +4566,7 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 #' }
 #' @rdname movingAve
 #' @export
-Calculates the moving / rolling average of a numeric vector.
+
 
 movingAve <- function(x, oneSide = 5) {
   y = NULL
@@ -4574,8 +4576,8 @@ movingAve <- function(x, oneSide = 5) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Calculates the moving / rolling average.
+#' @description Calculates the moving / rolling average of a numeric vector, using filter().
 #' @param x PARAM_DESCRIPTION
 #' @param n PARAM_DESCRIPTION, Default: 5
 #' @return OUTPUT_DESCRIPTION
@@ -4588,12 +4590,12 @@ movingAve <- function(x, oneSide = 5) {
 #' }
 #' @rdname movingAve2
 #' @export
-Calculates the moving / rolling average of a numeric vector, using filter().
+
 
 movingAve2 <- function(x,n = 5) {filter(x,rep(1/n,n), sides = 2)}
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
+#' @description Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
 #' @param x PARAM_DESCRIPTION
 #' @param oneSide PARAM_DESCRIPTION, Default: 5
 #' @return OUTPUT_DESCRIPTION
@@ -4606,7 +4608,7 @@ movingAve2 <- function(x,n = 5) {filter(x,rep(1/n,n), sides = 2)}
 #' }
 #' @rdname movingSEM
 #' @export
-Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
+
 
 movingSEM <- function(x, oneSide = 5) {
   y = NULL
@@ -4615,8 +4617,8 @@ movingSEM <- function(x, oneSide = 5) {
   };  return(y)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Calculates the moving / rolling standard error of the mean (SEM).
+#' @description Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
 #' @param x PARAM_DESCRIPTION
 #' @param oneSide PARAM_DESCRIPTION, Default: 5
 #' @return OUTPUT_DESCRIPTION
@@ -4629,7 +4631,7 @@ movingSEM <- function(x, oneSide = 5) {
 #' }
 #' @rdname imovingSEM
 #' @export
-Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
+
 
 imovingSEM <- function(x, oneSide = 5) {
   y = NULL
@@ -4640,8 +4642,8 @@ imovingSEM <- function(x, oneSide = 5) {
   };  return(y)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Shannon entropy
+#' @description Calculate shannon entropy
 #' @param p PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4653,7 +4655,7 @@ imovingSEM <- function(x, oneSide = 5) {
 #' }
 #' @rdname shannon.entropy
 #' @export
-Calculate shannon entropy
+
 
 shannon.entropy <- function(p) {
   if (min(p) < 0 || sum(p) <= 0) return(NA)
@@ -4663,110 +4665,9 @@ shannon.entropy <- function(p) {
 
 ## Plotting and Graphics -----------------------------------------------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param col PARAM_DESCRIPTION
-#' @param lev PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname legend.col
-#' @export
-Source: https://aurelienmadouasse.wordpress.com/2012/01/13/legend-for-a-continuous-color-scale-in-r/
-
-  legend.col <- function(col, lev) { # Legend color.
-    opar <- par
-    n <- length(col)
-    bx <- par("usr")
-    box.cx <- c(bx[2] + (bx[2] - bx[1]) / 1000,
-                bx[2] + (bx[2] - bx[1]) / 1000 + (bx[2] - bx[1]) / 50)
-    box.cy <- c(bx[3], bx[3])
-    box.sy <- (bx[4] - bx[3]) / n
-    xx <- rep(box.cx, each = 2)
-
-    par(xpd = TRUE)
-    for (i in 1:n) {
-      yy <- c(box.cy[1] + (box.sy * (i - 1)),
-              box.cy[1] + (box.sy * (i)),
-              box.cy[1] + (box.sy * (i)),
-              box.cy[1] + (box.sy * (i - 1)))
-      polygon(xx, yy, col = col[i], border = col[i])
-    }
-    par(new = TRUE)
-    plot(0, 0, type = "n",
-         ylim = c(min(lev), max(lev)),
-         yaxt = "n", ylab = "",
-         xaxt = "n", xlab = "",
-         frame.plot = FALSE)
-    axis(side = 4, las = 2, tick = FALSE, line = .25)
-    par <- opar
-    par(xpd = FALSE)
-    # print("You might need to set par('mar' = c( 5.1, 4.1, 4.1, 2.1)) to higher values.")
-  }
-
-
-
-
-### CONTAINS A QUICK FIX FOR THE NUMBER OF COLOR LEVELS. See #59 on GitHub ###
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param yourdata PARAM_DESCRIPTION
-#' @param zlim PARAM_DESCRIPTION
-#' @param col PARAM_DESCRIPTION, Default: rev(heat.colors(max(12, 3 * length(unique(yourdata)))))
-#' @param breaks PARAM_DESCRIPTION
-#' @param rename PARAM_DESCRIPTION, Default: FALSE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname val2col
-#' @export
-This function converts a vector of values("yourdata") to a vector of color levels. One must define the number of colors. The limits of the color scale("zlim") or the break points for the color changes("breaks") can also be defined. When breaks and zlim are defined, breaks overrides zlim.
-
-val2col <- function(yourdata,
-                    zlim,
-                    col = rev(heat.colors(max(12, 3 * length(unique(yourdata))))),
-                    breaks,
-                    rename = FALSE) {
-  if (!missing(breaks)) {
-    if (length(breaks) != (length(col) + 1)) {
-      stop("must have one more break than color")
-    }
-  }
-  if (missing(breaks) & !missing(zlim)) {
-    breaks <- seq(zlim[1], zlim[2], length.out = (length(col) + 1))
-  }
-  if (missing(breaks) & missing(zlim)) {
-    zlim <- range(yourdata, na.rm = TRUE)
-    zlim[2] <- zlim[2] + c(zlim[2] - zlim[1]) * (0.001)
-    zlim[1] <- zlim[1] - c(zlim[2] - zlim[1]) * (0.001)
-    breaks <- seq(zlim[1], zlim[2], length.out = (length(col) + 1))
-  }
-  colorlevels <- col[((as.vector(yourdata) - breaks[1]) /
-                        (range(breaks)[2] - range(breaks)[1])) * (length(breaks) - 1) + 1]
-  if (length(names(yourdata))) {
-    names(colorlevels) = yourdata
-  }
-
-  if (rename) {
-    names(colorlevels) = yourdata
-  } # works on vectors only"
-  colorlevels
-}
-
-
 ### Colors -----------------------------------------------------------------------------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Alias for rich.colors in gplots
+#' @description Alias for rich.colors in gplots
 #' @param n PARAM_DESCRIPTION, Default: 3
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4781,13 +4682,13 @@ val2col <- function(yourdata,
 #' @rdname richColors
 #' @export
 #' @importFrom gplots rich.colors
-Alias for rich.colors in gplots
+
 
 richColors <- function(n = 3) { gplots::rich.colors(n) }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Display the colors encoded by the numbers / color-ID-s you pass on to this function
+#' @description Display the colors encoded by the numbers / color-ID-s you pass on to this function
 #' @param ... PARAM_DESCRIPTION
 #' @param incrBottMarginBy PARAM_DESCRIPTION, Default: 0
 #' @param savefile PARAM_DESCRIPTION, Default: FALSE
@@ -4801,7 +4702,7 @@ richColors <- function(n = 3) { gplots::rich.colors(n) }
 #' }
 #' @rdname Color_Check
 #' @export
-Display the colors encoded by the numbers / color-ID-s you pass on to this function
+
 
 Color_Check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
   if (incrBottMarginBy) { .ParMarDefault <- par("mar");   par(mar = c(par("mar")[1] + incrBottMarginBy, par("mar")[2:4]) ) }  # Tune the margin
@@ -4814,39 +4715,13 @@ Color_Check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
   if (savefile) { dev.copy2pdf(file = ww.FnP_parser(fname, "ColorCheck.pdf")) }
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param n PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname HeatMapCol_BGR
-#' @export
+
 HeatMapCol_BGR <- grDevices::colorRampPalette(c("blue", "cyan", "yellow", "red"), bias = 1)
-# HeatMapCol_BWR <- grDevices::colorRampPalette(c("blue", "white", "red"), bias = 1)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param n PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @rdname HeatMapCol_RedBlackGreen
-#' @export
 HeatMapCol_RedBlackGreen <- grDevices::colorRampPalette(c("red", "black", "green"), bias = 1)
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Draw a barplot from ColSums of a matrix.
+#' @description Draw a barplot from ColSums of a matrix.
 #' @param df PARAM_DESCRIPTION
 #' @param col PARAM_DESCRIPTION, Default: 'seagreen2'
 #' @param na_rm PARAM_DESCRIPTION, Default: TRUE
@@ -4861,12 +4736,12 @@ HeatMapCol_RedBlackGreen <- grDevices::colorRampPalette(c("red", "black", "green
 #' }
 #' @rdname colSums.barplot
 #' @export
-Draw a barplot from ColSums of a matrix.
+
 
 colSums.barplot <- function(df, col = "seagreen2", na_rm = TRUE, ...) { barplot(colSums(df, na.rm = na_rm), col = col, ...) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Renders the lm() function's output.
+#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles)
 #' @param lm PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4878,15 +4753,15 @@ colSums.barplot <- function(df, col = "seagreen2", na_rm = TRUE, ...) { barplot(
 #' }
 #' @rdname lm_equation_formatter
 #' @export
-Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+
 
 lm_equation_formatter <- function(lm) {
   eq = signif(lm$coefficients);
   kollapse("Intercept: ", eq[1], " Slope: ", eq[2]);
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles)
 #' @param lm PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4898,15 +4773,15 @@ lm_equation_formatter <- function(lm) {
 #' }
 #' @rdname lm_equation_formatter2
 #' @export
-Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+
 
 lm_equation_formatter2 <- function(lm) {
   eq = signif(lm$coefficients, digits = 3);
   kollapse("y = ", eq[2], "* x + ", eq[1]);
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles)
 #' @param lm PARAM_DESCRIPTION
 #' @param y.var.name PARAM_DESCRIPTION, Default: 'y'
 #' @param x.var.name PARAM_DESCRIPTION, Default: 'x'
@@ -4920,7 +4795,7 @@ lm_equation_formatter2 <- function(lm) {
 #' }
 #' @rdname lm_equation_formatter3
 #' @export
-Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+
 
 lm_equation_formatter3 <- function(lm, y.var.name = "y", x.var.name = "x") {
   eq = signif(lm$coefficients, digits = 3);
@@ -4928,8 +4803,8 @@ lm_equation_formatter3 <- function(lm, y.var.name = "y", x.var.name = "x") {
   kollapse(y.var.name, " = ", eq[2], "*",x.var.name," ",plusSign,"", eq[1]);
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Split a one variable by another. Calculates equal bins in splitby, and returns a list of the corresponding values in toSplit.
+#' @description Split a one variable by another. Calculates equal bins in splitby, and returns a list of the corresponding values in toSplit.
 #' @param dfw2col PARAM_DESCRIPTION, Default: NULL
 #' @param toSplit PARAM_DESCRIPTION, Default: 1:100
 #' @param splitby PARAM_DESCRIPTION, Default: rnorm(100)
@@ -4939,12 +4814,12 @@ lm_equation_formatter3 <- function(lm, y.var.name = "y", x.var.name = "x") {
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  #ll = hist.XbyY(); wbarplot(unlapply(ll, length))
 #'  }
 #' }
 #' @rdname hist.XbyY
 #' @export
-Split a one variable by another. Calculates equal bins in splitby, and returns a list of the corresponding values in toSplit.
+
 
 hist.XbyY <- function(dfw2col = NULL, toSplit = 1:100, splitby = rnorm(100), breaks_ = 20 ) {
   # http://stackoverflow.com/questions/8853735/get-index-of-the-histogram-bin-in-r
@@ -4955,11 +4830,12 @@ hist.XbyY <- function(dfw2col = NULL, toSplit = 1:100, splitby = rnorm(100), bre
   iprint("Range of data:", range(xx$breaks))
   names(ls) = xx$breaks[-1]
   return(ls)
-}#  ll = hist.XbyY(); wbarplot(unlapply(ll, length))
+}
 
 ### Functions for pairs() plots  -----------------------------------------------------------------------------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+#' @title Helper function for pairs()
+#' @description A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
 #' @param digits PARAM_DESCRIPTION, Default: 2
@@ -4976,7 +4852,7 @@ hist.XbyY <- function(dfw2col = NULL, toSplit = 1:100, splitby = rnorm(100), bre
 #' }
 #' @rdname panel.cor.pearson
 #' @export
-A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
+
 
 panel.cor.pearson <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method = "pearson") {
   usr <- par("usr"); on.exit(par(usr))
@@ -4995,8 +4871,8 @@ panel.cor.pearson <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method
   text(.8, .8, Signif, cex = cex,  col = 2)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Helper function for pairs()
+#' @description A function to display correlation values for pairs() function.
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
 #' @param digits PARAM_DESCRIPTION, Default: 2
@@ -5013,7 +4889,7 @@ panel.cor.pearson <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method
 #' }
 #' @rdname panel.cor.spearman
 #' @export
-A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
+
 
 panel.cor.spearman <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method = "spearman") {
   usr <- par("usr"); on.exit(par(usr))
@@ -5033,8 +4909,8 @@ panel.cor.spearman <- function(x, y, digits = 2, prefix = "", cex.cor = 2, metho
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Quantile breakpoints.
+#' @description Quantile breakpoints in any data vector http://slowkow.com/notes/heatmap-tutorial/
 #' @param xs PARAM_DESCRIPTION
 #' @param n PARAM_DESCRIPTION, Default: 10
 #' @param na.Rm PARAM_DESCRIPTION, Default: FALSE
@@ -5048,20 +4924,20 @@ panel.cor.spearman <- function(x, y, digits = 2, prefix = "", cex.cor = 2, metho
 #' }
 #' @rdname quantile_breaks
 #' @export
-Quantile breakpoints in any data vector http://slowkow.com/notes/heatmap-tutorial/
 
-  quantile_breaks <- function(xs, n = 10, na.Rm = FALSE) {
-    breaks <- quantile(xs, probs = seq(0, 1, length.out = n), na.rm = na.Rm)
-    breaks[!duplicated(breaks)]
-  }
+
+quantile_breaks <- function(xs, n = 10, na.Rm = FALSE) {
+  breaks <- quantile(xs, probs = seq(0, 1, length.out = n), na.rm = na.Rm)
+  breaks[!duplicated(breaks)]
+}
 
 
 
 
 ## Clustering heatmap tools -----------------------------------------------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Extract ROW order from a pheatmap object.
+#' @description Extract ROW order from a pheatmap object.
 #' @param pheatmapObject PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -5073,11 +4949,11 @@ Quantile breakpoints in any data vector http://slowkow.com/notes/heatmap-tutoria
 #' }
 #' @rdname hclust.getOrder.row
 #' @export
-Extract ROW order from a pheatmap object.
+
 
 hclust.getOrder.row <- function(pheatmapObject) pheatmapObject$tree_row$labels[pheatmapObject$tree_row$order]
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Extract COLUMN order from a pheatmap object.
+#' @description Extract COLUMN order from a pheatmap object.
 #' @param pheatmapObject PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -5089,12 +4965,12 @@ hclust.getOrder.row <- function(pheatmapObject) pheatmapObject$tree_row$labels[p
 #' }
 #' @rdname hclust.getOrder.col
 #' @export
-Extract COLUMN order from a pheatmap object.
 
 hclust.getOrder.col <- function(pheatmapObject) pheatmapObject$tree_col$labels[pheatmapObject$tree_col$order]
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+#' @title Extract cluster ID's for ROWS of a pheatmap object.
+#' @description Extract cluster ID's for ROWS of a pheatmap object.
 #' @param pheatmapObject PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 3
 #' @return OUTPUT_DESCRIPTION
@@ -5107,11 +4983,12 @@ hclust.getOrder.col <- function(pheatmapObject) pheatmapObject$tree_col$labels[p
 #' }
 #' @rdname hclust.getClusterID.row
 #' @export
-Extract cluster ID's for ROWS of a pheatmap object.
 
 hclust.getClusterID.row <- function(pheatmapObject, k = 3) cutree(pheatmapObject$tree_row, k = k)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+
+#' @title Extract cluster ID's for COLUMNS of a pheatmap object.
+#' @description Extract cluster ID's for COLUMNS of a pheatmap object.
 #' @param pheatmapObject PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 3
 #' @return OUTPUT_DESCRIPTION
@@ -5124,12 +5001,13 @@ hclust.getClusterID.row <- function(pheatmapObject, k = 3) cutree(pheatmapObject
 #' }
 #' @rdname hclust.getClusterID.col
 #' @export
-Extract cluster ID's for COLUMNS of a pheatmap object.
 
 hclust.getClusterID.col <- function(pheatmapObject, k = 3) cutree(pheatmapObject$tree_col, k = k)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+
+#' @title Calculate the position of ROW separating lines between clusters in a pheatmap object.
+#' @description Calculate the position of ROW separating lines between clusters in a pheatmap object.
 #' @param pheatmapObject PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 3
 #' @return OUTPUT_DESCRIPTION
@@ -5142,11 +5020,13 @@ hclust.getClusterID.col <- function(pheatmapObject, k = 3) cutree(pheatmapObject
 #' }
 #' @rdname hclust.ClusterSeparatingLines.row
 #' @export
-Calculate the position of ROW separating lines between clusters in a pheatmap object.
 
 hclust.ClusterSeparatingLines.row <- function(pheatmapObject, k = 3) which(!duplicated(cutree(pheatmapObject$tree_row, k = k)[pheatmapObject$tree_row$order])[-1])
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+
+
+#' @title Calculate the position of COLUMN separating lines between clusters in a pheatmap object.
+#' @description Calculate the position of COLUMN separating lines between clusters in a pheatmap object.
 #' @param pheatmapObject PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 3
 #' @return OUTPUT_DESCRIPTION
@@ -5159,12 +5039,13 @@ hclust.ClusterSeparatingLines.row <- function(pheatmapObject, k = 3) which(!dupl
 #' }
 #' @rdname hclust.ClusterSeparatingLines.col
 #' @export
-Calculate the position of COLUMN separating lines between clusters in a pheatmap object.
 
 hclust.ClusterSeparatingLines.col <- function(pheatmapObject, k = 3) which(!duplicated(cutree(pheatmapObject$tree_col, k = k)[pheatmapObject$tree_col$order])[-1])
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+
+#' @title calculate gap positions for pheatmap, based a sorted annotation vector of categories
+#' @description calculate gap positions for pheatmap, based a sorted annotation vector of categories
 #' @param annot.vec.of.categories PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -5176,7 +5057,7 @@ hclust.ClusterSeparatingLines.col <- function(pheatmapObject, k = 3) which(!dupl
 #' }
 #' @rdname Gap.Postions.calc.pheatmap
 #' @export
-calculate gap positions for pheatmap, based a sorted annotation vector of categories
+
 
 Gap.Postions.calc.pheatmap <- function(annot.vec.of.categories) {
   NAZ = sum(is.na(annot.vec.of.categories))
@@ -5185,8 +5066,8 @@ Gap.Postions.calc.pheatmap <- function(annot.vec.of.categories) {
   cumsum(consecutive.lengthes) # return abs.positions
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Create a Matlab-like color gradient using "colorRamps".
+#' @description Create a Matlab-like color gradient using "colorRamps".
 #' @param matrixx PARAM_DESCRIPTION
 #' @param nr PARAM_DESCRIPTION, Default: 50
 #' @return OUTPUT_DESCRIPTION
@@ -5202,13 +5083,13 @@ Gap.Postions.calc.pheatmap <- function(annot.vec.of.categories) {
 #' @rdname matlabColors.pheatmap
 #' @export
 #' @importFrom colorRamps matlab.like
-Create a Matlab-like color gradient using "colorRamps".
+
 
 matlabColors.pheatmap <- function(matrixx, nr = 50) {colorRamps::matlab.like(length(quantile_breaks(matrixx, n = nr)) - 1)}
 
-"FOR VECTOR. it works"
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+
+#' @title Helper for pheatmap.
+#' @description For VECTORS. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
 #' @param data PARAM_DESCRIPTION
 #' @param annot_vec PARAM_DESCRIPTION
 #' @param annot_names PARAM_DESCRIPTION, Default: 'Annot'
@@ -5225,7 +5106,7 @@ matlabColors.pheatmap <- function(matrixx, nr = 50) {colorRamps::matlab.like(len
 #' @rdname annot_col.create.pheatmap.vec
 #' @export
 #' @importFrom gplots rich.colors
-For VECTORS. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
+
 
 annot_col.create.pheatmap.vec <- function(data, annot_vec, annot_names = "Annot") {
   stopifnot( length(annot_vec) == dim(data)[2] )
@@ -5250,8 +5131,8 @@ annot_col.create.pheatmap.vec <- function(data, annot_vec, annot_names = "Annot"
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title  Helper for pheatmap.
+#' @description For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
 #' @param data PARAM_DESCRIPTION
 #' @param annot_df_per_column PARAM_DESCRIPTION
 #' @param annot_names PARAM_DESCRIPTION, Default: NULL
@@ -5268,7 +5149,7 @@ annot_col.create.pheatmap.vec <- function(data, annot_vec, annot_names = "Annot"
 #' @rdname annot_col.create.pheatmap.df
 #' @export
 #' @importFrom gplots rich.colors
-For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
+
 
 annot_col.create.pheatmap.df <- function(data, annot_df_per_column, annot_names = NULL) {
   stopif( dim(annot_df_per_column)[1] != dim(data)[2] , message = "The number of rows in the annotation data != to the # columns in your data frame")
@@ -5296,8 +5177,8 @@ annot_col.create.pheatmap.df <- function(data, annot_df_per_column, annot_names 
   print("annot [data frame] and annot_col [list] variables are created. Use: pheatmap(..., annotation_col = annot, annotation_colors = annot_col)")
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title   Helper for pheatmap. fix class and color annotation in pheatmap.
+#' @description fix class and color annotation in pheatmap annotation data frame's and lists.
 #' @param ListOfColnames PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -5309,7 +5190,7 @@ annot_col.create.pheatmap.df <- function(data, annot_df_per_column, annot_names 
 #' }
 #' @rdname annot_col.fix.numeric
 #' @export
-fix class and color annotation in pheatmap annotation data frame's and lists.
+
 
 annot_col.fix.numeric <- function(ListOfColnames) {
   for (i in 1:length(ListOfColnames) ) {
@@ -5322,8 +5203,8 @@ annot_col.fix.numeric <- function(ListOfColnames) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title   Helper for pheatmap.
+#' @description For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
 #' @param data PARAM_DESCRIPTION
 #' @param annot_df_per_row PARAM_DESCRIPTION
 #' @param annot_names PARAM_DESCRIPTION, Default: NULL
@@ -5340,7 +5221,7 @@ annot_col.fix.numeric <- function(ListOfColnames) {
 #' @rdname annot_row.create.pheatmap.df
 #' @export
 #' @importFrom gplots rich.colors
-For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
+
 
 annot_row.create.pheatmap.df <- function(data, annot_df_per_row, annot_names = NULL) {
   stopif( dim(annot_df_per_row)[1] != dim(data)[1] , message = "The number of rows in the annotation data != to the # columns in your data frame")
@@ -5376,8 +5257,8 @@ annot_row.create.pheatmap.df <- function(data, annot_df_per_row, annot_names = N
 # b.dbl.writeOut = F
 # b.dbl.Open = F
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Parse google search query links.
+#' @description Parse google search query links to your list of gene symbols. Strings "prefix" and ""suffix" will be searched for together with each gene ("Human ID4 neurons"). See many additional services in [DatabaseLinke.R](https://vertesy.github.io/DatabaseLinke.R/).
 #' @param vector_of_gene_symbols PARAM_DESCRIPTION
 #' @param google PARAM_DESCRIPTION, Default: 'http://www.google.com/search?as_q = '
 #' @param prefix PARAM_DESCRIPTION, Default: ''
@@ -5390,16 +5271,16 @@ annot_row.create.pheatmap.df <- function(data, annot_df_per_row, annot_names = N
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  #link.google.clipboard = clipr::write_clip(link_google(clipr::read_clip()))
 #'  }
 #' }
 #' @rdname link_google
 #' @export
-Parse google search query links to your list of gene symbols. Strings "prefix" and ""suffix" will be searched for together with each gene ("Human ID4 neurons"). See many additional services in [DatabaseLinke.R](https://vertesy.github.io/DatabaseLinke.R/).
+
 
 link_google <- function(vector_of_gene_symbols
-                         , google = "http://www.google.com/search?as_q = ", prefix = "", suffix = ""
-                         , writeOut = b.dbl.writeOut, Open = b.dbl.Open, sleep = 0) {
+                        , google = "http://www.google.com/search?as_q = ", prefix = "", suffix = ""
+                        , writeOut = b.dbl.writeOut, Open = b.dbl.Open, sleep = 0) {
   links = paste0( google, prefix," ", vector_of_gene_symbols," ", suffix)
   if (writeOut) {
     bash_commands = paste0("open '", links, "'")
@@ -5410,12 +5291,10 @@ link_google <- function(vector_of_gene_symbols
 }
 
 
-# link.google.clipboard = clipr::write_clip(link_google(clipr::read_clip()))
 
 
-# Bing search URL / search query links
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title  Parse Bing search query links.
+#' @description Parse bing search query links to your list of gene symbols. Strings "prefix" and ""suffix" will be searched for together with each gene ("Human ID4 neurons"). See many additional services in [DatabaseLinke.R](https://vertesy.github.io/DatabaseLinke.R/).
 #' @param vector_of_gene_symbols PARAM_DESCRIPTION
 #' @param bing PARAM_DESCRIPTION, Default: 'https://www.bing.com/search?q = '
 #' @param prefix PARAM_DESCRIPTION, Default: ''
@@ -5433,7 +5312,6 @@ link_google <- function(vector_of_gene_symbols
 #' }
 #' @rdname link_bing
 #' @export
-  Parse bing search query links to your list of gene symbols. Strings "prefix" and ""suffix" will be searched for together with each gene ("Human ID4 neurons"). See many additional services in [DatabaseLinke.R](https://vertesy.github.io/DatabaseLinke.R/).
 
 link_bing <- function(vector_of_gene_symbols
                       , bing = "https://www.bing.com/search?q = ", prefix = "", suffix = ""
@@ -5449,8 +5327,8 @@ link_bing <- function(vector_of_gene_symbols
 
 # Biology ------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title GC-content of a string (frequency of G and C letters among all letters).
+#' @description GC-content of a string (frequency of G and C letters among all letters).
 #' @param string PARAM_DESCRIPTION
 #' @param len PARAM_DESCRIPTION, Default: nchar(string)
 #' @param pattern PARAM_DESCRIPTION, Default: c("G", "C")
@@ -5467,7 +5345,7 @@ link_bing <- function(vector_of_gene_symbols
 #' @rdname GC_content
 #' @export
 #' @importFrom stringr str_split_fixed
-GC-content of a string (frequency of G and C letters among all letters).
+
 
 GC_content <- function(string, len = nchar(string), pattern = c("G","C")) {
   char.list <- stringr::str_split_fixed(string, pattern = "", n = nchar(string))
