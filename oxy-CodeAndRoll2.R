@@ -63,22 +63,22 @@ print("Depends on MarkdownReports, gtools, readr, gdata, clipr. Some functions d
 
 # Alisases --------------------------------------------------------------------------------
 
-#' @title Alias for gtools::mixedsort
-#' @description Alias for gtools::mixedsort
+#' @title Alias for gtools::mixedsort.
+#' @description Alias for gtools::mixedsort.
 #' @rdname sort.natural
 #' @export
 sort.natural = gtools::mixedsort
 
 
-#' @title Alias for paste0
-#' @description Alias for paste0
+#' @title Alias for paste0.
+#' @description Alias for paste0.
 #' @rdname p0
 #' @export
 p0 = paste0
 
 
-#' @title Alias for paste0
-#' @description Alias for paste0
+#' @title Alias for paste0.
+#' @description Alias for paste0.
 #' @rdname l
 #' @export
 l = length
@@ -232,8 +232,8 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 
 
 
-#' @title Silent try
-#' @description Silent try
+#' @title Silent try.
+#' @description Silent try.
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -254,8 +254,8 @@ stry <- function(...) {try(..., silent = T)}
 
 ## Generic -------------------------------------------------------------------------------------------------
 
-#' @title Stop script if the condition is met. You can parse anything (e.g. variables) in the message
-#' @description Stop script if the condition is met. You can parse anything (e.g. variables) in the message
+#' @title Stop script if the condition is met. You can parse anything (e.g. variables) in the message.
+#' @description Stop script if the condition is met. You can parse anything (e.g. variables) in the message.
 #' @param condition PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -273,8 +273,8 @@ stry <- function(...) {try(..., silent = T)}
 stopif2 <- function(condition, ...) { if (condition) {iprint(...); stop()} }
 
 
-#' @title Use system voice to notify (after a long task is done)
-#' @description Use system voice to notify (after a long task is done)
+#' @title Use system voice to notify (after a long task is done).
+#' @description Use system voice to notify (after a long task is done).
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -293,8 +293,8 @@ say <- function(...) {
   if (sys == "Darwin") system("say Ready")
   if (sys == "Linux") system("echo -e '\a'; sleep 0.5s; echo -e '\a'; sleep 0.5s; echo -e '\a'; sleep 0.5s; echo -e '\a'; sleep 0.5s; echo -e '\a'; sleep 0.5s; echo -e '\a'")  # For UNIX servers.
 }
-#' @title Use system voice to notify (after a long task is done)
-#' @description Use system voice to notify (after a long task is done)
+#' @title Use system voice to notify (after a long task is done).
+#' @description Use system voice to notify (after a long task is done).
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -312,8 +312,8 @@ sayy <- function(...) {system("say Ready to roll")}
 
 
 
-#' @title grep returning the value
-#' @description grep returning the value
+#' @title Grep returning the value.
+#' @description Grep returning the value.
 #' @param pattern PARAM_DESCRIPTION
 #' @param x PARAM_DESCRIPTION
 #' @param ignore.case PARAM_DESCRIPTION, Default: FALSE
@@ -361,7 +361,7 @@ oo <- function() {
 
 
 #' @title Unload a package.
-#' @description Unload a package. Source: https://stackoverflow.com/questions/6979917/how-to-unload-a-package-without-restarting-r
+#' @description Unload a package. Source: https://stackoverflow.com/questions/6979917/how-to-unload-a-package-without-restarting-r.
 #' @param pkg PARAM_DESCRIPTION
 #' @param character.only PARAM_DESCRIPTION, Default: FALSE
 #' @return OUTPUT_DESCRIPTION
@@ -513,8 +513,8 @@ if (!require(package = package_,  character.only = TRUE)) {
 
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) }
 
-#' @title view the head of an object by console.
-#' @description view the head of an object by console.
+#' @title View the head of an object by console.
+#' @description View the head of an object by console.
 #' @param matrix PARAM_DESCRIPTION
 #' @param enn PARAM_DESCRIPTION, Default: 10
 #' @return OUTPUT_DESCRIPTION
@@ -550,8 +550,8 @@ view.head <- function(matrix, enn = 10) { matrix[1:min(NROW(matrix), enn), 1:min
 
 view.head2 <- function(matrix, enn = 10) { View(head(matrix, n = min(NROW(matrix), NCOL(matrix), enn))) }
 
-#' @title Test if names of two objects for being exactly equal
-#' @description Test if names of two objects for being exactly equal
+#' @title Test if names of two objects for being exactly equal.
+#' @description Test if names of two objects for being exactly equal.
 #' @param v1 PARAM_DESCRIPTION
 #' @param v2 PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -580,8 +580,8 @@ iidentical.names <- function(v1, v2) {
   Check
 }
 
-#' @title Test if two objects for being exactly equal
-#' @description Test if two objects for being exactly equal
+#' @title Test if two objects for being exactly equal.
+#' @description Test if two objects for being exactly equal.
 #' @param v1 PARAM_DESCRIPTION
 #' @param v2 PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -649,8 +649,8 @@ IfExistsAndTrue <- function(name = "pi" ) {
   return(x)
 }
 
-#' @title  Show distribution of the largest objects and return their names.
-#' @description  Show distribution of the largest objects and return their names. Modified from: https://stackoverflow.com/questions/17218404/should-i-get-a-habit-of-removing-unused-variables-in-r
+#' @title Show distribution of the largest objects and return their names.
+#' @description  Show distribution of the largest objects and return their names. Modified from: https://stackoverflow.com/questions/17218404/should-i-get-a-habit-of-removing-unused-variables-in-r.
 #' @param n PARAM_DESCRIPTION, Default: 5
 #' @param saveplot PARAM_DESCRIPTION, Default: F
 #' @return OUTPUT_DESCRIPTION
@@ -754,7 +754,7 @@ read.simple_char_list <- function(...) {
   return(read_in)
 }
 
-#' @title  Read in a table.
+#' @title Read in a table.
 #' @description  Read in a table. Default: header defines colnames, no rownames. For rownames give the col nr. with rownames, eg. 1 The header should start with a TAB / First column name should be empty.
 #' @param ... PARAM_DESCRIPTION
 #' @param colnames PARAM_DESCRIPTION, Default: TRUE
@@ -785,8 +785,8 @@ read.simple.table <- function(..., colnames = TRUE, coltypes = NULL) {
   return(read_in)
 }
 
-#' @title Set First Col to Row Names
-#' @description Set First Col to Row Names
+#' @title Set First Col to Row Names.
+#' @description Set First Col to Row Names.
 #' @param Tibble PARAM_DESCRIPTION
 #' @param rownamecol PARAM_DESCRIPTION, Default: 1
 #' @param make_names PARAM_DESCRIPTION, Default: FALSE
@@ -809,7 +809,7 @@ FirstCol2RowNames <- function(Tibble, rownamecol = 1, make_names = FALSE) {
   return(Tibble[, -rownamecol, drop = F])
 }
 
-#' @title  Read in a table with comma separeted values: rownames in col1, headers SHIFTED. The header should start with a TAB / First column name should be empty.
+#' @title Read in a table with comma separeted values: rownames in col1, headers SHIFTED. The header should start with a TAB / First column name should be empty.
 #' @description  Read in a file with excel style data: rownames in col1, headers SHIFTED. The header should start with a TAB / First column name should be empty.
 #' @param ... PARAM_DESCRIPTION
 #' @param sep_ PARAM_DESCRIPTION, Default: '  '
@@ -942,8 +942,8 @@ read.simple.tsv.named.vector <- function(...) {
   return(vect)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df_by_read.simple.tsv PARAM_DESCRIPTION, Default: x
 #' @param digitz PARAM_DESCRIPTION, Default: 2
 #' @param na_rep PARAM_DESCRIPTION, Default: 0
@@ -1016,7 +1016,7 @@ read.simple.xls <- function(pfn = kollapse(...), row_namePos = NULL, ..., header
 }
 
 #' @title Source parts of another script.
-#' @description Source parts of another script. Source: https://stackoverflow.com/questions/26245554/execute-a-set-of-lines-from-another-r-file
+#' @description Source parts of another script. Source: https://stackoverflow.com/questions/26245554/execute-a-set-of-lines-from-another-r-file.
 #' @param fn PARAM_DESCRIPTION
 #' @param startTag PARAM_DESCRIPTION, Default: '#1'
 #' @param endTag PARAM_DESCRIPTION, Default: '#/1'
@@ -1045,7 +1045,7 @@ sourcePartial <- function(fn,startTag = '#1', endTag = '#/1') {
 
 ### Writing files out -------------------------------------------------------------------------------------------------
 
-#' @title  Write out a matrix-like R-object to a file with as tab separated values (.tsv).
+#' @title Write out a matrix-like R-object to a file with as tab separated values (.tsv).
 #' @description  Write out a matrix-like R-object to a file with as tab separated values (.tsv). Your output filename will be either the variable's name. The output file will be located in "OutDir" specified by you at the beginning of the script, or under your current working directory. You can pass the PATH and VARIABLE separately (in order), they will be concatenated to the filename.
 #' @param input_df PARAM_DESCRIPTION
 #' @param extension PARAM_DESCRIPTION, Default: 'tsv'
@@ -1072,8 +1072,8 @@ write.simple <- function(input_df, extension = 'tsv', ManualName = "", o = FALSE
   iprint("Length: ", length(input_df))
 } # fun
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param input_vec PARAM_DESCRIPTION
 #' @param extension PARAM_DESCRIPTION, Default: 'vec'
 #' @param ManualName PARAM_DESCRIPTION, Default: ''
@@ -1099,8 +1099,8 @@ write.simple.vec <- function(input_vec, extension = 'vec', ManualName = "", o = 
   if (o) { system(paste0("open ", FnP), wait = FALSE) }
 } # fun
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param named_list PARAM_DESCRIPTION
 #' @param ManualName PARAM_DESCRIPTION, Default: ''
 #' @param o PARAM_DESCRIPTION, Default: FALSE
@@ -1140,8 +1140,8 @@ write.simple.xlsx <- function(named_list, ManualName = "", o = FALSE,  ..., TabC
 } # fun
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param input_df PARAM_DESCRIPTION
 #' @param extension PARAM_DESCRIPTION, Default: 'tsv'
 #' @param ManualName PARAM_DESCRIPTION, Default: ''
@@ -1167,8 +1167,8 @@ write.simple.append <- function(input_df, extension = 'tsv', ManualName = "", o 
 } # fun
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param filename PARAM_DESCRIPTION
 #' @param r PARAM_DESCRIPTION, Default: 225
 #' @param q PARAM_DESCRIPTION, Default: 90
@@ -1188,8 +1188,8 @@ jjpegA4 <- function(filename, r = 225, q = 90) {
   jpeg(file = filename,width = wA4, height = hA4, units = 'in', quality = q,res = r)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1205,8 +1205,8 @@ add pdf as extension to a file name
 
 extPDF <- function(vec) ppp(vec, "pdf")
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1227,8 +1227,8 @@ extPNG <- function(vec) ppp(vec, "png")
 # https://github.com/vertesy/DataInCode
 # try(source("~/Github/TheCorvinas/R/DataInCode/DataInCode.R"), silent = FALSE)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1256,8 +1256,8 @@ clip2clip.vector <- function() {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1284,8 +1284,8 @@ clip2clip.commaSepString <- function() {
   print(x)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param var PARAM_DESCRIPTION, Default: df.markers
 #' @param decimal_mark PARAM_DESCRIPTION, Default: ','
 #' @return OUTPUT_DESCRIPTION
@@ -1307,8 +1307,8 @@ write_clip.replace.dot <- function(var = df.markers, decimal_mark = ',') {
 
 ## Create and check variables -------------------------------------------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
 #' @param fill PARAM_DESCRIPTION, Default: NA
 #' @return OUTPUT_DESCRIPTION
@@ -1331,8 +1331,8 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
   return(v)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
 #' @param fill PARAM_DESCRIPTION, Default: NaN
 #' @return OUTPUT_DESCRIPTION
@@ -1353,8 +1353,8 @@ list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) {
   return(liszt)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param rowname_vec PARAM_DESCRIPTION, Default: 1:10
 #' @param colname_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
 #' @param fill PARAM_DESCRIPTION, Default: NA
@@ -1377,8 +1377,8 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vector PARAM_DESCRIPTION, Default: 1:5
 #' @param HowManyTimes PARAM_DESCRIPTION, Default: 3
 #' @param IsItARow PARAM_DESCRIPTION, Default: TRUE
@@ -1401,8 +1401,8 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param rowname_vec PARAM_DESCRIPTION, Default: 1:3
 #' @param colname_vec PARAM_DESCRIPTION, Default: letters[1:2]
 #' @param z_name_vec PARAM_DESCRIPTION, Default: LETTERS[4:6]
@@ -1428,8 +1428,8 @@ array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_nam
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param printme PARAM_DESCRIPTION, Default: 0
 #' @return OUTPUT_DESCRIPTION
@@ -1452,8 +1452,8 @@ what <- function(x, printme = 0) {
   head(x)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param any_object PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1475,8 +1475,8 @@ idim <- function(any_object) {
   else { print(dim(any_object))  }
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param any_object PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1497,8 +1497,8 @@ idimnames <- function(any_object) {
   else if (!is.null(names(any_object))) { iprint("names:", names(any_object)) }
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vector PARAM_DESCRIPTION
 #' @param categories_vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -1520,8 +1520,8 @@ table_fixed_categories <- function(vector, categories_vec) {
 
 ## Vector operations -------------------------------------------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @param N PARAM_DESCRIPTION, Default: 10
 #' @return OUTPUT_DESCRIPTION
@@ -1538,8 +1538,8 @@ A combination of head() and tail() to see both ends.
 
 trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) )
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1555,8 +1555,8 @@ Sort in decreasing order.
 
 sort.decreasing <- function(vec) sort(vec, decreasing = TRUE)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param string PARAM_DESCRIPTION
 #' @param pattern PARAM_DESCRIPTION, Default: '_'
 #' @param n PARAM_DESCRIPTION, Default: 2
@@ -1577,8 +1577,8 @@ Alias for str_split_fixed in the stringr package
 
 sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(string, pattern = pattern, n = n) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df_Col PARAM_DESCRIPTION, Default: as.named.vector(df[, 1, drop = FALSE])
 #' @param n PARAM_DESCRIPTION, Default: 5
 #' @return OUTPUT_DESCRIPTION
@@ -1594,8 +1594,8 @@ sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(s
 Find the n highest values in a named vector
 
 topN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 5)   { head(sort(df_Col, decreasing = TRUE), n = n) }
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df_Col PARAM_DESCRIPTION, Default: as.named.vector(df[, 1, drop = FALSE])
 #' @param n PARAM_DESCRIPTION, Default: 5
 #' @return OUTPUT_DESCRIPTION
@@ -1613,8 +1613,8 @@ Find the n lowest values in a named vector
 bottomN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 5) { head(sort(df_Col, decreasing = FALSE), n = n) }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df_col PARAM_DESCRIPTION
 #' @param WhichDimNames PARAM_DESCRIPTION, Default: 1
 #' @return OUTPUT_DESCRIPTION
@@ -1640,8 +1640,8 @@ as.named.vector <- function(df_col, WhichDimNames = 1) {
   return(vecc)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df_col PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1662,8 +1662,8 @@ col2named.vector <- function(df_col) {
   return(vecc)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df_row PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1685,8 +1685,8 @@ row2named.vector <- function(df_row) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1706,8 +1706,8 @@ as.numeric.wNames <- function(vec) {
   return(numerified_vec)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1727,8 +1727,8 @@ as.numeric.wNames.old <- function(vec) {
   return(numerified_vec)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -1748,8 +1748,8 @@ as.character.wNames <- function(vec) {
   return(char_vec)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @param from PARAM_DESCRIPTION, Default: 0
 #' @param upto PARAM_DESCRIPTION, Default: 100
@@ -1772,8 +1772,8 @@ rescale <- function(vec, from = 0, upto = 100) {
   return(vec)
 } # fun
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param named_vector PARAM_DESCRIPTION
 #' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
 #' @param silent PARAM_DESCRIPTION, Default: F
@@ -1802,8 +1802,8 @@ flip_value2name <- function(named_vector, NumericNames = FALSE, silent = F) {
   return(newvec)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param named_vector PARAM_DESCRIPTION
 #' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
 #' @param silent PARAM_DESCRIPTION, Default: F
@@ -1819,8 +1819,8 @@ flip_value2name <- function(named_vector, NumericNames = FALSE, silent = F) {
 #' @export
 value2name_flip = flip_value2name
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec_or_list PARAM_DESCRIPTION
 #' @param decreasing PARAM_DESCRIPTION, Default: FALSE
 #' @param ... PARAM_DESCRIPTION
@@ -1846,8 +1846,8 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
   vec_or_list[order]
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @param summarize PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -1872,8 +1872,8 @@ any.duplicated <- function(vec, summarize = TRUE) {
   return(y)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @param orig PARAM_DESCRIPTION, Default: F
 #' @return OUTPUT_DESCRIPTION
@@ -1894,8 +1894,8 @@ which.duplicated <- function(vec, orig = F) {
   return(DPL)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @param orig PARAM_DESCRIPTION, Default: F
 #' @return OUTPUT_DESCRIPTION
@@ -1917,8 +1917,8 @@ which.NA <- function(vec, orig = F) {
   return(NAs)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param len PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -1936,8 +1936,8 @@ Fill up with a vector to a given length with NA-values at the end.
 pad.na <- function(x, len) { c(x, rep(NA, len - length(x))) }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param valz PARAM_DESCRIPTION
 #' @param high PARAM_DESCRIPTION, Default: TRUE
 #' @param thr PARAM_DESCRIPTION, Default: 3
@@ -1959,8 +1959,8 @@ clip.values <- function(valz, high = TRUE, thr = 3) {
   valz
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param valz PARAM_DESCRIPTION
 #' @param high PARAM_DESCRIPTION, Default: TRUE
 #' @param probs PARAM_DESCRIPTION, Default: c(0.01, 0.99)
@@ -1989,8 +1989,8 @@ clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, 
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -2011,8 +2011,8 @@ as.logical.wNames <- function(x, ...) {
   return(numerified_vec)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param tbl.2col PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2033,8 +2033,8 @@ col2named.vec.tbl <- function(tbl.2col) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param yourvec PARAM_DESCRIPTION
 #' @param by PARAM_DESCRIPTION, Default: 9
 #' @return OUTPUT_DESCRIPTION
@@ -2056,8 +2056,8 @@ iterBy.over <- function(yourvec, by = 9) {
   lsX
 } # for (i in iterBy.over(yourvec = x)) { print(i) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION, Default: 1:9
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2075,8 +2075,8 @@ zigzagger <- function(vec = 1:9) {
   intermingle2vec(vec, rev(vec))[1:length(vec)]
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION, Default: 1
 #' @param y PARAM_DESCRIPTION, Default: 100
 #' @param zeropadding PARAM_DESCRIPTION, Default: TRUE
@@ -2104,8 +2104,8 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log
 # (numerate(1, 122))
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION, Default: rpois(4, lambda = 3)
 #' @param topN PARAM_DESCRIPTION, Default: 2
 #' @return OUTPUT_DESCRIPTION
@@ -2128,8 +2128,8 @@ MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) {
 # https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param numericV PARAM_DESCRIPTION, Default: blanks
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2152,8 +2152,8 @@ cumsubtract <- function(numericV = blanks) {
 
 ### Vector filtering  -------------------------------------------------------------------------------------------------
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param named_Vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2170,8 +2170,8 @@ Return the names where the input vector is TRUE. The input vector is converted t
 which_names <- function(named_Vec) {
   return(names(which(as.logical.wNames(named_Vec)))) }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param named_Vec PARAM_DESCRIPTION
 #' @param pattern PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -2191,8 +2191,8 @@ which_names_grep <- function(named_Vec, pattern) {
   return(named_Vec[idx])
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @param silent PARAM_DESCRIPTION, Default: FALSE
 #' @return OUTPUT_DESCRIPTION
@@ -2216,8 +2216,8 @@ na.omit.strip <- function(vec, silent = FALSE) {
   return(clean)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2240,8 +2240,8 @@ inf.omit <- function(vec) {
   return(clean)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2262,8 +2262,8 @@ zero.omit <- function(vec) {
   return(v2)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param logical_vector PARAM_DESCRIPTION
 #' @param percentify PARAM_DESCRIPTION, Default: TRUE
 #' @param NumberAndPC PARAM_DESCRIPTION, Default: FALSE
@@ -2290,8 +2290,8 @@ pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm
 }
 
 # deprecated :
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param logical_vec PARAM_DESCRIPTION, Default: idx_localised
 #' @param total PARAM_DESCRIPTION, Default: TRUE
 #' @param NArm PARAM_DESCRIPTION, Default: TRUE
@@ -2313,8 +2313,8 @@ NrAndPc <- function(logical_vec = idx_localised, total = TRUE, NArm = TRUE) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param vec_or_table PARAM_DESCRIPTION
 #' @param category PARAM_DESCRIPTION
 #' @param NA_omit PARAM_DESCRIPTION, Default: TRUE
@@ -2341,8 +2341,8 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) {
   } # else: is vector
 } # fun
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param length_new PARAM_DESCRIPTION
 #' @param length_old PARAM_DESCRIPTION
 #' @param prepend PARAM_DESCRIPTION, Default: ''
@@ -2363,8 +2363,8 @@ filter_survival_length <- function(length_new, length_old, prepend = "") {
   llprint(prepend, pc, " of ", length_old, " entries make through the filter")
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param ... PARAM_DESCRIPTION
@@ -2393,8 +2393,8 @@ remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) {
   y
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param category_vec PARAM_DESCRIPTION
 #' @param replaceit PARAM_DESCRIPTION
 #' @param to PARAM_DESCRIPTION
@@ -2416,8 +2416,8 @@ simplify_categories <- function(category_vec, replaceit , to ) {
   return(category_vec)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param needle PARAM_DESCRIPTION
 #' @param haystack PARAM_DESCRIPTION
 #' @param exact PARAM_DESCRIPTION, Default: TRUE
@@ -2459,8 +2459,8 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) {
 
 
 ## String operations  -------------------------------------------------------------------------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param pvalue PARAM_DESCRIPTION, Default: 0.01
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2476,8 +2476,8 @@ Parse p-value from a number to a string.
 
 parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")");
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2496,8 +2496,8 @@ eval_parse_kollapse <- function(...) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param ls.of.params PARAM_DESCRIPTION, Default: p
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2516,8 +2516,8 @@ param.list.2.fname <- function(ls.of.params = p) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2545,8 +2545,8 @@ PasteDirNameFromFlags <- function(...) {
 
 
 ### File name and path parsing ------------------------------------------------------------------------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param path PARAM_DESCRIPTION, Default: '~/Dropbox/Abel.IMBA/AnalysisD'
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -2576,8 +2576,8 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #                      , flag.names_list(p$'variables.2.regress')
 #                      ,  flag.nameiftrue(p$'Man.Int.Order') )
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param toggle PARAM_DESCRIPTION
 #' @param Separator PARAM_DESCRIPTION, Default: '_'
 #' @return OUTPUT_DESCRIPTION
@@ -2601,8 +2601,8 @@ flag.name_value <- function(toggle, Separator = "_") {
 }
 # Xseed = p$'seed' = F; flag.name_value(Xseed); flag.name_value(p$'seed')
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param toggle PARAM_DESCRIPTION
 #' @param prefix PARAM_DESCRIPTION, Default: NULL
 #' @param suffix PARAM_DESCRIPTION, Default: NULL
@@ -2625,8 +2625,8 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
   if (length(output) > 1) output = output[length(output)]  # fix for when input is a list element like p$'myparam'
   return(output)
 } # returns the name if its value is true
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param toggle PARAM_DESCRIPTION
 #' @param prefix PARAM_DESCRIPTION, Default: NULL
 #' @param suffix PARAM_DESCRIPTION, Default: NULL
@@ -2643,8 +2643,8 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #' @export
 nameiftrue = flag.nameiftrue # backward compatible
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param par PARAM_DESCRIPTION, Default: p$umap.min_dist
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2663,8 +2663,8 @@ flag.names_list <- function(par = p$'umap.min_dist') {
 };  # param.list.flag(par = p$umap.n_neighbors)
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param pl PARAM_DESCRIPTION, Default: p.hm
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2684,8 +2684,8 @@ flag.names_list.all.new <- function(pl = p.hm) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param par PARAM_DESCRIPTION, Default: p$umap.min_dist
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -2707,8 +2707,8 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 ## Matrix operations -------------------------------------------------------------------------------------------------
 
 ### Matrix calculations  -------------------------------------------------------------------------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2724,8 +2724,8 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 Calculates the median of each row of a numeric matrix / data frame.
 
 rowMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, median, na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2742,8 +2742,8 @@ Calculates the median of each column of a numeric matrix / data frame.
 
 colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2759,8 +2759,8 @@ colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm =
 Calculates the median of each row of a numeric matrix / data frame.
 
 rowGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, geomean, na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2777,8 +2777,8 @@ Calculates the median of each column of a numeric matrix / data frame.
 
 colGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, geomean, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2794,8 +2794,8 @@ colGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, geomean, na.rm
 Calculates the CV of each ROW of a numeric matrix / data frame.
 
 rowCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, cv, na.rm = na.rm )
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2812,8 +2812,8 @@ Calculates the CV of each column of a numeric matrix / data frame.
 
 colCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, cv, na.rm = na.rm )
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2829,8 +2829,8 @@ colCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, cv, na.rm = na.rm )
 Calculates the CV of each ROW of a numeric matrix / data frame.
 
 rowVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, var, na.rm = na.rm )
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2847,8 +2847,8 @@ Calculates the CV of each column of a numeric matrix / data frame.
 
 colVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, var, na.rm = na.rm )
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2864,8 +2864,8 @@ colVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, var, na.rm = n
 Calculates the minimum of each row of a numeric matrix / data frame.
 
 rowMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, min, na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2882,8 +2882,8 @@ Calculates the minimum of each column of a numeric matrix / data frame.
 
 colMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, min, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2899,8 +2899,8 @@ colMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, min, na.rm = na.rm)
 Calculates the maximum of each row of a numeric matrix / data frame.
 
 rowMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, max, na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2917,8 +2917,8 @@ Calculates the maximum of each column of a numeric matrix / data frame.
 
 colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2934,8 +2934,8 @@ colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm)
 Calculates the SEM of each row of a numeric matrix / data frame.
 
 rowSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sem, na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2952,8 +2952,8 @@ Calculates the SEM of each column of a numeric matrix / data frame.
 
 colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2969,8 +2969,8 @@ colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm)
 Calculates the SEM of each row of a numeric matrix / data frame.
 
 rowSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sd, na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -2987,8 +2987,8 @@ Calculates the SEM of each column of a numeric matrix / data frame.
 
 colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -3004,8 +3004,8 @@ colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm)
 Calculates the SEM of each row of a numeric matrix / data frame.
 
 rowIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, IQR, na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -3022,8 +3022,8 @@ Calculates the SEM of each column of a numeric matrix / data frame.
 
 colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param ... PARAM_DESCRIPTION
@@ -3040,8 +3040,8 @@ colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 Calculates the SEM of each row of a numeric matrix / data frame.
 
 rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile, ..., na.rm = na.rm)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param ... PARAM_DESCRIPTION
@@ -3059,8 +3059,8 @@ Calculates the SEM of each column of a numeric matrix / data frame.
 
 colquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 2, quantile, ..., na.rm = na.rm)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3080,8 +3080,8 @@ colDivide <- function(mat, vec) { # divide by column
   mat / vec[col(mat)] # fastest
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3102,8 +3102,8 @@ colMutliply <- function(mat, vec) { # Mutliply by column
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3123,8 +3123,8 @@ rowDivide <- function(mat, vec) {
   mat / vec[row(mat)] # fastest
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @param vec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3144,8 +3144,8 @@ rowMutliply <- function(mat, vec) {
   mat * vec[row(mat)] # fastest
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param DF PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3161,8 +3161,8 @@ Calculate Z-score over rows of data frame.
 
 row.Zscore <- function(DF) t(scale(t(DF)))
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @param SUM PARAM_DESCRIPTION, Default: 1e+06
 #' @return OUTPUT_DESCRIPTION
@@ -3183,8 +3183,8 @@ TPM_normalize <- function(mat, SUM = 1e6) {
   return(norm_mat)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3205,8 +3205,8 @@ median_normalize <- function(mat) {
   return(norm_mat)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3228,8 +3228,8 @@ mean_normalize <- function(mat) {
 }
 
 ### Distance and correlation calculations --------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df2col PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3249,8 +3249,8 @@ eucl.dist.pairwise <- function(df2col) {
   dist_
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df2col PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3271,8 +3271,8 @@ sign.dist.pairwise <- function(df2col) {
 }
 
 # Auto correlation functions
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na_pass PARAM_DESCRIPTION, Default: na.pass
 #' @param plot PARAM_DESCRIPTION, Default: FALSE
@@ -3290,8 +3290,8 @@ sign.dist.pairwise <- function(df2col) {
 RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix / data frame.
 
 rowACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 1, acf, na.action = na_pass,  plot = plot, ...)}
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na_pass PARAM_DESCRIPTION, Default: na.pass
 #' @param plot PARAM_DESCRIPTION, Default: FALSE
@@ -3310,8 +3310,8 @@ RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix /
 
 colACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 2, acf, na.action = na_pass,  plot = plot, ...)}
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param lag PARAM_DESCRIPTION, Default: 1
 #' @param na_pass PARAM_DESCRIPTION, Default: na.pass
@@ -3334,8 +3334,8 @@ acf.exactLag <- function(x, lag = 1, na_pass = na.pass, plot = FALSE, ... ) {
   x[['acf']][(lag + 1)]
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na_pass PARAM_DESCRIPTION, Default: na.pass
 #' @param lag PARAM_DESCRIPTION, Default: 1
@@ -3357,8 +3357,8 @@ rowACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) {
   signif(apply(x, 1, acf.exactLag, lag = lag, plot = plot, ...), digits = 2)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na_pass PARAM_DESCRIPTION, Default: na.pass
 #' @param lag PARAM_DESCRIPTION, Default: 1
@@ -3382,8 +3382,8 @@ colACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) {
 
 
 ### Matrix manipulations -------------------------------------------------------------------------------------------------
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param clockwise PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -3403,8 +3403,8 @@ rotate <- function(x, clockwise = TRUE) {
   } else {apply( t(x), 2, rev)}  #first transpose, then reverse, it's the same as rotate -90 degrees:
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param data PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3421,8 +3421,8 @@ Sort each column of a numeric matrix / data frame.
 
 sortEachColumn <- function(data, ...) sapply(data, sort, ...)
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df PARAM_DESCRIPTION
 #' @param colname_in_df PARAM_DESCRIPTION, Default: 1
 #' @param decrease PARAM_DESCRIPTION, Default: FALSE
@@ -3444,8 +3444,8 @@ sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) {
   else {df[ order(df[, colname_in_df], decreasing = decrease, na.last = na_last), ]}
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat_w_dimnames PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3463,8 +3463,8 @@ rowNameMatrix <- function(mat_w_dimnames) {
   matrix(rep(rownames(mat_w_dimnames), ncol(mat_w_dimnames) ), nrow = nrow(mat_w_dimnames), ncol = ncol(mat_w_dimnames))
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat_w_dimnames PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3483,8 +3483,8 @@ colNameMatrix <- function(mat_w_dimnames) {
   t(matrix(x, nrow = ncol(mat_w_dimnames), ncol = nrow(mat_w_dimnames)))
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param matrix1 PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3503,8 +3503,8 @@ rownames.trimws <- function(matrix1) {
   return(matrix1)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df PARAM_DESCRIPTION
 #' @param f PARAM_DESCRIPTION, Default: colnames(df)
 #' @return OUTPUT_DESCRIPTION
@@ -3526,8 +3526,8 @@ colsplit <- function(df, f = colnames(df)) {
   names(ListOfDFs) = levelz
   return(ListOfDFs)
 }
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df PARAM_DESCRIPTION
 #' @param f PARAM_DESCRIPTION, Default: colnames(df)
 #' @return OUTPUT_DESCRIPTION
@@ -3542,8 +3542,8 @@ colsplit <- function(df, f = colnames(df)) {
 #' @export
 splitByCol = colsplit
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df PARAM_DESCRIPTION
 #' @param f PARAM_DESCRIPTION, Default: rownames(df)
 #' @return OUTPUT_DESCRIPTION
@@ -3567,8 +3567,8 @@ rowsplit <- function(df, f = rownames(df)) {
 }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df PARAM_DESCRIPTION
 #' @param RowIDs PARAM_DESCRIPTION, Default: NULL
 #' @param ColIDs PARAM_DESCRIPTION, Default: NULL
@@ -3601,8 +3601,8 @@ select.rows.and.columns <- function(df, RowIDs = NULL, ColIDs = NULL ) {
   return(df)
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @param rownamez PARAM_DESCRIPTION
 #' @param silent PARAM_DESCRIPTION, Default: FALSE
@@ -3628,8 +3628,8 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
   mat[ idx, ]
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param mat PARAM_DESCRIPTION
 #' @param colnamez PARAM_DESCRIPTION
 #' @param silent PARAM_DESCRIPTION, Default: FALSE
@@ -3656,8 +3656,8 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
   mat[ ,idx ]
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param df_ PARAM_DESCRIPTION, Default: NULL
 #' @param rows PARAM_DESCRIPTION, Default: FALSE
 #' @param odd PARAM_DESCRIPTION, Default: TRUE
@@ -3681,8 +3681,8 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
 }
 
 
-#' @title combine matrices by rownames intersect
-#' @description combine matrices by rownames intersect
+#' @title Combine matrices by rownames intersect.
+#' @description Combine matrices by rownames intersect.
 #' @param matrix1 PARAM_DESCRIPTION
 #' @param matrix2 PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 2
@@ -3715,8 +3715,8 @@ combine.matrices.intersect <- function(matrix1, matrix2, k = 2) {
 }
 
 
-#' @title Merge any data frames by rownames. Required plyr package
-#' @description Merge any data frames by rownames. Required plyr package
+#' @title Merge any data frames by rownames. Required plyr package.
+#' @description Merge any data frames by rownames. Required plyr package.
 #' @param list_of_dfs PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3742,8 +3742,8 @@ merge_dfs_by_rn <- function(list_of_dfs) {
   return(COMBINED)
 }
 
-#' @title Merge 2 numeric data frames by rownames
-#' @description Merge 2 numeric data frames by rownames
+#' @title Merge 2 numeric data frames by rownames.
+#' @description Merge 2 numeric data frames by rownames.
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -3779,8 +3779,8 @@ merge_numeric_df_by_rn <- function(x, y) {
 }
 
 
-#' @title cols have to be a vector of numbers corresponding to columns
-#' @description cols have to be a vector of numbers corresponding to columns
+#' @title Cols have to be a vector of numbers corresponding to columns.
+#' @description Cols have to be a vector of numbers corresponding to columns.
 #' @param mat PARAM_DESCRIPTION
 #' @param cols PARAM_DESCRIPTION, Default: 1:NCOL(mat)
 #' @return OUTPUT_DESCRIPTION
@@ -3801,8 +3801,8 @@ remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
   mat[idxOK, ]
 }
 
-#' @title cols have to be a vector of numbers corresponding to columns
-#' @description cols have to be a vector of numbers corresponding to columns
+#' @title Cols have to be a vector of numbers corresponding to columns.
+#' @description Cols have to be a vector of numbers corresponding to columns.
 #' @param mat PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3821,8 +3821,8 @@ remove.na.cols <- function(mat) {
   return(mat[, idxOK])
 }
 
-#' @title Omit rows with NA values from a matrix. Rows with any, or full of NA-s
-#' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s
+#' @title Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
+#' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
 #' @param mat PARAM_DESCRIPTION
 #' @param any PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -3903,8 +3903,8 @@ intersect.ls <- function(ls, ...) { Reduce(intersect, ls) }
 
 union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) }
 
-#' @title lapply, then unlist
-#' @description lapply, then unlist
+#' @title Lapply, then unlist.
+#' @description Lapply, then unlist.
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3920,8 +3920,8 @@ union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) }
 
 unlapply <- function(...) { unlist(lapply(...)) }
 
-#' @title create a list with names from ALL variables you pass on to the function
-#' @description create a list with names from ALL variables you pass on to the function
+#' @title Create a list with names from ALL variables you pass on to the function.
+#' @description Create a list with names from ALL variables you pass on to the function.
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -3995,8 +3995,8 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
   return(outList)
 }
 
-#' @title reorder elements of lists in your custom order of names / indices.
-#' @description reorder elements of lists in your custom order of names / indices.
+#' @title Reorder elements of lists in your custom order of names / indices.
+#' @description Reorder elements of lists in your custom order of names / indices.
 #' @param L PARAM_DESCRIPTION
 #' @param namesOrdered PARAM_DESCRIPTION, Default: mixedsort(names(L))
 #' @return OUTPUT_DESCRIPTION
@@ -4018,8 +4018,8 @@ reorder.list <- function(L, namesOrdered = mixedsort(names(L))) {
   return(Lout)
 }
 
-#' @title range of values in whole list
-#' @description range of values in whole list
+#' @title Range of values in whole list.
+#' @description Range of values in whole list.
 #' @param L PARAM_DESCRIPTION
 #' @param namesOrdered PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4064,8 +4064,8 @@ intermingle2lists <- function(L1, L2) {
   return(Lout)
 }
 
-#' @title convert a vector to a list with certain dimensions, taken from the list it wanna resemble
-#' @description convert a vector to a list with certain dimensions, taken from the list it wanna resemble
+#' @title Convert a vector to a list with certain dimensions, taken from the list it wanna resemble.
+#' @description Convert a vector to a list with certain dimensions, taken from the list it wanna resemble.
 #' @param vec PARAM_DESCRIPTION
 #' @param list_wannabe PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4094,8 +4094,8 @@ as.listalike <- function(vec, list_wannabe) {
 
 
 
-#' @title reverse list hierarchy
-#' @description reverse list hierarchy
+#' @title Reverse list hierarchy.
+#' @description Reverse list hierarchy.
 #' @param ll PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4186,8 +4186,8 @@ list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]
   return(mat)
 }
 
-#' @title split a list by its names
-#' @description split a list by its names
+#' @title Split a list by its names.
+#' @description Split a list by its names.
 #' @param namedVec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4206,8 +4206,8 @@ splitbyitsnames <- function(namedVec) {
   split(namedVec, f = names(namedVec))
 }
 
-#' @title split a list by its names
-#' @description split a list by its names
+#' @title Split a list by its names.
+#' @description Split a list by its names.
 #' @param namedVec PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4293,7 +4293,7 @@ intermingle.cbind <- function(df1, df2) {
 }
 
 #' @title Convert a list to a vector.
-#' @description Convert a list to a vector repeating list-element names, while vector names are the list elements
+#' @description Convert a list to a vector repeating list-element names, while vector names are the list elements.
 #' @param your_list PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4340,8 +4340,8 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 ### Work with multi dimensional lists --------------------------------
 
 
-#' @title copy dimension and dimnames
-#' @description copy dimension and dimnames
+#' @title Copy dimension and dimnames.
+#' @description Copy dimension and dimnames.
 #' @param list.1D PARAM_DESCRIPTION
 #' @param obj.2D PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4361,8 +4361,8 @@ copy.dimension.and.dimnames <- function(list.1D, obj.2D) {
   list.1D
 }
 
-#' @title lapply for multidimensional arrays
-#' @description lapply for multidimensional arrays
+#' @title Lapply for multidimensional arrays.
+#' @description Lapply for multidimensional arrays.
 #' @param list_2D PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4383,8 +4383,8 @@ mdlapply <- function(list_2D, ...) {
 }
 
 
-#' @title simplify 2D-list-array to a DF
-#' @description simplify 2D-list-array to a DF
+#' @title Simplify 2D-list-array to a DF.
+#' @description Simplify 2D-list-array to a DF.
 #' @param two.dim.arr.of.lists PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4406,8 +4406,8 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
 }
 
 
-#' @title multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
-#' @description multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
+#' @title Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
+#' @description Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
 #' @param list_2D PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -4432,8 +4432,8 @@ mdlapply2df <- function(list_2D, ...) {
 
 ## Set operations -------------------------------------------------------------------------------------------------
 
-#' @title Symmetric difference of any number of vectors
-#' @description Quasy symmetric difference of any number of vectors
+#' @title Symmetric difference of any number of vectors.
+#' @description Quasy symmetric difference of any number of vectors.
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
@@ -4459,8 +4459,8 @@ symdiff <- function(x, y, ...) {
 
 ## Math & stats -------------------------------------------------------------------------------------------------
 
-#' @title Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
-#' @description Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
+#' @title Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
+#' @description Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -4477,8 +4477,8 @@ symdiff <- function(x, y, ...) {
 
 sem <- function(x, na.rm = TRUE) sd(unlist(x), na.rm = na.rm)/sqrt(length(na.omit.strip(as.numeric(x))))
 
-#' @title Calculates the fano factor on a numeric vector (it excludes NA-s by default)
-#' @description Calculates the fano factor on a numeric vector (it excludes NA-s by default)
+#' @title Calculates the fano factor on a numeric vector (it excludes NA-s by default).
+#' @description Calculates the fano factor on a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param USE PARAM_DESCRIPTION, Default: 'na.or.complete'
@@ -4497,7 +4497,7 @@ sem <- function(x, na.rm = TRUE) sd(unlist(x), na.rm = na.rm)/sqrt(length(na.omi
 fano <- function(x, na.rm = TRUE, USE = "na.or.complete") var(x, na.rm = na.rm, use = USE )/mean(x, na.rm = na.rm)
 
 #' @title Geometric mean.
-#' @description Calculates the geometric mean of a numeric vector (it excludes NA-s by default). Old alias gm_mean = geomean
+#' @description Calculates the geometric mean of a numeric vector (it excludes NA-s by default). Old alias gm_mean = geomean.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -4514,8 +4514,8 @@ fano <- function(x, na.rm = TRUE, USE = "na.or.complete") var(x, na.rm = na.rm, 
 
 geomean <- function(x, na.rm = TRUE) {
   exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x)) }
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title FUNCTION_TITLE.
+#' @description FUNCTION_DESCRIPTION.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @return OUTPUT_DESCRIPTION
@@ -4530,8 +4530,8 @@ geomean <- function(x, na.rm = TRUE) {
 #' @export
 
 
-#' @title Calculates the mean of the log
-#' @description Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
+#' @title Calculates the mean of the log.
+#' @description Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 2
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
@@ -4642,8 +4642,8 @@ imovingSEM <- function(x, oneSide = 5) {
   };  return(y)
 }
 
-#' @title Shannon entropy
-#' @description Calculate shannon entropy
+#' @title Shannon entropy.
+#' @description Calculate shannon entropy.
 #' @param p PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4666,8 +4666,8 @@ shannon.entropy <- function(p) {
 ## Plotting and Graphics -----------------------------------------------------------------------------------------------------
 
 ### Colors -----------------------------------------------------------------------------------------------------
-#' @title Alias for rich.colors in gplots
-#' @description Alias for rich.colors in gplots
+#' @title Alias for rich.colors in gplots.
+#' @description Alias for rich.colors in gplots.
 #' @param n PARAM_DESCRIPTION, Default: 3
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4687,8 +4687,8 @@ shannon.entropy <- function(p) {
 richColors <- function(n = 3) { gplots::rich.colors(n) }
 
 
-#' @title Display the colors encoded by the numbers / color-ID-s you pass on to this function
-#' @description Display the colors encoded by the numbers / color-ID-s you pass on to this function
+#' @title Display the colors encoded by the numbers / color-ID-s you pass on to this function.
+#' @description Display the colors encoded by the numbers / color-ID-s you pass on to this function.
 #' @param ... PARAM_DESCRIPTION
 #' @param incrBottMarginBy PARAM_DESCRIPTION, Default: 0
 #' @param savefile PARAM_DESCRIPTION, Default: FALSE
@@ -4741,7 +4741,7 @@ HeatMapCol_RedBlackGreen <- grDevices::colorRampPalette(c("red", "black", "green
 colSums.barplot <- function(df, col = "seagreen2", na_rm = TRUE, ...) { barplot(colSums(df, na.rm = na_rm), col = col, ...) }
 
 #' @title Renders the lm() function's output.
-#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles).
 #' @param lm PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4760,8 +4760,8 @@ lm_equation_formatter <- function(lm) {
   kollapse("Intercept: ", eq[1], " Slope: ", eq[2]);
 }
 
-#' @title Renders the lm() function's output into a human readable text. (e.g. for subtitles)
-#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+#' @title Renders the lm() function's output into a human readable text. (e.g. for subtitles).
+#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles).
 #' @param lm PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -4780,8 +4780,8 @@ lm_equation_formatter2 <- function(lm) {
   kollapse("y = ", eq[2], "* x + ", eq[1]);
 }
 
-#' @title Renders the lm() function's output into a human readable text. (e.g. for subtitles)
-#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles)
+#' @title Renders the lm() function's output into a human readable text. (e.g. for subtitles).
+#' @description Renders the lm() function's output into a human readable text. (e.g. for subtitles).
 #' @param lm PARAM_DESCRIPTION
 #' @param y.var.name PARAM_DESCRIPTION, Default: 'y'
 #' @param x.var.name PARAM_DESCRIPTION, Default: 'x'
@@ -4834,7 +4834,7 @@ hist.XbyY <- function(dfw2col = NULL, toSplit = 1:100, splitby = rnorm(100), bre
 
 ### Functions for pairs() plots  -----------------------------------------------------------------------------------------------------
 
-#' @title Helper function for pairs()
+#' @title Helper function for pairs().
 #' @description A function to display correlation values for pairs() function. Default is pearson correlation, that can be set to  "kendall" or "spearman".
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
@@ -4871,7 +4871,7 @@ panel.cor.pearson <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method
   text(.8, .8, Signif, cex = cex,  col = 2)
 }
 
-#' @title Helper function for pairs()
+#' @title Helper function for pairs().
 #' @description A function to display correlation values for pairs() function.
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
@@ -4910,7 +4910,7 @@ panel.cor.spearman <- function(x, y, digits = 2, prefix = "", cex.cor = 2, metho
 
 
 #' @title Quantile breakpoints.
-#' @description Quantile breakpoints in any data vector http://slowkow.com/notes/heatmap-tutorial/
+#' @description Quantile breakpoints in any data vector http://slowkow.com/notes/heatmap-tutorial/.
 #' @param xs PARAM_DESCRIPTION
 #' @param n PARAM_DESCRIPTION, Default: 10
 #' @param na.Rm PARAM_DESCRIPTION, Default: FALSE
@@ -5044,8 +5044,8 @@ hclust.ClusterSeparatingLines.col <- function(pheatmapObject, k = 3) which(!dupl
 
 
 
-#' @title calculate gap positions for pheatmap, based a sorted annotation vector of categories
-#' @description calculate gap positions for pheatmap, based a sorted annotation vector of categories
+#' @title Calculate gap positions for pheatmap, based a sorted annotation vector of categories.
+#' @description Calculate gap positions for pheatmap, based a sorted annotation vector of categories.
 #' @param annot.vec.of.categories PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -5089,7 +5089,7 @@ matlabColors.pheatmap <- function(matrixx, nr = 50) {colorRamps::matlab.like(len
 
 
 #' @title Helper for pheatmap.
-#' @description For VECTORS. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
+#' @description For VECTORS. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap.
 #' @param data PARAM_DESCRIPTION
 #' @param annot_vec PARAM_DESCRIPTION
 #' @param annot_names PARAM_DESCRIPTION, Default: 'Annot'
@@ -5131,8 +5131,8 @@ annot_col.create.pheatmap.vec <- function(data, annot_vec, annot_names = "Annot"
 }
 
 
-#' @title  Helper for pheatmap.
-#' @description For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
+#' @title Helper for pheatmap.
+#' @description For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap.
 #' @param data PARAM_DESCRIPTION
 #' @param annot_df_per_column PARAM_DESCRIPTION
 #' @param annot_names PARAM_DESCRIPTION, Default: NULL
@@ -5177,8 +5177,8 @@ annot_col.create.pheatmap.df <- function(data, annot_df_per_column, annot_names 
   print("annot [data frame] and annot_col [list] variables are created. Use: pheatmap(..., annotation_col = annot, annotation_colors = annot_col)")
 }
 
-#' @title   Helper for pheatmap. fix class and color annotation in pheatmap.
-#' @description fix class and color annotation in pheatmap annotation data frame's and lists.
+#' @title Helper for pheatmap. fix class and color annotation in pheatmap.
+#' @description Fix class and color annotation in pheatmap annotation data frame's and lists.
 #' @param ListOfColnames PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -5203,8 +5203,8 @@ annot_col.fix.numeric <- function(ListOfColnames) {
 }
 
 
-#' @title   Helper for pheatmap.
-#' @description For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap
+#' @title Helper for pheatmap.
+#' @description For data frames. Auxiliary function for pheatmap. Prepares the 2 variables needed for "annotation_col" and "annotation_colors" in pheatmap.
 #' @param data PARAM_DESCRIPTION
 #' @param annot_df_per_row PARAM_DESCRIPTION
 #' @param annot_names PARAM_DESCRIPTION, Default: NULL
@@ -5293,7 +5293,7 @@ link_google <- function(vector_of_gene_symbols
 
 
 
-#' @title  Parse Bing search query links.
+#' @title Parse Bing search query links.
 #' @description Parse bing search query links to your list of gene symbols. Strings "prefix" and ""suffix" will be searched for together with each gene ("Human ID4 neurons"). See many additional services in [DatabaseLinke.R](https://vertesy.github.io/DatabaseLinke.R/).
 #' @param vector_of_gene_symbols PARAM_DESCRIPTION
 #' @param bing PARAM_DESCRIPTION, Default: 'https://www.bing.com/search?q = '
