@@ -17,14 +17,17 @@ try(require(ggplot2),silent = T)
 
 
 ### CHAPTERS:
+# -  Generic functions
 # -  File handling, export, import [read & write]
 #   - Clipboard interaction (OS X)
 #   - Reading files in
 #   - Writing files out
+# - Create and check variables
 # -  Vector operations
 #   - Vector filtering
 # -  String operations
 # -  Matrix operations
+#   - Matrix filtering
 # -  List operations
 # -  Set operations
 # -  Math and stats
@@ -72,6 +75,13 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') } # kollapse by da
 
 stry <- function(...) {try(..., silent = T)} # Silent try
 
+
+
+## Generic -------------------------------------------------------------------------------------------------
+
+stopif2 <- function(condition, ...) { if (condition) {iprint(...); stop()} } # Stop script if the condition is met. You can parse anything (e.g. variables) in the message
+
+
 say <- function(...) { # Use system voice to notify (after a long task is done)
   sys <- Sys.info()["sysname"]
   if (sys == "Darwin") system("say Ready")
@@ -81,12 +91,9 @@ sayy <- function(...) {system("say Ready to roll")} # Use system voice to notify
 
 
 
-
-
-
 grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, fixed = FALSE, useBytes = FALSE  # grep returning the value
-                   , invert = FALSE, ...) grep(pattern, x, ignore.case = ignore.case, perl = perl, fixed = fixed
-                                               , useBytes = useBytes, invert = invert, ..., value = TRUE)
+                  , invert = FALSE, ...) grep(pattern, x, ignore.case = ignore.case, perl = perl, fixed = fixed
+                                              , useBytes = useBytes, invert = invert, ..., value = TRUE)
 
 oo <- function() { # Open current working directory.
   system("open .")
@@ -104,6 +111,102 @@ unload <- function(pkg, character.only = FALSE) { # Unload a package. Source: ht
     detach(search_item, unload = TRUE, character.only = TRUE)
   }
 }
+
+most_frequent_elements <- function(thingy, topN = 10) { # Show the most frequent elements of a table
+  tail(sort(table(thingy, useNA = "ifany")), topN)
+}
+
+top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order
+  head( order(x, decreasing = top), n )
+}
+
+percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercentile = TRUE) { # Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()'s "vline" paramter.
+  index = percentile * length(distribution)
+  if (FirstValOverPercentile) { index = ceiling(index)
+  } else {index = floor(index) }
+  value = sort(distribution)[index]
+  return(value)
+}
+
+printEveryN <- function(i, N = 1000) { if ((i %% N) == 0 ) iprint(i) } # Report at every e.g. 1000
+
+irequire <- function(package) { package_ = as.character(substitute(package)); print(package_); # Load a package. If it does not exist, try to install it from CRAN.
+if (!require(package = package_,  character.only = TRUE)) {
+  print("Not Installed yet.");install.packages(pkgs = package_);
+  Sys.sleep(1)
+  print("Loading package:")
+  require(package = package_, character.only = TRUE)
+}
+}  # install package if cannot be loaded
+
+idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) } # Parse current date, dot separated.
+
+view.head <- function(matrix, enn = 10) { matrix[1:min(NROW(matrix), enn), 1:min(NCOL(matrix), enn)] } # view the head of an object by console.
+view.head2 <- function(matrix, enn = 10) { View(head(matrix, n = min(NROW(matrix), NCOL(matrix), enn))) } # view the head of an object by View().
+
+iidentical.names <- function(v1, v2) { # Test if names of two objects for being exactly equal
+  nv1 = names(v1)
+  nv2 = names(v2)
+  len.eq = (length(nv1) == length(nv2))
+  if (!len.eq) iprint("Lenghts differ by:", (length(nv1) - length(nv2)) )
+  Check = identical(nv1, nv2)
+  if (!Check) {
+    diff = setdiff(nv1, nv2)
+    ld = length(diff)
+    iprint(ld, "elements differ: ", head(diff))
+  }
+  Check
+}
+
+iidentical <- function(v1, v2) { # Test if two objects for being exactly equal
+  len.eq = (length(v1) == length(v2))
+  if (!len.eq) iprint("Lenghts differ by:", (length(v1) - length(v2)) )
+  Check = identical(v1,v2)
+  if (!Check) {
+    diff = setdiff(v1, v2)
+    ld = length(diff)
+    iprint(ld, "elements differ: ", head(diff))
+  }
+  Check
+}
+
+iidentical.all <- function(li) all(sapply(li, identical, li[[1]])) # Test if two objects for being exactly equal.
+
+#' IfExistsAndTrue
+#'
+#' Internal function. Checks if a variable is defined, and its value is TRUE.
+#' @param name Name of the varaible
+#' @export
+#' @examples IfExistsAndTrue()
+
+IfExistsAndTrue <- function(name = "pi" ) { # Internal function. Checks if a variable is defined, and its value is TRUE.
+  x = FALSE
+  if (exists(name)) {
+    if (isTRUE(get(name)))  {x = TRUE} else {x = FALSE; iprint(name, " exists, but != TRUE; ", get(name))}
+  }
+  return(x)
+}
+
+memory.biggest.objects <- function(n = 5, saveplot = F) { # Show distribution of the largest objects and return their names. # https://stackoverflow.com/questions/17218404/should-i-get-a-habit-of-removing-unused-variables-in-r
+  try.dev.off()
+  gc()
+  ls.mem <- ls( envir = .GlobalEnv)
+  ls.obj <- lapply(ls.mem, get)
+  Sizes.of.objects.in.mem <- unlapply(ls.obj, object.size)
+  names(Sizes.of.objects.in.mem) <- ls.mem
+  topX = sort(Sizes.of.objects.in.mem,decreasing = TRUE)[1:n]
+
+  Memorty.usage.stat = c(topX, 'Other' = sum(sort(Sizes.of.objects.in.mem,decreasing = TRUE)[-(1:n)]))
+  pie(Memorty.usage.stat, cex = .5, sub = make.names(date()))
+  try(qpie(Memorty.usage.stat, w = 7,  ), silent = T)
+  # Use wpie if you have MarkdownReports, from https://github.com/vertesy/MarkdownReports
+  dput(names(topX))
+  iprint("rm(list = c( 'objectA',  'objectB'))")
+  # inline_vec.char(names(topX))
+  # Use inline_vec.char if you have DataInCode, from https://github.com/vertesy/DataInCode
+}
+# memory.biggest.objects()
+
 
 ## File handling, export, import [read & write] -------------------------------------------------------------------------------------------------
 
@@ -302,6 +405,72 @@ write_clip.replace.dot <- function(var = df.markers, decimal_mark = ',') { # Cli
 }
 # write_clip.replace.dot(df_markers)
 
+## Create and check variables -------------------------------------------------------------------------------------------------
+
+vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # create a vector from a vector of names
+  v = numeric(length(name_vec))
+  if (length(fill) == 1) {v = rep(fill, length(name_vec))}
+  else if (length(fill == length(name_vec))) {v = fill}
+  names(v) = name_vec
+  return(v)
+}
+
+list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) { # create list from a vector with the names of the elements
+  liszt = as.list(rep(fill, length(name_vec)))
+  names(liszt) = name_vec
+  return(liszt)
+}
+
+matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) { # Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
+  mx = matrix(data = fill, nrow = length(rowname_vec), ncol = length(colname_vec), dimnames = list(rowname_vec, colname_vec))
+  iprint("Dimensions:", dim(mx))
+  return(mx)
+}
+
+
+matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) { # Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
+  matt = matrix(vector, nrow = length(vector), ncol = HowManyTimes)
+  if ( !IsItARow ) {matt = t(matt)}
+  return(matt)
+}
+
+
+array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_name_vec = LETTERS[4:6], fill = NA) { # create an N-dimensional array from N vectors defining the row-, column, etc names of the array
+  DimNames = list(rowname_vec, colname_vec, z_name_vec)
+  Dimensions_ = lapply(DimNames, length)
+  mx = array(data = fill, dim = Dimensions_, dimnames = DimNames)
+  iprint("Dimensions:", dim(mx))
+  return(mx)
+}
+
+
+what <- function(x, printme = 0) { # A better version of is(). It can print the first "printme" elements.
+  iprint(is(x), "; nr. of elements:", length(x))
+  if ( is.numeric(x) )    { iprint("min&max:", range(x) ) } else {print("Not numeric")}
+  if ( length(dim(x) ) > 0 )  { iprint("Dim:", dim(x) ) }
+  if ( printme > 0)       { iprint("Elements:", x[0:printme] ) }
+  head(x)
+}
+
+idim <- function(any_object) { # A dim() function that can handle if you pass on a vector: then, it gives the length.
+  if (is.null(dim(any_object))) {
+    if (is.list(any_object)) { print("list") } #if
+    print(length(any_object))
+  }
+  else { print(dim(any_object))  }
+}
+
+idimnames <- function(any_object) { # A dimnames() function that can handle if you pass on a vector: it gives back the names.
+  if (!is.null(dimnames(any_object)))   { print(dimnames(any_object)) }
+  else if (!is.null(colnames(any_object))) { iprint("colnames:", colnames(any_object))  }
+  else if (!is.null(rownames(any_object))) { iprint("rownames:", rownames(any_object))  }
+  else if (!is.null(names(any_object))) { iprint("names:", names(any_object)) }
+}
+
+table_fixed_categories <- function(vector, categories_vec) { # generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
+  if ( !is.vector(vector)) {print(is(vector[]))}
+  table(factor(unlist(vector), levels = categories_vec))
+}
 
 ## Vector operations -------------------------------------------------------------------------------------------------
 
@@ -1204,73 +1373,6 @@ shannon.entropy <- function(p) { # Calculate shannon entropy
 }
 
 
-## Create and check variables -------------------------------------------------------------------------------------------------
-
-vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # create a vector from a vector of names
-  v = numeric(length(name_vec))
-  if (length(fill) == 1) {v = rep(fill, length(name_vec))}
-  else if (length(fill == length(name_vec))) {v = fill}
-  names(v) = name_vec
-  return(v)
-}
-
-list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) { # create list from a vector with the names of the elements
-  liszt = as.list(rep(fill, length(name_vec)))
-  names(liszt) = name_vec
-  return(liszt)
-}
-
-matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) { # Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
-  mx = matrix(data = fill, nrow = length(rowname_vec), ncol = length(colname_vec), dimnames = list(rowname_vec, colname_vec))
-  iprint("Dimensions:", dim(mx))
-  return(mx)
-}
-
-
-matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) { # Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
-  matt = matrix(vector, nrow = length(vector), ncol = HowManyTimes)
-  if ( !IsItARow ) {matt = t(matt)}
-  return(matt)
-}
-
-
-array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_name_vec = LETTERS[4:6], fill = NA) { # create an N-dimensional array from N vectors defining the row-, column, etc names of the array
-  DimNames = list(rowname_vec, colname_vec, z_name_vec)
-  Dimensions_ = lapply(DimNames, length)
-  mx = array(data = fill, dim = Dimensions_, dimnames = DimNames)
-  iprint("Dimensions:", dim(mx))
-  return(mx)
-}
-
-
-what <- function(x, printme = 0) { # A better version of is(). It can print the first "printme" elements.
-  iprint(is(x), "; nr. of elements:", length(x))
-  if ( is.numeric(x) )    { iprint("min&max:", range(x) ) } else {print("Not numeric")}
-  if ( length(dim(x) ) > 0 )  { iprint("Dim:", dim(x) ) }
-  if ( printme > 0)       { iprint("Elements:", x[0:printme] ) }
-  head(x)
-}
-
-idim <- function(any_object) { # A dim() function that can handle if you pass on a vector: then, it gives the length.
-  if (is.null(dim(any_object))) {
-    if (is.list(any_object)) { print("list") } #if
-    print(length(any_object))
-  }
-  else { print(dim(any_object))  }
-}
-
-idimnames <- function(any_object) { # A dimnames() function that can handle if you pass on a vector: it gives back the names.
-  if (!is.null(dimnames(any_object)))   { print(dimnames(any_object)) }
-  else if (!is.null(colnames(any_object))) { iprint("colnames:", colnames(any_object))  }
-  else if (!is.null(rownames(any_object))) { iprint("rownames:", rownames(any_object))  }
-  else if (!is.null(names(any_object))) { iprint("names:", names(any_object)) }
-}
-
-table_fixed_categories <- function(vector, categories_vec) { # generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
-  if ( !is.vector(vector)) {print(is(vector[]))}
-  table(factor(unlist(vector), levels = categories_vec))
-}
-
 ## Plotting and Graphics -----------------------------------------------------------------------------------------------------
 
 legend.col <- function(col, lev) { # Legend color. # Source: https://aurelienmadouasse.wordpress.com/2012/01/13/legend-for-a-continuous-color-scale-in-r/
@@ -1597,108 +1699,6 @@ GC_content <- function(string, len = nchar(string), pattern = c("G","C")) { # GC
   tbl = table(factor(unlist(char.list), levels = c("A", "T", "G", "C")))
   sum(tbl[  pattern ]) / sum(tbl)
 }
-
-
-
-## Generic -------------------------------------------------------------------------------------------------
-
-stopif2 <- function(condition, ...) { if (condition) {iprint(...); stop()} } # Stop script if the condition is met. You can parse anything (e.g. variables) in the message
-
-most_frequent_elements <- function(thingy, topN = 10) { # Show the most frequent elements of a table
-  tail(sort(table(thingy, useNA = "ifany")), topN)
-}
-
-top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order
-  head( order(x, decreasing = top), n )
-}
-
-percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercentile = TRUE) { # Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()'s "vline" paramter.
-  index = percentile * length(distribution)
-  if (FirstValOverPercentile) { index = ceiling(index)
-  } else {index = floor(index) }
-  value = sort(distribution)[index]
-  return(value)
-}
-
-printEveryN <- function(i, N = 1000) { if ((i %% N) == 0 ) iprint(i) } # Report at every e.g. 1000
-
-irequire <- function(package) { package_ = as.character(substitute(package)); print(package_); # Load a package. If it does not exist, try to install it from CRAN.
-if (!require(package = package_,  character.only = TRUE)) {
-  print("Not Installed yet.");install.packages(pkgs = package_);
-  Sys.sleep(1)
-  print("Loading package:")
-  require(package = package_, character.only = TRUE)
-}
-}  # install package if cannot be loaded
-
-idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) } # Parse current date, dot separated.
-
-view.head <- function(matrix, enn = 10) { matrix[1:min(NROW(matrix), enn), 1:min(NCOL(matrix), enn)] } # view the head of an object by console.
-view.head2 <- function(matrix, enn = 10) { View(head(matrix, n = min(NROW(matrix), NCOL(matrix), enn))) } # view the head of an object by View().
-
-iidentical.names <- function(v1, v2) { # Test if names of two objects for being exactly equal
-  nv1 = names(v1)
-  nv2 = names(v2)
-  len.eq = (length(nv1) == length(nv2))
-  if (!len.eq) iprint("Lenghts differ by:", (length(nv1) - length(nv2)) )
-  Check = identical(nv1, nv2)
-  if (!Check) {
-    diff = setdiff(nv1, nv2)
-    ld = length(diff)
-    iprint(ld, "elements differ: ", head(diff))
-  }
-  Check
-}
-
-iidentical <- function(v1, v2) { # Test if two objects for being exactly equal
-  len.eq = (length(v1) == length(v2))
-  if (!len.eq) iprint("Lenghts differ by:", (length(v1) - length(v2)) )
-  Check = identical(v1,v2)
-  if (!Check) {
-    diff = setdiff(v1, v2)
-    ld = length(diff)
-    iprint(ld, "elements differ: ", head(diff))
-  }
-  Check
-}
-
-iidentical.all <- function(li) all(sapply(li, identical, li[[1]])) # Test if two objects for being exactly equal.
-
-#' IfExistsAndTrue
-#'
-#' Internal function. Checks if a variable is defined, and its value is TRUE.
-#' @param name Name of the varaible
-#' @export
-#' @examples IfExistsAndTrue()
-
-IfExistsAndTrue <- function(name = "pi" ) { # Internal function. Checks if a variable is defined, and its value is TRUE.
-  x = FALSE
-  if (exists(name)) {
-    if (isTRUE(get(name)))  {x = TRUE} else {x = FALSE; iprint(name, " exists, but != TRUE; ", get(name))}
-  }
-  return(x)
-}
-
-memory.biggest.objects <- function(n = 5, saveplot = F) { # Show distribution of the largest objects and return their names. # https://stackoverflow.com/questions/17218404/should-i-get-a-habit-of-removing-unused-variables-in-r
-  try.dev.off()
-  gc()
-  ls.mem <- ls( envir = .GlobalEnv)
-  ls.obj <- lapply(ls.mem, get)
-  Sizes.of.objects.in.mem <- unlapply(ls.obj, object.size)
-  names(Sizes.of.objects.in.mem) <- ls.mem
-  topX = sort(Sizes.of.objects.in.mem,decreasing = TRUE)[1:n]
-
-  Memorty.usage.stat = c(topX, 'Other' = sum(sort(Sizes.of.objects.in.mem,decreasing = TRUE)[-(1:n)]))
-  pie(Memorty.usage.stat, cex = .5, sub = make.names(date()))
-  try(qpie(Memorty.usage.stat, w = 7,  ), silent = T)
-  # Use wpie if you have MarkdownReports, from https://github.com/vertesy/MarkdownReports
-  dput(names(topX))
-  iprint("rm(list = c( 'objectA',  'objectB'))")
-  # inline_vec.char(names(topX))
-  # Use inline_vec.char if you have DataInCode, from https://github.com/vertesy/DataInCode
-}
-# memory.biggest.objects()
-
 
 
 # Temporary  ------------------------------------------------------------
