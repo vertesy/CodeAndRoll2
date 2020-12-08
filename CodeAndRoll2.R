@@ -1,10 +1,11 @@
 ######################################################################
 # A collection of custom R functions
 ######################################################################
-# source('/GitHub/Packages/CodeAndRoll/CodeAndRoll.R')
+# source('~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R')
+# source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
 
 ## If something is not found:
-# source("~/Github/TheCorvinas/R/RNA_seq_specific_functions.r")
+source("~/Github/TheCorvinas/R/RNA_seq_specific_functions.r")
 ## For Plotting From Clipboard or Files
 # source("~/Github/TheCorvinas/R/Plotting.From.Clipboard.And.Files.r")
 # # Load sequence length and base distribution check
@@ -12,8 +13,6 @@
 suppressMessages(try(require(clipr), silent = T))
 try(require(ggplot2),silent = T)
 
-# try(source("~/GitHub/Seurat.multicore/Seurat3.Multicore.Read.Write.R"), silent = T)
-try(source("~/GitHub/TheCorvinas/R/ggMarkdownreports.R"), silent = T)
 
 
 ### CHAPTERS:
@@ -1543,60 +1542,6 @@ shannon.entropy <- function(p) { # Calculate shannon entropy
   p.norm <- p[p > 0]/sum(p) - sum(log2(p.norm)*p.norm)
 }
 
-id2titlecaseitalic <- function(x, prefix = NULL, suffix = NULL, sep = " ") { # Convert a gene ID to title case italic
-  x2 = sub("\\_\\_chr\\w + ", "", x)
-  bquote(.(prefix) * .(sep) * italic(.(x2)) * .(sep) * .(suffix))
-}
-
-id2titlecaseitalic.sp <- function(x, prefix = NULL, suffix = expression, sep = " ") { # Convert a gene ID to italic
-  x2 = sub("\\_\\_chr\\w + ", "", x)
-  bquote(.(prefix) * .(sep) * italic(.(x2)) * .(sep) * .(suffix))
-}
-
-id2name <- function(x) sub("\\_\\_chr\\w + ", "", x) # Convert a gene ID to a gene name (symbol). From / for RaceID.
-
-id2chr <- function(x) sub(". + \\_\\_", "", x) # Convert a gene ID to the chromosome. From / for RaceID.
-
-name2id <- function(Names = c("Actn1","Actn","Actnsasasa2","Actn2") # Convert an name to gene ID. From / for RaceID.
-  , id = rownames(sc@expdata), Exact = FALSE,  unlist = TRUE, KeepNotFound = FALSE, KeepFirstHitOnly = FALSE, removeAmbigous = FALSE) {
-  ls_IDs = if (Exact) {lapply(paste0(Names,"__chr"), grep, x = id, value = TRUE) } else {lapply(Names, grep, x = id, value = TRUE)}
-  hitLength = unlist(lapply(ls_IDs, length))
-  Matches = table(hitLength)
-  notfound = Matches["0"]
-  multiplehits = sum(Matches[3:length(Matches)])
-  if (!is.na(notfound)) {
-    if (notfound > 0) {
-      NF = head(Names[hitLength == 0])
-      print(paste(notfound, "gene names could not be converted, eg: ", paste(NF, collapse = ", ")))
-    }
-  } #if
-  if (!is.na(multiplehits)) {
-    if ( multiplehits > 0) {
-      MULTI = head(Names[hitLength > 1])
-      print(paste(multiplehits, "gene names correspond to multiple gene_ID-s, eg:", paste(MULTI, collapse = ", ") ) )
-    } #if
-  } #if
-
-  if (KeepNotFound) {ls_IDs[unlapply(ls_IDs, length) == 0] <- NA}
-  if (removeAmbigous) { ls_IDs = ls_IDs[(unlapply(ls_IDs,length) == 1)]
-  } else if (KeepFirstHitOnly) { ls_IDs = lapply(ls_IDs, `[[`, 1) } #if
-  if (unlist) { ls_IDs = unlist(ls_IDs) } #if
-  return(ls_IDs)
-}
-
-
-name2id.toClipboard <- function(x, id = rownames(sc@expdata)) { # Convert an name to gene ID, anc copy to clipboard. From / for RaceID.
-  IDg = id[sub("\\_\\_chr\\w + ", "", id) %in% x]
-  iprint(IDg, ", copied to clipboard")
-  toClipboard(IDg)
-} # From RaceID
-
-
-
-
-name2id.fast <- function(x, id = rownames(sc@expdata)) id[sub("\\_\\_chr\\w + ", "", id) %in% x] # Convert an name to gene ID. From / for RaceID.
-
-
 legend.col <- function(col, lev) { # Legend color. # Source: https://aurelienmadouasse.wordpress.com/2012/01/13/legend-for-a-continuous-color-scale-in-r/
   opar <- par
   n <- length(col)
@@ -1638,7 +1583,8 @@ legend.col <- function(col, lev) { # Legend color. # Source: https://aurelienmad
 memory.biggest.objects <- function(n = 5, saveplot = F) { # Show distribution of the largest objects and return their names
   try.dev.off()
   gc()
-  Sizes.of.objects.in.mem <- sapply( ls( envir = .GlobalEnv), FUN = function(name) { object.size(get(name)) } );
+  ls.mem <- ls( envir = .GlobalEnv)
+  Sizes.of.objects.in.mem <- sapply( ls.mem, FUN = function(name) { object.size(get(name)) } );
   topX = sort(Sizes.of.objects.in.mem,decreasing = TRUE)[1:n]
 
   Memorty.usage.stat = c(topX, 'Other' = sum(sort(Sizes.of.objects.in.mem,decreasing = TRUE)[-(1:n)]))
