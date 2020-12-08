@@ -17,6 +17,7 @@ try(require(ggplot2),silent = T)
 
 
 ### CHAPTERS:
+# -  Aliases for often used functions
 # -  Generic functions
 # -  File handling, export, import [read & write]
 #   - Clipboard interaction (OS X)
@@ -112,8 +113,8 @@ unload <- function(pkg, character.only = FALSE) { # Unload a package. Source: ht
   }
 }
 
-most_frequent_elements <- function(thingy, topN = 10) { # Show the most frequent elements of a table
-  tail(sort(table(thingy, useNA = "ifany")), topN)
+most_frequent_elements <- function(vec, topN = 10) { # Show the most frequent elements of a table
+  tail(sort(table(vec, useNA = "ifany")), topN)
 }
 
 top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order
