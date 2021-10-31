@@ -17,60 +17,6 @@ try(require(ggplot2),silent = T)
 
 
 ### CHAPTERS:
-# -  Aliases for often used functions
-# -  Generic functions
-# -  File handling, export, import [read & write]
-#   - Clipboard interaction (OS X)
-#   - Reading files in
-#   - Writing files out
-# - Create and check variables
-# -  Vector operations
-#   - Vector filtering
-# -  String operations
-# -  Matrix operations
-#   - Matrix filtering
-# -  List operations
-# -  Set operations
-# -  Math and stats
-# -  Plotting and Graphics
-# -  Clustering heatmap tools
-# -  Search query links
-# -  Biology
-
-
-# -  Generic
-# -  New additions
-
-
-## Setup   -------------------------------------------------------------------------------------------------
-
-## Generic -------------------------------------------------------------------------------------------------
-
-
-grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, fixed = FALSE, useBytes = FALSE  # grep returning the value
-                  , invert = FALSE, ...) grep(pattern, x, ignore.case = ignore.case, perl = perl, fixed = fixed
-                                              , useBytes = useBytes, invert = invert, ..., value = TRUE)
-
-
-most_frequent_elements <- function(vec, topN = 10) { # Show the most frequent elements of a table
-  tail(sort(table(vec, useNA = "ifany")), topN)
-}
-
-top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order
-  head( order(x, decreasing = top), n )
-}
-
-percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercentile = TRUE) { # Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()'s "vline" paramter.
-  index = percentile * length(distribution)
-  if (FirstValOverPercentile) { index = ceiling(index)
-  } else {index = floor(index) }
-  value = sort(distribution)[index]
-  return(value)
-}
-
-printEveryN <- function(i, N = 1000) { if ((i %% N) == 0 ) iprint(i) } # Report at every e.g. 1000
-
-
 
 ## Create and check variables -------------------------------------------------------------------------------------------------
 
@@ -140,6 +86,18 @@ table_fixed_categories <- function(vector, categories_vec) { # generate a table(
 }
 
 ## Vector operations -------------------------------------------------------------------------------------------------
+grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, fixed = FALSE, useBytes = FALSE  # grep returning the value
+                  , invert = FALSE, ...) grep(pattern, x, ignore.case = ignore.case, perl = perl, fixed = fixed
+                                              , useBytes = useBytes, invert = invert, ..., value = TRUE)
+
+
+most_frequent_elements <- function(vec, topN = 10) { # Show the most frequent elements of a table
+  tail(sort(table(vec, useNA = "ifany")), topN)
+}
+
+top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order
+  head( order(x, decreasing = top), n )
+}
 
 trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combination of head() and tail() to see both ends.
 
@@ -392,12 +350,6 @@ pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm
   return(out)
 }
 
-# deprecated :
-NrAndPc <- function(logical_vec = idx_localised, total = TRUE, NArm = TRUE) { # Summary stat. text formatting for logical vectors (%, length)
-  x = paste0(pc_TRUE(logical_vec), " or ", sum(logical_vec, na.rm = NArm))
-  if (total) paste0(x, " of ", length(logical_vec))
-}
-
 
 pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Percentage of a certain value within a vector or table.
   if (is.table(vec_or_table)) { vec_or_table[category]/sum(vec_or_table, na.rm = NA_omit) }
@@ -535,38 +487,8 @@ mean_normalize <- function(mat) { # normalize each column to the median of the c
   return(norm_mat)
 }
 
-### Distance and correlation calculations --------------
-eucl.dist.pairwise <- function(df2col) { # Calculate pairwise euclidean distance
-  dist_ = abs(df2col[,1] - df2col[,2]) / sqrt(2)
-  if (!is.null(rownames(df2col)))   names(dist_) = rownames(df2col)
-  dist_
-}
 
-sign.dist.pairwise <- function(df2col) { # Calculate absolute value of the pairwise euclidean distance
-  dist_ = abs(df2col[,1] - df2col[,2]) / sqrt(2)
-  if (!is.null(rownames(df2col)))   names(dist_) = rownames(df2col)
-  dist_
-}
-
-# Auto correlation functions
-rowACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 1, acf, na.action = na_pass,  plot = plot, ...)} # RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-colACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 2, acf, na.action = na_pass,  plot = plot, ...)} # RETURNS A LIST. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-
-acf.exactLag <- function(x, lag = 1, na_pass = na.pass, plot = FALSE, ... ) { # Autocorrelation with exact lag
-  x = acf(x, na.action = na_pass,  plot = plot, ...)
-  x[['acf']][(lag + 1)]
-}
-
-rowACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) { # RETURNS A Vector for the "lag" based autocorrelation. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-  signif(apply(x, 1, acf.exactLag, lag = lag, plot = plot, ...), digits = 2)
-}
-
-colACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) { # RETURNS A Vector for the "lag" based autocorrelation. Calculates the autocorrelation of each row of a numeric matrix / data frame.
-  signif(apply(x, 2, acf.exactLag, lag = lag, plot = plot, ...), digits = 2)
-}
-
-
-### Matrix manipulations -------------------------------------------------------------------------------------------------
+## Matrix manipulations -------------------------------------------------------------------------------------------------
 rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
   if (clockwise) { t( apply(x, 2, rev))  #first reverse, then transpose, it's the same as rotate 90 degrees
   } else {apply( t(x), 2, rev)}  #first transpose, then reverse, it's the same as rotate -90 degrees:
@@ -719,10 +641,37 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 }
 
 
+# Multi-dimensional lists ----------------------------------------------------------------
+
+copy.dimension.and.dimnames <- function(list.1D, obj.2D) { # copy dimension and dimnames
+  dim(list.1D) <- dim(obj.2D)
+  dimnames(list.1D) <- dimnames(obj.2D)
+  list.1D
+}
+
+mdlapply <- function(list_2D, ...) { #  lapply for multidimensional arrays
+  x = lapply(list_2D, ...)
+  copy.dimension.and.dimnames(x,list_2D)
+}
+
+
+arr.of.lists.2.df <- function(two.dim.arr.of.lists) { # simplify 2D-list-array to a DF
+  list.1D = unlist(two.dim.arr.of.lists)
+  dim(list.1D) <- dim(two.dim.arr.of.lists)
+  dimnames(list.1D) <- dimnames(two.dim.arr.of.lists)
+  list.1D
+}
+
+
+mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
+  x = lapply(list_2D, ...)
+  z = copy.dimension.and.dimnames(x,list_2D)
+  arr.of.lists.2.df(z)
+}
 
 
 
-## List operations -------------------------------------------------------------------------------------------------
+# List operations -------------------------------------------------------------------------------------------------
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
 
 intersect.ls <- function(ls, ...) { Reduce(intersect, ls) } # Intersect any number of lists.
@@ -907,36 +856,6 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
   return(replicated.name.vec)
 }
 
-### Work with multi dimensional lists --------------------------------
-
-copy.dimension.and.dimnames <- function(list.1D, obj.2D) { # copy dimension and dimnames
-  dim(list.1D) <- dim(obj.2D)
-  dimnames(list.1D) <- dimnames(obj.2D)
-  list.1D
-}
-
-mdlapply <- function(list_2D, ...) { #  lapply for multidimensional arrays
-  x = lapply(list_2D, ...)
-  copy.dimension.and.dimnames(x,list_2D)
-}
-
-
-arr.of.lists.2.df <- function(two.dim.arr.of.lists) { # simplify 2D-list-array to a DF
-  list.1D = unlist(two.dim.arr.of.lists)
-  dim(list.1D) <- dim(two.dim.arr.of.lists)
-  dimnames(list.1D) <- dimnames(two.dim.arr.of.lists)
-  list.1D
-}
-
-
-mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
-  x = lapply(list_2D, ...)
-  z = copy.dimension.and.dimnames(x,list_2D)
-  arr.of.lists.2.df(z)
-}
-
-
-
 ## Set operations -------------------------------------------------------------------------------------------------
 
 symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of vectors
@@ -946,6 +865,8 @@ symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of v
   duplicates <- big.vec[duplicated(big.vec)]
   lapply(ls, function(x) setdiff(x, duplicates))
 }
+
+
 
 ## Math & stats -------------------------------------------------------------------------------------------------
 
