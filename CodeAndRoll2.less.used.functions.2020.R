@@ -49,7 +49,7 @@ filter_InCircle <- function(df2col = cbind(rnorm(100),rnorm(100)) # Find points 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -71,7 +71,7 @@ NrAndPc <- function(logical_vec = idx_localised, total = TRUE, NArm = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -92,7 +92,7 @@ rowNameMatrix <- function(mat_w_dimnames) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -116,7 +116,7 @@ colNameMatrix <- function(mat_w_dimnames) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -167,7 +167,7 @@ legend.col <- function(col, lev) { # Legend color.
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -216,7 +216,7 @@ val2col <- function(yourdata,
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }

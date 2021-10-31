@@ -91,7 +91,7 @@ l = length
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #' ppp("Apple",2:3, letters[3:5])
 #' }
@@ -110,7 +110,7 @@ ppp <- function(...) { paste(..., sep = '.') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  pps("Apple",2:3, letters[3:5])
 #'  }
 #' }
@@ -128,7 +128,7 @@ pps <- function(...) { paste(..., sep = '/') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  ppu("Apple",2:3, letters[3:5])
 #'  }
 #' }
@@ -146,7 +146,7 @@ ppu <- function(...) { paste(..., sep = '_') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  ppd("Apple",2:3, letters[3:5])
 #'  }
 #' }
@@ -165,7 +165,7 @@ ppd <- function(...) { paste(..., sep = '-') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  kpp("Apple",2:3, letters[3:5])
 #'  }
 #' }
@@ -183,7 +183,7 @@ kpp <- function(...) { paste(..., sep = '.', collapse = '.') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  kppu("Apple",2:3, letters[3:5])
 #'  }
 #' }
@@ -201,7 +201,7 @@ kppu <- function(...) { paste(..., sep = '_',  collapse = '_') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  kpps("Apple",2:3, letters[3:5])
 #'  }
 #' }
@@ -219,7 +219,7 @@ kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  kppd("Apple",2:3, letters[3:5])
 #'  }
 #' }
@@ -239,7 +239,7 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -262,7 +262,7 @@ stry <- function(...) {try(..., silent = T)}
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -280,7 +280,7 @@ stopif2 <- function(condition, ...) { if (condition) {iprint(...); stop()} }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -300,7 +300,7 @@ say <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -327,7 +327,7 @@ sayy <- function(...) {system("say Ready to roll")}
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -347,7 +347,7 @@ grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -368,7 +368,7 @@ oo <- function() {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -396,7 +396,7 @@ unload <- function(pkg, character.only = FALSE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -417,7 +417,7 @@ most_frequent_elements <- function(vec, topN = 10) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -438,7 +438,7 @@ top_indices <- function(x, n = 3, top = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -462,7 +462,7 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -479,7 +479,7 @@ printEveryN <- function(i, N = 1000) { if ((i %% N) == 0 ) iprint(i) }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -503,7 +503,7 @@ if (!require(package = package_,  character.only = TRUE)) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -521,7 +521,7 @@ idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -540,7 +540,7 @@ view.head <- function(matrix, enn = 10) { matrix[1:min(NROW(matrix), enn), 1:min
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -558,7 +558,7 @@ view.head2 <- function(matrix, enn = 10) { View(head(matrix, n = min(NROW(matrix
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -588,7 +588,7 @@ iidentical.names <- function(v1, v2) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -615,7 +615,7 @@ iidentical <- function(v1, v2) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -633,7 +633,7 @@ iidentical.all <- function(li) all(sapply(li, identical, li[[1]]))
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -657,7 +657,7 @@ IfExistsAndTrue <- function(name = "pi" ) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'   memory.biggest.objects()
 #'  }
 #' }
@@ -696,7 +696,7 @@ memory.biggest.objects <- function(n = 5, saveplot = F) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -718,7 +718,7 @@ read.simple.vec <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -739,7 +739,7 @@ read.simple <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -763,7 +763,7 @@ read.simple_char_list <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -794,7 +794,7 @@ read.simple.table <- function(..., colnames = TRUE, coltypes = NULL) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -821,7 +821,7 @@ FirstCol2RowNames <- function(Tibble, rownamecol = 1, make_names = FALSE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -857,7 +857,7 @@ read.simple.tsv <- function(..., sep_ = "\t", colnames = TRUE, wRownames = TRUE,
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -891,7 +891,7 @@ read.simple.csv <- function(...,  colnames = TRUE, coltypes = NULL, wRownames = 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -921,7 +921,7 @@ read.simple.ssv <- function(..., sep_ = " ", colnames = TRUE, wRownames = TRUE, 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -951,7 +951,7 @@ read.simple.tsv.named.vector <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -982,7 +982,7 @@ convert.tsv.data <- function(df_by_read.simple.tsv = x, digitz = 2, na_rep = 0 )
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1024,7 +1024,7 @@ read.simple.xls <- function(pfn = kollapse(...), row_namePos = NULL, ..., header
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1056,7 +1056,7 @@ sourcePartial <- function(fn,startTag = '#1', endTag = '#/1') {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1083,7 +1083,7 @@ write.simple <- function(input_df, extension = 'tsv', ManualName = "", o = FALSE
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1114,7 +1114,7 @@ write.simple.vec <- function(input_vec, extension = 'vec', ManualName = "", o = 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1151,7 +1151,7 @@ write.simple.xlsx <- function(named_list, ManualName = "", o = FALSE,  ..., TabC
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1176,7 +1176,7 @@ write.simple.append <- function(input_df, extension = 'tsv', ManualName = "", o 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1195,7 +1195,7 @@ jjpegA4 <- function(filename, r = 225, q = 90) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1212,7 +1212,7 @@ extPDF <- function(vec) ppp(vec, "pdf")
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1234,7 +1234,7 @@ extPNG <- function(vec) ppp(vec, "png")
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1263,7 +1263,7 @@ clip2clip.vector <- function() {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1292,7 +1292,7 @@ clip2clip.commaSepString <- function() {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1315,7 +1315,7 @@ write_clip.replace.dot <- function(var = df.markers, decimal_mark = ',') {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1339,7 +1339,7 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1362,7 +1362,7 @@ list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1386,7 +1386,7 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1411,7 +1411,7 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1436,7 +1436,7 @@ array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_nam
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1459,7 +1459,7 @@ what <- function(x, printme = 0) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1482,7 +1482,7 @@ idim <- function(any_object) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1505,7 +1505,7 @@ idimnames <- function(any_object) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1528,7 +1528,7 @@ table_fixed_categories <- function(vector, categories_vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1545,7 +1545,7 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) )
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1564,7 +1564,7 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1585,7 +1585,7 @@ sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(s
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1602,7 +1602,7 @@ topN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 5) 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1621,7 +1621,7 @@ bottomN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1647,7 +1647,7 @@ as.named.vector <- function(df_col, WhichDimNames = 1) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1669,7 +1669,7 @@ col2named.vector <- function(df_col) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1692,7 +1692,7 @@ row2named.vector <- function(df_row) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1713,7 +1713,7 @@ as.numeric.wNames <- function(vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1734,7 +1734,7 @@ as.numeric.wNames.old <- function(vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1757,7 +1757,7 @@ as.character.wNames <- function(vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1781,7 +1781,7 @@ rescale <- function(vec, from = 0, upto = 100) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1811,7 +1811,7 @@ flip_value2name <- function(named_vector, NumericNames = FALSE, silent = F) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1828,7 +1828,7 @@ value2name_flip = flip_value2name
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1854,7 +1854,7 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1880,7 +1880,7 @@ any.duplicated <- function(vec, summarize = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1902,7 +1902,7 @@ which.duplicated <- function(vec, orig = F) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1925,7 +1925,7 @@ which.NA <- function(vec, orig = F) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1945,7 +1945,7 @@ pad.na <- function(x, len) { c(x, rep(NA, len - length(x))) }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1971,7 +1971,7 @@ clip.values <- function(valz, high = TRUE, thr = 3) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -1997,7 +1997,7 @@ clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2018,7 +2018,7 @@ as.logical.wNames <- function(x, ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2041,7 +2041,7 @@ col2named.vec.tbl <- function(tbl.2col) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2063,7 +2063,7 @@ iterBy.over <- function(yourvec, by = 9) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2085,7 +2085,7 @@ zigzagger <- function(vec = 1:9) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2112,7 +2112,7 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2135,7 +2135,7 @@ MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2159,7 +2159,7 @@ cumsubtract <- function(numericV = blanks) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2178,7 +2178,7 @@ which_names <- function(named_Vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2199,7 +2199,7 @@ which_names_grep <- function(named_Vec, pattern) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2223,7 +2223,7 @@ na.omit.strip <- function(vec, silent = FALSE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2247,7 +2247,7 @@ inf.omit <- function(vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2272,7 +2272,7 @@ zero.omit <- function(vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2299,7 +2299,7 @@ pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2322,7 +2322,7 @@ NrAndPc <- function(logical_vec = idx_localised, total = TRUE, NArm = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2350,7 +2350,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2373,7 +2373,7 @@ filter_survival_length <- function(length_new, length_old, prepend = "") {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2402,7 +2402,7 @@ remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2426,7 +2426,7 @@ simplify_categories <- function(category_vec, replaceit , to ) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2466,7 +2466,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2483,7 +2483,7 @@ parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")");
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2503,7 +2503,7 @@ eval_parse_kollapse <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2523,7 +2523,7 @@ param.list.2.fname <- function(ls.of.params = p) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2553,7 +2553,7 @@ PasteDirNameFromFlags <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2584,7 +2584,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2611,7 +2611,7 @@ flag.name_value <- function(toggle, Separator = "_") {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2635,7 +2635,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2650,7 +2650,7 @@ nameiftrue = flag.nameiftrue # backward compatible
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2670,7 +2670,7 @@ flag.names_list <- function(par = p$'umap.min_dist') {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2691,7 +2691,7 @@ flag.names_list.all.new <- function(pl = p.hm) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2715,7 +2715,7 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2732,7 +2732,7 @@ rowMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, median, na.rm =
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2750,7 +2750,7 @@ colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm =
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2767,7 +2767,7 @@ rowGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, geomean, na.rm
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2785,7 +2785,7 @@ colGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, geomean, na.rm
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2802,7 +2802,7 @@ rowCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, cv, na.rm = na.rm )
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2820,7 +2820,7 @@ colCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, cv, na.rm = na.rm )
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2837,7 +2837,7 @@ rowVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, var, na.rm = n
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2855,7 +2855,7 @@ colVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, var, na.rm = n
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2872,7 +2872,7 @@ rowMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, min, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2890,7 +2890,7 @@ colMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, min, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2907,7 +2907,7 @@ rowMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, max, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2925,7 +2925,7 @@ colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2942,7 +2942,7 @@ rowSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sem, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2960,7 +2960,7 @@ colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2977,7 +2977,7 @@ rowSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sd, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -2995,7 +2995,7 @@ colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3012,7 +3012,7 @@ rowIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, IQR, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3031,7 +3031,7 @@ colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3049,7 +3049,7 @@ rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile,
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3067,7 +3067,7 @@ colquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 2, quantile,
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3088,7 +3088,7 @@ colDivide <- function(mat, vec) { # divide by column
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3110,7 +3110,7 @@ colMutliply <- function(mat, vec) { # Mutliply by column
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3131,7 +3131,7 @@ rowDivide <- function(mat, vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3151,7 +3151,7 @@ rowMutliply <- function(mat, vec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3169,7 +3169,7 @@ row.Zscore <- function(DF) t(scale(t(DF)))
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3190,7 +3190,7 @@ TPM_normalize <- function(mat, SUM = 1e6) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3212,7 +3212,7 @@ median_normalize <- function(mat) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3235,7 +3235,7 @@ mean_normalize <- function(mat) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3256,7 +3256,7 @@ eucl.dist.pairwise <- function(df2col) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3281,7 +3281,7 @@ sign.dist.pairwise <- function(df2col) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3300,7 +3300,7 @@ rowACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 1, acf, n
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3321,7 +3321,7 @@ colACF <- function(x, na_pass = na.pass, plot = FALSE, ...) { apply(x, 2, acf, n
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3345,7 +3345,7 @@ acf.exactLag <- function(x, lag = 1, na_pass = na.pass, plot = FALSE, ... ) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3368,7 +3368,7 @@ rowACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3390,7 +3390,7 @@ colACF.exactLag <- function(x, na_pass = na.pass, lag = 1, plot = FALSE, ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3411,7 +3411,7 @@ rotate <- function(x, clockwise = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3431,7 +3431,7 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...)
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3451,7 +3451,7 @@ sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3470,7 +3470,7 @@ rowNameMatrix <- function(mat_w_dimnames) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3490,7 +3490,7 @@ colNameMatrix <- function(mat_w_dimnames) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3511,7 +3511,7 @@ rownames.trimws <- function(matrix1) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3534,7 +3534,7 @@ colsplit <- function(df, f = colnames(df)) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3550,7 +3550,7 @@ splitByCol = colsplit
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3576,7 +3576,7 @@ rowsplit <- function(df, f = rownames(df)) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3612,7 +3612,7 @@ select.rows.and.columns <- function(df, RowIDs = NULL, ColIDs = NULL ) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3639,7 +3639,7 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3665,7 +3665,7 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3690,7 +3690,7 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3722,7 +3722,7 @@ combine.matrices.intersect <- function(matrix1, matrix2, k = 2) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3750,7 +3750,7 @@ merge_dfs_by_rn <- function(list_of_dfs) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3787,7 +3787,7 @@ merge_numeric_df_by_rn <- function(x, y) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3808,7 +3808,7 @@ remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3829,7 +3829,7 @@ remove.na.cols <- function(mat) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3857,7 +3857,7 @@ na.omit.mat <- function(mat, any = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3875,7 +3875,7 @@ any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls))
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3893,7 +3893,7 @@ intersect.ls <- function(ls, ...) { Reduce(intersect, ls) }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3910,7 +3910,7 @@ union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3927,7 +3927,7 @@ unlapply <- function(...) { unlist(lapply(...)) }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3951,7 +3951,7 @@ list.wNames <- function(...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -3978,7 +3978,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4003,7 +4003,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4026,7 +4026,7 @@ reorder.list <- function(L, namesOrdered = mixedsort(names(L))) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4046,7 +4046,7 @@ range.list <- function(L, namesOrdered) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4072,7 +4072,7 @@ intermingle2lists <- function(L1, L2) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4101,7 +4101,7 @@ as.listalike <- function(vec, list_wannabe) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4129,7 +4129,7 @@ reverse.list.hierarchy <- function(ll) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4163,7 +4163,7 @@ list2fullDF.byNames <- function(your.list = list(
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4193,7 +4193,7 @@ list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4213,7 +4213,7 @@ splitbyitsnames <- function(namedVec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4235,7 +4235,7 @@ splititsnames_byValues <- function(namedVec) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4260,7 +4260,7 @@ intermingle2vec <- function(V1, V2, wNames = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4299,7 +4299,7 @@ intermingle.cbind <- function(df1, df2) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4321,7 +4321,7 @@ ls2categvec <- function(your_list ) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4348,7 +4348,7 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4369,7 +4369,7 @@ copy.dimension.and.dimnames <- function(list.1D, obj.2D) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4390,7 +4390,7 @@ mdlapply <- function(list_2D, ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4414,7 +4414,7 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4441,7 +4441,7 @@ mdlapply2df <- function(list_2D, ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4467,7 +4467,7 @@ symdiff <- function(x, y, ...) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4486,7 +4486,7 @@ sem <- function(x, na.rm = TRUE) sd(unlist(x), na.rm = na.rm)/sqrt(length(na.omi
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4504,7 +4504,7 @@ fano <- function(x, na.rm = TRUE, USE = "na.or.complete") var(x, na.rm = na.rm, 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4525,7 +4525,7 @@ geomean <- function(x, na.rm = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4546,7 +4546,7 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4570,7 +4570,7 @@ movingAve <- function(x, oneSide = 5) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4588,7 +4588,7 @@ movingAve2 <- function(x,n = 5) {filter(x,rep(1/n,n), sides = 2)}
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4611,7 +4611,7 @@ movingSEM <- function(x, oneSide = 5) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4635,7 +4635,7 @@ imovingSEM <- function(x, oneSide = 5) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4659,7 +4659,7 @@ shannon.entropy <- function(p) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4682,7 +4682,7 @@ richColors <- function(n = 3) { gplots::rich.colors(n) }
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4716,7 +4716,7 @@ HeatMapCol_RedBlackGreen <- grDevices::colorRampPalette(c("red", "black", "green
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4733,7 +4733,7 @@ colSums.barplot <- function(df, col = "seagreen2", na_rm = TRUE, ...) { barplot(
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4753,7 +4753,7 @@ lm_equation_formatter <- function(lm) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4775,7 +4775,7 @@ lm_equation_formatter2 <- function(lm) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4799,7 +4799,7 @@ lm_equation_formatter3 <- function(lm, y.var.name = "y", x.var.name = "x") {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #ll = hist.XbyY(); wbarplot(unlapply(ll, length))
 #'  }
 #' }
@@ -4832,7 +4832,7 @@ hist.XbyY <- function(dfw2col = NULL, toSplit = 1:100, splitby = rnorm(100), bre
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4869,7 +4869,7 @@ panel.cor.pearson <- function(x, y, digits = 2, prefix = "", cex.cor = 2, method
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4904,7 +4904,7 @@ panel.cor.spearman <- function(x, y, digits = 2, prefix = "", cex.cor = 2, metho
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4929,7 +4929,7 @@ quantile_breaks <- function(xs, n = 10, na.Rm = FALSE) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4945,7 +4945,7 @@ hclust.getOrder.row <- function(pheatmapObject) pheatmapObject$tree_row$labels[p
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4963,7 +4963,7 @@ hclust.getOrder.col <- function(pheatmapObject) pheatmapObject$tree_col$labels[p
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -4981,7 +4981,7 @@ hclust.getClusterID.row <- function(pheatmapObject, k = 3) cutree(pheatmapObject
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5000,7 +5000,7 @@ hclust.getClusterID.col <- function(pheatmapObject, k = 3) cutree(pheatmapObject
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5019,7 +5019,7 @@ hclust.ClusterSeparatingLines.row <- function(pheatmapObject, k = 3) which(!dupl
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5037,7 +5037,7 @@ hclust.ClusterSeparatingLines.col <- function(pheatmapObject, k = 3) which(!dupl
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5060,7 +5060,7 @@ Gap.Postions.calc.pheatmap <- function(annot.vec.of.categories) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5083,7 +5083,7 @@ matlabColors.pheatmap <- function(matrixx, nr = 50) {colorRamps::matlab.like(len
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5126,7 +5126,7 @@ annot_col.create.pheatmap.vec <- function(data, annot_vec, annot_names = "Annot"
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5170,7 +5170,7 @@ annot_col.create.pheatmap.df <- function(data, annot_df_per_column, annot_names 
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5198,7 +5198,7 @@ annot_col.fix.numeric <- function(ListOfColnames) {
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5256,7 +5256,7 @@ annot_row.create.pheatmap.df <- function(data, annot_df_per_row, annot_names = N
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #link.google.clipboard = clipr::write_clip(link_google(clipr::read_clip()))
 #'  }
 #' }
@@ -5292,7 +5292,7 @@ link_google <- function(vector_of_gene_symbols
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
@@ -5322,7 +5322,7 @@ link_bing <- function(vector_of_gene_symbols
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
+#' if (interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
