@@ -64,6 +64,9 @@ sort.natural = gtools::mixedsort
 p0 = paste0
 l = length
 
+stry <- function(...) {try(..., silent = T)} # Silent try
+
+
 ppp <- function(...) { paste(..., sep = '.') } # Paste by point
 pps <- function(...) { paste(..., sep = '/') } # Paste by (forward) slash
 ppu <- function(...) { paste(..., sep = '_') } # Paste by underscore
@@ -74,11 +77,14 @@ kppu <- function(...) { paste(..., sep = '_',  collapse = '_') } # kollapse by u
 kpps <- function(...) { paste(..., sep = '/', collapse = '/') } # kollapse by (forward) slash
 kppd <- function(...) { paste(..., sep = '-', collapse = '-') } # kollapse by dash
 
-stry <- function(...) {try(..., silent = T)} # Silent try
-
+sppp <- function(...) { # Simplified Paste by point
+  string <- paste(..., sep = '.')
+  gsub(pattern = '\\.+', replacement = '\\.', x = string)
+}
 
 
 ## Generic -------------------------------------------------------------------------------------------------
+'%!in%' <- function(x,y)!('%in%'(x,y))
 
 stopif2 <- function(condition, ...) { if (condition) {iprint(...); stop()} } # Stop script if the condition is met. You can parse anything (e.g. variables) in the message
 
@@ -511,6 +517,25 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 }
 
 
+tibble_summary_to_named_vec <- function(tbl =  dplyr::tibble('key' = sample(x = 1:5, size = 20, replace = T), 'value' = rnorm(20) )
+                                        ,  idx = c(key =1, value = 2)) { # Convert a key-value tibble into a named vector (as opposed to using rownames).
+  iprint("The following name and value columns are taken:",colnames(tbl[idx]), "; with indices:", idx)
+  tbl_2_col <- tbl[,idx]
+  named.vec <- tbl_2_col[[2]]
+  names(named.vec) <- tbl_2_col[[1]]
+  return(named.vec)
+}
+# tibble_summary_to_named_vec()
+
+
+as_tibble_from_named_vec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
+  stopif(is_null(names(vec.w.names)))
+  tbl <- bind_rows(vec.w.names)
+  if (transpose) t(tbl) else tbl
+}
+# as_tibble_from_named_vec()
+
+
 as.numeric.wNames <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
   numerified_vec = as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
   if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
@@ -568,13 +593,13 @@ any.duplicated <- function(vec, summarize = TRUE) { # How many entries are dupli
   return(y)
 }
 
-which.duplicated <- function(vec, orig = F) { # orig = rownames(sc@expdata)
+which.duplicated <- function(vec, orig = F) { # which values are duplicated?
   DPL = vec[which(duplicated(vec))]; iprint(length(DPL), "Duplicated entries: ", DPL)
   # for (i in DPL ) {   print(grepv(i,orig)) } #for
   return(DPL)
 }
 
-which.NA <- function(vec, orig = F) { # orig = rownames(sc@expdata)
+which.NA <- function(vec, orig = F) { # which values are NA?
   NANs = vec[which(is.na(vec))]; iprint(length(NANs), "NaN entries: ", NANs)
   NAs = vec[which(is.na(vec))]; iprint(length(NAs), "NA entries: ", NAs, "(only NA-s are returned)")
   # for (i in DPL ) {   print(grepv(i,orig)) } #for
@@ -655,6 +680,12 @@ cumsubtract <- function(numericV = blanks) { # Cumulative subtraction, opposite 
 }
 
 
+sumBySameName <- function(namedVec) { # Sum up vector elements with the same name
+  # unlapply(splitbyitsnames(namedVec), sum)
+  tapply(X = namedVec, INDEX = names(namedVec), sum)
+}
+
+
 ### Vector filtering  -------------------------------------------------------------------------------------------------
 
 which_names <- function(named_Vec) { # Return the names where the input vector is TRUE. The input vector is converted to logical.
@@ -690,12 +721,14 @@ zero.omit <- function(vec) { # Omit zero values from a vector.
   return(v2)
 }
 
-pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm = TRUE) { # Percentage of true values in a logical vector, parsed as text (useful for reports.)
+pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm = TRUE, prefix = NULL, suffix = NULL) { # Percentage of true values in a logical vector, parsed as text (useful for reports.)
   SUM = sum(logical_vector, na.rm = NArm)
   LEN = length(logical_vector)
   out = SUM / LEN
   if (percentify) {out = percentage_formatter(out) }
   if (NumberAndPC) { out = paste0(out, " or " , SUM, " of ", LEN) }
+  if (!is.null(prefix)) {out = paste(prefix, out) }
+  if (!is.null(suffix)) {out = paste(out, suffix) }
   return(out)
 }
 
@@ -847,6 +880,7 @@ colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm =
 
 rowGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, geomean, na.rm = na.rm) # Calculates the median of each row of a numeric matrix / data frame.
 colGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, geomean, na.rm = na.rm) # Calculates the median of each column of a numeric matrix / data frame.
+
 
 rowCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, cv, na.rm = na.rm ) # Calculates the CV of each ROW of a numeric matrix / data frame.
 colCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, cv, na.rm = na.rm ) # Calculates the CV of each column of a numeric matrix / data frame.
@@ -1328,6 +1362,21 @@ symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of v
 }
 
 ## Math & stats -------------------------------------------------------------------------------------------------
+
+#' cv
+#'
+#' Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default)
+#' @param x A vector with numbers
+#' @param na.rm Remove NA-s? Default: TRUE
+#' @import stats
+#' @export
+#'
+#' @examples cv(rnorm(100, sd = 10))
+
+cv <- function(x, na.rm = TRUE) {
+  sd( x, na.rm = na.rm)/mean(x, na.rm = na.rm)
+}
+
 
 sem <- function(x, na.rm = TRUE) sd(unlist(x), na.rm = na.rm)/sqrt(length(na.omit.strip(as.numeric(x))))  # Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
 
