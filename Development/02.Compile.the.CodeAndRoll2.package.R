@@ -1,12 +1,12 @@
 ######################################################################################################
 # 02.Compile.the.CodeAndRoll2.package.R
 ######################################################################################################
-# source("~/MarkdownReports/Workflow_to_Create_an_R_Package.R")
+# source("~/CodeAndRoll2/Workflow_to_Create_an_R_Package.R")
 rm(list = ls(all.names = TRUE));
 try(dev.off(), silent = TRUE)
 # install.packages("devtools")
 # Functions ------------------------
-# devtools::install_github(repo = "vertesy/MarkdownReports/MarkdownReports")
+# devtools::install_github(repo = "vertesy/CodeAndRoll2/CodeAndRoll2")
 try (source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R'),silent= FALSE)
 
 # irequire("devtools")
@@ -23,35 +23,29 @@ if (print == TRUE) {
 }
 
 # Setup ------------------------
-PackageName = 	"MarkdownReportsDev"
-# PackageName = 	"MarkdownReports"
+PackageName = 	"CodeAndRoll2"
 setwd("~/GitHub/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
 fname = 	kollapse(PackageName, ".R")
 Package_FnP = 	kollapse(RepositoryDir, "R/", fname)
 
-BackupDir = "~/GitHub/Packages/MarkdownReports/Development/"
+BackupDir = "~/GitHub/Packages/CodeAndRoll2/Development/"
 dir.create(BackupDir)
 
 # devtools::use_package("vioplot")
-DESCRIPTION <- list("Title" = "Generate Scientific Figures and Reports Easily"
-    , "Author" = person(given = "Abel", family = "Vertesy", email = "a.vertesy@hubrecht.eu", role =  c("aut", "cre") )
-    , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@hubrecht.eu", role =  c("aut", "cre") )'
-    , "Description" = "MarkdownReports is a set of R functions that allows you to generate precise figures easily,
-    and create clean markdown reports about what you just discovered with your analysis script. It helps you to:
-    1. Create scientifically accurate (annotated) figures with very short code, making use of variable-, row- and columnnames.
-    2. Save figures automatically as vector graphic (.pdf), that you can use from presentation to posters anywhere.
-    3. Incorporate your figures automatically in a markdown report file.
-    4. Describe your figures & findings in the same report in a clear and nicely formatted way, parsed from your variables into english sentences.
-    5. Share your report, by exporting your report to .pdf, .html or .docx, or via Github or a personal website."
+DESCRIPTION <- list("Title" = "CodeAndRoll2 for vector, matrix and list manipulations"
+    , "Author" = person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )
+    , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
+    , "Description" = "CodeAndRoll2 is a set of more than >130 productivity functions. Used by MarkdownReports, ggExpress, SeuratUtils.
+    Packaged version of the core functionalities  (vector, matrix and list manipulations; math) of the formerly used CodeAndRoll (v1)."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version"= "4.1.6"
+    , "Version"= "2.0.0"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
-    , "Imports" = "stats, methods, sm, graphics, grDevices, gplots, RColorBrewer, colorRamps, clipr, vioplot, VennDiagram, sessioninfo"
+    , "Imports" = "dplyr, gtools, stringr, stats, methods, sm, graphics, grDevices, gplots, RColorBrewer, colorRamps, clipr,  sessioninfo"
     # , "Suggests" = ""
-    , "BugReports"= "https://github.com/vertesy/MarkdownReports/issues"
+    , "BugReports"= "https://github.com/vertesy/CodeAndRoll2/issues"
 )
 
 
@@ -59,8 +53,8 @@ setwd(RepositoryDir)
 if ( !dir.exists(RepositoryDir) ) { create(path = RepositoryDir, description = DESCRIPTION, rstudio = TRUE)
 } else {
     getwd()
-    try(file.remove(c("DESCRIPTION","NAMESPACE", "MarkdownReportsDev.Rproj")))
-    create_package(path = RepositoryDir, fields = DESCRIPTION)
+    try(file.remove(c("DESCRIPTION","NAMESPACE", "CodeAndRoll2.Rproj")))
+    create_package(path = RepositoryDir, fields = DESCRIPTION, open = F)
 }
 
 
@@ -88,8 +82,8 @@ document()
 # Install your package ------------------------------------------------
 # # setwd(RepositoryDir)
 install(RepositoryDir)
-# require("MarkdownReportsDev")
-# # remove.packages("MarkdownReports")
+# require("CodeAndRoll2")
+# # remove.packages("CodeAndRoll2")
 # # Test your package ------------------------------------------------
 # help("wplot")
 # cat("\014")
@@ -97,13 +91,13 @@ install(RepositoryDir)
 
 
 # Test if you can install from github ------------------------------------------------
-# devtools::install_github(repo = "vertesy/MarkdownReportsDev")
-# devtools::install_github(repo = "vertesy/MarkdownReports/MarkdownReports")
-# require("MarkdownReports")
+# devtools::install_github(repo = "vertesy/CodeAndRoll2")
+# devtools::install_github(repo = "vertesy/CodeAndRoll2/CodeAndRoll2")
+# require("CodeAndRoll2")
 
 # Clean up if not needed anymore ------------------------------------------------
 # View(installed.packages())
-# remove.packages("MarkdownReports")
+# remove.packages("CodeAndRoll2")
 
 check(RepositoryDir, cran = TRUE)
 # as.package(RepositoryDir)
@@ -111,9 +105,9 @@ check(RepositoryDir, cran = TRUE)
 #
 # # source("https://install-github.me/r-lib/desc")
 # # library(desc)
-# # desc$set("MarkdownReports", "foo")
-# # desc$get(MarkdownReports)
+# # desc$set("CodeAndRoll2", "foo")
+# # desc$get(CodeAndRoll2)
 #
 #
-# system("cd ~/GitHub/MarkdownReportsDev/; ls -a; open .Rbuildignore")
+# system("cd ~/GitHub/CodeAndRoll2/; ls -a; open .Rbuildignore")
 #

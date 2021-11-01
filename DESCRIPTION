@@ -1,0 +1,35 @@
+Package: CodeAndRoll2
+Title: CodeAndRoll2 for vector, matrix and list manipulations
+Version: 2.0.0
+Authors@R: 
+    person(given = "Abel",
+           family = "Vertesy",
+           role = c("aut", "cre"),
+           email = "abel.vertesy@imba.oeaw.ac.at")
+Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
+Description: CodeAndRoll2 is a set of more than >130 productivity
+    functions. Used by MarkdownReports, ggExpress, SeuratUtils.  Packaged
+    version of the core functionalities (vector, matrix and list
+    manipulations; math) of the formerly used CodeAndRoll (v1).
+License: GPL-3 + file LICENSE
+BugReports: https://github.com/vertesy/CodeAndRoll2/issues
+Imports: 
+    clipr,
+    colorRamps,
+    dplyr,
+    gplots,
+    graphics,
+    grDevices,
+    gtools,
+    methods,
+    RColorBrewer,
+    sessioninfo,
+    sm,
+    stats,
+    stringr
+Encoding: UTF-8
+LazyData: true
+Packaged: 2021-11-01 11:33:25
+Repository: CRAN
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1

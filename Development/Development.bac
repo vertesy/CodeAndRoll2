@@ -24,16 +24,17 @@ try(require(ggplot2),silent = T)
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title vec.fromNames
-#' @description create a vector from a vector of names.
+#' @description Create a vector from a vector of names.
 #' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
 #' @param fill PARAM_DESCRIPTION, Default: NA
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # vec.fromNames()
 #'  }
 #' }
 #' @export
-vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # create a vector from a vector of names.
+vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # Create a vector from a vector of names.
   v = numeric(length(name_vec))
   if (length(fill) == 1) {v = rep(fill, length(name_vec))}
   else if (length(fill == length(name_vec))) {v = fill}
@@ -49,9 +50,10 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # create a vecto
 #' @description create list from a vector with the names of the elements.
 #' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
 #' @param fill PARAM_DESCRIPTION, Default: NaN
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # list.fromNames()
 #'  }
 #' }
 #' @export
@@ -68,9 +70,10 @@ list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) { # create list 
 #' @param rowname_vec PARAM_DESCRIPTION, Default: 1:10
 #' @param colname_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
 #' @param fill PARAM_DESCRIPTION, Default: NA
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # matrix.fromNames()
 #'  }
 #' }
 #' @export
@@ -88,9 +91,10 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
 #' @param vector Input vector, Default: 1:5
 #' @param HowManyTimes PARAM_DESCRIPTION, Default: 3
 #' @param IsItARow PARAM_DESCRIPTION, Default: TRUE
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # matrix.fromVector()
 #'  }
 #' }
 #' @export
@@ -104,18 +108,19 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title array.fromNames
-#' @description create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
+#' @description Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
 #' @param rowname_vec PARAM_DESCRIPTION, Default: 1:3
 #' @param colname_vec PARAM_DESCRIPTION, Default: letters[1:2]
 #' @param z_name_vec PARAM_DESCRIPTION, Default: LETTERS[4:6]
 #' @param fill PARAM_DESCRIPTION, Default: NA
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # array.fromNames()
 #'  }
 #' }
 #' @export
-array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_name_vec = LETTERS[4:6], fill = NA) { # create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
+array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_name_vec = LETTERS[4:6], fill = NA) { # Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
   DimNames = list(rowname_vec, colname_vec, z_name_vec)
   Dimensions_ = lapply(DimNames, length)
   mx = array(data = fill, dim = Dimensions_, dimnames = DimNames)
@@ -132,9 +137,10 @@ array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_nam
 #' @description A better version of is(). It can print the first "printme" elements.
 #' @param x PARAM_DESCRIPTION
 #' @param printme PARAM_DESCRIPTION, Default: 0
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # a <- 1:2; what(a)
 #'  }
 #' }
 #' @export
@@ -153,9 +159,10 @@ what <- function(x, printme = 0) { # A better version of is(). It can print the 
 #' @title idim
 #' @description A dim() function that can handle if you pass on a vector: then, it gives the length.
 #' @param any_object PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # a <- 1:2; idim(a)
 #'  }
 #' }
 #' @export
@@ -174,9 +181,10 @@ idim <- function(any_object) { # A dim() function that can handle if you pass on
 #' @title idimnames
 #' @description A dimnames() function that can handle if you pass on a vector: it gives back the names.
 #' @param any_object PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  #a <- 1:2; idimnames(a)
 #'  }
 #' }
 #' @export
@@ -195,9 +203,10 @@ idimnames <- function(any_object) { # A dimnames() function that can handle if y
 #' @description Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
 #' @param vec Input vector
 #' @param categories_vec PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  # table_fixed_categories(vec = 1:3, categories_vec = 1:4)
 #'  }
 #' }
 #' @export
@@ -220,6 +229,7 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
 #' @param useBytes PARAM_DESCRIPTION, Default: FALSE
 #' @param invert PARAM_DESCRIPTION, Default: FALSE
 #' @param ... PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -239,6 +249,7 @@ grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, 
 #' @description Show the most frequent elements of a table.
 #' @param vec input vector
 #' @param topN PARAM_DESCRIPTION, Default: 10
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -256,6 +267,7 @@ most_frequent_elements <- function(vec, topN = 10) { # Show the most frequent el
 #' @param x PARAM_DESCRIPTION
 #' @param n PARAM_DESCRIPTION, Default: 3
 #' @param top PARAM_DESCRIPTION, Default: TRUE
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -273,6 +285,7 @@ top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index o
 #' @description A combination of head() and tail() to see both ends.
 #' @param vec input vector
 #' @param N PARAM_DESCRIPTION, Default: 10
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -287,6 +300,7 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combin
 #' @title sort.decreasing
 #' @description Sort in decreasing order.
 #' @param vec input vector
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -302,6 +316,7 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 #' @param string PARAM_DESCRIPTION
 #' @param pattern PARAM_DESCRIPTION, Default: '_'
 #' @param n PARAM_DESCRIPTION, Default: 2
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -320,13 +335,14 @@ sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(s
 #' @description Find the n highest values in a named vector.
 #' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
 #' @param n PARAM_DESCRIPTION, Default: 5
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @export
-topN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 5)   { head(sort(df_Col, decreasing = TRUE), n = n) } # Find the n highest values in a named vector
+topN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 5)   { head(sort(df_col, decreasing = TRUE), n = n) } # Find the n highest values in a named vector
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -334,13 +350,14 @@ topN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 5) 
 #' @description Find the n lowest values in a named vector.
 #' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
 #' @param n PARAM_DESCRIPTION, Default: 5
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @export
-bottomN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 5) { head(sort(df_Col, decreasing = FALSE), n = n) } # Find the n lowest values in a named vector
+bottomN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 5) { head(sort(df_col, decreasing = FALSE), n = n) } # Find the n lowest values in a named vector
 
 
 
@@ -351,6 +368,7 @@ bottomN.dfCol <- function(df_Col = as.named.vector(df[ , 1, drop = FALSE]), n = 
 #' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
 #' @param WhichDimNames PARAM_DESCRIPTION, Default: 1
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -375,6 +393,7 @@ as.named.vector <- function(df_col, WhichDimNames = 1) { # Convert a dataframe c
 #' @title col2named.vector
 #' @description Convert a dataframe column into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -395,6 +414,7 @@ col2named.vector <- function(df_col) { # Convert a dataframe column into a vecto
 #' @title row2named.vector
 #' @description Convert a dataframe row into a vector, keeping the corresponding dimension name.
 #' @param df_row data frame row
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -415,6 +435,7 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 #' @description Convert a key-value tibble into a named vector (as opposed to using rownames).
 #' @param tbl PARAM_DESCRIPTION, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))
 #' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -425,7 +446,7 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 #' @export
 #' @importFrom dplyr tibble
 tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1:5, size = 20, replace = T), 'value' = rnorm(20) )
-                                        ,  idx = c(key =1, value = 2)) { # Convert a key-value tibble into a named vector (as opposed to using rownames).
+                                       ,  idx = c(key =1, value = 2)) { # Convert a key-value tibble into a named vector (as opposed to using rownames).
   iprint("The following name and value columns are taken:",colnames(tbl[idx]), "; with indices:", idx)
   tbl_2_col <- tbl[,idx]
   named.vec <- tbl_2_col[[2]]
@@ -443,6 +464,7 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 #' @description Convert a vector with names into a tibble, keeping the names as rownames.
 #' @param vec.w.names PARAM_DESCRIPTION, Default: c(a = 1, b = 2)
 #' @param transpose PARAM_DESCRIPTION, Default: T
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -464,6 +486,7 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
 #' @title Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @description FUNCTION_DESCRIPTION.
 #' @param vec input vector
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -485,6 +508,7 @@ as.numeric.wNames <- function(vec) { # Converts any vector into a numeric vector
 #' @title as.character.wNames
 #' @description Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param vec input vector
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -504,6 +528,7 @@ as.character.wNames <- function(vec) { # Converts your input vector into a chara
 #' @param vec input vector
 #' @param from PARAM_DESCRIPTION, Default: 0
 #' @param upto PARAM_DESCRIPTION, Default: 100
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -525,6 +550,7 @@ rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a gi
 #' @param namedVector PARAM_DESCRIPTION
 #' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
 #' @param silent PARAM_DESCRIPTION, Default: F
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -551,6 +577,7 @@ flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) { # F
 #' @param vec_or_list PARAM_DESCRIPTION
 #' @param decreasing PARAM_DESCRIPTION, Default: FALSE
 #' @param ... PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -575,6 +602,7 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) { # Sort a vect
 #' @description How many entries are duplicated?.
 #' @param vec input vector
 #' @param summarize PARAM_DESCRIPTION, Default: TRUE
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -599,6 +627,7 @@ any.duplicated <- function(vec, summarize = TRUE) { # How many entries are dupli
 #' @description Which values are duplicated?.
 #' @param vec input vector
 #' @param orig PARAM_DESCRIPTION, Default: F
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -619,6 +648,7 @@ which.duplicated <- function(vec, orig = F) { # Which values are duplicated?.
 #' @description Which values are NA?.
 #' @param vec input vector
 #' @param orig PARAM_DESCRIPTION, Default: F
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -639,6 +669,7 @@ which.NA <- function(vec, orig = F) { # Which values are NA?.
 #' @description Fill up with a vector to a given length with NA-values at the end.
 #' @param x PARAM_DESCRIPTION
 #' @param len PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -655,6 +686,7 @@ pad.na <- function(x, len) { c(x, rep(NA, len - length(x))) } # Fill up with a v
 #' @param valz PARAM_DESCRIPTION
 #' @param high PARAM_DESCRIPTION, Default: TRUE
 #' @param thr PARAM_DESCRIPTION, Default: 3
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -677,6 +709,7 @@ clip.values <- function(valz, high = TRUE, thr = 3) { # Signal clipping. Cut val
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
 #' @param ... PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -700,6 +733,7 @@ clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, 
 #' @description Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param x PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -717,6 +751,7 @@ as.logical.wNames <- function(x, ...) { # Converts your input vector into a logi
 #' @title col2named.vec.tbl
 #' @description Convert a 2-column table(data frame) into a named vector. 1st column will be used as names.
 #' @param tbl.2col PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -738,6 +773,7 @@ col2named.vec.tbl <- function(tbl.2col) { # Convert a 2-column table(data frame)
 #' @description Iterate over a vector by every N-th element.
 #' @param vec PARAM_DESCRIPTION
 #' @param by PARAM_DESCRIPTION, Default: 9
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -758,6 +794,7 @@ iterBy.over <- function(vec, by = 9) { # Iterate over a vec by every N-th elemen
 #' @title zigzagger
 #' @description Mix entries so that they differ.
 #' @param vec input vector, Default: 1:9
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -776,6 +813,7 @@ zigzagger <- function(vec = 1:9) { # mix entries so that they differ.
 #' @param y PARAM_DESCRIPTION, Default: 100
 #' @param zeropadding PARAM_DESCRIPTION, Default: TRUE
 #' @param pad_length PARAM_DESCRIPTION, Default: floor(log10(max(abs(x), abs(y)))) + 1
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -801,6 +839,7 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log
 #' @description Find second (third…) highest/lowest value in vector.
 #' @param vec input vector, Default: rpois(4, lambda = 3)
 #' @param topN PARAM_DESCRIPTION, Default: 2
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -822,6 +861,7 @@ MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) { # find second (third…
 #' @title cumsubtract
 #' @description Cumulative subtraction, opposite of cumsum().
 #' @param numericVec PARAM_DESCRIPTION, Default: blanks
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -842,6 +882,7 @@ cumsubtract <- function(numericVec = blanks) { # Cumulative subtraction, opposit
 #' @title sumBySameName
 #' @description Sum up vector elements with the same name.
 #' @param namedVec PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -859,6 +900,7 @@ sumBySameName <- function(namedVec) { # Sum up vector elements with the same nam
 #' @title which_names
 #' @description Return the names where the input vector is TRUE. The input vector is converted to logical.
 #' @param namedVec PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -876,6 +918,7 @@ which_names <- function(namedVec) { # Return the names where the input vector is
 #' @description Return the vector elements whose names are partially matched.
 #' @param namedVec PARAM_DESCRIPTION
 #' @param pattern PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -895,17 +938,22 @@ which_names_grep <- function(namedVec, pattern) { # Return the vector elements w
 #' @description Calls na.omit() and returns a clean vector.
 #' @param vec input vector
 #' @param silent PARAM_DESCRIPTION, Default: FALSE
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
+#' @seealso
+#'  \code{\link[stats]{na.omit}}
 #' @export
+#' @importFrom stats na.omit
+
 na.omit.strip <- function(vec, silent = FALSE) { # Calls na.omit() and returns a clean vector.
   if (is.data.frame(vec)) {
     if (min(dim(vec)) > 1 & silent == FALSE) { iprint(dim(vec), "dimensional array is converted to a vector.") }
     vec = unlist(vec) }
-  clean = na.omit(vec)
+  clean = stats::na.omit(vec)
   attributes(clean)$na.action <- NULL
   return(clean)
 }
@@ -917,6 +965,7 @@ na.omit.strip <- function(vec, silent = FALSE) { # Calls na.omit() and returns a
 #' @title inf.omit
 #' @description Omit infinite values from a vector.
 #' @param vec input vector
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -938,6 +987,7 @@ inf.omit <- function(vec) { # Omit infinite values from a vector.
 #' @title zero.omit
 #' @description Omit zero values from a vector.
 #' @param vec input vector
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -961,6 +1011,7 @@ zero.omit <- function(vec) { # Omit zero values from a vector.
 #' @param NArm PARAM_DESCRIPTION, Default: TRUE
 #' @param prefix PARAM_DESCRIPTION, Default: NULL
 #' @param suffix PARAM_DESCRIPTION, Default: NULL
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -986,17 +1037,21 @@ pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm
 #' @param vec_or_table PARAM_DESCRIPTION
 #' @param category PARAM_DESCRIPTION
 #' @param NA_omit PARAM_DESCRIPTION, Default: TRUE
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
+#' @seealso
+#'  \code{\link[stats]{na.omit}}
 #' @export
+#' @importFrom stats na.omit
 pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Percentage of a certain value within a vector or table.
   if (is.table(vec_or_table)) { vec_or_table[category]/sum(vec_or_table, na.rm = NA_omit) }
   else {# if (is.vector(vec_or_table))
     if (NA_omit) {
-      if (sum(is.na(vec_or_table))) { vec_or_table = na.omit(vec_or_table); iprint(sum(is.na(vec_or_table)), 'NA are omitted from the vec_or_table of:', length(vec_or_table))}
+      if (sum(is.na(vec_or_table))) { vec_or_table = stats::na.omit(vec_or_table); iprint(sum(is.na(vec_or_table)), 'NA are omitted from the vec_or_table of:', length(vec_or_table))}
       "Not wokring complelety : if NaN is stored as string, it does not detect it"
     }
     sum(vec_or_table == category) /  length(vec_or_table)
@@ -1010,6 +1065,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 #' @param length_new PARAM_DESCRIPTION
 #' @param length_old PARAM_DESCRIPTION
 #' @param prepend PARAM_DESCRIPTION, Default: ''
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -1029,6 +1085,7 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param ... PARAM_DESCRIPTION
 #' @param probs PARAM_DESCRIPTION, Default: c(0.05, 0.95)
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -1054,6 +1111,7 @@ remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) { # Remov
 #' @param category_vec PARAM_DESCRIPTION
 #' @param replaceit PARAM_DESCRIPTION
 #' @param to PARAM_DESCRIPTION
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -1074,6 +1132,7 @@ simplify_categories <- function(category_vec, replaceit , to ) { # Replace every
 #' @param haystack PARAM_DESCRIPTION
 #' @param exact PARAM_DESCRIPTION, Default: TRUE
 #' @param report PARAM_DESCRIPTION, Default: FALSE
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
