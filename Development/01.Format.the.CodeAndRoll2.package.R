@@ -19,7 +19,8 @@ RoxygenReady("~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R")
 # Setup ------------------------
 remotes::install_github('yonicd/sinew')
 require('sinew')
-makeOxyFile("~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R", overwrite = FALSE)
+# makeOxyFile("~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R", overwrite = FALSE)
+makeOxyFile("~/GitHub/Packages/CodeAndRoll2/Development/CodeAndRoll2.orig.R", overwrite = FALSE)
 
 makeOxyFile("~/GitHub/Packages/StringParser/R/StringParser.R", overwrite = FALSE)
 
