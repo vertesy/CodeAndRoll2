@@ -21,5 +21,9 @@ remotes::install_github('yonicd/sinew')
 require('sinew')
 makeOxyFile("~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R", overwrite = FALSE)
 
+makeOxyFile("~/GitHub/Packages/StringParser/R/StringParser.R", overwrite = FALSE)
+
+makeOxyFile("~/GitHub/Packages/ReadWriter/R/ReadWriter.R", overwrite = FALSE)
 
 
+require('ggExpress')
