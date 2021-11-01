@@ -6,9 +6,9 @@ Packaged version of the core functionalities (vector, matrix and list manipulati
 A standalone set of more than >130 productivity functions. 
 Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [SeuratUtils](https://github.com/vertesy/SeuratUtils).
 
-<img width="723" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/139642446-cde94051-ca6b-4ee6-84c1-3000cab51b78.png">
+<img width="931" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/139664920-12b8797e-b161-4e2c-ac88-98754772b609.png">
 
-#### 
+
 
 <br><br>
 
