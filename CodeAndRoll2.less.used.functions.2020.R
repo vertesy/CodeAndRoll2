@@ -231,3 +231,19 @@ as.numeric.wNames.old <- function(vec) {
 }
 
 
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------
+#' @title as.numeric.wNames.old
+#' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+#' @param vec PARAM_DESCRIPTION
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @export
+as.numeric.wNames.old <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+  numerified_vec = as.numeric(as.factor(vec))
+  if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
+  return(numerified_vec)
+}
