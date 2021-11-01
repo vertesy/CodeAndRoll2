@@ -17,19 +17,22 @@ Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpres
 
 Install directly from **GitHub** via **devtools** with one R command:
 
-    # install.packages("devtools"); # If you don't have it.
-    require("devtools")
-    devtools::install_github(repo = "vertesy/CodeAndRoll2")
-
+```r
+# install.packages("devtools"); # If you don't have it.
+require("devtools")
+devtools::install_github(repo = "vertesy/CodeAndRoll2")
+```
 ...then simply load the package:
 
-    require("CodeAndRoll2")
+```r
+require("CodeAndRoll2")
+```
 
 Alternatively, you simply source it from the web. 
 *This way function help will not work, and you will have no local copy of the code on your hard drive.*
-
-    source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2/R/CodeAndRoll2.R")
-
+```r
+source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2/R/CodeAndRoll2.R")
+```
 <br><br>
 
 
