@@ -26,5 +26,13 @@ makeOxyFile("~/GitHub/Packages/StringParser/R/StringParser.R", overwrite = FALSE
 
 makeOxyFile("~/GitHub/Packages/ReadWriter/R/ReadWriter.R", overwrite = FALSE)
 
+makeOxyFile("~/GitHub/Packages/StringParser/R/StringParser.R", overwrite = FALSE)
+
+makeOxyFile("~/GitHub/Packages/Seurat.utils/Development/Seurat.Utils.R", overwrite = FALSE, verbose = T)
+
+makeOxyFile("~/GitHub/Packages/DatabaseLinke.R/Development/DatabaseLinke.R", overwrite = FALSE)
+
+makeOxyFile("~/GitHub/Packages/DataInCode/Development/DataInCode.R", overwrite = FALSE)
+
 
 require('ggExpress')
