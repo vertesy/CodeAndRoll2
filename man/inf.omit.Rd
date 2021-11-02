@@ -12,10 +12,3 @@ inf.omit(vec)
 \description{
 Omit infinite values from a vector.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

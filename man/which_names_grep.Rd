@@ -14,10 +14,3 @@ which_names_grep(namedVec, pattern)
 \description{
 Return the vector elements whose names are partially matched.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -16,10 +16,3 @@ matrix.fromVector(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE)
 \description{
 Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # matrix.fromVector()
- }
-}
-}

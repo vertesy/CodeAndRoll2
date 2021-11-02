@@ -12,10 +12,3 @@ col2named.vec.tbl(tbl.2col)
 \description{
 Convert a 2-column table(data frame) into a named vector. 1st column will be used as names.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -16,13 +16,6 @@ sortbyitsnames(vec_or_list, decreasing = FALSE, ...)
 \description{
 Sort a vector by the alphanumeric order of its names(instead of its values).
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
 \seealso{
 \code{\link[gtools]{mixedsort}}
 }

@@ -12,10 +12,3 @@ zigzagger(vec = 1:9)
 \description{
 Mix entries so that they differ.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -12,10 +12,3 @@
 \description{
 Sort in decreasing order.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

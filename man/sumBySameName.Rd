@@ -12,10 +12,3 @@ sumBySameName(namedVec)
 \description{
 Sum up vector elements with the same name.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

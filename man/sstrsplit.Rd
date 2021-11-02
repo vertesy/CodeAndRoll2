@@ -16,13 +16,6 @@ sstrsplit(string, pattern = "_", n = 2)
 \description{
 Alias for str_split_fixed in the stringr package.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
 \seealso{
 \code{\link[stringr]{str_split}}
 }

@@ -14,10 +14,3 @@ iterBy.over(vec, by = 9)
 \description{
 Iterate over a vector by every N-th element.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

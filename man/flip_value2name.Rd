@@ -16,10 +16,3 @@ flip_value2name(namedVector, NumericNames = FALSE, silent = F)
 \description{
 Flip the values and the names of a vector with names.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

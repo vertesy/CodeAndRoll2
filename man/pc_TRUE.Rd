@@ -29,10 +29,3 @@ pc_TRUE(
 \description{
 FUNCTION_DESCRIPTION.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -16,10 +16,3 @@ filter_survival_length(length_new, length_old, prepend = "")
 \description{
 Parse a sentence reporting the \% of filter survival.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

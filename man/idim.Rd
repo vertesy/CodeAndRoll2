@@ -12,10 +12,3 @@ idim(any_object)
 \description{
 A dim() function that can handle if you pass on a vector: then, it gives the length.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # a <- 1:2; idim(a)
- }
-}
-}

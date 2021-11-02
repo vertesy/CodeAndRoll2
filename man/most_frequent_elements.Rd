@@ -14,10 +14,3 @@ most_frequent_elements(vec, topN = 10)
 \description{
 Show the most frequent elements of a table.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

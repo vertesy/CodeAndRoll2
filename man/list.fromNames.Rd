@@ -14,10 +14,3 @@ list.fromNames(name_vec = LETTERS[1:5], fill = NaN)
 \description{
 create list from a vector with the names of the elements.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # list.fromNames()
- }
-}
-}

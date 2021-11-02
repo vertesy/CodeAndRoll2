@@ -12,10 +12,3 @@ col2named.vector(df_col)
 \description{
 Convert a dataframe column into a vector, keeping the corresponding dimension name.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

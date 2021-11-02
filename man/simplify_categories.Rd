@@ -16,10 +16,3 @@ simplify_categories(category_vec, replaceit, to)
 \description{
 Replace every entry that is found in "replaceit", by a single value provided by "to".
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

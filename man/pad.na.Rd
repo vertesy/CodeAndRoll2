@@ -14,10 +14,3 @@ pad.na(x, len)
 \description{
 Fill up with a vector to a given length with NA-values at the end.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

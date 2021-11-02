@@ -14,10 +14,3 @@ MaxN(vec = rpois(4, lambda = 3), topN = 2)
 \description{
 Find second (third…) highest/lowest value in vector.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

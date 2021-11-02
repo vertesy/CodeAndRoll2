@@ -18,10 +18,3 @@ remove_outliers(x, na.rm = TRUE, ..., probs = c(0.05, 0.95))
 \description{
 Remove values that fall outside the trailing N \% of the distribution.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -14,10 +14,3 @@ as_tibble_from_namedVec(vec.w.names = c(a = 1, b = 2), transpose = T)
 \description{
 Convert a vector with names into a tibble, keeping the names as rownames.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

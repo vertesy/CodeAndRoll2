@@ -16,10 +16,3 @@ rescale(vec, from = 0, upto = 100)
 \description{
 Linear transformation to a given range of values.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

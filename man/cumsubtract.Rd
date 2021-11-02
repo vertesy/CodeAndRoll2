@@ -12,10 +12,3 @@ cumsubtract(numericVec = blanks)
 \description{
 Cumulative subtraction, opposite of cumsum().
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

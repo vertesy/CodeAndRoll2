@@ -16,13 +16,6 @@ pc_in_total_of_match(vec_or_table, category, NA_omit = TRUE)
 \description{
 Percentage of a certain value within a vector or table.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
 \seealso{
 \code{\link[stats]{na.omit}}
 }

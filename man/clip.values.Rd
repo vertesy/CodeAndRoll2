@@ -16,10 +16,3 @@ clip.values(valz, high = TRUE, thr = 3)
 \description{
 Signal clipping. Cut values above or below a threshold.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -16,10 +16,3 @@ top_indices(x, n = 3, top = TRUE)
 \description{
 Returns the position / index of the n highest values. For equal values, it maintains the original order.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

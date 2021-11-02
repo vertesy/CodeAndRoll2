@@ -14,10 +14,3 @@ as.named.vector(df_col, WhichDimNames = 1)
 \description{
 Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

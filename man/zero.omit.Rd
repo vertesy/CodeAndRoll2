@@ -12,10 +12,3 @@ zero.omit(vec)
 \description{
 Omit zero values from a vector.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

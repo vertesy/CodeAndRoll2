@@ -14,10 +14,3 @@ which.NA(vec, orig = F)
 \description{
 Which values are NA?.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -14,10 +14,3 @@ which.duplicated(vec, orig = F)
 \description{
 Which values are duplicated?.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

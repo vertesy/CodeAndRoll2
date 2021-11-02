@@ -14,10 +14,3 @@ table_fixed_categories(vec, categories_vec)
 \description{
 Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # table_fixed_categories(vec = 1:3, categories_vec = 1:4)
- }
-}
-}

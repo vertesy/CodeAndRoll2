@@ -29,10 +29,3 @@ clip.outliers(
 \description{
 Signal clipping based on the input data's distribution. It clips values above or below the extreme N\% of the distribution.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

@@ -14,10 +14,3 @@
 \description{
 How many entries are duplicated?.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

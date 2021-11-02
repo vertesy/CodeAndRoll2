@@ -14,10 +14,3 @@ vec.fromNames(name_vec = LETTERS[1:5], fill = NA)
 \description{
 Create a vector from a vector of names.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # vec.fromNames()
- }
-}
-}

@@ -16,10 +16,3 @@ matrix.fromNames(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA)
 \description{
 Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # matrix.fromNames()
- }
-}
-}

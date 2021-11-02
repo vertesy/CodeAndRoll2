@@ -12,10 +12,3 @@ idimnames(any_object)
 \description{
 A dimnames() function that can handle if you pass on a vector: it gives back the names.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #a <- 1:2; idimnames(a)
- }
-}
-}

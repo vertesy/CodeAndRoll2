@@ -18,10 +18,3 @@ lookup(needle, haystack, exact = TRUE, report = FALSE)
 \description{
 Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

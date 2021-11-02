@@ -1,19 +1,8 @@
 ######################################################################
-# A collection of custom R functions
+# CodeAndRoll2 - A collection of custom R functions
 ######################################################################
-# source('~/GitHub/Packages/CodeAndRoll2/CodeAndRoll2.R')
+# source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.R')
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
-
-## If something is not found:
-# try(source("https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpress.functions.R"), silent = T)
-
-# try(source("~/Github/TheCorvinas/R/RNA_seq_specific_functions.r"), silent = T)
-## For Plotting From Clipboard or Files
-# source("~/Github/TheCorvinas/R/Plotting.From.Clipboard.And.Files.r")
-# # Load sequence length and base distribution check
-# source("~/Github/TheCorvinas/R/Gene.Stats.mm10.R")
-suppressMessages(try(require(clipr), silent = T))
-try(require(ggplot2),silent = T)
 
 
 ### CHAPTERS:

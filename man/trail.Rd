@@ -14,10 +14,3 @@ trail(vec, N = 10)
 \description{
 A combination of head() and tail() to see both ends.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

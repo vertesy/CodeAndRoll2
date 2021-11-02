@@ -12,10 +12,3 @@
 \description{
 FUNCTION_DESCRIPTION.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

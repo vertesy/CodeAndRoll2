@@ -12,10 +12,3 @@ which_names(namedVec)
 \description{
 Return the names where the input vector is TRUE. The input vector is converted to logical.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

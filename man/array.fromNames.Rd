@@ -23,10 +23,3 @@ array.fromNames(
 \description{
 Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # array.fromNames()
- }
-}
-}

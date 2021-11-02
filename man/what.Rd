@@ -14,10 +14,3 @@ what(x, printme = 0)
 \description{
 A better version of is(). It can print the first "printme" elements.
 }
-\examples{
-\dontrun{
-if(interactive()){
- # a <- 1:2; what(a)
- }
-}
-}

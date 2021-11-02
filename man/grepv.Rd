@@ -38,10 +38,3 @@ grepv(
 \description{
 grep returning the value.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}

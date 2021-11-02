@@ -23,13 +23,6 @@ numerate(
 \description{
 Numerate from x to y with additonal zeropadding.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
 \seealso{
 \code{\link[stringr]{str_pad}}
 }

@@ -12,10 +12,3 @@ row2named.vector(df_row)
 \description{
 Convert a dataframe row into a vector, keeping the corresponding dimension name.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
