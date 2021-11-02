@@ -29,7 +29,13 @@ Alternatively, you simply source it from the web.
 
     source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2/R/CodeAndRoll2.R")
 
-<br><br>
+<br>
+
+### Troubleshooting
+
+*If you encounter a **bug**, something doesn't work or unclear, please let me know by raising an issue on [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2/issues) – Please check if it has been asked.*
+
+<br>
 
 
 ## List of Functions
