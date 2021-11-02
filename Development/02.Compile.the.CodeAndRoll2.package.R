@@ -40,7 +40,7 @@ DESCRIPTION <- list("Title" = "CodeAndRoll2 for vector, matrix and list manipula
     , "Description" = "CodeAndRoll2 is a set of more than >130 productivity functions. Used by MarkdownReports, ggExpress, SeuratUtils.
     Packaged version of the core functionalities  (vector, matrix and list manipulations; math) of the formerly used CodeAndRoll (v1)."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version"= "2.0.0"
+    , "Version"= "2.0.2"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     , "Imports" = "dplyr, gtools, stringr, stats, methods, sm, graphics, grDevices, gplots, RColorBrewer, colorRamps, clipr,  sessioninfo"

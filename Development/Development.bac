@@ -936,27 +936,27 @@ which_names_grep <- function(namedVec, pattern) { # Return the vector elements w
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title na.omit.strip
 #' @description Calls na.omit() and returns a clean vector.
-#' @param vec input vector
-#' @param silent PARAM_DESCRIPTION, Default: FALSE
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#'  \code{\link[stats]{na.omit}}
-#' @export
+#' Omit NA values from a vector and return a clean vector without any spam.
+#' @param object Values to filter for NA
+#' @param silent Silence the data structure coversion warning: anything ->vector
+#' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
+#' @export
+#'
+#' @examples # CodeAndRoll2::na.omit.strip(c(1, 2, 3, NA, NaN, 2))
 
-na.omit.strip <- function(vec, silent = FALSE) { # Calls na.omit() and returns a clean vector.
-  if (is.data.frame(vec)) {
-    if (min(dim(vec)) > 1 & silent == FALSE) { iprint(dim(vec), "dimensional array is converted to a vector.") }
-    vec = unlist(vec) }
-  clean = stats::na.omit(vec)
+na.omit.strip <- function(object, silent = FALSE, ...) {
+  if (is.data.frame(object)) {
+    if (min(dim(object)) > 1 & silent == FALSE) {
+      iprint(dim(object), "dimensional array is converted to a vector.")
+    }
+    object = unlist(object)
+  }
+  clean = stats::na.omit(object, ...)
   attributes(clean)$na.action <- NULL
   return(clean)
 }
+
 
 
 
@@ -1162,4 +1162,56 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 }
 
 
+
+
+
+#' @title Translate values to a new set using a dictionary
+#' @description Replaces a set of values in a vector with another set of values,
+#' it translates your vector. Oldvalues and newvalues have to be 1-to-1
+#' correspoding vectors.
+#' @param vec set of values where you want to replace
+#' @param oldvalues oldvalues (from)
+#' @param newvalues newvalues (to)
+#' @export
+#' @examples A = 1:3; translate(vec = A, oldvalues = 2:3, newvalues = letters[1:2])
+
+translate = replace_values <- function(vec, oldvalues, newvalues) {
+  Nr = length(oldvalues)
+  if (Nr > length(newvalues)) {
+    if (length(newvalues) == 1) {
+      newvalues = rep(newvalues, length(oldvalues))
+    } else if (length(newvalues) > 1) {
+      iprint("PROVIDE ONE NEWVALUE, OR THE SAME NUMEBR OF NEWVALUES AS OLDVALUES.")
+    }
+  }
+  tmp = vec
+  for (i in 1:Nr) {
+    oldval = oldvalues[i]
+    tmp[vec == oldval] = newvalues[i]
+  }
+  return(tmp)
+}
+# 'chartr("a-cX", "D-Fw", x) does the same as above in theory,
+# but it did not seem very robust regarding your input...'
+
+
+
+
+
+#' @title as.factor.numeric
+#'
+#' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
+#' @param vec vector of factors or strings
+#' @param rename Rename the vector?
+#' @param ... Pass any other argument to as.factor()
+#' @export
+#'
+#' @examples as.factor.numeric(LETTERS[1:4])
+
+as.factor.numeric <- function(vec, rename = FALSE, ...) {
+  vec2 = as.numeric(as.factor(vec, ...)) ;
+  names (vec2) <- if ( !rename & !is.null(names(vec) ) ) { names (vec)
+  } else { vec }
+  return(vec2)
+}
 

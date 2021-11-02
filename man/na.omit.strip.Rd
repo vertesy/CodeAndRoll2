@@ -4,23 +4,19 @@
 \alias{na.omit.strip}
 \title{na.omit.strip}
 \usage{
-\method{na.omit}{strip}(vec, silent = FALSE)
+\method{na.omit}{strip}(object, silent = FALSE, ...)
 }
 \arguments{
-\item{vec}{input vector}
+\item{object}{Values to filter for NA}
 
-\item{silent}{PARAM_DESCRIPTION, Default: FALSE}
+\item{silent}{Silence the data structure coversion warning: anything ->vector}
+
+\item{...}{Pass any other argument to na.omit()}
 }
 \description{
 Calls na.omit() and returns a clean vector.
+Omit NA values from a vector and return a clean vector without any spam.
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
-\seealso{
-\code{\link[stats]{na.omit}}
+# CodeAndRoll2::na.omit.strip(c(1, 2, 3, NA, NaN, 2))
 }
