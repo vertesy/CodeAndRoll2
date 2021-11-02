@@ -6,7 +6,8 @@ Packaged version of the core functionalities (vector, matrix and list manipulati
 A standalone set of more than >130 productivity functions. 
 Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [SeuratUtils](https://github.com/vertesy/SeuratUtils).
 
-<img width="723" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/139642446-cde94051-ca6b-4ee6-84c1-3000cab51b78.png">
+
+<img width="931" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/139664920-12b8797e-b161-4e2c-ac88-98754772b609.png">
 
 #### 
 
@@ -16,18 +17,22 @@ Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpres
 
 Install directly from **GitHub** via **devtools** with one R command:
 
-    # install.packages("devtools"); # If you don't have it.
-    require("devtools")
-    devtools::install_github(repo = "vertesy/CodeAndRoll2")
-
+```r
+# install.packages("devtools"); # If you don't have it.
+require("devtools")
+devtools::install_github(repo = "vertesy/CodeAndRoll2")
+```
 ...then simply load the package:
 
-    require("CodeAndRoll2")
+```r
+require("CodeAndRoll2")
+```
 
 Alternatively, you simply source it from the web. 
 *This way function help will not work, and you will have no local copy of the code on your hard drive.*
-
-    source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2/R/CodeAndRoll2.R")
+```r
+source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2/R/CodeAndRoll2.R")
+```
 
 <br>
 
@@ -37,7 +42,7 @@ Alternatively, you simply source it from the web.
 
 <br>
 
-
+=======
 ## List of Functions
 
 - #### vec.fromNames 
