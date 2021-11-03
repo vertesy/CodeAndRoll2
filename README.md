@@ -1,3 +1,5 @@
+#### *Cite via:* [![DOI](https://zenodo.org/badge/319134544.svg)](https://zenodo.org/badge/latestdoi/319134544)
+
 # CodeAndRoll2
 
 #### \*\*\*\*Package in development\*\*\*\*
@@ -5,7 +7,6 @@
 Packaged version of the core functionalities (vector, matrix and list manipulations; math) of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll). 
 A standalone set of more than >130 productivity functions. 
 Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [SeuratUtils](https://github.com/vertesy/SeuratUtils).
-
 
 <img width="931" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/139664920-12b8797e-b161-4e2c-ac88-98754772b609.png">
 
@@ -446,3 +447,12 @@ Calculates the moving / rolling standard error of the mean (SEM). It calculates 
 
 - #### shannon.entropy 
 Calculate shannon entropy
+
+
+
+---
+
+Vertesy, 2021.  ***Cite via:*** [![DOI](https://zenodo.org/badge/319134544.svg)](https://zenodo.org/badge/latestdoi/319134544)
+
+<br>
+
