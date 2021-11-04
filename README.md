@@ -1,4 +1,4 @@
-#### *Cite via:* [![DOI](https://zenodo.org/badge/319134544.svg)](https://zenodo.org/badge/latestdoi/319134544)
+*Cite via:* [![DOI](https://zenodo.org/badge/319134544.svg)](https://zenodo.org/badge/latestdoi/319134544)
 
 # CodeAndRoll2
 
@@ -8,9 +8,19 @@ Packaged version of the core functionalities (vector, matrix and list manipulati
 A standalone set of more than >130 productivity functions. 
 Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [SeuratUtils](https://github.com/vertesy/SeuratUtils).
 
-<img width="931" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/139664920-12b8797e-b161-4e2c-ac88-98754772b609.png">
+<img width="915" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/140038110-b0e843cf-10c7-45c7-87dc-0525fafb0f57.png">
 
-#### 
+
+Works together with
+- [Stringendo](https://github.com/vertesy/Stringendo)
+- [ReadWriter](https://github.com/vertesy/ReadWriter)
+
+... and provides functions for
+- [ggExpress](https://github.com/vertesy/ggExpress)
+- [SeuratUtils](https://github.com/vertesy/SeuratUtils).
+- [MarkdownReports](https://github.com/vertesy/MarkdownReports)
+
+
 
 <br><br>
 
