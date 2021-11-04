@@ -10,7 +10,7 @@
 ## Create and check variables -------------------------------------------------------------------------------------------------
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title vec.fromNames
 #' @description Create a vector from a vector of names.
 #' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
@@ -26,7 +26,7 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # Create a vecto
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title list.fromNames
 #' @description create list from a vector with the names of the elements.
 #' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
@@ -39,7 +39,7 @@ list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) { # create list 
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title matrix.fromNames
 #' @description Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
 #' @param rowname_vec PARAM_DESCRIPTION, Default: 1:10
@@ -54,7 +54,7 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title matrix.fromVector
 #' @description Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
 #' @param vector Input vector, Default: 1:5
@@ -69,7 +69,7 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title array.fromNames
 #' @description Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
 #' @param rowname_vec PARAM_DESCRIPTION, Default: 1:3
@@ -87,7 +87,7 @@ array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_nam
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title what
 #' @description A better version of is(). It can print the first "printme" elements.
 #' @param x PARAM_DESCRIPTION
@@ -103,7 +103,7 @@ what <- function(x, printme = 0) { # A better version of is(). It can print the 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title idim
 #' @description A dim() function that can handle if you pass on a vector: then, it gives the length.
 #' @param any_object PARAM_DESCRIPTION
@@ -118,7 +118,7 @@ idim <- function(any_object) { # A dim() function that can handle if you pass on
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title idimnames
 #' @description A dimnames() function that can handle if you pass on a vector: it gives back the names.
 #' @param any_object PARAM_DESCRIPTION
@@ -132,7 +132,7 @@ idimnames <- function(any_object) { # A dimnames() function that can handle if y
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title table_fixed_categories
 #' @description Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
 #' @param vec Input vector
@@ -145,7 +145,7 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
 
 ## Vector operations -------------------------------------------------------------------------------------------------
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title grepv
 #' @description grep returning the value.
 #' @param pattern PARAM_DESCRIPTION
@@ -164,7 +164,7 @@ grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title most_frequent_elements
 #' @description Show the most frequent elements of a table.
 #' @param vec input vector
@@ -175,7 +175,7 @@ most_frequent_elements <- function(vec, topN = 10) { # Show the most frequent el
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title top_indices
 #' @description Returns the position / index of the n highest values. For equal values, it maintains the original order.
 #' @param x PARAM_DESCRIPTION
@@ -188,7 +188,7 @@ top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index o
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title trail
 #' @description A combination of head() and tail() to see both ends.
 #' @param vec input vector
@@ -198,7 +198,7 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combin
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title sort.decreasing
 #' @description Sort in decreasing order.
 #' @param vec input vector
@@ -206,7 +206,7 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combin
 sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title sstrsplit
 #' @description Alias for str_split_fixed in the stringr package.
 #' @param string PARAM_DESCRIPTION
@@ -219,7 +219,7 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(string, pattern = pattern, n = n) } # Alias for str_split_fixed in the stringr package
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as.named.vector
 #' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
@@ -238,7 +238,7 @@ as.named.vector <- function(df_col, WhichDimNames = 1) { # Convert a dataframe c
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title col2named.vector
 #' @description Convert a dataframe column into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
@@ -252,7 +252,7 @@ col2named.vector <- function(df_col) { # Convert a dataframe column into a vecto
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title row2named.vector
 #' @description Convert a dataframe row into a vector, keeping the corresponding dimension name.
 #' @param df_row data frame row
@@ -266,7 +266,7 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title tibble_summary_to_namedVec
 #' @description Convert a key-value tibble into a named vector (as opposed to using rownames).
 #' @param tbl PARAM_DESCRIPTION, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))
@@ -287,7 +287,7 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as_tibble_from_namedVec
 #' @description Convert a vector with names into a tibble, keeping the names as rownames.
 #' @param vec.w.names PARAM_DESCRIPTION, Default: c(a = 1, b = 2)
@@ -304,7 +304,7 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @description FUNCTION_DESCRIPTION.
 #' @param vec input vector
@@ -316,7 +316,7 @@ as.numeric.wNames <- function(vec) { # Converts any vector into a numeric vector
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as.factor.numeric
 #' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
 #' @param vec vector of factors or strings
@@ -335,7 +335,7 @@ as.factor.numeric <- function(vec, rename = FALSE, ...) {
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as.character.wNames
 #' @description Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param vec input vector
@@ -347,7 +347,7 @@ as.character.wNames <- function(vec) { # Converts your input vector into a chara
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title Translate values to a new set using a dictionary
 #' @description Replaces a set of values in a vector with another set of values,
 #' it translates your vector. Oldvalues and newvalues have to be 1-to-1
@@ -377,7 +377,7 @@ translate <- function(vec, oldvalues, newvalues) {
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rescale
 #' @description Linear transformation to a given range of values.
 #' @param vec input vector
@@ -392,7 +392,7 @@ rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a gi
 } # fun
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 
 #' @title flip_value2name
 #' @description Flip the values and the names of a vector with names.
@@ -415,7 +415,7 @@ flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) { # F
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title sortbyitsnames
 #' @description Sort a vector by the alphanumeric order of its names(instead of its values).
 #' @param vec_or_list PARAM_DESCRIPTION
@@ -434,7 +434,7 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) { # Sort a vect
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title any.duplicated
 #' @description How many entries are duplicated?.
 #' @param vec input vector
@@ -452,7 +452,7 @@ any.duplicated <- function(vec, summarize = TRUE) { # How many entries are dupli
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title which.duplicated
 #' @description Which values are duplicated?.
 #' @param vec input vector
@@ -466,7 +466,7 @@ which.duplicated <- function(vec, orig = F) { # Which values are duplicated?.
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title which.NA
 #' @description Which values are NA?.
 #' @param vec input vector
@@ -481,7 +481,7 @@ which.NA <- function(vec, orig = F) { # Which values are NA?.
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title pad.na
 #' @description Fill up with a vector to a given length with NA-values at the end.
 #' @param x PARAM_DESCRIPTION
@@ -491,7 +491,7 @@ pad.na <- function(x, len) { c(x, rep(NA, len - length(x))) } # Fill up with a v
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title clip.values
 #' @description Signal clipping. Cut values above or below a threshold.
 #' @param valz PARAM_DESCRIPTION
@@ -505,7 +505,7 @@ clip.values <- function(valz, high = TRUE, thr = 3) { # Signal clipping. Cut val
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title clip.outliers
 #' @description Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
 #' @param valz PARAM_DESCRIPTION
@@ -528,7 +528,7 @@ clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as.logical.wNames
 #' @description Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param x PARAM_DESCRIPTION
@@ -541,7 +541,7 @@ as.logical.wNames <- function(x, ...) { # Converts your input vector into a logi
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title col2named.vec.tbl
 #' @description Convert a 2-column table(data frame) into a named vector. 1st column will be used as names.
 #' @param tbl.2col PARAM_DESCRIPTION
@@ -554,7 +554,7 @@ col2named.vec.tbl <- function(tbl.2col) { # Convert a 2-column table(data frame)
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title topN.dfCol
 #' @description Find the n highest values in a named vector.
 #' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
@@ -563,7 +563,7 @@ col2named.vec.tbl <- function(tbl.2col) { # Convert a 2-column table(data frame)
 topN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 5)   { head(sort(df_col, decreasing = TRUE), n = n) } # Find the n highest values in a named vector
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title bottomN.dfCol
 #' @description Find the n lowest values in a named vector.
 #' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
@@ -573,7 +573,7 @@ bottomN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title iterBy.over
 #' @description Iterate over a vector by every N-th element.
 #' @param vec PARAM_DESCRIPTION
@@ -588,7 +588,7 @@ iterBy.over <- function(vec, by = 9) { # Iterate over a vec by every N-th elemen
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title zigzagger
 #' @description Mix entries so that they differ.
 #' @param vec input vector, Default: 1:9
@@ -598,7 +598,7 @@ zigzagger <- function(vec = 1:9) { # mix entries so that they differ.
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title numerate
 #' @description Numerate from x to y with additonal zeropadding.
 #' @param x PARAM_DESCRIPTION, Default: 1
@@ -618,7 +618,7 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title MaxN
 #' @description Find second (third…) highest/lowest value in vector.
 #' @param vec input vector, Default: rpois(4, lambda = 3)
@@ -633,7 +633,7 @@ MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) { # find second (third…
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title cumsubtract
 #' @description Cumulative subtraction, opposite of cumsum().
 #' @param numericVec PARAM_DESCRIPTION, Default: blanks
@@ -646,7 +646,7 @@ cumsubtract <- function(numericVec = blanks) { # Cumulative subtraction, opposit
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title sumBySameName
 #' @description Sum up vector elements with the same name.
 #' @param namedVec PARAM_DESCRIPTION
@@ -658,7 +658,7 @@ sumBySameName <- function(namedVec) { # Sum up vector elements with the same nam
 
 
 ### Vector filtering  -------------------------------------------------------------------------------------------------
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title which_names
 #' @description Return the names where the input vector is TRUE. The input vector is converted to logical.
 #' @param namedVec PARAM_DESCRIPTION
@@ -668,7 +668,7 @@ which_names <- function(namedVec) { # Return the names where the input vector is
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title which_names_grep
 #' @description Return the vector elements whose names are partially matched.
 #' @param namedVec PARAM_DESCRIPTION
@@ -681,7 +681,7 @@ which_names_grep <- function(namedVec, pattern) { # Return the vector elements w
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title na.omit.strip
 #' @description Calls na.omit() and returns a clean vector.
 #' Omit NA values from a vector and return a clean vector without any spam.
@@ -707,7 +707,7 @@ na.omit.strip <- function(object, silent = FALSE, ...) {
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title inf.omit
 #' @description Omit infinite values from a vector.
 #' @param vec input vector
@@ -723,7 +723,7 @@ inf.omit <- function(vec) { # Omit infinite values from a vector.
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title zero.omit
 #' @description Omit zero values from a vector.
 #' @param vec input vector
@@ -736,7 +736,7 @@ zero.omit <- function(vec) { # Omit zero values from a vector.
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title pc_TRUE
 #' @description FUNCTION_DESCRIPTION.
 #' @param logical_vector Percentage of true values in a logical vector, parsed as text (useful for reports).
@@ -759,7 +759,7 @@ pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title pc_in_total_of_match
 #' @description Percentage of a certain value within a vector or table.
 #' @param vec_or_table PARAM_DESCRIPTION
@@ -781,7 +781,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 } # fun
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title filter_survival_length
 #' @description Parse a sentence reporting the % of filter survival.
 #' @param length_new PARAM_DESCRIPTION
@@ -795,7 +795,7 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title remove_outliers
 #' @description Remove values that fall outside the trailing N % of the distribution.
 #' @param x PARAM_DESCRIPTION
@@ -816,7 +816,7 @@ remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) { # Remov
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title simplify_categories
 #' @description Replace every entry that is found in "replaceit", by a single value provided by "to".
 #' @param category_vec PARAM_DESCRIPTION
@@ -830,7 +830,7 @@ simplify_categories <- function(category_vec, replaceit , to ) { # Replace every
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title lookup
 #' @description Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
 #' @param needle PARAM_DESCRIPTION
@@ -867,7 +867,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 ### Matrix calculations  -------------------------------------------------------------------------------------------------
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowMedians
 #' @description Calculates the median of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -876,7 +876,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 rowMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, median, na.rm = na.rm) # Calculates the median of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colMedians
 #' @description Calculates the median of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -886,7 +886,7 @@ colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm =
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowGeoMeans
 #' @description Calculates the median of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -895,7 +895,7 @@ colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm =
 rowGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, geomean, na.rm = na.rm) # Calculates the median of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colGeoMeans
 #' @description Calculates the median of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -905,7 +905,7 @@ colGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, geomean, na.rm
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowCV
 #' @description Calculates the CV of each ROW of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -914,7 +914,7 @@ colGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, geomean, na.rm
 rowCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, cv, na.rm = na.rm ) # Calculates the CV of each ROW of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colCV
 #' @description Calculates the CV of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -924,7 +924,7 @@ colCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, cv, na.rm = na.rm ) 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowVariance
 #' @description Calculates the CV of each ROW of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -933,7 +933,7 @@ colCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, cv, na.rm = na.rm ) 
 rowVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, var, na.rm = na.rm ) # Calculates the CV of each ROW of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colVariance
 #' @description Calculates the CV of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -943,7 +943,7 @@ colVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, var, na.rm = n
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowMin
 #' @description Calculates the minimum of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -952,7 +952,7 @@ colVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, var, na.rm = n
 rowMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, min, na.rm = na.rm) # Calculates the minimum of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colMin
 #' @description Calculates the minimum of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -962,7 +962,7 @@ colMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, min, na.rm = na.rm)
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowMax
 #' @description Calculates the maximum of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -971,7 +971,7 @@ colMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, min, na.rm = na.rm)
 rowMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, max, na.rm = na.rm) # Calculates the maximum of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colMax
 #' @description Calculates the maximum of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -981,7 +981,7 @@ colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm)
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowSEM
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -990,7 +990,7 @@ colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm)
 rowSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sem, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colSEM
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1000,7 +1000,7 @@ colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm)
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowSD
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1009,7 +1009,7 @@ colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm)
 rowSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sd, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colSD
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1019,7 +1019,7 @@ colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm) #
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowIQR
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1028,7 +1028,7 @@ colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm) #
 rowIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, IQR, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colIQR
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1038,7 +1038,7 @@ colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowquantile
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1048,7 +1048,7 @@ colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile, ..., na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colquantile
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1059,7 +1059,7 @@ colquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 2, quantile,
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colDivide
 #' @description See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat PARAM_DESCRIPTION
@@ -1072,7 +1072,7 @@ colDivide <- function(mat, vec) { # divide by column # See more: https://stackov
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colMutliply
 #' @description See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat PARAM_DESCRIPTION
@@ -1085,7 +1085,7 @@ colMutliply <- function(mat, vec) { # Mutliply by column # See more: https://sta
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowDivide
 #' @description Divide by row.
 #' @param mat PARAM_DESCRIPTION
@@ -1098,7 +1098,7 @@ rowDivide <- function(mat, vec) { # divide by row
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowMutliply
 #' @description Mutliply by row.
 #' @param mat PARAM_DESCRIPTION
@@ -1111,7 +1111,7 @@ rowMutliply <- function(mat, vec) { # Mutliply by row
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title row.Zscore
 #' @description Calculate Z-score over rows of data frame.
 #' @param DF PARAM_DESCRIPTION
@@ -1120,7 +1120,7 @@ row.Zscore <- function(DF) t(scale(t(DF))) # Calculate Z-score over rows of data
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title TPM_normalize
 #' @description Normalize each column to 1 million.
 #' @param mat PARAM_DESCRIPTION
@@ -1134,7 +1134,7 @@ TPM_normalize <- function(mat, SUM = 1e6) { # normalize each column to 1 million
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title median_normalize
 #' @description Normalize each column to the median of all the column-sums.
 #' @param mat PARAM_DESCRIPTION
@@ -1148,7 +1148,7 @@ median_normalize <- function(mat) { # normalize each column to the median of all
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title mean_normalize
 #' @description Normalize each column to the median of the columns.
 #' @param mat PARAM_DESCRIPTION
@@ -1164,7 +1164,7 @@ mean_normalize <- function(mat) { # normalize each column to the median of the c
 ## Matrix manipulations -------------------------------------------------------------------------------------------------
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rotate
 #' @description Rotate a matrix 90 degrees.
 #' @param x PARAM_DESCRIPTION
@@ -1177,7 +1177,7 @@ rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title sortEachColumn
 #' @description Sort each column of a numeric matrix / data frame.
 #' @param data PARAM_DESCRIPTION
@@ -1187,7 +1187,7 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title sort.mat
 #' @description Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r.
 #' @param df PARAM_DESCRIPTION
@@ -1202,7 +1202,7 @@ sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowNameMatrix
 #' @description Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a plot (where you have different number of NA-values in each row).
 #' @param mat_w_dimnames PARAM_DESCRIPTION
@@ -1213,7 +1213,7 @@ rowNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, wher
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colNameMatrix
 #' @description Create a copy of your matrix, where every entry is replaced by the corresponding column name. Useful if you want to color by column name in a plot (where you have different number of NA-values in each column).
 #' @param mat_w_dimnames PARAM_DESCRIPTION
@@ -1225,7 +1225,7 @@ colNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, wher
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rownames.trimws
 #' @description Trim whitespaces from the rownames.
 #' @param matrix1 PARAM_DESCRIPTION
@@ -1237,7 +1237,7 @@ rownames.trimws <- function(matrix1) { # trim whitespaces from the rownames
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title colsplit
 #' @description Split a data frame by a factor corresponding to columns.
 #' @param df PARAM_DESCRIPTION
@@ -1253,7 +1253,7 @@ colsplit <- function(df, f = colnames(df)) { # split a data frame by a factor co
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title rowsplit
 #' @description Split a data frame by a factor corresponding to columns.
 #' @param df PARAM_DESCRIPTION
@@ -1269,7 +1269,7 @@ rowsplit <- function(df, f = rownames(df)) { # split a data frame by a factor co
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title select.rows.and.columns
 #' @description Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they aren't found.
 #' @param df PARAM_DESCRIPTION
@@ -1295,7 +1295,7 @@ select.rows.and.columns <- function(df, RowIDs = NULL, ColIDs = NULL ) { # Subse
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title getRows
 #' @description Get the subset of rows with existing rownames, report how much it could not find.
 #' @param mat PARAM_DESCRIPTION
@@ -1314,7 +1314,7 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title getCols
 #' @description Get the subset of cols with existing colnames, report how much it could not find.
 #' @param mat PARAM_DESCRIPTION
@@ -1334,7 +1334,7 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title get.oddoreven
 #' @description Get odd or even columns or rows of a data frame.
 #' @param df_ PARAM_DESCRIPTION, Default: NULL
@@ -1350,7 +1350,7 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) { # Get odd or e
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title combine.matrices.intersect
 #' @description Combine matrices by rownames intersect.
 #' @param matrix1 PARAM_DESCRIPTION
@@ -1376,7 +1376,7 @@ combine.matrices.intersect <- function(matrix1, matrix2, k = 2) { # combine matr
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title merge_dfs_by_rn
 #' @description Merge any data frames by rownames. Required plyr package.
 #' @param list_of_dfs PARAM_DESCRIPTION
@@ -1395,7 +1395,7 @@ merge_dfs_by_rn <- function(list_of_dfs) { # Merge any data frames by rownames. 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title merge_numeric_df_by_rn
 #' @description Merge 2 numeric data frames by rownames.
 #' @param x PARAM_DESCRIPTION
@@ -1423,7 +1423,7 @@ merge_numeric_df_by_rn <- function(x, y) { # Merge 2 numeric data frames by rown
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title remove.na.rows
 #' @description Cols have to be a vector of numbers corresponding to columns.
 #' @param mat PARAM_DESCRIPTION
@@ -1437,7 +1437,7 @@ remove.na.rows <- function(mat, cols = 1:NCOL(mat)) { # cols have to be a vector
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title remove.na.cols
 #' @description Cols have to be a vector of numbers corresponding to columns.
 #' @param mat PARAM_DESCRIPTION
@@ -1449,7 +1449,7 @@ remove.na.cols <- function(mat) { # cols have to be a vector of numbers correspo
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title na.omit.mat
 #' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
 #' @param mat PARAM_DESCRIPTION
@@ -1468,7 +1468,7 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title copy.dimension.and.dimnames
 #' @description Copy dimension and dimnames.
 #' @param list.1D PARAM_DESCRIPTION
@@ -1482,7 +1482,7 @@ copy.dimension.and.dimnames <- function(list.1D, obj.2D) { # copy dimension and 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title mdlapply
 #' @description lapply for multidimensional arrays.
 #' @param list_2D PARAM_DESCRIPTION
@@ -1495,7 +1495,7 @@ mdlapply <- function(list_2D, ...) { #  lapply for multidimensional arrays
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title arr.of.lists.2.df
 #' @description Simplify 2D-list-array to a DF.
 #' @param two.dim.arr.of.lists PARAM_DESCRIPTION
@@ -1509,7 +1509,7 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) { # simplify 2D-list-array t
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title mdlapply2df
 #' @description Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
 #' @param list_2D PARAM_DESCRIPTION
@@ -1526,7 +1526,7 @@ mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.list
 # List operations -------------------------------------------------------------------------------------------------
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title any.duplicated.rownames.ls.of.df
 #' @description Check if there are any duplocated rownames in a list of dataframes.
 #' @param ls PARAM_DESCRIPTION
@@ -1535,7 +1535,7 @@ any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title intersect.ls
 #' @description Intersect any number of lists.
 #' @param ls PARAM_DESCRIPTION
@@ -1545,7 +1545,7 @@ intersect.ls <- function(ls, ...) { Reduce(intersect, ls) } # Intersect any numb
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title union.ls
 #' @description Intersect any number of list elements. Faster than reduce.
 #' @param ls PARAM_DESCRIPTION
@@ -1555,7 +1555,7 @@ union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) } # Intersect any nu
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title unlapply
 #' @description Lapply, then unlist.
 #' @param ... PARAM_DESCRIPTION
@@ -1564,7 +1564,7 @@ unlapply <- function(...) { unlist(lapply(...)) } # lapply, then unlist
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title list.wNames
 #' @description Create a list with names from ALL variables you pass on to the function.
 #' @param ... PARAM_DESCRIPTION
@@ -1577,7 +1577,7 @@ list.wNames <- function(...) { # create a list with names from ALL variables you
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as.list.df.by.row
 #' @description Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
 #' @param dtf PARAM_DESCRIPTION
@@ -1596,7 +1596,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as.list.df.by.col
 #' @description OSplit a dataframe into a list by its rows. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
 #' @param dtf PARAM_DESCRIPTION
@@ -1615,7 +1615,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title reorder.list
 #' @description Reorder elements of lists in your custom order of names / indices.
 #' @param L PARAM_DESCRIPTION
@@ -1630,7 +1630,7 @@ reorder.list <- function(L, namesOrdered = mixedsort(names(L))) { # reorder elem
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title range.list
 #' @description Range of values in whole list.
 #' @param L PARAM_DESCRIPTION
@@ -1642,7 +1642,7 @@ range.list <- function(L, namesOrdered) { # range of values in whole list
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title intermingle2lists
 #' @description Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 #' @param L1 PARAM_DESCRIPTION
@@ -1660,7 +1660,7 @@ intermingle2lists <- function(L1, L2) { # Combine 2 lists (of the same length) s
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title as.listalike
 #' @description Convert a vector to a list with certain dimensions, taken from the list it wanna resemble.
 #' @param vec PARAM_DESCRIPTION
@@ -1680,7 +1680,7 @@ as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with 
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title reverse.list.hierarchy
 #' @description Reverse list hierarchy.
 #' @param ll PARAM_DESCRIPTION
@@ -1695,7 +1695,7 @@ reverse.list.hierarchy <- function(ll) { # reverse list hierarchy
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title list2fullDF.byNames
 #' @description ..
 #' @param your.list PARAM_DESCRIPTION, Default: list(set.1 = vec.fromNames(LETTERS[1:5], fill = 1), set.2 = vec.fromNames(LETTERS[3:9],
@@ -1722,7 +1722,7 @@ list2fullDF.byNames <- function(your.list = list(
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title list2fullDF.presence
 #' @description Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
 #' @param your.list PARAM_DESCRIPTION, Default: list(set.1 = LETTERS[1:5], set.2 = LETTERS[3:9])
@@ -1746,7 +1746,7 @@ list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]  # Conv
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title splitbyitsnames
 #' @description Split a list by its names.
 #' @param namedVec PARAM_DESCRIPTION
@@ -1758,7 +1758,7 @@ splitbyitsnames <- function(namedVec) { # split a list by its names
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title splititsnames_byValues
 #' @description Split a list by its names.
 #' @param namedVec PARAM_DESCRIPTION
@@ -1770,7 +1770,7 @@ splititsnames_byValues <- function(namedVec) { # split a list by its names
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title intermingle2vec
 #' @description Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
 #' @param V1 PARAM_DESCRIPTION
@@ -1786,7 +1786,7 @@ intermingle2vec <- function(V1, V2, wNames = TRUE) { # Combine 2 vectors (of the
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title intermingle.cbind
 #' @description Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 #' @param df1 PARAM_DESCRIPTION
@@ -1818,7 +1818,7 @@ intermingle.cbind <- function(df1, df2) { # Combine 2 data frames (of the same l
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title ls2categvec
 #' @description Convert a list to a vector repeating list-element names, while vector names are the list elements.
 #' @param your_list PARAM_DESCRIPTION
@@ -1831,7 +1831,7 @@ ls2categvec <- function(your_list ) { # Convert a list to a vector repeating lis
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title list.2.replicated.name.vec
 #' @description Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
 #' @param ListWithNames PARAM_DESCRIPTION, Default: Sections.ls.Final
@@ -1848,7 +1848,7 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title symdiff
 #' @description Quasy symmetric difference of any number of vectors.
 #' @param x PARAM_DESCRIPTION
@@ -1869,7 +1869,7 @@ symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of v
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title iround
 #' @description Rounds a value to the significant amount of digits. Its a wrapper for signif().
 #' @param x Unrounded number.
@@ -1883,7 +1883,7 @@ iround <- function(x, digitz = 3) {
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title modus
 #' @description Calculates the mode (modus) of a numeric vector (it excludes NA-s by default). https://en.wikipedia.org/wiki/Mode_(statistics)
 #' @param x A numeric vector
@@ -1900,7 +1900,7 @@ modus <- function(x) {
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title cv
 #' @description ..
 #' @param x PARAM_DESCRIPTION
@@ -1912,7 +1912,7 @@ cv <- function(x, na.rm = TRUE) {
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title sem
 #' @description Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
@@ -1924,7 +1924,7 @@ sem <-
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title fano
 #' @description Calculates the fano factor on a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
@@ -1937,7 +1937,7 @@ fano <-
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title geomean
 #' @description Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
@@ -1948,7 +1948,7 @@ geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a nume
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title mean_of_log
 #' @description Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
@@ -1962,7 +1962,7 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the l
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title movingAve
 #' @description Calculates the moving / rolling average of a numeric vector.
 #' @param x PARAM_DESCRIPTION
@@ -1977,7 +1977,7 @@ movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling averag
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title movingAve2
 #' @description Calculates the moving / rolling average of a numeric vector, using filter().
 #' @param x PARAM_DESCRIPTION
@@ -1989,7 +1989,7 @@ movingAve2 <- function(x, n = 5) {
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title movingSEM
 #' @description Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
 #' @param x PARAM_DESCRIPTION
@@ -2007,7 +2007,7 @@ movingSEM <-
 
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title imovingSEM
 #' @description Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
 #' @param x PARAM_DESCRIPTION
@@ -2027,7 +2027,7 @@ imovingSEM <- function(x, oneSide = 5) {
 }
 
 
-# _______________________________________________________________________________________________
+# _________________________________________________________________________________________________
 #' @title shannon.entropy
 #' @description Calculate shannon entropy.
 #' @param p PARAM_DESCRIPTION
