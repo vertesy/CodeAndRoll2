@@ -273,8 +273,8 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 #' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
-#' @example tibble_summary_to_namedVec()
 #' @export
+#' @example tibble_summary_to_namedVec()
 #' @importFrom dplyr tibble
 tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1:5, size = 20, replace = T), 'value' = rnorm(20) )
                                        ,  idx = c(key =1, value = 2)) { # Convert a key-value tibble into a named vector (as opposed to using rownames).
@@ -292,8 +292,8 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 #' @description Convert a vector with names into a tibble, keeping the names as rownames.
 #' @param vec.w.names PARAM_DESCRIPTION, Default: c(a = 1, b = 2)
 #' @param transpose PARAM_DESCRIPTION, Default: T
-#' @example  as_tibble_from_namedVec()
 #' @export
+#' @example as_tibble_from_namedVec()
 # #' @importFrom MarkdownReports stopif
 as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
   # MarkdownReports::stopif( !purrr::is_null(names(vec.w.names)))
