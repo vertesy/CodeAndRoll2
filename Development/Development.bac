@@ -273,6 +273,7 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 #' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
+#' @example tibble_summary_to_namedVec()
 #' @export
 #' @importFrom dplyr tibble
 tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1:5, size = 20, replace = T), 'value' = rnorm(20) )
@@ -283,7 +284,6 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
   names(named.vec) <- tbl_2_col[[1]]
   return(named.vec)
 }
-# tibble_summary_to_namedVec()
 
 
 
@@ -292,13 +292,15 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 #' @description Convert a vector with names into a tibble, keeping the names as rownames.
 #' @param vec.w.names PARAM_DESCRIPTION, Default: c(a = 1, b = 2)
 #' @param transpose PARAM_DESCRIPTION, Default: T
+#' @example  as_tibble_from_namedVec()
 #' @export
+# #' @importFrom MarkdownReports stopif
 as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
-  stopif(is_null(names(vec.w.names)))
+  # MarkdownReports::stopif( !purrr::is_null(names(vec.w.names)))
+  stopifnot(!is.null(names(vec.w.names)))
   tbl <- bind_rows(vec.w.names)
   if (transpose) t(tbl) else tbl
 }
-# as_tibble_from_namedVec()
 
 
 
@@ -398,12 +400,13 @@ rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a gi
 #' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
 #' @param silent PARAM_DESCRIPTION, Default: F
 #' @export
+#' @importFrom MarkdownReports llprint
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) { # Flip the values and the names of a vector with names.
   if (!is.null(names(namedVector))) {
     newvec = names(namedVector)
     if (NumericNames) { newvec = as.numeric(names(namedVector))     }
     names(newvec) = namedVector
-  } else {llprint("Vector without names!", head(namedVector))}
+  } else {MarkdownReports::llprint("Vector without names!", head(namedVector))}
   if (!silent) {
     if (any(duplicated(namedVector))) {iprint("New names contain duplicated elements", head(namedVector[which(duplicated(namedVector))])) }
     if (any(duplicated(newvec))) {iprint("Old names contained duplicated elements", head(newvec[which(duplicated(newvec))])) }
@@ -512,9 +515,11 @@ clip.values <- function(valz, high = TRUE, thr = 3) { # Signal clipping. Cut val
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
 #' @param ... PARAM_DESCRIPTION
 #' @export
+# #' @importFrom MarkdownReports whist
 clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) { # Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
   qnt <- quantile(valz, probs = probs, na.rm = na.rm)
-  if (showhist) { whist(unlist(valz), breaks = 50 ,vline = qnt, filtercol = -1)} #if
+  if (showhist) { hist(unlist(valz), breaks = 50);  abline(v = qnt, col = 2) } #if
+  # if (showhist) { MarkdownReports::whist(unlist(valz), breaks = 50 ,vline = qnt, filtercol = -1)} #if
   y <- valz
   y[valz < qnt[1]] <- qnt[1]
   y[valz > qnt[2]] <- qnt[2]
@@ -783,9 +788,10 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 #' @param length_old PARAM_DESCRIPTION
 #' @param prepend PARAM_DESCRIPTION, Default: ''
 #' @export
+#' @importFrom MarkdownReports llprint
 filter_survival_length <- function(length_new, length_old, prepend = "") { # Parse a sentence reporting the % of filter survival.
   pc = percentage_formatter(length_new/length_old)
-  llprint(prepend, pc, " of ", length_old, " entries make through the filter")
+  MarkdownReports::llprint(prepend, pc, " of ", length_old, " entries make through the filter")
 }
 
 
@@ -832,6 +838,7 @@ simplify_categories <- function(category_vec, replaceit , to ) { # Replace every
 #' @param exact PARAM_DESCRIPTION, Default: TRUE
 #' @param report PARAM_DESCRIPTION, Default: FALSE
 #' @export
+#' @importFrom MarkdownReports llprint
 lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
   ls_out = as.list( c(ln_needle = length(needle), ln_haystack = length(haystack), ln_hits = "",  hit_poz = "", hits = "") )
   Findings = numeric(0)
@@ -847,9 +854,9 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
   if (length(Findings)) { ls_out$'nonhits' = haystack[-Findings]
   } else {      ls_out$'nonhits' = haystack }
   if (report) {
-    llprint(length(Findings), "/", ln_needle, '(', percentage_formatter(length(Findings)/ln_needle)
+    MarkdownReports::llprint(length(Findings), "/", ln_needle, '(', percentage_formatter(length(Findings)/ln_needle)
             , ") of", substitute(needle), "were found among", length(haystack), substitute(haystack), "." )
-    if (length(Findings)) { llprint( substitute(needle), "findings: ", paste( haystack[Findings], sep = " " ) ) }
+    if (length(Findings)) { MarkdownReports::llprint( substitute(needle), "findings: ", paste( haystack[Findings], sep = " " ) ) }
   } else { iprint(length(Findings), "Hits:", haystack[Findings]) } # if (report)
   return(ls_out)
 }
@@ -1350,10 +1357,11 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) { # Get odd or e
 #' @param matrix2 PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 2
 #' @export
+#' @importFrom MarkdownReports llprint
 combine.matrices.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
   rn1 = rownames(matrix1); rn2 = rownames(matrix2);
   idx = intersect(rn1, rn2)
-  llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
+  MarkdownReports::llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
   merged = cbind(matrix1[idx, ], matrix2[idx, ])
   diffz = symdiff(rn1, rn2)
   print("Missing Rows 1, 2")
