@@ -34,11 +34,11 @@ DESCRIPTION <- list("Title" = "CodeAndRoll2 for vector, matrix and list manipula
     , "Description" = "CodeAndRoll2 is a set of more than >130 productivity functions. Used by MarkdownReports, ggExpress, SeuratUtils.
     Packaged version of the core functionalities  (vector, matrix and list manipulations; math) of the formerly used CodeAndRoll (v1)."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version"= "2.1.1"
+    , "Version"= "2.1.2"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     , "Depends" =  "Stringendo"
-    , "Imports" = "clipr, colorRamps, dplyr, gplots, graphics, grDevices, gtools, methods, plyr, RColorBrewer, sessioninfo, sm, stats, stringr"
+    , "Imports" = "base, colorRamps, dplyr, gplots, graphics, grDevices, gtools, MarkdownReports, methods, plyr, RColorBrewer, sessioninfo, sm, stats, Stringendo, stringr, utils"
     # , "Suggests" = ""
     , "BugReports"= "https://github.com/vertesy/CodeAndRoll2/issues"
 )
