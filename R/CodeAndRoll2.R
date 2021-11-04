@@ -512,9 +512,11 @@ clip.values <- function(valz, high = TRUE, thr = 3) { # Signal clipping. Cut val
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
 #' @param ... PARAM_DESCRIPTION
 #' @export
+# #' @importFrom MarkdownReports whist
 clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) { # Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
   qnt <- quantile(valz, probs = probs, na.rm = na.rm)
-  if (showhist) { whist(unlist(valz), breaks = 50 ,vline = qnt, filtercol = -1)} #if
+  if (showhist) { hist(unlist(valz), breaks = 50);  abline(v = qnt, col = 2) } #if
+  # if (showhist) { MarkdownReports::whist(unlist(valz), breaks = 50 ,vline = qnt, filtercol = -1)} #if
   y <- valz
   y[valz < qnt[1]] <- qnt[1]
   y[valz > qnt[2]] <- qnt[2]
