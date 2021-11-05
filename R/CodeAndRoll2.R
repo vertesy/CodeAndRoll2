@@ -143,6 +143,22 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
   table(factor(unlist(vec), levels = categories_vec))
 }
 
+# _________________________________________________________________________________________________
+#' getCategories
+#'
+#' Extract unique entries with a corresponding name.
+#' @param named_categ_vec A vector of categories with names.
+#' "Uniqueness" in the vector and its name should be the same!!!
+#' @export
+#' @examples getCategories(c("A" = 1,"B" = 1, "C" = 2, 3))
+
+getCategories <-
+  function(named_categ_vec) {
+    named_categ_vec[unique(names(named_categ_vec))]
+  }
+
+
+
 ## Vector operations -------------------------------------------------------------------------------------------------
 
 # _________________________________________________________________________________________________
@@ -400,13 +416,12 @@ rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a gi
 #' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
 #' @param silent PARAM_DESCRIPTION, Default: F
 #' @export
-# #' @importFrom MarkdownReports llprint
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) { # Flip the values and the names of a vector with names.
   if (!is.null(names(namedVector))) {
     newvec = names(namedVector)
     if (NumericNames) { newvec = as.numeric(names(namedVector))     }
     names(newvec) = namedVector
-  } else {llprint("Vector without names!", head(namedVector))}
+  } else {iprint("Vector without names!", head(namedVector))}
   if (!silent) {
     if (any(duplicated(namedVector))) {iprint("New names contain duplicated elements", head(namedVector[which(duplicated(namedVector))])) }
     if (any(duplicated(newvec))) {iprint("Old names contained duplicated elements", head(newvec[which(duplicated(newvec))])) }
@@ -782,17 +797,6 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 
 
 # _________________________________________________________________________________________________
-#' @title filter_survival_length
-#' @description Parse a sentence reporting the % of filter survival.
-#' @param length_new PARAM_DESCRIPTION
-#' @param length_old PARAM_DESCRIPTION
-#' @param prepend PARAM_DESCRIPTION, Default: ''
-#' @export
-# #' @importFrom MarkdownReports llprint
-filter_survival_length <- function(length_new, length_old, prepend = "") { # Parse a sentence reporting the % of filter survival.
-  pc = percentage_formatter(length_new/length_old)
-  llprint(prepend, pc, " of ", length_old, " entries make through the filter")
-}
 
 
 # _________________________________________________________________________________________________
@@ -831,35 +835,6 @@ simplify_categories <- function(category_vec, replaceit , to ) { # Replace every
 
 
 # _________________________________________________________________________________________________
-#' @title lookup
-#' @description Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
-#' @param needle PARAM_DESCRIPTION
-#' @param haystack PARAM_DESCRIPTION
-#' @param exact PARAM_DESCRIPTION, Default: TRUE
-#' @param report PARAM_DESCRIPTION, Default: FALSE
-#' @export
-# #' @importFrom MarkdownReports llprint
-lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
-  ls_out = as.list( c(ln_needle = length(needle), ln_haystack = length(haystack), ln_hits = "",  hit_poz = "", hits = "") )
-  Findings = numeric(0)
-  ln_needle = length(needle)
-  if (exact) {
-    for (i in 1:ln_needle) {      Findings = c(Findings, which(haystack == needle[i]) )    } # for
-  } else {
-    for (i in 1:ln_needle) {      Findings = c(Findings, grep(needle[i], haystack,  ignore.case = TRUE, perl = FALSE))    } # for
-  } # exact or partial match
-  ls_out$'hit_poz' = Findings
-  ls_out$'ln_hits' = length(Findings)
-  ls_out$'hits' = haystack[Findings]
-  if (length(Findings)) { ls_out$'nonhits' = haystack[-Findings]
-  } else {      ls_out$'nonhits' = haystack }
-  if (report) {
-    llprint(length(Findings), "/", ln_needle, '(', percentage_formatter(length(Findings)/ln_needle)
-            , ") of", substitute(needle), "were found among", length(haystack), substitute(haystack), "." )
-    if (length(Findings)) { llprint( substitute(needle), "findings: ", paste( haystack[Findings], sep = " " ) ) }
-  } else { iprint(length(Findings), "Hits:", haystack[Findings]) } # if (report)
-  return(ls_out)
-}
 
 
 ## Matrix operations -------------------------------------------------------------------------------------------------
@@ -1346,32 +1321,6 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) { # Get odd or e
   IDX = if (odd) seq(1, to = counter, by = 2) else seq(2, to = counter, by = 2)
   df_out = if (rows) df_[IDX, ] else df_[, IDX]
   return(df_out)
-}
-
-
-
-# _________________________________________________________________________________________________
-#' @title combine.matrices.intersect
-#' @description Combine matrices by rownames intersect.
-#' @param matrix1 PARAM_DESCRIPTION
-#' @param matrix2 PARAM_DESCRIPTION
-#' @param k PARAM_DESCRIPTION, Default: 2
-#' @export
-# # #' @importFrom MarkdownReports llprint
-combine.matrices.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
-  rn1 = rownames(matrix1); rn2 = rownames(matrix2);
-  idx = intersect(rn1, rn2)
-  llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
-  merged = cbind(matrix1[idx, ], matrix2[idx, ])
-  diffz = symdiff(rn1, rn2)
-  print("Missing Rows 1, 2")
-  x1 = rowSums( matrix1[diffz[[1]], ] )
-  x2 = rowSums( matrix2[diffz[[2]], ] ); print("")
-  iprint("Values lost 1: ", round(sum(x1)), "or", percentage_formatter(sum(x1)/sum(merged)))
-  print(tail(sort(x1), n = 10));print("")
-  iprint("Values lost 2: ", round(sum(x2)), "or", percentage_formatter(sum(x2)/sum(merged)))
-  print(tail(sort(x2), n = 10))
-  iprint("dim:", dim(merged)); return(merged)
 }
 
 
@@ -2042,58 +1991,3 @@ shannon.entropy <- function(p) {
 
 
 ################################################################################################
-# TEMPORARY
-# _____________________________________________________________________________________________----
-
-#' ww.variable.and.path.exists
-#'
-#' Check if a variable name is defined, and if so, does the path (to a file) stored in that
-#'  variable points to an existing directory?
-#' @param path A variable name that might not exist and might point to a non-existent direcotry.
-#' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
-#' @export
-#' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
-
-ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NULL) {
-  Variable.Name = substitute(path)
-  if (exists(as.character(Variable.Name))) {
-    dn = dirname(path)
-    ExisingDir = (dn != "." & dir.exists(dn))
-    if (ExisingDir) {
-      TRUE
-    } else {
-      cat("Variable", Variable.Name," points to a non-existent directory: ",path)
-      FALSE
-    }
-  } else {
-    if (is.null(alt.message) ) {
-      iprint("Variable", Variable.Name, "does not exist.")
-    } else {
-      cat(alt.message)
-    }
-    FALSE
-  }
-}
-
-
-
-#' llprint
-#'
-#' Collapse by white spaces a sentence from any variable passed on to the function.
-#' Print the sentence to the screen and write it to your markdown report file,
-#' if the "path_of_report" variable is defined.
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
-#' @export
-#' @examples MyFriends = c("Peter", "Bence"); llprint ("My friends are: ", MyFriends )
-
-llprint <- function(...) {
-  argument_list <- c(...)
-  LogEntry = print(paste(argument_list, collapse = " "))
-  if (ww.variable.and.path.exists(path_of_report,
-                                  alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report") ) {
-    write(kollapse("\n", LogEntry, print = FALSE),
-          path_of_report,
-          append = TRUE)
-  }
-}
-
