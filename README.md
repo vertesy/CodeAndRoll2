@@ -6,7 +6,7 @@
 
 Packaged version of the core functionalities (vector, matrix and list manipulations; math) of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll). 
 A standalone set of more than >130 productivity functions. 
-Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [SeuratUtils](https://github.com/vertesy/SeuratUtils).
+Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [Seurat.utils](https://github.com/vertesy/Seurat.utils).
 
 <img width="915" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/140038110-b0e843cf-10c7-45c7-87dc-0525fafb0f57.png">
 
@@ -17,7 +17,7 @@ Works together with
 
 ... and provides functions for
 - [ggExpress](https://github.com/vertesy/ggExpress)
-- [SeuratUtils](https://github.com/vertesy/SeuratUtils).
+- [Seurat.utils](https://github.com/vertesy/Seurat.utils).
 - [MarkdownReports](https://github.com/vertesy/MarkdownReports)
 
 
