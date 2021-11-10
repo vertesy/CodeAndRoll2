@@ -1,32 +1,40 @@
 $`character(0)`
-[1] "any.duplicated"    "as.logical.wNames" "bind_rows"         "join_all"          "mixedsort"        
-[6] "na.omit.strip"     "tibble"           
+ [1] "any.duplicated"              "arr.of.lists.2.df"          
+ [3] "as.logical.wNames"           "as.named.vector"            
+ [5] "bind_rows"                   "colMedians"                 
+ [7] "copy.dimension.and.dimnames" "grepv"                      
+ [9] "idim"                        "intermingle2vec"            
+[11] "join_all"                    "matrix.fromNames"           
+[13] "mixedsort"                   "na.omit.strip"              
+[15] "sem"                         "stopif"                     
+[17] "symdiff"                     "tibble"                     
+[19] "unlapply"                    "vec.fromNames"              
+[21] "which_names"                
 
 $`package:base`
- [1] "abs"           "any"           "apply"         "array"         "as.character"  "as.data.frame"
- [7] "as.factor"     "as.list"       "as.logical"    "as.matrix"     "as.numeric"    "as.vector"    
-[13] "attributes"    "c"             "cat"           "cbind"         "ceiling"       "col"          
-[19] "colMeans"      "colnames"      "colSums"       "data.matrix"   "dim"           "dimnames"     
-[25] "dir.exists"    "dirname"       "do.call"       "duplicated"    "exists"        "exp"          
-[31] "factor"        "floor"         "grep"          "intersect"     "is.data.frame" "is.finite"    
-[37] "is.list"       "is.na"         "is.null"       "is.numeric"    "is.table"      "is.vector"    
-[43] "lapply"        "length"        "list"          "log"           "log10"         "log2"         
-[49] "match"         "match.call"    "matrix"        "max"           "mean"          "merge"        
-[55] "min"           "names"         "ncol"          "NCOL"          "nrow"          "NROW"         
-[61] "numeric"       "order"         "paste"         "paste0"        "print"         "range"        
-[67] "rank"          "rbind"         "Reduce"        "rep"           "return"        "rev"          
-[73] "round"         "row"           "row.names"     "rownames"      "rowSums"       "sample"       
-[79] "sapply"        "scale"         "seq"           "setdiff"       "signif"        "sort"         
-[85] "split"         "sqrt"          "stopifnot"     "substitute"    "sum"           "t"            
-[91] "table"         "tabulate"      "tapply"        "trimws"        "unique"        "unlist"       
-[97] "which"         "write"        
-
-$`package:CodeAndRoll2`
- [1] "arr.of.lists.2.df"           "as.named.vector"             "colMedians"                 
- [4] "copy.dimension.and.dimnames" "grepv"                       "idim"                       
- [7] "intermingle2vec"             "llprint"                     "matrix.fromNames"           
-[10] "sem"                         "symdiff"                     "unlapply"                   
-[13] "vec.fromNames"               "which_names"                 "ww.variable.and.path.exists"
+ [1] "abs"           "any"           "apply"         "array"        
+ [5] "as.character"  "as.data.frame" "as.factor"     "as.list"      
+ [9] "as.logical"    "as.matrix"     "as.numeric"    "as.vector"    
+[13] "attributes"    "c"             "ceiling"       "col"          
+[17] "colMeans"      "colnames"      "colSums"       "data.matrix"  
+[21] "dim"           "dimnames"      "do.call"       "duplicated"   
+[25] "exp"           "factor"        "floor"         "grep"         
+[29] "intersect"     "is.data.frame" "is.finite"     "is.list"      
+[33] "is.na"         "is.null"       "is.numeric"    "is.table"     
+[37] "is.vector"     "lapply"        "length"        "list"         
+[41] "log"           "log10"         "log2"          "match"        
+[45] "match.call"    "matrix"        "max"           "mean"         
+[49] "merge"         "min"           "names"         "ncol"         
+[53] "NCOL"          "nrow"          "NROW"          "numeric"      
+[57] "order"         "paste"         "paste0"        "print"        
+[61] "range"         "rank"          "rbind"         "Reduce"       
+[65] "rep"           "return"        "rev"           "round"        
+[69] "row"           "row.names"     "rownames"      "rowSums"      
+[73] "sample"        "sapply"        "scale"         "seq"          
+[77] "setdiff"       "signif"        "sort"          "split"        
+[81] "sqrt"          "stopifnot"     "sum"           "t"            
+[85] "table"         "tabulate"      "tapply"        "trimws"       
+[89] "unique"        "unlist"        "which"        
 
 $`package:graphics`
 [1] "abline" "hist"  
@@ -35,11 +43,11 @@ $`package:methods`
 [1] "is"
 
 $`package:stats`
- [1] "filter"     "median"     "na.exclude" "na.omit"    "quantile"   "rnorm"      "rpois"      "sd"        
- [9] "setNames"   "var"       
+ [1] "filter"     "median"     "na.exclude" "na.omit"    "quantile"  
+ [6] "rnorm"      "rpois"      "sd"         "setNames"   "var"       
 
 $`package:Stringendo`
-[1] "iprint"               "kollapse"             "percentage_formatter" "stopif"              
+[1] "iprint"               "percentage_formatter"
 
 $`package:stringr`
 [1] "str_pad"         "str_split_fixed"
@@ -49,7 +57,6 @@ $`package:utils`
 
 character(0)
 base
-CodeAndRoll2
 graphics
 methods
 stats
