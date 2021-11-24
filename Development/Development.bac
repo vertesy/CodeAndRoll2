@@ -218,7 +218,7 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combin
 #' @title sort.decreasing
 #' @description Sort in decreasing order.
 #' @param vec input vector
-#' @export
+#' @export sort.decreasing
 sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
 
 
@@ -324,7 +324,7 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
 #' @title Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @description FUNCTION_DESCRIPTION.
 #' @param vec input vector
-#' @export
+#' @export as.numeric.wNames
 as.numeric.wNames <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
   numerified_vec = as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
   if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
@@ -355,7 +355,7 @@ as.factor.numeric <- function(vec, rename = FALSE, ...) {
 #' @title as.character.wNames
 #' @description Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param vec input vector
-#' @export
+#' @export as.character.wNames
 as.character.wNames <- function(vec) { # Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
   char_vec = as.character(vec)
   if (!is.null(names(vec))) {names(char_vec) = names(vec)}
@@ -454,7 +454,8 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) { # Sort a vect
 #' @description How many entries are duplicated?.
 #' @param vec input vector
 #' @param summarize PARAM_DESCRIPTION, Default: TRUE
-#' @export
+#' @export any.duplicated
+
 any.duplicated <- function(vec, summarize = TRUE) { # How many entries are duplicated?.
   y = sum(duplicated(vec))
   if (summarize & y) {
@@ -548,7 +549,7 @@ clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, 
 #' @description Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param x PARAM_DESCRIPTION
 #' @param ... PARAM_DESCRIPTION
-#' @export
+#' @export as.logical.wNames
 as.logical.wNames <- function(x, ...) { # Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
   numerified_vec = as.logical(x, ...)
   if (!is.null(names(x))) {names(numerified_vec) = names(x)}
@@ -704,7 +705,7 @@ which_names_grep <- function(namedVec, pattern) { # Return the vector elements w
 #' @param silent Silence the data structure coversion warning: anything ->vector
 #' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
-#' @export
+#' @export na.omit.strip
 #'
 #' @examples # CodeAndRoll2::na.omit.strip(c(1, 2, 3, NA, NaN, 2))
 
@@ -1169,7 +1170,7 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 #' @param colname_in_df PARAM_DESCRIPTION, Default: 1
 #' @param decrease PARAM_DESCRIPTION, Default: FALSE
 #' @param na_last PARAM_DESCRIPTION, Default: TRUE
-#' @export
+#' @export sort.mat
 sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { # Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
   if (length(colname_in_df) > 1) { print("cannot handle multi column sort") }
   else {df[ order(df[, colname_in_df], decreasing = decrease, na.last = na_last), ]}
@@ -1403,7 +1404,7 @@ remove.na.cols <- function(mat) { # cols have to be a vector of numbers correspo
 #' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
 #' @param mat PARAM_DESCRIPTION
 #' @param any PARAM_DESCRIPTION, Default: TRUE
-#' @export
+#' @export na.omit.mat
 na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a matrix. Rows with any, or full of NA-s
   mat = as.matrix(mat)
   stopifnot(length(dim(mat)) == 2)
@@ -1479,7 +1480,7 @@ mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.list
 #' @title any.duplicated.rownames.ls.of.df
 #' @description Check if there are any duplocated rownames in a list of dataframes.
 #' @param ls PARAM_DESCRIPTION
-#' @export
+#' @export any.duplicated.rownames.ls.of.df
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
 
 
@@ -1533,7 +1534,7 @@ list.wNames <- function(...) { # create a list with names from ALL variables you
 #' @param na.omit PARAM_DESCRIPTION, Default: TRUE
 #' @param zero.omit PARAM_DESCRIPTION, Default: FALSE
 #' @param omit.empty PARAM_DESCRIPTION, Default: FALSE
-#' @export
+#' @export as.list.df.by.row
 as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) { # Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
   outList = as.list(as.data.frame(t( dtf ) ) )
   if (na.omit) {   outList = lapply(outList, na.omit.strip) }
@@ -1552,7 +1553,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' @param na.omit PARAM_DESCRIPTION, Default: TRUE
 #' @param zero.omit PARAM_DESCRIPTION, Default: FALSE
 #' @param omit.empty PARAM_DESCRIPTION, Default: FALSE
-#' @export
+#' @export as.list.df.by.col
 as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) { # oSplit a dataframe into a list by its rows. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
   outList = as.list(dtf)
   if (na.omit) {   outList = lapply(outList, na.omit.strip) }
@@ -1569,7 +1570,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' @description Reorder elements of lists in your custom order of names / indices.
 #' @param L PARAM_DESCRIPTION
 #' @param namesOrdered PARAM_DESCRIPTION, Default: mixedsort(names(L))
-#' @export
+#' @export reorder.list
 reorder.list <- function(L, namesOrdered = mixedsort(names(L))) { # reorder elements of lists in your custom order of names / indices.
   Lout = list(NA)
   for (x in 1:length(namesOrdered)) { Lout[[x]] = L[[namesOrdered[x] ]]  }
@@ -1584,7 +1585,7 @@ reorder.list <- function(L, namesOrdered = mixedsort(names(L))) { # reorder elem
 #' @description Range of values in whole list.
 #' @param L PARAM_DESCRIPTION
 #' @param namesOrdered PARAM_DESCRIPTION
-#' @export
+#' @export range.list
 range.list <- function(L, namesOrdered) { # range of values in whole list
   return(range(unlist(L), na.rm = TRUE))
 }
