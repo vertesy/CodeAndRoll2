@@ -2,23 +2,30 @@
 
 # CodeAndRoll2
 
-#### \*\*\*\*Package in development\*\*\*\*
+Packaged version of the core functionalities (vector, matrix and list manipulations; math) of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll).  A standalone set of more than >130 productivity functions. 
 
-Packaged version of the core functionalities (vector, matrix and list manipulations; math) of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll). 
-A standalone set of more than >130 productivity functions. 
 Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [Seurat.utils](https://github.com/vertesy/Seurat.utils).
 
-<img width="915" alt="Package Reorganisation Diagram" src="https://user-images.githubusercontent.com/5101911/140038110-b0e843cf-10c7-45c7-87dc-0525fafb0f57.png">
 
 
-Works together with
+*In 2021, function libraries got reorganized as below:*
+
+<img width="1005" alt="R-package Tree" src="https://user-images.githubusercontent.com/5101911/143560128-065d8a49-0283-4a3a-9448-540fa424d0ef.png">
+
+
+
+CodeAndRoll2 depends on:
+
 - [Stringendo](https://github.com/vertesy/Stringendo)
 - [ReadWriter](https://github.com/vertesy/ReadWriter)
 
 ... and provides functions for
-- [ggExpress](https://github.com/vertesy/ggExpress)
-- [Seurat.utils](https://github.com/vertesy/Seurat.utils).
+
+- [MarkdownHelpers](https://github.com/vertesy/MarkdownHelpers)
 - [MarkdownReports](https://github.com/vertesy/MarkdownReports)
+- [ggExpress](https://github.com/vertesy/ggExpress)
+- [Seurat.utils](https://github.com/vertesy/Seurat.utils)
+- [Seurat.pipeline](https://github.com/vertesy/Seurat.pipeline)
 
 
 
@@ -31,7 +38,14 @@ Install directly from **GitHub** via **devtools** with one R command:
 ```r
 # install.packages("devtools"); # If you don't have it.
 require("devtools")
-devtools::install_github(repo = "vertesy/CodeAndRoll2")
+
+# Install dependencies
+devtools::install_github(repo = "vertesy/Stringendo", upgrade = F)
+devtools::install_github(repo = "vertesy/ReadWriter", upgrade = F)
+
+# Install MarkdownHelpers
+devtools::install_github(repo = "vertesy/CodeAndRoll2", upgrade = F)
+
 ```
 ...then simply load the package:
 
@@ -51,9 +65,12 @@ source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRol
 
 *If you encounter a **bug**, something doesn't work or unclear, please let me know by raising an issue on [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2/issues) – Please check if it has been asked.*
 
+
+
 <br>
 
 =======
+
 ## List of Functions
 
 - #### vec.fromNames 
