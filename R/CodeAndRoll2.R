@@ -172,7 +172,7 @@ getCategories <-
 #' @param fixed PARAM_DESCRIPTION, Default: FALSE
 #' @param useBytes PARAM_DESCRIPTION, Default: FALSE
 #' @param invert PARAM_DESCRIPTION, Default: FALSE
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, fixed = FALSE, useBytes = FALSE  # grep returning the value
                   , invert = FALSE, ...) grep(pattern, x, ignore.case = ignore.case, perl = perl, fixed = fixed
@@ -337,7 +337,7 @@ as.numeric.wNames <- function(vec) { # Converts any vector into a numeric vector
 #' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
 #' @param vec vector of factors or strings
 #' @param rename Rename the vector?
-#' @param ... Pass any other argument to as.factor()
+#' @param ... Pass any other argument. to as.factor()
 #' @export
 #'
 #' @examples as.factor.numeric(LETTERS[1:4])
@@ -435,7 +435,7 @@ flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) { # F
 #' @description Sort a vector by the alphanumeric order of its names(instead of its values).
 #' @param vec_or_list PARAM_DESCRIPTION
 #' @param decreasing PARAM_DESCRIPTION, Default: FALSE
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @seealso
 #'  \code{\link[gtools]{mixedsort}}
 #' @export
@@ -529,7 +529,7 @@ clip.values <- function(valz, high = TRUE, thr = 3) { # Signal clipping. Cut val
 #' @param probs PARAM_DESCRIPTION, Default: c(0.01, 0.99)
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 # #' @importFrom MarkdownReports whist
 clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) { # Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
@@ -548,7 +548,7 @@ clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, 
 #' @title as.logical.wNames
 #' @description Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param x PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export as.logical.wNames
 as.logical.wNames <- function(x, ...) { # Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
   numerified_vec = as.logical(x, ...)
@@ -703,7 +703,7 @@ which_names_grep <- function(namedVec, pattern) { # Return the vector elements w
 #' Omit NA values from a vector and return a clean vector without any spam.
 #' @param object Values to filter for NA
 #' @param silent Silence the data structure coversion warning: anything ->vector
-#' @param ... Pass any other argument to na.omit()
+#' @param ... Pass any other argument. to na.omit()
 #' @importFrom stats na.omit
 #' @export na.omit.strip
 #'
@@ -805,7 +805,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 #' @description Remove values that fall outside the trailing N % of the distribution.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @param probs PARAM_DESCRIPTION, Default: c(0.05, 0.95)
 #' @export
 remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) { # Remove values that fall outside the trailing N % of the distribution.
@@ -1019,7 +1019,7 @@ colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile, ..., na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
 
@@ -1029,7 +1029,7 @@ rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile,
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 colquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 2, quantile, ..., na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
 
@@ -1157,7 +1157,7 @@ rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
 #' @title sortEachColumn
 #' @description Sort each column of a numeric matrix / data frame.
 #' @param data PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column of a numeric matrix / data frame.
 
@@ -1436,7 +1436,7 @@ copy.dimension.and.dimnames <- function(list.1D, obj.2D) { # copy dimension and 
 #' @title mdlapply
 #' @description lapply for multidimensional arrays.
 #' @param list_2D PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 mdlapply <- function(list_2D, ...) { #  lapply for multidimensional arrays
   x = lapply(list_2D, ...)
@@ -1463,7 +1463,7 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) { # simplify 2D-list-array t
 #' @title mdlapply2df
 #' @description Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
 #' @param list_2D PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
   x = lapply(list_2D, ...)
@@ -1479,7 +1479,7 @@ mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.list
 # _________________________________________________________________________________________________
 #' @title any.duplicated.rownames.ls.of.df
 #' @description Check if there are any duplocated rownames in a list of dataframes.
-#' @param ls PARAM_DESCRIPTION
+#' @param ls List of 2 or more vectors (sets) with categorical variables.
 #' @export any.duplicated.rownames.ls.of.df
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
 
@@ -1488,8 +1488,8 @@ any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # 
 # _________________________________________________________________________________________________
 #' @title intersect.ls
 #' @description Intersect any number of lists.
-#' @param ls PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @param ls List of 2 or more vectors (sets) with categorical variables.
+#' @param ... Pass any other argument.
 #' @export
 intersect.ls <- function(ls, ...) { Reduce(intersect, ls) } # Intersect any number of lists.
 
@@ -1498,17 +1498,32 @@ intersect.ls <- function(ls, ...) { Reduce(intersect, ls) } # Intersect any numb
 # _________________________________________________________________________________________________
 #' @title union.ls
 #' @description Intersect any number of list elements. Faster than reduce.
-#' @param ls PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @param ls List of 2 or more vectors (sets) with categorical variables.
+#' @param ... Pass any other argument.
 #' @export
 union.ls <- function(ls, ...) { sort(unique(do.call(c,ls))) } # Intersect any number of list elements. Faster than reduce.
 
+# _________________________________________________________________________________________________
+#' @title symdiff.ls
+#' @description Calculate symmetric difference on a list (of 2 vectors).
+#' @param ls List of 2 or more vectors (sets) with categorical variables.
+#' @param ... Pass any other argument.
+#' @export
+symdiff.ls <- function(ls, ...) { Reduce(symdiff, ls) } # Intersect any number of list elements. Faster than reduce.
+
+# _________________________________________________________________________________________________
+#' @title setdiff.ls
+#' @description Calculate set difference on a list (of 2 vectors).
+#' @param ls List of 2 or more vectors (sets) with categorical variables.
+#' @param ... Pass any other argument.
+#' @export
+setdiff.ls <- function(ls, ...) { print("Difference to first element:"); Reduce(setdiff, ls) } # Intersect any number of list elements. Faster than reduce.
 
 
 # _________________________________________________________________________________________________
 #' @title unlapply
 #' @description Lapply, then unlist.
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 unlapply <- function(...) { unlist(lapply(...)) } # lapply, then unlist
 
@@ -1517,7 +1532,7 @@ unlapply <- function(...) { unlist(lapply(...)) } # lapply, then unlist
 # _________________________________________________________________________________________________
 #' @title list.wNames
 #' @description Create a list with names from ALL variables you pass on to the function.
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 list.wNames <- function(...) { # create a list with names from ALL variables you pass on to the function
   lst = list(...)
@@ -1803,7 +1818,7 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
 #' @description Quasy symmetric difference of any number of vectors.
 #' @param x PARAM_DESCRIPTION
 #' @param y PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @param ... Pass any other argument.
 #' @export
 symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of vectors
   big.vec <- c(x, y, ...)
