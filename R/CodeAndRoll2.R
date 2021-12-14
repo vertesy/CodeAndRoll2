@@ -253,6 +253,21 @@ as.named.vector <- function(df_col, WhichDimNames = 1) { # Convert a dataframe c
 }
 
 
+# as.named.vector.2colDF
+#' @title as.named.vector
+#' @description Convert a 2-column dataframe (value, name) into a named vector.
+#' @param DF data frame
+#' @param values Index of column with values, Default: 1
+#' @param names Index of column with names, Default: 2
+#' @param make.names make.names, Default: F
+#' @export
+as.named.vector.2colDF <- function(DF = UMI_CBC_1to1, values = 1, names = 2, make.names = F) {
+  vec <- DF[[values]]
+  names(vec) <- DF[[names]]
+  if (make.names) names(vec) <-  make.names(names(vec))
+  return(vec)
+}
+
 
 # _________________________________________________________________________________________________
 #' @title col2named.vector
