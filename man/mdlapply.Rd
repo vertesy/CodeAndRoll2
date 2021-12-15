@@ -9,7 +9,7 @@ mdlapply(list_2D, ...)
 \arguments{
 \item{list_2D}{PARAM_DESCRIPTION}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 lapply for multidimensional arrays.

@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{PARAM_DESCRIPTION}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.

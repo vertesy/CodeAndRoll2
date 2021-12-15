@@ -11,7 +11,7 @@ remove_outliers(x, na.rm = TRUE, ..., probs = c(0.05, 0.95))
 
 \item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 
 \item{probs}{PARAM_DESCRIPTION, Default: c(0.05, 0.95)}
 }

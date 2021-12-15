@@ -7,9 +7,9 @@
 intersect.ls(ls, ...)
 }
 \arguments{
-\item{ls}{PARAM_DESCRIPTION}
+\item{ls}{List of 2 or more vectors (sets) with categorical variables.}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Intersect any number of lists.

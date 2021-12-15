@@ -7,7 +7,7 @@
 list.wNames(...)
 }
 \arguments{
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Create a list with names from ALL variables you pass on to the function.

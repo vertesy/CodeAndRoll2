@@ -18,11 +18,13 @@ require('Stringendo')
 
 # Setup ------------------------
 PackageName = 	"CodeAndRoll2"
+package.version = "2.1.9"
+
 setwd("~/GitHub/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
 fname = 	kollapse(PackageName, ".R")
-Package_FnP = 	kollapse(RepositoryDir, "R/", fname)
+Package_FnP = kollapse(RepositoryDir, "R/", fname)
 
 BackupDir = "~/GitHub/Packages/CodeAndRoll2/Development/"
 dir.create(BackupDir)
@@ -34,9 +36,9 @@ DESCRIPTION <- list("Title" = "CodeAndRoll2 for vector, matrix and list manipula
     , "Description" = "CodeAndRoll2 is a set of more than >130 productivity functions. Used by MarkdownReports, ggExpress, SeuratUtils.
     Packaged version of the core functionalities  (vector, matrix and list manipulations; math) of the formerly used CodeAndRoll (v1)."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version"= "2.1.8"
+    , "Version"= package.version
     , "Packaged" =  Sys.time()
-    , "Repository" =  "CRAN"
+    # , "Repository" =  "CRAN"
     , "Depends" =  "Stringendo"
     , "Imports" = "base, colorRamps, dplyr, gplots, graphics, grDevices, gtools, methods, plyr, RColorBrewer, sessioninfo, sm, stats, Stringendo, stringr, utils"
     # , "Imports" = "base, colorRamps, dplyr, gplots, graphics, grDevices, gtools, MarkdownReports, methods, plyr, RColorBrewer, sessioninfo, sm, stats, Stringendo, stringr, utils"
@@ -78,6 +80,14 @@ document()
 # Install your package ------------------------------------------------
 # # setwd(RepositoryDir)
 install(RepositoryDir, upgrade = F)
+
+{
+  "update cff version"
+  citpath <- paste0(RepositoryDir, 'CITATION.cff')
+  xfun::gsub_file(file = citpath, perl = T
+                  , "^version: v.+", paste0("version: v", package.version))
+}
+
 
 # require("CodeAndRoll2")
 # # remove.packages("CodeAndRoll2")

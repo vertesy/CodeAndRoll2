@@ -11,7 +11,7 @@ rowquantile(x, na.rm = TRUE, ...)
 
 \item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Calculates the SEM of each row of a numeric matrix / data frame.

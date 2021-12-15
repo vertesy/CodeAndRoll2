@@ -11,7 +11,7 @@ symdiff(x, y, ...)
 
 \item{y}{PARAM_DESCRIPTION}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Quasy symmetric difference of any number of vectors.

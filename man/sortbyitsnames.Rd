@@ -11,7 +11,7 @@ sortbyitsnames(vec_or_list, decreasing = FALSE, ...)
 
 \item{decreasing}{PARAM_DESCRIPTION, Default: FALSE}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Sort a vector by the alphanumeric order of its names(instead of its values).

@@ -24,7 +24,7 @@ clip.outliers(
 
 \item{showhist}{PARAM_DESCRIPTION, Default: FALSE}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Signal clipping based on the input data's distribution. It clips values above or below the extreme N\% of the distribution.

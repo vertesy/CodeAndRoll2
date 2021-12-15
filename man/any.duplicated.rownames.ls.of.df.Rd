@@ -7,7 +7,7 @@
 \method{any}{duplicated.rownames.ls.of.df}(ls)
 }
 \arguments{
-\item{ls}{PARAM_DESCRIPTION}
+\item{ls}{List of 2 or more vectors (sets) with categorical variables.}
 }
 \description{
 Check if there are any duplocated rownames in a list of dataframes.

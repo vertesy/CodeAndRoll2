@@ -9,7 +9,7 @@ mdlapply2df(list_2D, ...)
 \arguments{
 \item{list_2D}{PARAM_DESCRIPTION}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).

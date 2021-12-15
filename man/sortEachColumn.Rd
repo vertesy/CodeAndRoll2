@@ -9,7 +9,7 @@ sortEachColumn(data, ...)
 \arguments{
 \item{data}{PARAM_DESCRIPTION}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Sort each column of a numeric matrix / data frame.

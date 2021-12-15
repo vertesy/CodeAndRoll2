@@ -33,7 +33,7 @@ grepv(
 
 \item{invert}{PARAM_DESCRIPTION, Default: FALSE}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 grep returning the value.

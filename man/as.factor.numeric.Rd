@@ -11,7 +11,7 @@ as.factor.numeric(vec, rename = FALSE, ...)
 
 \item{rename}{Rename the vector?}
 
-\item{...}{Pass any other argument to as.factor()}
+\item{...}{Pass any other argument. to as.factor()}
 }
 \description{
 Turn any vector into numeric categories as.numeric(as.factor(vec))

@@ -7,7 +7,7 @@
 unlapply(...)
 }
 \arguments{
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Pass any other argument.}
 }
 \description{
 Lapply, then unlist.
