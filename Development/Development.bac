@@ -305,7 +305,7 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
 #' @export
-#' @example tibble_summary_to_namedVec()
+#' @examples tibble_summary_to_namedVec()
 #' @importFrom dplyr tibble
 tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1:5, size = 20, replace = T), 'value' = rnorm(20) )
                                        ,  idx = c(key =1, value = 2)) { # Convert a key-value tibble into a named vector (as opposed to using rownames).
@@ -324,7 +324,7 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 #' @param vec.w.names PARAM_DESCRIPTION, Default: c(a = 1, b = 2)
 #' @param transpose PARAM_DESCRIPTION, Default: T
 #' @export
-#' @example as_tibble_from_namedVec()
+#' @examples as_tibble_from_namedVec()
 # #' @importFrom MarkdownReports stopif
 as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
   # MarkdownReports::stopif( !purrr::is_null(names(vec.w.names)))
@@ -1356,6 +1356,28 @@ merge_dfs_by_rn <- function(list_of_dfs) { # Merge any data frames by rownames. 
   rownames(COMBINED) = COMBINED$rn
   COMBINED$rn = NULL
   return(COMBINED)
+}
+
+# _________________________________________________________________________________________________
+#' merge_1col_dfs_by_rn
+#'
+#' @param list_of_dfs  list of 1col dfs
+#' @param FILLwith 0 by def
+#' @param columnUSE colnames in both
+#' @export
+#' @examples merge_1col_dfs_by_rn()
+
+merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0,columnUSE= 'n') {
+  all.rn <- sort(union.ls(lapply(list_of_dfs, rownames)))
+  iprint("n rownames:",l(all.rn))
+  df_new <- data.frame(matrix(data = FILLwith, nrow = l(all.rn), ncol = l(list_of_dfs)), row.names = all.rn)
+  colnames(df_new) <-  names(list_of_dfs)
+  for (i in 1:l(list_of_dfs)) {
+    print(i)
+    indf <- list_of_dfs[[i]]
+    df_new[rownames(indf),i] <- indf[,columnUSE]
+  }
+  df_new
 }
 
 

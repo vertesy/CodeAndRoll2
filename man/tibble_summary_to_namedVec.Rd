@@ -17,6 +17,9 @@ tibble_summary_to_namedVec(
 \description{
 Convert a key-value tibble into a named vector (as opposed to using rownames).
 }
+\examples{
+tibble_summary_to_namedVec()
+}
 \seealso{
 \code{\link[dplyr]{reexports}}
 }

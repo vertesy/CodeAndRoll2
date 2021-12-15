@@ -18,7 +18,7 @@ require('Stringendo')
 
 # Setup ------------------------
 PackageName = 	"CodeAndRoll2"
-package.version = "2.1.9"
+package.version = "2.2.0"
 
 setwd("~/GitHub/")
 
@@ -76,17 +76,18 @@ setwd(RepositoryDir)
 getwd()
 document()
 
-
-# Install your package ------------------------------------------------
-# # setwd(RepositoryDir)
-install(RepositoryDir, upgrade = F)
-
 {
   "update cff version"
   citpath <- paste0(RepositoryDir, 'CITATION.cff')
   xfun::gsub_file(file = citpath, perl = T
                   , "^version: v.+", paste0("version: v", package.version))
 }
+
+# Install your package ------------------------------------------------
+# # setwd(RepositoryDir)
+install(RepositoryDir, upgrade = F)
+
+
 
 
 # require("CodeAndRoll2")
