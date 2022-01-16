@@ -34,5 +34,6 @@ makeOxyFile("~/GitHub/Packages/DatabaseLinke.R/Development/DatabaseLinke.R", ove
 
 makeOxyFile("~/GitHub/Packages/DataInCode/Development/DataInCode.R", overwrite = FALSE)
 
+makeOxyFile("~/GitHub/Packages/SCP.tools/R/SCP.functions.R", overwrite = FALSE)
 
 require('ggExpress')
