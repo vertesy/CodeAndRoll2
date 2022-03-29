@@ -326,10 +326,11 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 #' @export
 #' @examples as_tibble_from_namedVec()
 # #' @importFrom MarkdownReports stopif
+#' @importFrom dplyr bind_rows
 as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
   # MarkdownReports::stopif( !purrr::is_null(names(vec.w.names)))
   stopifnot(!is.null(names(vec.w.names)))
-  tbl <- bind_rows(vec.w.names)
+  tbl <- dplyr::bind_rows(vec.w.names)
   if (transpose) t(tbl) else tbl
 }
 
@@ -1367,12 +1368,12 @@ merge_dfs_by_rn <- function(list_of_dfs) { # Merge any data frames by rownames. 
 #' @export
 #' @examples merge_1col_dfs_by_rn()
 
-merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0,columnUSE= 'n') {
+merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE= 'n') {
   all.rn <- sort(union.ls(lapply(list_of_dfs, rownames)))
-  iprint("n rownames:",l(all.rn))
-  df_new <- data.frame(matrix(data = FILLwith, nrow = l(all.rn), ncol = l(list_of_dfs)), row.names = all.rn)
+  iprint("n rownames:",length(all.rn))
+  df_new <- data.frame(matrix(data = FILLwith, nrow = length(all.rn), ncol = length(list_of_dfs)), row.names = all.rn)
   colnames(df_new) <-  names(list_of_dfs)
-  for (i in 1:l(list_of_dfs)) {
+  for (i in 1:length(list_of_dfs)) {
     print(i)
     indf <- list_of_dfs[[i]]
     df_new[rownames(indf),i] <- indf[,columnUSE]
@@ -1623,7 +1624,10 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' @param L PARAM_DESCRIPTION
 #' @param namesOrdered PARAM_DESCRIPTION, Default: mixedsort(names(L))
 #' @export reorder.list
-reorder.list <- function(L, namesOrdered = mixedsort(names(L))) { # reorder elements of lists in your custom order of names / indices.
+#' @seealso
+#'  \code{\link[gtools]{mixedsort}}
+#' @importFrom gtools mixedsort
+reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) { # reorder elements of lists in your custom order of names / indices.
   Lout = list(NA)
   for (x in 1:length(namesOrdered)) { Lout[[x]] = L[[namesOrdered[x] ]]  }
   if (length(names(L))) { names(Lout) = namesOrdered }
@@ -1752,9 +1756,10 @@ list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]  # Conv
 #' @title splitbyitsnames
 #' @description Split a list by its names.
 #' @param namedVec PARAM_DESCRIPTION
+#' @importFrom MarkdownReports stopif
 #' @export
 splitbyitsnames <- function(namedVec) { # split a list by its names
-  stopif(is.null(names(namedVec)), message = "NO NAMES")
+  MarkdownHelpers::stopif(is.null(names(namedVec)), message = "NO NAMES")
   split(namedVec, f = names(namedVec))
 }
 
@@ -1764,9 +1769,10 @@ splitbyitsnames <- function(namedVec) { # split a list by its names
 #' @title splititsnames_byValues
 #' @description Split a list by its names.
 #' @param namedVec PARAM_DESCRIPTION
+#' @importFrom MarkdownReports stopif
 #' @export
 splititsnames_byValues <- function(namedVec) { # split a list by its names
-  stopif(is.null(names(namedVec)), message = "NO NAMES")
+  MarkdownHelpers::stopif(is.null(names(namedVec)), message = "NO NAMES")
   split(names(namedVec), f = namedVec)
 }
 

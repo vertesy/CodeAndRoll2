@@ -4,7 +4,7 @@
 \alias{reorder.list}
 \title{reorder.list}
 \usage{
-\method{reorder}{list}(L, namesOrdered = mixedsort(names(L)))
+\method{reorder}{list}(L, namesOrdered = gtools::mixedsort(names(L)))
 }
 \arguments{
 \item{L}{PARAM_DESCRIPTION}
@@ -13,4 +13,7 @@
 }
 \description{
 Reorder elements of lists in your custom order of names / indices.
+}
+\seealso{
+\code{\link[gtools]{mixedsort}}
 }
