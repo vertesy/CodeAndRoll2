@@ -328,7 +328,7 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 # #' @importFrom MarkdownReports stopif
 #' @importFrom dplyr bind_rows
 as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
-  # MarkdownReports::stopif( !purrr::is_null(names(vec.w.names)))
+  # MarkdownHelpers::stopif( !purrr::is_null(names(vec.w.names)))
   stopifnot(!is.null(names(vec.w.names)))
   tbl <- dplyr::bind_rows(vec.w.names)
   if (transpose) t(tbl) else tbl
