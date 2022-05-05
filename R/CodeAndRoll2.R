@@ -121,10 +121,15 @@ idim <- function(any_object) { # A dim() function that can handle if you pass on
 # _________________________________________________________________________________________________
 #' @title idimnames
 #' @description A dimnames() function that can handle if you pass on a vector: it gives back the names.
-#' @param any_object PARAM_DESCRIPTION
+#' @param any_object Any object with N dimensions (with or w/o names).
+#' @param print_max Max number of names to print per dimension. Default 25.
 #' @export
-idimnames <- function(any_object) { # A dimnames() function that can handle if you pass on a vector: it gives back the names.
-  if (!is.null(dimnames(any_object)))   { print(dimnames(any_object)) }
+idimnames <- function(any_object, print_max = 25) {
+  iprint("print max:", print_max, "names.")
+  if (!is.null(dimnames(any_object)))   {
+    dimNamesShort <- lapply(dimnames(m.UVI.reads.per.cell), head, n = print_max)
+    print(dimNamesShort)
+    }
   else if (!is.null(colnames(any_object))) { iprint("colnames:", colnames(any_object))  }
   else if (!is.null(rownames(any_object))) { iprint("rownames:", rownames(any_object))  }
   else if (!is.null(names(any_object))) { iprint("names:", names(any_object)) }

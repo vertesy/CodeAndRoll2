@@ -4,10 +4,12 @@
 \alias{idimnames}
 \title{idimnames}
 \usage{
-idimnames(any_object)
+idimnames(any_object, print_max = 25)
 }
 \arguments{
-\item{any_object}{PARAM_DESCRIPTION}
+\item{any_object}{Any object with N dimensions (with or w/o names).}
+
+\item{print_max}{Max number of names to print per dimension. Default 25.}
 }
 \description{
 A dimnames() function that can handle if you pass on a vector: it gives back the names.
