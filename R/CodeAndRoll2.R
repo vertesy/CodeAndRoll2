@@ -524,37 +524,43 @@ pad.na <- function(x, len) { c(x, rep(NA, len - length(x))) } # Fill up with a v
 
 
 # _________________________________________________________________________________________________
-#' @title clip.values
+#' @title clip.at.fixed.value
 #' @description Signal clipping. Cut values above or below a threshold.
-#' @param valz A vector of numeric values.
+#' @param distribution A vector of numeric values.
 #' @param high Clip above threshold? Default: TRUE
 #' @param thr threshold values, Default: 3
 #' @export
-clip.values <- function(valz, high = TRUE, thr = 3) { # Signal clipping. Cut values above or below a threshold.
-  if (high) { valz[valz > thr] = thr
-  } else {    valz[valz < thr] = thr }
-  valz
+
+clip.at.fixed.value <- function(distribution, high = TRUE, thr = 3) { # Signal clipping. Cut values above or below a threshold.
+  if (high) { distribution[distribution > thr] = thr
+  } else {    distribution[distribution < thr] = thr }
+  distribution
 }
 
 
 # _________________________________________________________________________________________________
-#' @title clip.outliers
+#' @title clip.outliers.at.percentile
 #' @description Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
-#' @param valz A vector of numeric values.
+#' @param distribution A vector of numeric values.
 #' @param high Clip above threshold? Default: TRUE
-#' @param probs PARAM_DESCRIPTION, Default: c(0.01, 0.99)
+#' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
 #' @param ... Pass any other argument.
 #' @export
 # #' @importFrom MarkdownReports whist
-clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) { # Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
-  qnt <- quantile(valz, probs = probs, na.rm = na.rm)
-  if (showhist) { hist(unlist(valz), breaks = 50);  abline(v = qnt, col = 2) } #if
-  # if (showhist) { MarkdownReports::whist(unlist(valz), breaks = 50 ,vline = qnt, filtercol = -1)} #if
-  y <- valz
-  y[valz < qnt[1]] <- qnt[1]
-  y[valz > qnt[2]] <- qnt[2]
+
+clip.outliers.at.percentile <- function(distribution, high = TRUE, percentiles = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) { # Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
+  qnt <- quantile(distribution, probs = percentiles, na.rm = na.rm)
+  if (showhist) { hist(unlist(distribution), breaks = 50, main = "Distribution and cutoffs histogram"
+                       , sub = paste("Percentile cutoffs at: " , paste(percentiles, collapse = " and "))
+                       ,xlab = 'Values')
+                    abline(v = qnt, col = 2)
+                  }
+  # if (showhist) { MarkdownReports::whist(unlist(distribution), breaks = 50 ,vline = qnt, filtercol = -1)} #if
+  y <- distribution
+  y[distribution < qnt[1]] <- qnt[1]
+  y[distribution > qnt[2]] <- qnt[2]
   y
 }
 
@@ -825,7 +831,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 #' @param probs PARAM_DESCRIPTION, Default: c(0.05, 0.95)
 #' @export
 remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) { # Remove values that fall outside the trailing N % of the distribution.
-  print("Deprecated. Use clip.outliers()")
+  print("Deprecated. Use clip.outliers.at.percentile()")
   qnt <- quantile(x, probs = probs, na.rm = na.rm, ...)
   # H <- 1.5 * IQR(x, na.rm = na.rm)
   y <- x

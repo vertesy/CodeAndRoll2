@@ -10,7 +10,7 @@ tibble_summary_to_namedVec(
 )
 }
 \arguments{
-\item{tbl}{PARAM_DESCRIPTION, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))}
+\item{tbl}{A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))}
 
 \item{idx}{PARAM_DESCRIPTION, Default: c(key = 1, value = 2)}
 }

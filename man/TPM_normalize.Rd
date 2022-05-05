@@ -7,7 +7,7 @@
 TPM_normalize(mat, SUM = 1e+06)
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{Numeric input matrix with the distribution.}
 
 \item{SUM}{PARAM_DESCRIPTION, Default: 1e+06}
 }

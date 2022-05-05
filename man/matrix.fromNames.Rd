@@ -7,11 +7,11 @@
 matrix.fromNames(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA)
 }
 \arguments{
-\item{rowname_vec}{PARAM_DESCRIPTION, Default: 1:10}
+\item{rowname_vec}{A vector of names for rows, Default: 1:10}
 
-\item{colname_vec}{PARAM_DESCRIPTION, Default: LETTERS\link{1:5}}
+\item{colname_vec}{A vector of names for columns, Default: LETTERS\link{1:5}}
 
-\item{fill}{PARAM_DESCRIPTION, Default: NA}
+\item{fill}{The value to fill the new vector, Default: NA}
 }
 \description{
 Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.

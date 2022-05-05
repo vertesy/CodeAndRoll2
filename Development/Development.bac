@@ -13,8 +13,8 @@
 # _________________________________________________________________________________________________
 #' @title vec.fromNames
 #' @description Create a vector from a vector of names.
-#' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
-#' @param fill PARAM_DESCRIPTION, Default: NA
+#' @param name_vec A vector of names, Default: LETTERS[1:5]
+#' @param fill The value to fill the new vector, Default: NA
 #' @export
 vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # Create a vector from a vector of names.
   v = numeric(length(name_vec))
@@ -29,8 +29,8 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) { # Create a vecto
 # _________________________________________________________________________________________________
 #' @title list.fromNames
 #' @description create list from a vector with the names of the elements.
-#' @param name_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
-#' @param fill PARAM_DESCRIPTION, Default: NaN
+#' @param name_vec A vector of names, Default: LETTERS[1:5]
+#' @param fill The value to fill the new vector, Default: NaN
 #' @export
 list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) { # create list from a vector with the names of the elements.
   liszt = as.list(rep(fill, length(name_vec)))
@@ -42,9 +42,9 @@ list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) { # create list 
 # _________________________________________________________________________________________________
 #' @title matrix.fromNames
 #' @description Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
-#' @param rowname_vec PARAM_DESCRIPTION, Default: 1:10
-#' @param colname_vec PARAM_DESCRIPTION, Default: LETTERS[1:5]
-#' @param fill PARAM_DESCRIPTION, Default: NA
+#' @param rowname_vec A vector of names for rows, Default: 1:10
+#' @param colname_vec A vector of names for columns, Default: LETTERS[1:5]
+#' @param fill The value to fill the new vector, Default: NA
 #' @export
 matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) { # Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
   mx = matrix(data = fill, nrow = length(rowname_vec), ncol = length(colname_vec), dimnames = list(rowname_vec, colname_vec))
@@ -57,9 +57,9 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
 # _________________________________________________________________________________________________
 #' @title matrix.fromVector
 #' @description Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
-#' @param vector Input vector, Default: 1:5
-#' @param HowManyTimes PARAM_DESCRIPTION, Default: 3
-#' @param IsItARow PARAM_DESCRIPTION, Default: TRUE
+#' @param vector Input vector for rows (number of rows = length), Default: 1:5
+#' @param HowManyTimes Number of columns, Default: 3
+#' @param IsItARow Transpose? Swap rows an columns. Default: TRUE
 #' @export
 matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) { # Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
   matt = matrix(vector, nrow = length(vector), ncol = HowManyTimes)
@@ -72,10 +72,10 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 # _________________________________________________________________________________________________
 #' @title array.fromNames
 #' @description Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
-#' @param rowname_vec PARAM_DESCRIPTION, Default: 1:3
-#' @param colname_vec PARAM_DESCRIPTION, Default: letters[1:2]
-#' @param z_name_vec PARAM_DESCRIPTION, Default: LETTERS[4:6]
-#' @param fill PARAM_DESCRIPTION, Default: NA
+#' @param rowname_vec A vector of names for rows, Default: 1:3
+#' @param colname_vec A vector of names for columns, Default: letters[1:2]
+#' @param z_name_vec A vector of names for Z dimension, Default: LETTERS[4:6]
+#' @param fill The value to fill the new vector, Default: NA
 #' @export
 array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_name_vec = LETTERS[4:6], fill = NA) { # Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
   DimNames = list(rowname_vec, colname_vec, z_name_vec)
@@ -90,8 +90,8 @@ array.fromNames <- function(rowname_vec = 1:3, colname_vec = letters[1:2], z_nam
 # _________________________________________________________________________________________________
 #' @title what
 #' @description A better version of is(). It can print the first "printme" elements.
-#' @param x PARAM_DESCRIPTION
-#' @param printme PARAM_DESCRIPTION, Default: 0
+#' @param x An object to identify.
+#' @param printme print the first "printme" elements, Default: 0
 #' @export
 what <- function(x, printme = 0) { # A better version of is(). It can print the first "printme" elements.
   iprint(is(x), "; nr. of elements:", length(x))
@@ -106,7 +106,7 @@ what <- function(x, printme = 0) { # A better version of is(). It can print the 
 # _________________________________________________________________________________________________
 #' @title idim
 #' @description A dim() function that can handle if you pass on a vector: then, it gives the length.
-#' @param any_object PARAM_DESCRIPTION
+#' @param any_object An object to identify.
 #' @export
 idim <- function(any_object) { # A dim() function that can handle if you pass on a vector: then, it gives the length.
   if (is.null(dim(any_object))) {
@@ -300,7 +300,7 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 # _________________________________________________________________________________________________
 #' @title tibble_summary_to_namedVec
 #' @description Convert a key-value tibble into a named vector (as opposed to using rownames).
-#' @param tbl PARAM_DESCRIPTION, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))
+#' @param tbl A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))
 #' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
@@ -321,8 +321,8 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 # _________________________________________________________________________________________________
 #' @title as_tibble_from_namedVec
 #' @description Convert a vector with names into a tibble, keeping the names as rownames.
-#' @param vec.w.names PARAM_DESCRIPTION, Default: c(a = 1, b = 2)
-#' @param transpose PARAM_DESCRIPTION, Default: T
+#' @param vec.w.names A vector with names, Default: c(a = 1, b = 2)
+#' @param transpose Transpose? Default: T
 #' @export
 #' @examples as_tibble_from_namedVec()
 # #' @importFrom MarkdownHelpers stopif
@@ -337,8 +337,8 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
 
 
 # _________________________________________________________________________________________________
-#' @title Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
-#' @description FUNCTION_DESCRIPTION.
+#' @title as.numeric.wNames
+#' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @param vec input vector
 #' @export as.numeric.wNames
 as.numeric.wNames <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
@@ -413,8 +413,8 @@ translate <- function(vec, oldvalues, newvalues) {
 #' @title rescale
 #' @description Linear transformation to a given range of values.
 #' @param vec input vector
-#' @param from PARAM_DESCRIPTION, Default: 0
-#' @param upto PARAM_DESCRIPTION, Default: 100
+#' @param from min, Default: 0
+#' @param upto max, Default: 100
 #' @export
 rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a given range of values.
   vec = vec - min(vec, na.rm = TRUE)
@@ -428,9 +428,9 @@ rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a gi
 
 #' @title flip_value2name
 #' @description Flip the values and the names of a vector with names.
-#' @param namedVector PARAM_DESCRIPTION
+#' @param namedVector named vector
 #' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
-#' @param silent PARAM_DESCRIPTION, Default: F
+#' @param silent Suppress printing info? Default: FALSE
 #' @export
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) { # Flip the values and the names of a vector with names.
   if (!is.null(names(namedVector))) {
@@ -469,7 +469,7 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) { # Sort a vect
 #' @title any.duplicated
 #' @description How many entries are duplicated?.
 #' @param vec input vector
-#' @param summarize PARAM_DESCRIPTION, Default: TRUE
+#' @param summarize Print summary? Default: TRUE
 #' @export any.duplicated
 
 any.duplicated <- function(vec, summarize = TRUE) { # How many entries are duplicated?.
@@ -502,7 +502,7 @@ which.duplicated <- function(vec, orig = F) { # Which values are duplicated?.
 #' @title which.NA
 #' @description Which values are NA?.
 #' @param vec input vector
-#' @param orig PARAM_DESCRIPTION, Default: F
+# @param orig PARAM_DESCRIPTION, Default: F
 #' @export
 which.NA <- function(vec, orig = F) { # Which values are NA?.
   NANs = vec[which(is.na(vec))]; iprint(length(NANs), "NaN entries: ", NANs)
@@ -524,37 +524,43 @@ pad.na <- function(x, len) { c(x, rep(NA, len - length(x))) } # Fill up with a v
 
 
 # _________________________________________________________________________________________________
-#' @title clip.values
+#' @title clip.at.fixed.value
 #' @description Signal clipping. Cut values above or below a threshold.
-#' @param valz PARAM_DESCRIPTION
-#' @param high PARAM_DESCRIPTION, Default: TRUE
-#' @param thr PARAM_DESCRIPTION, Default: 3
+#' @param distribution A vector of numeric values.
+#' @param high Clip above threshold? Default: TRUE
+#' @param thr threshold values, Default: 3
 #' @export
-clip.values <- function(valz, high = TRUE, thr = 3) { # Signal clipping. Cut values above or below a threshold.
-  if (high) { valz[valz > thr] = thr
-  } else {    valz[valz < thr] = thr }
-  valz
+
+clip.at.fixed.value <- function(distribution, high = TRUE, thr = 3) { # Signal clipping. Cut values above or below a threshold.
+  if (high) { distribution[distribution > thr] = thr
+  } else {    distribution[distribution < thr] = thr }
+  distribution
 }
 
 
 # _________________________________________________________________________________________________
-#' @title clip.outliers
+#' @title clip.outliers.at.percentile
 #' @description Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
-#' @param valz PARAM_DESCRIPTION
-#' @param high PARAM_DESCRIPTION, Default: TRUE
-#' @param probs PARAM_DESCRIPTION, Default: c(0.01, 0.99)
+#' @param distribution A vector of numeric values.
+#' @param high Clip above threshold? Default: TRUE
+#' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
 #' @param ... Pass any other argument.
 #' @export
 # #' @importFrom MarkdownReports whist
-clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) { # Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
-  qnt <- quantile(valz, probs = probs, na.rm = na.rm)
-  if (showhist) { hist(unlist(valz), breaks = 50);  abline(v = qnt, col = 2) } #if
-  # if (showhist) { MarkdownReports::whist(unlist(valz), breaks = 50 ,vline = qnt, filtercol = -1)} #if
-  y <- valz
-  y[valz < qnt[1]] <- qnt[1]
-  y[valz > qnt[2]] <- qnt[2]
+
+clip.outliers.at.percentile <- function(distribution, high = TRUE, percentiles = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) { # Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
+  qnt <- quantile(distribution, probs = percentiles, na.rm = na.rm)
+  if (showhist) { hist(unlist(distribution), breaks = 50, main = "Distribution and cutoffs histogram"
+                       , sub = paste("Percentile cutoffs at: " , paste(percentiles, collapse = " and "))
+                       ,xlab = 'Values')
+                    abline(v = qnt, col = 2)
+                  }
+  # if (showhist) { MarkdownReports::whist(unlist(distribution), breaks = 50 ,vline = qnt, filtercol = -1)} #if
+  y <- distribution
+  y[distribution < qnt[1]] <- qnt[1]
+  y[distribution > qnt[2]] <- qnt[2]
   y
 }
 
@@ -563,7 +569,7 @@ clip.outliers <- function(valz, high = TRUE, probs = c(.01, .99), na.rm = TRUE, 
 # _________________________________________________________________________________________________
 #' @title as.logical.wNames
 #' @description Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
-#' @param x PARAM_DESCRIPTION
+#' @param x input vector
 #' @param ... Pass any other argument.
 #' @export as.logical.wNames
 as.logical.wNames <- function(x, ...) { # Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
@@ -576,7 +582,7 @@ as.logical.wNames <- function(x, ...) { # Converts your input vector into a logi
 # _________________________________________________________________________________________________
 #' @title col2named.vec.tbl
 #' @description Convert a 2-column table(data frame) into a named vector. 1st column will be used as names.
-#' @param tbl.2col PARAM_DESCRIPTION
+#' @param tbl.2col 2-column tibble
 #' @export
 col2named.vec.tbl <- function(tbl.2col) { # Convert a 2-column table(data frame) into a named vector. 1st column will be used as names.
   nvec = tbl.2col[[2]]
@@ -590,7 +596,7 @@ col2named.vec.tbl <- function(tbl.2col) { # Convert a 2-column table(data frame)
 #' @title topN.dfCol
 #' @description Find the n highest values in a named vector.
 #' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
-#' @param n PARAM_DESCRIPTION, Default: 5
+#' @param n top N values, Default: 5
 #' @export
 topN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 5)   { head(sort(df_col, decreasing = TRUE), n = n) } # Find the n highest values in a named vector
 
@@ -599,7 +605,7 @@ topN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 5) 
 #' @title bottomN.dfCol
 #' @description Find the n lowest values in a named vector.
 #' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
-#' @param n PARAM_DESCRIPTION, Default: 5
+#' @param n lowest N values, Default: 5
 #' @export
 bottomN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 5) { head(sort(df_col, decreasing = FALSE), n = n) } # Find the n lowest values in a named vector
 
@@ -608,7 +614,7 @@ bottomN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 
 # _________________________________________________________________________________________________
 #' @title iterBy.over
 #' @description Iterate over a vector by every N-th element.
-#' @param vec PARAM_DESCRIPTION
+#' @param vec Input vector
 #' @param by PARAM_DESCRIPTION, Default: 9
 #' @export
 iterBy.over <- function(vec, by = 9) { # Iterate over a vec by every N-th element.
@@ -825,7 +831,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 #' @param probs PARAM_DESCRIPTION, Default: c(0.05, 0.95)
 #' @export
 remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) { # Remove values that fall outside the trailing N % of the distribution.
-  print("Deprecated. Use clip.outliers()")
+  print("Deprecated. Use clip.outliers.at.percentile()")
   qnt <- quantile(x, probs = probs, na.rm = na.rm, ...)
   # H <- 1.5 * IQR(x, na.rm = na.rm)
   y <- x
@@ -957,7 +963,7 @@ colMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, min, na.rm = na.rm)
 # _________________________________________________________________________________________________
 #' @title rowMax
 #' @description Calculates the maximum of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 rowMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, max, na.rm = na.rm) # Calculates the maximum of each row of a numeric matrix / data frame.
@@ -966,7 +972,7 @@ rowMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, max, na.rm = na.rm)
 # _________________________________________________________________________________________________
 #' @title colMax
 #' @description Calculates the maximum of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm) # Calculates the maximum of each column of a numeric matrix / data frame.
@@ -976,7 +982,7 @@ colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm)
 # _________________________________________________________________________________________________
 #' @title rowSEM
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 rowSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sem, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
@@ -985,7 +991,7 @@ rowSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sem, na.rm = na.rm)
 # _________________________________________________________________________________________________
 #' @title colSEM
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
@@ -995,7 +1001,7 @@ colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm)
 # _________________________________________________________________________________________________
 #' @title rowSD
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 rowSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sd, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
@@ -1004,7 +1010,7 @@ rowSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sd, na.rm = na.rm) #
 # _________________________________________________________________________________________________
 #' @title colSD
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
@@ -1014,7 +1020,7 @@ colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm) #
 # _________________________________________________________________________________________________
 #' @title rowIQR
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 rowIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, IQR, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
@@ -1023,7 +1029,7 @@ rowIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, IQR, na.rm = na.rm)
 # _________________________________________________________________________________________________
 #' @title colIQR
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @export
 colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
@@ -1033,7 +1039,7 @@ colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 # _________________________________________________________________________________________________
 #' @title rowquantile
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param ... Pass any other argument.
 #' @export
@@ -1043,7 +1049,7 @@ rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile,
 # _________________________________________________________________________________________________
 #' @title colquantile
 #' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix with the distribution.
 #' @param na.rm PARAM_DESCRIPTION, Default: TRUE
 #' @param ... Pass any other argument.
 #' @export
@@ -1054,7 +1060,7 @@ colquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 2, quantile,
 # _________________________________________________________________________________________________
 #' @title colDivide
 #' @description See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat Numeric input matrix with the distribution.
 #' @param vec PARAM_DESCRIPTION
 #' @export
 colDivide <- function(mat, vec) { # divide by column # See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
@@ -1067,7 +1073,7 @@ colDivide <- function(mat, vec) { # divide by column # See more: https://stackov
 # _________________________________________________________________________________________________
 #' @title colMutliply
 #' @description See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat Numeric input matrix with the distribution.
 #' @param vec PARAM_DESCRIPTION
 #' @export
 colMutliply <- function(mat, vec) { # Mutliply by column # See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
@@ -1080,7 +1086,7 @@ colMutliply <- function(mat, vec) { # Mutliply by column # See more: https://sta
 # _________________________________________________________________________________________________
 #' @title rowDivide
 #' @description Divide by row.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat Numeric input matrix with the distribution.
 #' @param vec PARAM_DESCRIPTION
 #' @export
 rowDivide <- function(mat, vec) { # divide by row
@@ -1093,7 +1099,7 @@ rowDivide <- function(mat, vec) { # divide by row
 # _________________________________________________________________________________________________
 #' @title rowMutliply
 #' @description Mutliply by row.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat Numeric input matrix with the distribution.
 #' @param vec PARAM_DESCRIPTION
 #' @export
 rowMutliply <- function(mat, vec) { # Mutliply by row
@@ -1106,7 +1112,7 @@ rowMutliply <- function(mat, vec) { # Mutliply by row
 # _________________________________________________________________________________________________
 #' @title row.Zscore
 #' @description Calculate Z-score over rows of data frame.
-#' @param DF PARAM_DESCRIPTION
+#' @param DF Numeric input matrix with the distribution.
 #' @export
 row.Zscore <- function(DF) t(scale(t(DF))) # Calculate Z-score over rows of data frame.
 
@@ -1115,7 +1121,7 @@ row.Zscore <- function(DF) t(scale(t(DF))) # Calculate Z-score over rows of data
 # _________________________________________________________________________________________________
 #' @title TPM_normalize
 #' @description Normalize each column to 1 million.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat Numeric input matrix with the distribution.
 #' @param SUM PARAM_DESCRIPTION, Default: 1e+06
 #' @export
 TPM_normalize <- function(mat, SUM = 1e6) { # normalize each column to 1 million
@@ -1129,7 +1135,7 @@ TPM_normalize <- function(mat, SUM = 1e6) { # normalize each column to 1 million
 # _________________________________________________________________________________________________
 #' @title median_normalize
 #' @description Normalize each column to the median of all the column-sums.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat Numeric input matrix with the distribution.
 #' @export
 median_normalize <- function(mat) { # normalize each column to the median of all the column-sums
   cs = colSums(mat, na.rm = TRUE)
@@ -1143,7 +1149,7 @@ median_normalize <- function(mat) { # normalize each column to the median of all
 # _________________________________________________________________________________________________
 #' @title mean_normalize
 #' @description Normalize each column to the median of the columns.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat Numeric input matrix.
 #' @export
 mean_normalize <- function(mat) { # normalize each column to the median of the columns
   cs = colSums(mat, na.rm = TRUE)
@@ -1159,7 +1165,7 @@ mean_normalize <- function(mat) { # normalize each column to the median of the c
 # _________________________________________________________________________________________________
 #' @title rotate
 #' @description Rotate a matrix 90 degrees.
-#' @param x PARAM_DESCRIPTION
+#' @param x Numeric input matrix.
 #' @param clockwise PARAM_DESCRIPTION, Default: TRUE
 #' @export
 rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
@@ -1172,7 +1178,7 @@ rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
 # _________________________________________________________________________________________________
 #' @title sortEachColumn
 #' @description Sort each column of a numeric matrix / data frame.
-#' @param data PARAM_DESCRIPTION
+#' @param data Numeric input matrix.
 #' @param ... Pass any other argument.
 #' @export
 sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column of a numeric matrix / data frame.
@@ -1182,7 +1188,7 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 # _________________________________________________________________________________________________
 #' @title sort.mat
 #' @description Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r.
-#' @param df PARAM_DESCRIPTION
+#' @param df Numeric input matrix.
 #' @param colname_in_df PARAM_DESCRIPTION, Default: 1
 #' @param decrease PARAM_DESCRIPTION, Default: FALSE
 #' @param na_last PARAM_DESCRIPTION, Default: TRUE
@@ -1197,7 +1203,7 @@ sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { 
 # _________________________________________________________________________________________________
 #' @title rowNameMatrix
 #' @description Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a plot (where you have different number of NA-values in each row).
-#' @param mat_w_dimnames PARAM_DESCRIPTION
+#' @param mat_w_dimnames A named matrix to copy from.
 #' @export
 rowNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a plot (where you have different number of NA-values in each row).
   matrix(rep(rownames(mat_w_dimnames), ncol(mat_w_dimnames) ), nrow = nrow(mat_w_dimnames), ncol = ncol(mat_w_dimnames))
@@ -1208,7 +1214,7 @@ rowNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, wher
 # _________________________________________________________________________________________________
 #' @title colNameMatrix
 #' @description Create a copy of your matrix, where every entry is replaced by the corresponding column name. Useful if you want to color by column name in a plot (where you have different number of NA-values in each column).
-#' @param mat_w_dimnames PARAM_DESCRIPTION
+#' @param mat_w_dimnames A named matrix to copy from.
 #' @export
 colNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, where every entry is replaced by the corresponding column name. Useful if you want to color by column name in a plot (where you have different number of NA-values in each column).
   x = rep(colnames(mat_w_dimnames), nrow(mat_w_dimnames) )
@@ -1220,7 +1226,7 @@ colNameMatrix <- function(mat_w_dimnames) { # Create a copy of your matrix, wher
 # _________________________________________________________________________________________________
 #' @title rownames.trimws
 #' @description Trim whitespaces from the rownames.
-#' @param matrix1 PARAM_DESCRIPTION
+#' @param matrix1 Input matrix.
 #' @export
 rownames.trimws <- function(matrix1) { # trim whitespaces from the rownames
   rownames(matrix1) = trimws(rownames(matrix1))
@@ -1232,8 +1238,8 @@ rownames.trimws <- function(matrix1) { # trim whitespaces from the rownames
 # _________________________________________________________________________________________________
 #' @title colsplit
 #' @description Split a data frame by a factor corresponding to columns.
-#' @param df PARAM_DESCRIPTION
-#' @param f PARAM_DESCRIPTION, Default: colnames(df)
+#' @param df Input data frame.
+#' @param f Splitting factor, Default: colnames(df)
 #' @export
 colsplit <- function(df, f = colnames(df)) { # split a data frame by a factor corresponding to columns.
   ListOfDFs = NULL
@@ -1248,8 +1254,8 @@ colsplit <- function(df, f = colnames(df)) { # split a data frame by a factor co
 # _________________________________________________________________________________________________
 #' @title rowsplit
 #' @description Split a data frame by a factor corresponding to columns.
-#' @param df PARAM_DESCRIPTION
-#' @param f PARAM_DESCRIPTION, Default: rownames(df)
+#' @param df Input data frame.
+#' @param f Splitting factor, Default: rownames(df)
 #' @export
 rowsplit <- function(df, f = rownames(df)) { # split a data frame by a factor corresponding to columns.
   ListOfDFs = NULL
@@ -1264,7 +1270,7 @@ rowsplit <- function(df, f = rownames(df)) { # split a data frame by a factor co
 # _________________________________________________________________________________________________
 #' @title select.rows.and.columns
 #' @description Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they aren't found.
-#' @param df PARAM_DESCRIPTION
+#' @param df Input data frame.
 #' @param RowIDs PARAM_DESCRIPTION, Default: NULL
 #' @param ColIDs PARAM_DESCRIPTION, Default: NULL
 #' @export
@@ -1290,7 +1296,7 @@ select.rows.and.columns <- function(df, RowIDs = NULL, ColIDs = NULL ) { # Subse
 # _________________________________________________________________________________________________
 #' @title getRows
 #' @description Get the subset of rows with existing rownames, report how much it could not find.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat In put matrix.
 #' @param rownamez PARAM_DESCRIPTION
 #' @param silent PARAM_DESCRIPTION, Default: FALSE
 #' @param removeNAonly PARAM_DESCRIPTION, Default: FALSE
@@ -1309,7 +1315,7 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
 # _________________________________________________________________________________________________
 #' @title getCols
 #' @description Get the subset of cols with existing colnames, report how much it could not find.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat In put matrix.
 #' @param colnamez PARAM_DESCRIPTION
 #' @param silent PARAM_DESCRIPTION, Default: FALSE
 #' @param removeNAonly PARAM_DESCRIPTION, Default: FALSE
@@ -1414,7 +1420,7 @@ merge_numeric_df_by_rn <- function(x, y) { # Merge 2 numeric data frames by rown
 # _________________________________________________________________________________________________
 #' @title remove.na.rows
 #' @description Cols have to be a vector of numbers corresponding to columns.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat In put matrix.
 #' @param cols PARAM_DESCRIPTION, Default: 1:NCOL(mat)
 #' @export
 remove.na.rows <- function(mat, cols = 1:NCOL(mat)) { # cols have to be a vector of numbers corresponding to columns
@@ -1428,7 +1434,7 @@ remove.na.rows <- function(mat, cols = 1:NCOL(mat)) { # cols have to be a vector
 # _________________________________________________________________________________________________
 #' @title remove.na.cols
 #' @description Cols have to be a vector of numbers corresponding to columns.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat In put matrix.
 #' @export
 remove.na.cols <- function(mat) { # cols have to be a vector of numbers corresponding to columns
   idxOK = !is.na(colSums(mat))
@@ -1440,7 +1446,7 @@ remove.na.cols <- function(mat) { # cols have to be a vector of numbers correspo
 # _________________________________________________________________________________________________
 #' @title na.omit.mat
 #' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
-#' @param mat PARAM_DESCRIPTION
+#' @param mat In put matrix.
 #' @param any PARAM_DESCRIPTION, Default: TRUE
 #' @export na.omit.mat
 na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a matrix. Rows with any, or full of NA-s

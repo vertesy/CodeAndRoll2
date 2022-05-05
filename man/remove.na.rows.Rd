@@ -7,7 +7,7 @@
 remove.na.rows(mat, cols = 1:NCOL(mat))
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{In put matrix.}
 
 \item{cols}{PARAM_DESCRIPTION, Default: 1:NCOL(mat)}
 }

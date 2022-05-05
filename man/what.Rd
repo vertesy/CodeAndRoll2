@@ -7,9 +7,9 @@
 what(x, printme = 0)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{An object to identify.}
 
-\item{printme}{PARAM_DESCRIPTION, Default: 0}
+\item{printme}{print the first "printme" elements, Default: 0}
 }
 \description{
 A better version of is(). It can print the first "printme" elements.

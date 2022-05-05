@@ -9,7 +9,7 @@
 \arguments{
 \item{vec}{input vector}
 
-\item{summarize}{PARAM_DESCRIPTION, Default: TRUE}
+\item{summarize}{Print summary? Default: TRUE}
 }
 \description{
 How many entries are duplicated?.

@@ -7,7 +7,7 @@
 colMutliply(mat, vec)
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{Numeric input matrix with the distribution.}
 
 \item{vec}{PARAM_DESCRIPTION}
 }

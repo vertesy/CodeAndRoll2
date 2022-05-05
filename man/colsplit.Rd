@@ -7,9 +7,9 @@
 colsplit(df, f = colnames(df))
 }
 \arguments{
-\item{df}{PARAM_DESCRIPTION}
+\item{df}{Input data frame.}
 
-\item{f}{PARAM_DESCRIPTION, Default: colnames(df)}
+\item{f}{Splitting factor, Default: colnames(df)}
 }
 \description{
 Split a data frame by a factor corresponding to columns.

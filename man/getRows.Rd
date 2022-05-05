@@ -13,7 +13,7 @@ getRows(
 )
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{In put matrix.}
 
 \item{rownamez}{PARAM_DESCRIPTION}
 

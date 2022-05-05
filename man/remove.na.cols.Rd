@@ -7,7 +7,7 @@
 remove.na.cols(mat)
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{In put matrix.}
 }
 \description{
 Cols have to be a vector of numbers corresponding to columns.

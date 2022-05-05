@@ -7,9 +7,9 @@
 list.fromNames(name_vec = LETTERS[1:5], fill = NaN)
 }
 \arguments{
-\item{name_vec}{PARAM_DESCRIPTION, Default: LETTERS\link{1:5}}
+\item{name_vec}{A vector of names, Default: LETTERS\link{1:5}}
 
-\item{fill}{PARAM_DESCRIPTION, Default: NaN}
+\item{fill}{The value to fill the new vector, Default: NaN}
 }
 \description{
 create list from a vector with the names of the elements.

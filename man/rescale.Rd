@@ -9,9 +9,9 @@ rescale(vec, from = 0, upto = 100)
 \arguments{
 \item{vec}{input vector}
 
-\item{from}{PARAM_DESCRIPTION, Default: 0}
+\item{from}{min, Default: 0}
 
-\item{upto}{PARAM_DESCRIPTION, Default: 100}
+\item{upto}{max, Default: 100}
 }
 \description{
 Linear transformation to a given range of values.

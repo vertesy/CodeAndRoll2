@@ -7,7 +7,7 @@
 rotate(x, clockwise = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{Numeric input matrix.}
 
 \item{clockwise}{PARAM_DESCRIPTION, Default: TRUE}
 }

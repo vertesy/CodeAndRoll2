@@ -7,7 +7,7 @@
 \method{na.omit}{mat}(mat, any = TRUE)
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{In put matrix.}
 
 \item{any}{PARAM_DESCRIPTION, Default: TRUE}
 }

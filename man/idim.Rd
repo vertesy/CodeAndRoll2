@@ -7,7 +7,7 @@
 idim(any_object)
 }
 \arguments{
-\item{any_object}{PARAM_DESCRIPTION}
+\item{any_object}{An object to identify.}
 }
 \description{
 A dim() function that can handle if you pass on a vector: then, it gives the length.

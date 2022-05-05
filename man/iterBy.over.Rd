@@ -7,7 +7,7 @@
 iterBy.over(vec, by = 9)
 }
 \arguments{
-\item{vec}{PARAM_DESCRIPTION}
+\item{vec}{Input vector}
 
 \item{by}{PARAM_DESCRIPTION, Default: 9}
 }

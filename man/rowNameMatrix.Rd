@@ -7,7 +7,7 @@
 rowNameMatrix(mat_w_dimnames)
 }
 \arguments{
-\item{mat_w_dimnames}{PARAM_DESCRIPTION}
+\item{mat_w_dimnames}{A named matrix to copy from.}
 }
 \description{
 Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a plot (where you have different number of NA-values in each row).

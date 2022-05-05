@@ -7,7 +7,7 @@
 row.Zscore(DF)
 }
 \arguments{
-\item{DF}{PARAM_DESCRIPTION}
+\item{DF}{Numeric input matrix with the distribution.}
 }
 \description{
 Calculate Z-score over rows of data frame.

@@ -7,7 +7,7 @@
 sortEachColumn(data, ...)
 }
 \arguments{
-\item{data}{PARAM_DESCRIPTION}
+\item{data}{Numeric input matrix.}
 
 \item{...}{Pass any other argument.}
 }

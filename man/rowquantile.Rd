@@ -7,7 +7,7 @@
 rowquantile(x, na.rm = TRUE, ...)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{Numeric input matrix with the distribution.}
 
 \item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
 

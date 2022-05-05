@@ -7,11 +7,11 @@
 matrix.fromVector(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE)
 }
 \arguments{
-\item{vector}{Input vector, Default: 1:5}
+\item{vector}{Input vector for rows (number of rows = length), Default: 1:5}
 
-\item{HowManyTimes}{PARAM_DESCRIPTION, Default: 3}
+\item{HowManyTimes}{Number of columns, Default: 3}
 
-\item{IsItARow}{PARAM_DESCRIPTION, Default: TRUE}
+\item{IsItARow}{Transpose? Swap rows an columns. Default: TRUE}
 }
 \description{
 Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.

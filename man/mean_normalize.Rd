@@ -7,7 +7,7 @@
 mean_normalize(mat)
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{Numeric input matrix.}
 }
 \description{
 Normalize each column to the median of the columns.

@@ -7,7 +7,7 @@
 col2named.vec.tbl(tbl.2col)
 }
 \arguments{
-\item{tbl.2col}{PARAM_DESCRIPTION}
+\item{tbl.2col}{2-column tibble}
 }
 \description{
 Convert a 2-column table(data frame) into a named vector. 1st column will be used as names.

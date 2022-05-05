@@ -7,7 +7,7 @@
 \method{sort}{mat}(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE)
 }
 \arguments{
-\item{df}{PARAM_DESCRIPTION}
+\item{df}{Numeric input matrix.}
 
 \item{colname_in_df}{PARAM_DESCRIPTION, Default: 1}
 

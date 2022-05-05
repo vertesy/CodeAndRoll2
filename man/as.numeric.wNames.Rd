@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{as.numeric.wNames}
 \alias{as.numeric.wNames}
-\title{Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.}
+\title{as.numeric.wNames}
 \usage{
 \method{as.numeric}{wNames}(vec)
 }
@@ -10,5 +10,5 @@
 \item{vec}{input vector}
 }
 \description{
-FUNCTION_DESCRIPTION.
+Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 }

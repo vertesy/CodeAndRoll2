@@ -13,7 +13,7 @@ getCols(
 )
 }
 \arguments{
-\item{mat}{PARAM_DESCRIPTION}
+\item{mat}{In put matrix.}
 
 \item{colnamez}{PARAM_DESCRIPTION}
 

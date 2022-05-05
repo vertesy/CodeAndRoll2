@@ -7,7 +7,7 @@
 rownames.trimws(matrix1)
 }
 \arguments{
-\item{matrix1}{PARAM_DESCRIPTION}
+\item{matrix1}{Input matrix.}
 }
 \description{
 Trim whitespaces from the rownames.

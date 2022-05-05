@@ -7,11 +7,11 @@
 flip_value2name(namedVector, NumericNames = FALSE, silent = F)
 }
 \arguments{
-\item{namedVector}{PARAM_DESCRIPTION}
+\item{namedVector}{named vector}
 
 \item{NumericNames}{PARAM_DESCRIPTION, Default: FALSE}
 
-\item{silent}{PARAM_DESCRIPTION, Default: F}
+\item{silent}{Suppress printing info? Default: FALSE}
 }
 \description{
 Flip the values and the names of a vector with names.

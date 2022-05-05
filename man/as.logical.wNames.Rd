@@ -7,7 +7,7 @@
 \method{as.logical}{wNames}(x, ...)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{input vector}
 
 \item{...}{Pass any other argument.}
 }

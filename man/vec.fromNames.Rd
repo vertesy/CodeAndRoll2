@@ -7,9 +7,9 @@
 vec.fromNames(name_vec = LETTERS[1:5], fill = NA)
 }
 \arguments{
-\item{name_vec}{PARAM_DESCRIPTION, Default: LETTERS\link{1:5}}
+\item{name_vec}{A vector of names, Default: LETTERS\link{1:5}}
 
-\item{fill}{PARAM_DESCRIPTION, Default: NA}
+\item{fill}{The value to fill the new vector, Default: NA}
 }
 \description{
 Create a vector from a vector of names.

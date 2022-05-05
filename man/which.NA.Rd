@@ -8,8 +8,6 @@ which.NA(vec, orig = F)
 }
 \arguments{
 \item{vec}{input vector}
-
-\item{orig}{PARAM_DESCRIPTION, Default: F}
 }
 \description{
 Which values are NA?.

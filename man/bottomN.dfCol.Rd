@@ -9,7 +9,7 @@ bottomN.dfCol(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5)
 \arguments{
 \item{df_col}{data frame column, Default: as.named.vector(df\link{, 1, drop = FALSE})}
 
-\item{n}{PARAM_DESCRIPTION, Default: 5}
+\item{n}{lowest N values, Default: 5}
 }
 \description{
 Find the n lowest values in a named vector.

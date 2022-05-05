@@ -7,7 +7,7 @@
 select.rows.and.columns(df, RowIDs = NULL, ColIDs = NULL)
 }
 \arguments{
-\item{df}{PARAM_DESCRIPTION}
+\item{df}{Input data frame.}
 
 \item{RowIDs}{PARAM_DESCRIPTION, Default: NULL}
 
