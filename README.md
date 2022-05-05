@@ -43,7 +43,7 @@ require("devtools")
 devtools::install_github(repo = "vertesy/Stringendo", upgrade = F)
 devtools::install_github(repo = "vertesy/ReadWriter", upgrade = F)
 
-# Install MarkdownHelpers
+# Install CodeAndRoll2
 devtools::install_github(repo = "vertesy/CodeAndRoll2", upgrade = F)
 
 ```
