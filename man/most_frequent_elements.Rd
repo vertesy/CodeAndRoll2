@@ -9,7 +9,7 @@ most_frequent_elements(vec, topN = 10)
 \arguments{
 \item{vec}{input vector}
 
-\item{topN}{PARAM_DESCRIPTION, Default: 10}
+\item{topN}{How many pof the most frequent elements should be returned? Default: 10}
 }
 \description{
 Show the most frequent elements of a table.

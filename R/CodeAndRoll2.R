@@ -168,15 +168,15 @@ getCategories <-
 
 # _________________________________________________________________________________________________
 #' @title grepv
-#' @description grep returning the value.
-#' @param pattern PARAM_DESCRIPTION
-#' @param x PARAM_DESCRIPTION
-#' @param ignore.case PARAM_DESCRIPTION, Default: FALSE
-#' @param perl PARAM_DESCRIPTION, Default: FALSE
-#' @param value PARAM_DESCRIPTION, Default: FALSE
-#' @param fixed PARAM_DESCRIPTION, Default: FALSE
-#' @param useBytes PARAM_DESCRIPTION, Default: FALSE
-#' @param invert PARAM_DESCRIPTION, Default: FALSE
+#' @description grep returning the value. A character string containing a regular expression (or character string for fixed = TRUE) to be matched in the given character vector. Coerced by as.character to a character string if possible. If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values are allowed except for regexpr, gregexpr and regexec.
+#' @param pattern pattern to look for
+#' @param x The haystack to search through. a character vector where matches are sought, or an object which can be coerced by as.character to a character vector. Long vectors are supported.
+#' @param ignore.case Ignore letter case, Default: FALSE
+#' @param perl logical. Should Perl-compatible regexps be used? Default: FALSE
+#' @param value if FALSE, a vector containing the (integer) indices of the matches determined by grep is returned, and if TRUE, a vector containing the matching elements themselves is returned. Default: FALSE
+#' @param fixed logical. If TRUE, pattern is a string to be matched as is. Overrides all conflicting arguments. Default: FALSE
+#' @param useBytes logical. If TRUE the matching is done byte-by-byte rather than character-by-character. See ‘Details’., Default: FALSE
+#' @param invert logical. If TRUE return indices or values for elements that do not match. Default: FALSE
 #' @param ... Pass any other argument.
 #' @export
 grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, fixed = FALSE, useBytes = FALSE  # grep returning the value
@@ -189,11 +189,24 @@ grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, 
 #' @title most_frequent_elements
 #' @description Show the most frequent elements of a table.
 #' @param vec input vector
-#' @param topN PARAM_DESCRIPTION, Default: 10
+#' @param topN How many pof the most frequent elements should be returned? Default: 10
 #' @export
 most_frequent_elements <- function(vec, topN = 10) { # Show the most frequent elements of a table.
   tail(sort(table(vec, useNA = "ifany")), topN)
 }
+
+
+# _________________________________________________________________________________________________
+#' @title count_occurrence_each_element
+#' @description Count the number of times each element occurs in the full vector, AND give it back as a vector, that is the same length as the input vector, each element corresponding one-by-one.
+#' @param vec input vector
+#' @export
+count_occurrence_each_element <- function(vec) {
+  tableX <- table(vec)
+  rep(x = tableX, tableX)
+}
+
+
 
 
 # _________________________________________________________________________________________________
@@ -241,16 +254,36 @@ sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(s
 
 
 # _________________________________________________________________________________________________
+#' @title as.named.vector2
+#' @description Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
+#' @param index.rc Which column or row to extract (numeric index).
+#' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
+#' @export
+as.named.vector2 <- function(df, index.rc = 1, WhichDimNames = 1) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
+  namez = dimnames(df)[[WhichDimNames]]
+  name.selection <- dimnames(df)[[ (3-WhichDimNames) ]][index.rc]
+  iprint("Variable used:", name.selection)
+
+  if (WhichDimNames==1) {
+    vecc <- as.vector(unlist(df[ , index.rc]))
+  } else if (WhichDimNames==2) {
+    vecc <- as.vector(unlist(df[ index.rc, ]))
+  }
+  names(vecc) = namez
+  return(vecc)
+}
+
+
 #' @title as.named.vector
 #' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
-#' @param WhichDimNames PARAM_DESCRIPTION, Default: 1
+#' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
 #' @export
 as.named.vector <- function(df_col, WhichDimNames = 1) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
+  namez = dimnames(df_col)[[WhichDimNames]]
   # use RowNames: WhichDimNames = 1 , 2: use ColNames
   # !!! might require drop = FALSE in subsetting!!! eg: df_col[, 3, drop = FALSE]
   # df_col[which(unlist(lapply(df_col, is.null)))] = "NULL" # replace NULLs - they would fall out of vectors - DOES not work yet
-  namez = dimnames(df_col)[[WhichDimNames]]
   if (is.list(df_col) & !is.data.frame(df_col)) {namez = names(df_col)}
   vecc = as.vector(unlist(df_col))
   names(vecc) = namez
@@ -260,7 +293,7 @@ as.named.vector <- function(df_col, WhichDimNames = 1) { # Convert a dataframe c
 
 # as.named.vector.2colDF
 #' @title as.named.vector
-#' @description Convert a 2-column dataframe (value, name) into a named vector.
+#' @description Convert a 2-column dataframe (value, name) into a named vector. Use for simple tibbles.
 #' @param DF data frame
 #' @param values Index of column with values, Default: 1
 #' @param names Index of column with names, Default: 2

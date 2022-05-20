@@ -21,5 +21,5 @@ as.named.vector.2colDF(
 \item{make.names}{make.names, Default: F}
 }
 \description{
-Convert a 2-column dataframe (value, name) into a named vector.
+Convert a 2-column dataframe (value, name) into a named vector. Use for simple tibbles.
 }

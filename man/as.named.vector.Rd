@@ -9,7 +9,7 @@ as.named.vector(df_col, WhichDimNames = 1)
 \arguments{
 \item{df_col}{data frame column}
 
-\item{WhichDimNames}{PARAM_DESCRIPTION, Default: 1}
+\item{WhichDimNames}{Shall we extract rows (2) or columns (1, default)?, Default: 1}
 }
 \description{
 Convert a dataframe column or row into a vector, keeping the corresponding dimension name.

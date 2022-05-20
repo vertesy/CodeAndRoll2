@@ -17,24 +17,24 @@ grepv(
 )
 }
 \arguments{
-\item{pattern}{PARAM_DESCRIPTION}
+\item{pattern}{pattern to look for}
 
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{The haystack to search through. a character vector where matches are sought, or an object which can be coerced by as.character to a character vector. Long vectors are supported.}
 
-\item{ignore.case}{PARAM_DESCRIPTION, Default: FALSE}
+\item{ignore.case}{Ignore letter case, Default: FALSE}
 
-\item{perl}{PARAM_DESCRIPTION, Default: FALSE}
+\item{perl}{logical. Should Perl-compatible regexps be used? Default: FALSE}
 
-\item{value}{PARAM_DESCRIPTION, Default: FALSE}
+\item{value}{if FALSE, a vector containing the (integer) indices of the matches determined by grep is returned, and if TRUE, a vector containing the matching elements themselves is returned. Default: FALSE}
 
-\item{fixed}{PARAM_DESCRIPTION, Default: FALSE}
+\item{fixed}{logical. If TRUE, pattern is a string to be matched as is. Overrides all conflicting arguments. Default: FALSE}
 
-\item{useBytes}{PARAM_DESCRIPTION, Default: FALSE}
+\item{useBytes}{logical. If TRUE the matching is done byte-by-byte rather than character-by-character. See ‘Details’., Default: FALSE}
 
-\item{invert}{PARAM_DESCRIPTION, Default: FALSE}
+\item{invert}{logical. If TRUE return indices or values for elements that do not match. Default: FALSE}
 
 \item{...}{Pass any other argument.}
 }
 \description{
-grep returning the value.
+grep returning the value. A character string containing a regular expression (or character string for fixed = TRUE) to be matched in the given character vector. Coerced by as.character to a character string if possible. If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values are allowed except for regexpr, gregexpr and regexec.
 }

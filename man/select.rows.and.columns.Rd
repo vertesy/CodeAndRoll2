@@ -4,7 +4,7 @@
 \alias{select.rows.and.columns}
 \title{select.rows.and.columns}
 \usage{
-select.rows.and.columns(df, RowIDs = NULL, ColIDs = NULL)
+\method{select}{rows.and.columns}(df, RowIDs = NULL, ColIDs = NULL)
 }
 \arguments{
 \item{df}{Input data frame.}
