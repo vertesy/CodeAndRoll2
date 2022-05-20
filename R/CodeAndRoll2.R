@@ -1306,13 +1306,13 @@ rowsplit <- function(df, f = rownames(df)) { # split a data frame by a factor co
 
 
 # _________________________________________________________________________________________________
-#' @title select.rows.and.columns
+#' @title select_rows_and_columns
 #' @description Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they aren't found.
 #' @param df Input data frame.
-#' @param RowIDs PARAM_DESCRIPTION, Default: NULL
-#' @param ColIDs PARAM_DESCRIPTION, Default: NULL
+#' @param RowIDs RowIDs, Default: NULL
+#' @param ColIDs ColIDs, Default: NULL
 #' @export
-select.rows.and.columns <- function(df, RowIDs = NULL, ColIDs = NULL ) { # Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they aren't found.
+select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL ) { # Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they aren't found.
   if (length(RowIDs)) {
     true_rownames = intersect(rownames(df), RowIDs)
     NotFound = setdiff(RowIDs, rownames(df))
