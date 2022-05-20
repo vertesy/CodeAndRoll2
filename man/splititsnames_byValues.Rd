@@ -7,7 +7,7 @@
 splititsnames_byValues(namedVec)
 }
 \arguments{
-\item{namedVec}{PARAM_DESCRIPTION}
+\item{namedVec}{Vector with names}
 }
 \description{
 Split a list by its names.

@@ -363,10 +363,8 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 #' @param transpose Transpose? Default: T
 #' @export
 #' @examples as_tibble_from_namedVec()
-# #' @importFrom MarkdownHelpers stopif
 #' @importFrom dplyr bind_rows
 as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
-  # MarkdownHelpers::stopif( !purrr::is_null(names(vec.w.names)))
   stopifnot(!is.null(names(vec.w.names)))
   tbl <- dplyr::bind_rows(vec.w.names)
   if (transpose) t(tbl) else tbl
@@ -1799,11 +1797,10 @@ list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]  # Conv
 # _________________________________________________________________________________________________
 #' @title splitbyitsnames
 #' @description Split a list by its names.
-#' @param namedVec PARAM_DESCRIPTION
-#' @importFrom MarkdownHelpers stopif
+#' @param namedVec Vector with names
 #' @export
 splitbyitsnames <- function(namedVec) { # split a list by its names
-  MarkdownHelpers::stopif(is.null(names(namedVec)), message = "NO NAMES")
+  stopifnot(!is.null(names(namedVec)))
   split(namedVec, f = names(namedVec))
 }
 
@@ -1812,11 +1809,10 @@ splitbyitsnames <- function(namedVec) { # split a list by its names
 # _________________________________________________________________________________________________
 #' @title splititsnames_byValues
 #' @description Split a list by its names.
-#' @param namedVec PARAM_DESCRIPTION
-#' @importFrom MarkdownHelpers stopif
+#' @param namedVec Vector with names
 #' @export
 splititsnames_byValues <- function(namedVec) { # split a list by its names
-  MarkdownHelpers::stopif(is.null(names(namedVec)), message = "NO NAMES")
+  stopifnot(!is.null(names(namedVec)))
   split(names(namedVec), f = namedVec)
 }
 
