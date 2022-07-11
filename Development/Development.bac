@@ -127,7 +127,7 @@ idim <- function(any_object) { # A dim() function that can handle if you pass on
 idimnames <- function(any_object, print_max = 25) {
   iprint("print max:", print_max, "names.")
   if (!is.null(dimnames(any_object)))   {
-    dimNamesShort <- lapply(dimnames(m.UVI.reads.per.cell), head, n = print_max)
+    dimNamesShort <- lapply(dimnames(any_object), head, n = print_max)
     print(dimNamesShort)
     }
   else if (!is.null(colnames(any_object))) { iprint("colnames:", colnames(any_object))  }
