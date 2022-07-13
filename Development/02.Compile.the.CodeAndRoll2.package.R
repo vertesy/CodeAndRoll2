@@ -18,7 +18,7 @@ require('Stringendo')
 
 # Setup ------------------------
 PackageName = 	"CodeAndRoll2"
-package.version = "2.2.9"
+package.version = "2.3.0"
 
 setwd("~/GitHub/")
 

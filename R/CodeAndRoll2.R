@@ -1,6 +1,7 @@
 ######################################################################
 # CodeAndRoll2 - A collection of custom R functions
 ######################################################################
+# devtools::load_all("~/GitHub/Packages/CodeAndRoll2")
 # source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.R')
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
 
@@ -114,6 +115,18 @@ idim <- function(any_object) { # A dim() function that can handle if you pass on
     print(length(any_object))
   }
   else { print(dim(any_object))  }
+}
+
+
+# _________________________________________________________________________________________________
+#' @title Test if object is a list
+#' @description The 'is.list()' function fails on tibbles: it returns TRUE, as if it were a list. This distiguishes. Thaat's why we need this function.
+#' @param object Object to test.
+#' @export
+#' @examples is.list2(list()); is.list2(dplyr::tibble())
+
+is.list2 <- function(object) {
+  'list' %in% class(object)
 }
 
 
