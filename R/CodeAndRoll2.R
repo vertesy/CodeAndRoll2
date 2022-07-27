@@ -1161,12 +1161,23 @@ rowMutliply <- function(mat, vec) { # Mutliply by row
 # _________________________________________________________________________________________________
 #' @title row.Zscore
 #' @description Calculate Z-score over rows of data frame.
-#' @param DF Numeric input matrix with the distribution.
+#' @param x Numeric input matrix with the distribution.
 #' @export
-row.Zscore <- function(DF) t(scale(t(DF))) # Calculate Z-score over rows of data frame.
+row.Zscore <- function(x) t(scale(t(x)))
 
 
 
+# _________________________________________________________________________________________________
+#' #' #' @title colNrNAs
+#' #' #' @description Calculates the number of NA-values of each column of a matrix / data frame.
+#' #' #' @param x Numeric input matrix with the distribution.
+#' #' #' @export
+#' colNrNAs <- function(x) colSums(is.na(x), na.rm = FALSE)
+
+
+
+# _________________________________________________________________________________________________
+# _________________________________________________________________________________________________
 # _________________________________________________________________________________________________
 #' @title TPM_normalize
 #' @description Normalize each column to 1 million.
