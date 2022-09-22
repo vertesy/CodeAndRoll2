@@ -4,10 +4,10 @@
 \alias{row.Zscore}
 \title{row.Zscore}
 \usage{
-row.Zscore(DF)
+row.Zscore(x)
 }
 \arguments{
-\item{DF}{Numeric input matrix with the distribution.}
+\item{x}{Numeric input matrix with the distribution.}
 }
 \description{
 Calculate Z-score over rows of data frame.

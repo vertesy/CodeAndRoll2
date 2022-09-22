@@ -14,3 +14,10 @@ TPM_normalize(mat, SUM = 1e+06)
 \description{
 Normalize each column to 1 million.
 }
+\details{
+#' #' @title colNrNAs
+#' #' @description Calculates the number of NA-values of each column of a matrix / data frame.
+#' #' @param x Numeric input matrix with the distribution.
+#' #' @export
+colNrNAs <- function(x) colSums(is.na(x), na.rm = FALSE)
+}

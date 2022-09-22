@@ -1417,6 +1417,11 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) { # Get odd or e
 #' @export
 #' @importFrom plyr join_all
 merge_dfs_by_rn <- function(list_of_dfs) { # Merge any data frames by rownames. Required plyr package
+
+  if(length(names(list_of_dfs)) != length(list_of_dfs)) {
+    names(list_of_dfs) <- 1:length(list_of_dfs)
+  }
+
   for (i in names(list_of_dfs) ) { colnames(list_of_dfs[[i]]) <- paste0(i,'.',colnames(list_of_dfs[[i]])) } # make unique column names
   for (i in names(list_of_dfs) ) { list_of_dfs[[i]]$rn <- rownames(list_of_dfs[[i]]) } #for
   COMBINED <- plyr::join_all(list_of_dfs, by = 'rn', type = 'full');   idim(COMBINED)
