@@ -4,14 +4,14 @@
 \alias{merge_1col_dfs_by_rn}
 \title{merge_1col_dfs_by_rn}
 \usage{
-merge_1col_dfs_by_rn(list_of_dfs, FILLwith = 0, columnUSE = "n")
+merge_1col_dfs_by_rn(list_of_dfs, FILLwith = 0, columnUSE = 1)
 }
 \arguments{
 \item{list_of_dfs}{list of 1col dfs}
 
 \item{FILLwith}{0 by def}
 
-\item{columnUSE}{colnames in both}
+\item{columnUSE}{column index in both. 1 by default.}
 }
 \description{
 merge_1col_dfs_by_rn

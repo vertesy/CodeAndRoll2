@@ -1435,11 +1435,11 @@ merge_dfs_by_rn <- function(list_of_dfs) { # Merge any data frames by rownames. 
 #'
 #' @param list_of_dfs  list of 1col dfs
 #' @param FILLwith 0 by def
-#' @param columnUSE colnames in both
+#' @param columnUSE column index in both. 1 by default.
 #' @export
 #' @examples merge_1col_dfs_by_rn()
 
-merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE= 'n') {
+merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE= 1) {
   all.rn <- sort(union.ls(lapply(list_of_dfs, rownames)))
   iprint("n rownames:",length(all.rn))
   df_new <- data.frame(matrix(data = FILLwith, nrow = length(all.rn), ncol = length(list_of_dfs)), row.names = all.rn)
