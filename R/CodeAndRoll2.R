@@ -1481,6 +1481,26 @@ merge_numeric_df_by_rn <- function(x, y) { # Merge 2 numeric data frames by rown
 }
 
 
+# _________________________________________________________________________________________________
+#' @title merge_2_named_vec_as_df
+#' @description Merge two named vectors by names, into a dataframe with 2 columns.
+#' @param x A vector with named elements.
+#' @param y Another vector with named elements.
+#' @examples # a <- 1:5; names(a) <- letters[a]; b <- 9:3; names(b) <- letters[b]; merge_2_named_vec_as_df(a,b)
+#' @export
+
+merge_2_named_vec_as_df <- function(x, y) { # Merge any data frames by rownames. Required plyr package
+
+  COMBINED <-
+    full_join(x = stack(x), y = stack(y), by = 'ind')[, c(2,1,3)] %>%
+    FirstCol2RowNames.as.df()
+
+  colnames(COMBINED) <- c(substitute(x), substitute(y))
+  return(COMBINED)
+}
+
+
+
 
 # _________________________________________________________________________________________________
 #' @title remove.na.rows
