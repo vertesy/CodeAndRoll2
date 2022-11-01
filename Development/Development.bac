@@ -8,10 +8,10 @@
 
 ### CHAPTERS:
 
-## Create and check variables -------------------------------------------------------------------------------------------------
-
-
 # _________________________________________________________________________________________________
+## Create and check variables ____________________________________________________________ ----
+
+
 #' @title vec.fromNames
 #' @description Create a vector from a vector of names.
 #' @param name_vec A vector of names, Default: LETTERS[1:5]
@@ -149,6 +149,14 @@ idimnames <- function(any_object, print_max = 25) {
 }
 
 
+# _________________________________________________________________________________________________
+#' @title printEveryN
+#' @description Report iterator value at every e.g. 1000
+#' @param iterator iterator that increases (in a loop). Default: i.
+#' @param N  print Every N
+#' @export
+printEveryN <- function(iterator = i, N = 1000) { if ((iterator %% N) == 0 ) iprint(iterator) }
+
 
 # _________________________________________________________________________________________________
 #' @title table_fixed_categories
@@ -177,9 +185,9 @@ getCategories <-
 
 
 
-## Vector operations -------------------------------------------------------------------------------------------------
-
 # _________________________________________________________________________________________________
+## Vector operations ____________________________________________________________ ----
+
 #' @title grepv
 #' @description grep returning the value. A character string containing a regular expression (or character string for fixed = TRUE) to be matched in the given character vector. Coerced by as.character to a character string if possible. If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values are allowed except for regexpr, gregexpr and regexec.
 #' @param pattern pattern to look for
@@ -744,8 +752,9 @@ sumBySameName <- function(namedVec) { # Sum up vector elements with the same nam
 }
 
 
-### Vector filtering  -------------------------------------------------------------------------------------------------
 # _________________________________________________________________________________________________
+### Vector filtering ____________________________________________________________ ----
+
 #' @title which_names
 #' @description Return the names where the input vector is TRUE. The input vector is converted to logical.
 #' @param namedVec PARAM_DESCRIPTION
@@ -907,14 +916,14 @@ simplify_categories <- function(category_vec, replaceit , to ) { # Replace every
 
 
 # _________________________________________________________________________________________________
-
-
-## Matrix operations -------------------------------------------------------------------------------------------------
-
-### Matrix calculations  -------------------------------------------------------------------------------------------------
+## Matrix operations ____________________________________________________________ ----
 
 
 # _________________________________________________________________________________________________
+### Matrix calculations ____________________________________________________________ ----
+
+
+
 #' @title rowMedians
 #' @description Calculates the median of each row of a numeric matrix / data frame.
 #' @param x PARAM_DESCRIPTION
@@ -1219,10 +1228,10 @@ mean_normalize <- function(mat) { # normalize each column to the median of the c
 }
 
 
-## Matrix manipulations -------------------------------------------------------------------------------------------------
-
-
 # _________________________________________________________________________________________________
+## Matrix manipulations ____________________________________________________________ ----
+
+
 #' @title rotate
 #' @description Rotate a matrix 90 degrees.
 #' @param x Numeric input matrix.
@@ -1533,7 +1542,7 @@ remove.na.cols <- function(mat) { # cols have to be a vector of numbers correspo
 #' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
 #' @param mat In put matrix.
 #' @param any PARAM_DESCRIPTION, Default: TRUE
-#' @export na.omit.mat
+#' @export
 na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a matrix. Rows with any, or full of NA-s
   mat = as.matrix(mat)
   stopifnot(length(dim(mat)) == 2)
@@ -1543,11 +1552,45 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 }
 
 
-# Multi-dimensional lists ----------------------------------------------------------------
+# _________________________________________________________________________________________________
+#' df.remove.empty.rows.and.columns
+#'
+#' @param df Data frame to filter for rows and columns with only-0 values.
+#' @param empty what is empty? Default: 0
+#' @param plot_stats plot removal stats?
+#' @export
+df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF, empty = 0, plot_stats = T) {
 
+  df.boolean <- (df != empty)
+  view.head(df.boolean)
+  rsx <- rowSums(df.boolean)
+  csx <- colSums(df.boolean)
+
+  s1 = pc_TRUE(csx ==0, suffix = 'of the columns are empty/removed.')
+  s2 = pc_TRUE(rsx ==0, suffix = 'of the rows are empty/removed.')
+
+  if (plot_stats) {
+    Removal.Dimensions <- c(
+      'cols' = pc_TRUE(csx ==0, percentify = F),
+      'rows' = pc_TRUE(rsx ==0, percentify = F)
+    )
+    qbarplot(Removal.Dimensions, label = percentage_formatter(Removal.Dimensions)
+             , xlab.angle = 45, xlab =''
+             , ylim = 0:1, ylab = "Fractions removed")
+  }
+
+  df.filt <- df[rsx > 0, csx > 0]
+  idim(df.filt)
+  return(df.filt)
+
+}
 
 
 # _________________________________________________________________________________________________
+# Multi-dimensional lists ____________________________________________________________ ----
+
+
+
 #' @title copy.dimension.and.dimnames
 #' @description Copy dimension and dimnames.
 #' @param list.1D PARAM_DESCRIPTION
@@ -1602,10 +1645,10 @@ mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.list
 
 
 
-# List operations -------------------------------------------------------------------------------------------------
-
-
 # _________________________________________________________________________________________________
+# List operations ____________________________________________________________ ----
+
+
 #' @title any.duplicated.rownames.ls.of.df
 #' @description Check if there are any duplocated rownames in a list of dataframes.
 #' @param ls List of 2 or more vectors (sets) with categorical variables.
@@ -1941,11 +1984,11 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
   return(replicated.name.vec)
 }
 
-## Set operations -------------------------------------------------------------------------------------------------
-
-
-
 # _________________________________________________________________________________________________
+## Set operations ____________________________________________________________ ----
+
+
+
 #' @title symdiff
 #' @description Quasy symmetric difference of any number of vectors.
 #' @param x PARAM_DESCRIPTION
@@ -1962,11 +2005,11 @@ symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of v
 
 
 
-## Math & stats -------------------------------------------------------------------------------------------------
-
-
-
 # _________________________________________________________________________________________________
+## Math & stats ____________________________________________________________ ----
+
+
+
 #' @title iround
 #' @description Rounds a value to the significant amount of digits. Its a wrapper for signif().
 #' @param x Unrounded number.
