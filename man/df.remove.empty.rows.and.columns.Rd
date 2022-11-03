@@ -6,12 +6,18 @@
 \usage{
 df.remove.empty.rows.and.columns(
   df = UVI.assignment.filtered.3.HF,
+  suffix = substitute(df),
+  rows = "rows",
+  cols = "cols",
   empty = 0,
-  plot_stats = T
+  plot_stats = T,
+  ...
 )
 }
 \arguments{
 \item{df}{Data frame to filter for rows and columns with only-0 values.}
+
+\item{cols}{}
 
 \item{empty}{what is empty? Default: 0}
 

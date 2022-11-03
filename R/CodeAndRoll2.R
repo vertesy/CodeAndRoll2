@@ -1557,9 +1557,19 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 #'
 #' @param df Data frame to filter for rows and columns with only-0 values.
 #' @param empty what is empty? Default: 0
+#' @param suffix
+#' @param ...
 #' @param plot_stats plot removal stats?
+#' @param rows
+#' @param cols
+#'
 #' @export
-df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF, empty = 0, plot_stats = T) {
+df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF
+                                             , suffix = substitute(df)
+                                             , rows = 'rows'
+                                             , cols = 'cols'
+                                             , empty = 0, plot_stats = T
+                                             , ...) {
 
   df.boolean <- (df != empty)
   view.head(df.boolean)
@@ -1571,18 +1581,20 @@ df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF, 
 
   if (plot_stats) {
     Removal.Dimensions <- c(
-      'cols' = pc_TRUE(csx ==0, percentify = F),
-      'rows' = pc_TRUE(rsx ==0, percentify = F)
+      'rows' = pc_TRUE(rsx ==0, percentify = F),
+      'cols' = pc_TRUE(csx ==0, percentify = F)
     )
+    names(Removal.Dimensions) <- c(rows, cols)
     qbarplot(Removal.Dimensions, label = percentage_formatter(Removal.Dimensions)
+             , suffix = suffix
              , xlab.angle = 45, xlab =''
-             , ylim = 0:1, ylab = "Fractions removed")
+             , ylim = 0:1, ylab = "Fractions removed"
+             , ...)
   }
 
   df.filt <- df[rsx > 0, csx > 0]
   idim(df.filt)
   return(df.filt)
-
 }
 
 
