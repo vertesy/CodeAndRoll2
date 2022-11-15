@@ -7,7 +7,7 @@
 merge_numeric_df_by_rn(x, y)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{Input matrix, or all-numeric dataframe.}
 
 \item{y}{PARAM_DESCRIPTION}
 }

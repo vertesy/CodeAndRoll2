@@ -9,8 +9,8 @@ colSD(x, na.rm = TRUE)
 \arguments{
 \item{x}{Numeric input matrix with the distribution.}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 }
 \description{
-Calculates the SEM of each column of a numeric matrix / data frame.
+Calculates the SD of each column of a numeric matrix / data frame.
 }

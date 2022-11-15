@@ -9,7 +9,7 @@ fano(x, na.rm = TRUE, USE = "na.or.complete")
 \arguments{
 \item{x}{PARAM_DESCRIPTION}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 
 \item{USE}{PARAM_DESCRIPTION, Default: 'na.or.complete'}
 }

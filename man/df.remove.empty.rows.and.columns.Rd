@@ -17,11 +17,13 @@ df.remove.empty.rows.and.columns(
 \arguments{
 \item{df}{Data frame to filter for rows and columns with only-0 values.}
 
-\item{cols}{}
+\item{suffix}{barplot title and filename suffix.}
 
 \item{empty}{what is empty? Default: 0}
 
 \item{plot_stats}{plot removal stats?}
+
+\item{...}{Pass any other argument.}
 }
 \description{
 df.remove.empty.rows.and.columns

@@ -9,7 +9,7 @@ sem(x, na.rm = TRUE)
 \arguments{
 \item{x}{PARAM_DESCRIPTION}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 }
 \description{
 Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).

@@ -4,16 +4,16 @@
 \alias{remove_outliers}
 \title{remove_outliers}
 \usage{
-remove_outliers(x, na.rm = TRUE, ..., probs = c(0.05, 0.95))
+remove_outliers(x, na.rm = TRUE, probs = c(0.05, 0.95), ...)
 }
 \arguments{
 \item{x}{PARAM_DESCRIPTION}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
-
-\item{...}{Pass any other argument.}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 
 \item{probs}{PARAM_DESCRIPTION, Default: c(0.05, 0.95)}
+
+\item{...}{Pass any other argument.}
 }
 \description{
 Remove values that fall outside the trailing N \% of the distribution.

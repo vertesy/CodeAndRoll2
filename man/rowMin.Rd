@@ -7,10 +7,17 @@
 rowMin(x, na.rm = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{Input matrix, or all-numeric dataframe.}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 }
 \description{
 Calculates the minimum of each row of a numeric matrix / data frame.
+}
+\details{
+#' #' @title colNrNAs
+#' #' @description Calculates the number of NA-values of each column of a matrix / data frame.
+#' #' @param x Numeric input matrix with the distribution.
+#' #' @export
+colNrNAs <- function(x) colSums(is.na(x), na.rm = FALSE)
 }

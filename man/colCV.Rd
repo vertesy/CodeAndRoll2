@@ -7,9 +7,9 @@
 colCV(x, na.rm = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{Input matrix, or all-numeric dataframe.}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 }
 \description{
 Calculates the CV of each column of a numeric matrix / data frame.

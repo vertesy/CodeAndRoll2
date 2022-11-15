@@ -20,7 +20,7 @@ clip.outliers.at.percentile(
 
 \item{percentiles}{At which percentiles to cut off?, Default: c(0.01, 0.99)}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 
 \item{showhist}{PARAM_DESCRIPTION, Default: FALSE}
 

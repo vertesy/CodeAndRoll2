@@ -11,7 +11,7 @@ mean_of_log(x, k = 2, na.rm = TRUE)
 
 \item{k}{PARAM_DESCRIPTION, Default: 2}
 
-\item{na.rm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE}
 }
 \description{
 Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).

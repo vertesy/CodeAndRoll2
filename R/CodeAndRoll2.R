@@ -601,7 +601,7 @@ clip.at.fixed.value <- function(distribution, high = TRUE, thr = 3) { # Signal c
 #' @param distribution A vector of numeric values.
 #' @param high Clip above threshold? Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+#' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
 #' @param ... Pass any other argument.
 #' @export
@@ -884,17 +884,14 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 #' @title remove_outliers
 #' @description Remove values that fall outside the trailing N % of the distribution.
 #' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @param ... Pass any other argument.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @param probs PARAM_DESCRIPTION, Default: c(0.05, 0.95)
+#' @param ... Pass any other argument.
 #' @export
-remove_outliers <- function(x, na.rm = TRUE, ..., probs = c(.05, .95)) { # Remove values that fall outside the trailing N % of the distribution.
+remove_outliers <- function(x, na.rm = TRUE, probs = c(.05, .95), ...) { # Remove values that fall outside the trailing N % of the distribution.
   print("Deprecated. Use clip.outliers.at.percentile()")
   qnt <- quantile(x, probs = probs, na.rm = na.rm, ...)
-  # H <- 1.5 * IQR(x, na.rm = na.rm)
   y <- x
-  # y[x < (qnt[1] - H)] <- NA ## Add IQR dependence
-  # y[x > (qnt[2] + H)] <- NA
   y[x < qnt[1]] <- NA ## Add IQR dependence
   y[x > qnt[2]] <- NA
   y
@@ -924,194 +921,28 @@ simplify_categories <- function(category_vec, replaceit , to ) { # Replace every
 
 
 
-#' @title rowMedians
-#' @description Calculates the median of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+# _________________________________________________________________________________________________
+#' @title colSubtract
+#' @description Subtract a vector (length = nr. columns) column by column from each value of the matrix.
+#' @param mat Numeric input matrix.
+#' @param vec Vector to subtract. Length = nr. columns.
 #' @export
-rowMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, median, na.rm = na.rm) # Calculates the median of each row of a numeric matrix / data frame.
+colSubtract <- function(mat = xx, vec = 5:1) {
+  stopifnot(NCOL(mat) == length(vec))
+  t(apply(mat, 1, function(x) x - vec))
+}
 
 
 # _________________________________________________________________________________________________
-#' @title colMedians
-#' @description Calculates the median of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+#' @title rowSubtract
+#' @description Subtract a vector (length = nr. rows) row by row from each value of the matrix
+#' @param mat Numeric input matrix.
+#' @param vec Vector to subtract. Length = nr. rows.
 #' @export
-colMedians <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, median, na.rm = na.rm) # Calculates the median of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowGeoMeans
-#' @description Calculates the median of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, geomean, na.rm = na.rm) # Calculates the median of each row of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colGeoMeans
-#' @description Calculates the median of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colGeoMeans <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, geomean, na.rm = na.rm) # Calculates the median of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowCV
-#' @description Calculates the CV of each ROW of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, cv, na.rm = na.rm ) # Calculates the CV of each ROW of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colCV
-#' @description Calculates the CV of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colCV <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, cv, na.rm = na.rm ) # Calculates the CV of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowVariance
-#' @description Calculates the CV of each ROW of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, var, na.rm = na.rm ) # Calculates the CV of each ROW of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colVariance
-#' @description Calculates the CV of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colVariance <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, var, na.rm = na.rm ) # Calculates the CV of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowMin
-#' @description Calculates the minimum of each row of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, min, na.rm = na.rm) # Calculates the minimum of each row of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colMin
-#' @description Calculates the minimum of each column of a numeric matrix / data frame.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colMin <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, min, na.rm = na.rm) # Calculates the minimum of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowMax
-#' @description Calculates the maximum of each row of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, max, na.rm = na.rm) # Calculates the maximum of each row of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colMax
-#' @description Calculates the maximum of each column of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colMax <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, max, na.rm = na.rm) # Calculates the maximum of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowSEM
-#' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sem, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colSEM
-#' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colSEM <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sem, na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowSD
-#' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, sd, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colSD
-#' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colSD <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, sd, na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowIQR
-#' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rowIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 1, IQR, na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colIQR
-#' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @export
-colIQR <- function(x, na.rm = TRUE) apply(data.matrix(x), 2, IQR, na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
-
-
-
-# _________________________________________________________________________________________________
-#' @title rowquantile
-#' @description Calculates the SEM of each row of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @param ... Pass any other argument.
-#' @export
-rowquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 1, quantile, ..., na.rm = na.rm) # Calculates the SEM of each row of a numeric matrix / data frame.
-
-
-# _________________________________________________________________________________________________
-#' @title colquantile
-#' @description Calculates the SEM of each column of a numeric matrix / data frame.
-#' @param x Numeric input matrix with the distribution.
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
-#' @param ... Pass any other argument.
-#' @export
-colquantile <- function(x, na.rm = TRUE, ...) apply(data.matrix(x), 2, quantile, ..., na.rm = na.rm) # Calculates the SEM of each column of a numeric matrix / data frame.
+rowSubtract <- function(mat = yy, vec = 5:1) {
+  stopifnot(NROW(mat) == length(vec))
+  apply(mat, 2, function(x) x - vec)
+}
 
 
 
@@ -1186,6 +1017,207 @@ row.Zscore <- function(x) t(scale(t(x)))
 
 
 # _________________________________________________________________________________________________
+### Matrix stats basic ____________________________________________________________ ----
+
+
+# _________________________________________________________________________________________________
+#' @title rowMin
+#' @description Calculates the minimum of each row of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowMin <- function(x, na.rm = TRUE) { apply(data.matrix(x), 1, min, na.rm = na.rm) }
+
+
+# _________________________________________________________________________________________________
+#' @title colMin
+#' @description Calculates the minimum of each column of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colMin <- function(x, na.rm = TRUE) { apply(data.matrix(x), 2, min, na.rm = na.rm) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowMax
+#' @description Calculates the maximum of each row of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowMax <- function(x, na.rm = TRUE) { apply(data.matrix(x), 1, max, na.rm = na.rm)  }
+
+
+# _________________________________________________________________________________________________
+#' @title colMax
+#' @description Calculates the maximum of each column of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colMax <- function(x, na.rm = TRUE) {  apply(data.matrix(x), 2, max, na.rm = na.rm) }
+
+
+
+# _________________________________________________________________________________________________
+### Matrix stats ____________________________________________________________ ----
+
+
+#' @title rowMedians
+#' @description Calculates the median of each row of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowMedians <- function(x, na.rm = TRUE) {  apply(data.matrix(x), 1, median, na.rm = na.rm) }
+
+
+# _________________________________________________________________________________________________
+#' @title colMedians
+#' @description Calculates the median of each column of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colMedians <- function(x, na.rm = TRUE) { apply(data.matrix(x), 2, median, na.rm = na.rm) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowGeoMeans
+#' @description Calculates the median of each row of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowGeoMeans <- function(x, na.rm = TRUE) { apply(data.matrix(x), 1, geomean, na.rm = na.rm) }
+
+
+# _________________________________________________________________________________________________
+#' @title colGeoMeans
+#' @description Calculates the median of each column of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colGeoMeans <- function(x, na.rm = TRUE) {  apply(data.matrix(x), 2, geomean, na.rm = na.rm) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowCV
+#' @description Calculates the CV of each ROW of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowCV <- function(x, na.rm = TRUE) { apply(data.matrix(x), 1, cv, na.rm = na.rm ) }
+
+
+# _________________________________________________________________________________________________
+#' @title colCV
+#' @description Calculates the CV of each column of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colCV <- function(x, na.rm = TRUE) { apply(data.matrix(x), 2, cv, na.rm = na.rm ) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowVariance
+#' @description Calculates the CV of each ROW of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowVariance <- function(x, na.rm = TRUE) {  apply(data.matrix(x), 1, var, na.rm = na.rm ) }
+
+
+# _________________________________________________________________________________________________
+#' @title colVariance
+#' @description Calculates the CV of each column of a numeric matrix / data frame.
+#' @param x Input matrix, or all-numeric dataframe.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colVariance <- function(x, na.rm = TRUE) { apply(data.matrix(x), 2, var, na.rm = na.rm ) }
+
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowSEM
+#' @description Calculates the SEM of each row of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowSEM <- function(x, na.rm = TRUE) { apply(data.matrix(x), 1, sem, na.rm = na.rm) }
+
+
+# _________________________________________________________________________________________________
+#' @title colSEM
+#' @description Calculates the SEM of each column of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colSEM <- function(x, na.rm = TRUE) { apply(data.matrix(x), 2, sem, na.rm = na.rm) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowSD
+#' @description Calculates the SEM of each row of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowSD <- function(x, na.rm = TRUE) { apply(data.matrix(x), 1, sd, na.rm = na.rm) }
+
+
+# _________________________________________________________________________________________________
+#' @title colSD
+#' @description Calculates the SD of each column of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colSD <- function(x, na.rm = TRUE) { apply(data.matrix(x), 2, sd, na.rm = na.rm) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowIQR
+#' @description Calculates the IQR of each row of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+rowIQR <- function(x, na.rm = TRUE) { apply(data.matrix(x), 1, IQR, na.rm = na.rm) }
+
+
+# _________________________________________________________________________________________________
+#' @title colIQR
+#' @description Calculates the IQR of each column of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @export
+colIQR <- function(x, na.rm = TRUE) { apply(data.matrix(x), 2, IQR, na.rm = na.rm) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title rowQuantile
+#' @description Calculates the quantile of each row of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @param ... Pass any other argument.
+#' @export
+rowQuantile <- function(x, na.rm = TRUE, ...) { apply(data.matrix(x), 1, quantile, ..., na.rm = na.rm) }
+
+
+# _________________________________________________________________________________________________
+#' @title colQuantile
+#' @description Calculates the quantile of each column of a numeric matrix / data frame.
+#' @param x Numeric input matrix with the distribution.
+#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' @param ... Pass any other argument.
+#' @export
+colQuantile <- function(x, na.rm = TRUE, ...) { apply(data.matrix(x), 2, quantile, ..., na.rm = na.rm) }
+
+
+
+
+# _________________________________________________________________________________________________
 # _________________________________________________________________________________________________
 # _________________________________________________________________________________________________
 #' @title TPM_normalize
@@ -1206,7 +1238,7 @@ TPM_normalize <- function(mat, SUM = 1e6) { # normalize each column to 1 million
 #' @description Normalize each column to the median of all the column-sums.
 #' @param mat Numeric input matrix with the distribution.
 #' @export
-median_normalize <- function(mat) { # normalize each column to the median of all the column-sums
+median_normalize <- function(mat) {
   cs = colSums(mat, na.rm = TRUE)
   norm_mat = (t(t(mat) / cs)) * median(cs)
   iprint("colMedians: ", head(signif(colMedians(norm_mat), digits = 3)))
@@ -1466,7 +1498,7 @@ merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE= 1) {
 # _________________________________________________________________________________________________
 #' @title merge_numeric_df_by_rn
 #' @description Merge 2 numeric data frames by rownames.
-#' @param x PARAM_DESCRIPTION
+#' @param x Input matrix, or all-numeric dataframe.
 #' @param y PARAM_DESCRIPTION
 #' @export
 merge_numeric_df_by_rn <- function(x, y) { # Merge 2 numeric data frames by rownames
@@ -1557,11 +1589,11 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 #'
 #' @param df Data frame to filter for rows and columns with only-0 values.
 #' @param empty what is empty? Default: 0
-#' @param suffix
-#' @param ...
+#' @param suffix barplot title and filename suffix.
 #' @param plot_stats plot removal stats?
 #' @param rows
 #' @param cols
+#' @param ... Pass any other argument.
 #'
 #' @export
 df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF
@@ -2056,7 +2088,7 @@ modus <- function(x) {
 #' @title cv
 #' @description ..
 #' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+#' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @export
 cv <- function(x, na.rm = TRUE) {
   sd( x, na.rm = na.rm)/mean(x, na.rm = na.rm)
@@ -2068,7 +2100,7 @@ cv <- function(x, na.rm = TRUE) {
 #' @title sem
 #' @description Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+#' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @export
 sem <-
   function(x, na.rm = TRUE)
@@ -2080,7 +2112,7 @@ sem <-
 #' @title fano
 #' @description Calculates the fano factor on a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+#' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @param USE PARAM_DESCRIPTION, Default: 'na.or.complete'
 #' @export
 fano <-
@@ -2093,7 +2125,7 @@ fano <-
 #' @title geomean
 #' @description Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+#' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @export
 geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a numeric vector (it excludes NA-s by default)
   exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x)) }
@@ -2105,7 +2137,7 @@ geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a nume
 #' @description Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
 #' @param x PARAM_DESCRIPTION
 #' @param k PARAM_DESCRIPTION, Default: 2
-#' @param na.rm PARAM_DESCRIPTION, Default: TRUE
+#' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @export
 mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
   negs = sum(x < 0);  zeros = sum(x == 0)
