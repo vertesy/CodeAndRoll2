@@ -480,6 +480,14 @@ rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a gi
   return(vec)
 } # fun
 
+# _________________________________________________________________________________________________
+#' @title fractions
+#' @description x/sum(x)
+#' @param vec input vector
+#' @param na_rm remove NAs 
+#' @export
+fractions <- function(vec, na_rm = TRUE) vec/ sum(vec, na.rm = na_rm)
+
 
 # _________________________________________________________________________________________________
 
