@@ -188,6 +188,8 @@ getCategories <-
 # _________________________________________________________________________________________________
 ## Vector operations ____________________________________________________________ ----
 
+
+
 #' @title grepv
 #' @description grep returning the value. A character string containing a regular expression (or character string for fixed = TRUE) to be matched in the given character vector. Coerced by as.character to a character string if possible. If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values are allowed except for regexpr, gregexpr and regexec.
 #' @param pattern pattern to look for
@@ -200,9 +202,11 @@ getCategories <-
 #' @param invert logical. If TRUE return indices or values for elements that do not match. Default: FALSE
 #' @param ... Pass any other argument.
 #' @export
-grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE, fixed = FALSE, useBytes = FALSE  # grep returning the value
-                  , invert = FALSE, ...) grep(pattern, x, ignore.case = ignore.case, perl = perl, fixed = fixed
-                                              , useBytes = useBytes, invert = invert, ..., value = TRUE)
+grepv <- function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE
+                  , fixed = FALSE, useBytes = FALSE, invert = FALSE, ...) {
+  grep(pattern, x, ignore.case = ignore.case, perl = perl, fixed = fixed
+       , useBytes = useBytes, invert = invert, ..., value = TRUE)
+}
 
 
 
@@ -390,6 +394,15 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
   tbl <- dplyr::bind_rows(vec.w.names)
   if (transpose) t(tbl) else tbl
 }
+
+
+# _________________________________________________________________________________________________
+#' @title Get the unique elements, keep their names
+#'
+#' @param x A vector with names
+#' @export
+unique.wNames <- function(x) { x[!duplicated(x)] }
+
 
 
 
