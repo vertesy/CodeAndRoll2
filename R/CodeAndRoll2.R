@@ -279,39 +279,21 @@ sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(s
 
 
 # _________________________________________________________________________________________________
-#' @title as.named.vector2
+#' @title as.named.vector.df
 #' @description Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
 #' @param index.rc Which column or row to extract (numeric index).
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
 #' @export
-as.named.vector2 <- function(df, index.rc = 1, WhichDimNames = 1) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
-  namez = dimnames(df)[[WhichDimNames]]
-  name.selection <- dimnames(df)[[ (3-WhichDimNames) ]][index.rc]
+as.named.vector.df <- function(df, col.or.row.name.or.index = 1
+                               , WhichDimNames = 1, ...) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
+
+  name.selection <- dimnames(df)[[ (3-WhichDimNames) ]][col.or.row.name.or.index]
   iprint("Variable used:", name.selection)
 
-  if (WhichDimNames==1) {
-    vecc <- as.vector(unlist(df[ , index.rc]))
-  } else if (WhichDimNames==2) {
-    vecc <- as.vector(unlist(df[ index.rc, ]))
-  }
-  names(vecc) = namez
-  return(vecc)
-}
+  vecc <- if (WhichDimNames == 1) as.vector(unlist(df[ , col.or.row.name.or.index]), ...) else
+    if (WhichDimNames == 2) as.vector(unlist(df[col.or.row.name.or.index, ]), ...)
 
-
-#' @title as.named.vector
-#' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
-#' @param df_col data frame column
-#' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
-#' @export
-as.named.vector <- function(df_col, WhichDimNames = 1) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
-  namez = dimnames(df_col)[[WhichDimNames]]
-  # use RowNames: WhichDimNames = 1 , 2: use ColNames
-  # !!! might require drop = FALSE in subsetting!!! eg: df_col[, 3, drop = FALSE]
-  # df_col[which(unlist(lapply(df_col, is.null)))] = "NULL" # replace NULLs - they would fall out of vectors - DOES not work yet
-  if (is.list(df_col) & !is.data.frame(df_col)) {namez = names(df_col)}
-  vecc = as.vector(unlist(df_col))
-  names(vecc) = namez
+  names(vecc) = dimnames(df)[[WhichDimNames]]
   return(vecc)
 }
 
@@ -2295,7 +2277,7 @@ shannon.entropy <- function(p) {
 #' @title as.numeric.wNames.deprecated
 #' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @param vec input vector
-#' @export as.numeric.wNames
+#' @export
 as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
   numerified_vec = as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
   if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
@@ -2319,4 +2301,21 @@ as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
   return(vec2)
 }
 
+
+# _________________________________________________________________________________________________
+#' @title as.named.vector.deprecated
+#' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
+#' @param df_col data frame column
+#' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
+#' @export
+as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
+  namez = dimnames(df_col)[[WhichDimNames]]
+  # use RowNames: WhichDimNames = 1 , 2: use ColNames
+  # !!! might require drop = FALSE in subsetting!!! eg: df_col[, 3, drop = FALSE]
+  # df_col[which(unlist(lapply(df_col, is.null)))] = "NULL" # replace NULLs - they would fall out of vectors - DOES not work yet
+  if (is.list(df_col) & !is.data.frame(df_col)) {namez = names(df_col)}
+  vecc = as.vector(unlist(df_col))
+  names(vecc) = namez
+  return(vecc)
+}
 
