@@ -407,32 +407,70 @@ unique.wNames <- function(x) { x[!duplicated(x)] }
 
 
 # _________________________________________________________________________________________________
-#' @title as.numeric.wNames
-#' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+#' @title as.numeric.wNames.character
+#' @description Converts (1) a 'character' v. into a numeric v., or
+#' a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.
+#' The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via facotr in any case. Code saved at the end.
 #' @param vec input vector
-#' @export as.numeric.wNames
-as.numeric.wNames <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
-  numerified_vec = as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
-  if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
+#' @param verbose
+#' @param factor.to.character
+#' @param ... Pass any other argument to as.numeric()
+#' @export
+#'
+#' @examples vec <- as.character(c(1,2,8,9)); names(vec) <- LETTERS[1:4]; vec; as.numeric.wNames.character(vec);
+#' vec2 <- as.factor(c(1,2,8,9)); names(vec2) <- LETTERS[1:4]; vec2; as.numeric.wNames.character(vec2, factor.to.character = FALSE)
+
+as.numeric.wNames.character <- function(vec, verbose = TRUE
+                                           , factor.to.character = TRUE, ...) {
+
+  if (is.character(vec) | is.logical(vec)) {
+    numerified_vec <- as.numeric(vec, ...)
+  } else {
+    if (verbose) print("Input vector is not 'character' or 'logical'.")
+    if (is.factor(vec)) {
+      if (verbose) print("Input vector is factor.")
+      if (factor.to.character) {
+        if (verbose) { print("Input vector converted to 'character', then numeric.") }
+        numerified_vec <- as.numeric(as.character(vec), ...)
+      } else {
+        warning("Input is factor, now converted as is")
+        numerified_vec <- as.numeric(vec, ...)
+      } # else / factor.to.character
+    } else {
+      warning("Input vector is not character/logical/factor. Simple conversion attempted.")
+      numerified_vec <- as.numeric(vec, ...)
+    } # else / is.factor
+  }  # else / is.character or is.logical
+
+  if(is.null(names(vec))) { warning("Input vector has no names!")
+  } else { names(numerified_vec) <- names(vec) } # else: has names
+
   return(numerified_vec)
 }
 
 
+
 # _________________________________________________________________________________________________
-#' @title as.factor.numeric
+#' @title as.numeric.wNames.factor
 #' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
-#' @param vec vector of factors or strings
-#' @param rename Rename the vector?
-#' @param ... Pass any other argument. to as.factor()
+#' Forerly as.factor.numeric
+#' @param vec vector of factors, strings, (or even logical)
+#' @param ... Pass any other argument to as.factor()
 #' @export
 #'
-#' @examples as.factor.numeric(LETTERS[1:4])
+#' @examples as.numeric.wNames.factor(LETTERS[1:4])
 
-as.factor.numeric <- function(vec, rename = FALSE, ...) {
-  vec2 = as.numeric(as.factor(vec, ...)) ;
-  names (vec2) <- if ( !rename & !is.null(names(vec) ) ) { names (vec)
-  } else { vec }
-  return(vec2)
+as.numeric.wNames.factor <- function(vec,  ...) {
+
+  if (is.character(vec)) warning("Input is character, now converted via as.factor()")
+  if (is.logical(vec)) warning("Input is logical, now converted via as.factor()")
+
+  numerified_vec = as.numeric(as.factor(vec, ...)) ;
+
+  if(is.null(names(vec))) { warning("Input vector has no names!")
+  } else { names(numerified_vec) <- names(vec) } # else: has names
+
+  return(numerified_vec)
 }
 
 
@@ -497,7 +535,7 @@ rescale <- function(vec, from = 0, upto = 100) { # Linear transformation to a gi
 #' @title fractions
 #' @description x/sum(x)
 #' @param vec input vector
-#' @param na_rm remove NAs 
+#' @param na_rm remove NAs
 #' @export
 fractions <- function(vec, na_rm = TRUE) vec/ sum(vec, na.rm = na_rm)
 
@@ -2250,3 +2288,35 @@ shannon.entropy <- function(p) {
 
 
 ################################################################################################
+
+# DON'T DELETE: FOR BACKTRACKING
+
+# _________________________________________________________________________________________________
+#' @title as.numeric.wNames.deprecated
+#' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+#' @param vec input vector
+#' @export as.numeric.wNames
+as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+  numerified_vec = as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
+  if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
+  return(numerified_vec)
+}
+
+# _________________________________________________________________________________________________
+#' @title as.factor.numeric.deprecated
+#' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
+#' @param vec vector of factors or strings
+#' @param rename Rename the vector?
+#' @param ... Pass any other argument. to as.factor()
+#' @export
+#'
+#' @examples as.factor.numeric(LETTERS[1:4])
+
+as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
+  vec2 = as.numeric(as.factor(vec, ...)) ;
+  names (vec2) <- if ( !rename & !is.null(names(vec) ) ) { names (vec)
+  } else { vec }
+  return(vec2)
+}
+
+
