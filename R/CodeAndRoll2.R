@@ -1582,6 +1582,36 @@ merge_2_named_vec_as_df <- function(x, y) { # Merge any data frames by rownames.
 }
 
 
+# _________________________________________________________________________________________________
+#' @title merge_ls_of_named_vec_as_df_cols
+#' @description Merge any number of named vectors (presented as a list) by names, into a dataframe
+#' @param named_list A named list of named vectors.
+#' @param missing_values How to fill missing values
+#' @examples # merge_ls_of_named_vec_as_df_cols()
+#' @export
+
+merge_ls_of_named_vec_as_df_cols <- function(
+    named_list = list(vec1 = c(A = 1, B = 2, C = 3),
+                      vec2 = c(B = 4, D = 5),
+                      vec3 = c(A = 6, C = 7, D = 8),
+                      vec4 = c(B = 9, C = 10, D = 11, E = 12))
+    , missing_values = NaN
+) {
+
+  stopifnot(length(names(named_list)) == length(named_list)) # stop if names are missing
+  stopifnot(all(unlapply(lapply(named_list, names), length)>0)) # stop if there are empty vectors
+
+  # Merge any data frames by rownames. Required plyr package
+  ls.indexed.dfs <- lapply(named_list, stack)
+  suppressWarnings(COMBINED <- Reduce(function(x,y) merge(x, y, by="ind", all=TRUE, ), ls.indexed.dfs))
+
+  colnames(COMBINED)[-1] <- names(named_list)
+  COMBINED[is.na(COMBINED)] <- missing_values
+
+  return(FirstCol2RowNames(COMBINED))
+}
+
+
 
 
 # _________________________________________________________________________________________________
