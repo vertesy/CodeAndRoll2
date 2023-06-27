@@ -2283,19 +2283,6 @@ imovingSEM <- function(x, oneSide = 5) {
 
 
 # _________________________________________________________________________________________________
-#' @title shannon.entropy
-#' @description Calculate shannon entropy.
-#' @param p PARAM_DESCRIPTION
-#' @export
-shannon.entropy <- function(p) {
-  # Calculate shannon entropy
-  if (min(p) < 0 || sum(p) <= 0)
-    return(NA)
-  p.norm <- p[p > 0] / sum(p) - sum(log2(p.norm) * p.norm)
-}
-
-
-# _________________________________________________________________________________________________
 
 
 
