@@ -1656,36 +1656,47 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 
 
 # _________________________________________________________________________________________________
-#' df.remove.empty.rows.and.columns
+#' Remove empty rows and columns from a data frame.
 #'
-#' @param df Data frame to filter for rows and columns with only-0 values.
-#' @param empty what is empty? Default: 0
-#' @param suffix barplot title and filename suffix.
-#' @param plot_stats plot removal stats?
-#' @param rows
-#' @param cols
-#' @param ... Pass any other argument.
+#' This function takes a data frame and a threshold value, and removes all rows and columns that contain only zeros or the threshold value.
 #'
+#' @param df A data frame.
+#' @param suffix A suffix to add to the plot titles.
+#' @param rows The name of the variable that will store the fraction of rows that were removed.
+#' @param cols The name of the variable that will store the fraction of columns that were removed.
+#' @param thr.cell.empty The threshold value below a cell is considered "empty".
+#' @param plot_stats Whether to plot the fraction of rows and columns that were removed.
+#' @param ... Additional arguments to pass to `qbarplot`.
+#'
+#' @return A data frame with the empty rows and columns removed.
 #' @export
+
 df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF
                                              , suffix = substitute(df)
                                              , rows = 'rows'
                                              , cols = 'cols'
-                                             , empty = 0, plot_stats = T
+                                             , thr.cell.empty = 0
+                                             , plot_stats = T
                                              , ...) {
 
-  df.boolean <- (df != empty)
-  view.head(df.boolean)
+  # Create a boolean vector that indicates whether each cell is non-empty
+  df.boolean <- (df != thr.cell.empty)
+  # view.head(df.boolean)
+
+  # Calculate the number of non-empty rows and columns
   rsx <- rowSums(df.boolean)
   csx <- colSums(df.boolean)
 
-  s1 = pc_TRUE(csx ==0, suffix = 'of the columns are empty/removed.')
-  s2 = pc_TRUE(rsx ==0, suffix = 'of the rows are empty/removed.')
+  # Calculate the fraction of rows and columns that were removed
+  s1 <- pc_TRUE(csx == 0, suffix = paste0(cols, ' are empty/removed.'), NumberAndPC = T)
+  s2 <- pc_TRUE(rsx == 0, suffix = paste0(rows, ' are empty/removed.'), NumberAndPC = T)
+  print(s1); print(s2)
 
+  # Plot the fraction of rows and columns that were removed, if requested
   if (plot_stats) {
     Removal.Dimensions <- c(
-      'rows' = pc_TRUE(rsx ==0, percentify = F),
-      'cols' = pc_TRUE(csx ==0, percentify = F)
+      'rows' = pc_TRUE(rsx == 0, percentify = F),
+      'cols' = pc_TRUE(csx == 0, percentify = F)
     )
     names(Removal.Dimensions) <- c(rows, cols)
     qbarplot(Removal.Dimensions, label = percentage_formatter(Removal.Dimensions)
@@ -1695,10 +1706,12 @@ df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF
              , ...)
   }
 
+  # Remove the empty rows and columns
   df.filt <- df[rsx > 0, csx > 0]
   idim(df.filt)
   return(df.filt)
 }
+
 
 
 # _________________________________________________________________________________________________

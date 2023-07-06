@@ -394,8 +394,8 @@ unique.wNames <- function(x) { x[!duplicated(x)] }
 #' a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.
 #' The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via facotr in any case. Code saved at the end.
 #' @param vec input vector
-#' @param verbose
-#' @param factor.to.character
+#' @param verbose Print troubleshooting messages
+#' @param factor.to.character convert Input vector to first to 'character', then numeric.
 #' @param ... Pass any other argument to as.numeric()
 #' @export
 #'

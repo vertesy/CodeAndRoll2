@@ -9,6 +9,10 @@
 \arguments{
 \item{vec}{input vector}
 
+\item{verbose}{Print troubleshooting messages}
+
+\item{factor.to.character}{convert Input vector to first to 'character', then numeric.}
+
 \item{...}{Pass any other argument to as.numeric()}
 }
 \description{

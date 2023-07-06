@@ -2,29 +2,36 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{df.remove.empty.rows.and.columns}
 \alias{df.remove.empty.rows.and.columns}
-\title{df.remove.empty.rows.and.columns}
+\title{Remove empty rows and columns from a data frame.}
 \usage{
 df.remove.empty.rows.and.columns(
   df = UVI.assignment.filtered.3.HF,
   suffix = substitute(df),
   rows = "rows",
   cols = "cols",
-  empty = 0,
+  thr.cell.empty = 0,
   plot_stats = T,
   ...
 )
 }
 \arguments{
-\item{df}{Data frame to filter for rows and columns with only-0 values.}
+\item{df}{A data frame.}
 
-\item{suffix}{barplot title and filename suffix.}
+\item{suffix}{A suffix to add to the plot titles.}
 
-\item{empty}{what is empty? Default: 0}
+\item{rows}{The name of the variable that will store the fraction of rows that were removed.}
 
-\item{plot_stats}{plot removal stats?}
+\item{cols}{The name of the variable that will store the fraction of columns that were removed.}
 
-\item{...}{Pass any other argument.}
+\item{thr.cell.empty}{The threshold value below a cell is considered "empty".}
+
+\item{plot_stats}{Whether to plot the fraction of rows and columns that were removed.}
+
+\item{...}{Additional arguments to pass to \code{qbarplot}.}
+}
+\value{
+A data frame with the empty rows and columns removed.
 }
 \description{
-df.remove.empty.rows.and.columns
+This function takes a data frame and a threshold value, and removes all rows and columns that contain only zeros or the threshold value.
 }
