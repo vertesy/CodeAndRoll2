@@ -7,10 +7,18 @@
 pad.na(x, len)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A vector that needs to be padded with NA. This can be of any type (numeric, etc.)}
 
-\item{len}{PARAM_DESCRIPTION}
+\item{len}{The target length for the vector. If the provided length is less than the length of
+the input vector, the function does not make any change to the input vector.}
+}
+\value{
+Returns a vector of the same type as the input, but with its length adjusted to the
+specified len, padding with NA values at the end if necessary.
 }
 \description{
-Fill up with a vector to a given length with NA-values at the end.
+This function fills up a vector to a given length by appending NA-values at the end.
+If the input vector's length is less than the provided length, the function pads the vector
+with NA. If the vector's length is already equal to or greater than the given length, no change
+will be made.
 }

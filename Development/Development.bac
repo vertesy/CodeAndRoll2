@@ -586,11 +586,11 @@ any.duplicated <- function(vec, summarize = TRUE) { # How many entries are dupli
 #' @title which.duplicated
 #' @description Which values are duplicated?.
 #' @param vec input vector
-#' @param orig PARAM_DESCRIPTION, Default: F
+#' @param verbose print statistics to terminal. Default: TRUE
 #' @export
-which.duplicated <- function(vec, orig = F) { # Which values are duplicated?.
-  DPL = vec[which(duplicated(vec))]; iprint(length(DPL), "Duplicated entries: ", DPL)
-  # for (i in DPL ) {   print(grepv(i,orig)) } #for
+which.duplicated <- function(vec, verbose = TRUE) { # Which values are duplicated?.
+  DPL = vec[which(duplicated(vec))]
+  if (verbose) iprint(length(DPL), "Duplicated entries (1-5): ", head(DPL), "...")
   return(DPL)
 }
 
@@ -599,13 +599,14 @@ which.duplicated <- function(vec, orig = F) { # Which values are duplicated?.
 # _________________________________________________________________________________________________
 #' @title which.NA
 #' @description Which values are NA?.
-#' @param vec input vector
-# @param orig PARAM_DESCRIPTION, Default: F
+#' @param vec input vector. Default: TRUE
+#' @param verbose print statistics to terminal. Default: TRUE
 #' @export
-which.NA <- function(vec, orig = F) { # Which values are NA?.
-  NANs = vec[which(is.na(vec))]; iprint(length(NANs), "NaN entries: ", NANs)
-  NAs = vec[which(is.na(vec))]; iprint(length(NAs), "NA entries: ", NAs, "(only NA-s are returned)")
-  # for (i in DPL ) {   print(grepv(i,orig)) } #for
+which.NA <- function(vec, verbose = TRUE) { # Which values are NA?.
+  NANs = vec[which(is.na(vec))]
+  if (verbose) iprint(length(NANs), "NaN entries: ", NANs)
+  NAs = vec[which(is.na(vec))]
+  if (verbose) iprint(length(NAs), "NA entries: ", NAs, "(only NA-s are returned)")
   return(NAs)
 }
 
@@ -613,11 +614,20 @@ which.NA <- function(vec, orig = F) { # Which values are NA?.
 
 # _________________________________________________________________________________________________
 #' @title pad.na
-#' @description Fill up with a vector to a given length with NA-values at the end.
-#' @param x PARAM_DESCRIPTION
-#' @param len PARAM_DESCRIPTION
+#' @description This function fills up a vector to a given length by appending NA-values at the end.
+#'   If the input vector's length is less than the provided length, the function pads the vector
+#'   with NA. If the vector's length is already equal to or greater than the given length, no change
+#'   will be made.
+#' @param x A vector that needs to be padded with NA. This can be of any type (numeric, etc.)
+#' @param len The target length for the vector. If the provided length is less than the length of
+#'   the input vector, the function does not make any change to the input vector.
+#' @return Returns a vector of the same type as the input, but with its length adjusted to the
+#'   specified len, padding with NA values at the end if necessary.
+#'
 #' @export
-pad.na <- function(x, len) { c(x, rep(NA, len - length(x))) } # Fill up with a vector to a given length with NA-values at the end.
+pad.na <- function(x, len) {
+  c(x, rep(NA, len - length(x)))
+}
 
 
 

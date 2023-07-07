@@ -4,10 +4,12 @@
 \alias{which.NA}
 \title{which.NA}
 \usage{
-which.NA(vec, orig = F)
+which.NA(vec, verbose = TRUE)
 }
 \arguments{
-\item{vec}{input vector}
+\item{vec}{input vector. Default: TRUE}
+
+\item{verbose}{print statistics to terminal. Default: TRUE}
 }
 \description{
 Which values are NA?.

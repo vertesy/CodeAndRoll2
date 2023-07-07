@@ -4,12 +4,12 @@
 \alias{which.duplicated}
 \title{which.duplicated}
 \usage{
-which.duplicated(vec, orig = F)
+which.duplicated(vec, verbose = TRUE)
 }
 \arguments{
 \item{vec}{input vector}
 
-\item{orig}{PARAM_DESCRIPTION, Default: F}
+\item{verbose}{print statistics to terminal. Default: TRUE}
 }
 \description{
 Which values are duplicated?.
