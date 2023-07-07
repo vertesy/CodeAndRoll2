@@ -75,6 +75,7 @@ file.copy(from = Package_FnP, to = BackupOldFile, overwrite = TRUE)
 setwd(RepositoryDir)
 getwd()
 document()
+warnings()
 
 {
   "update cff version"
