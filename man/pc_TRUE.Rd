@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{pc_TRUE}
 \alias{pc_TRUE}
-\title{pc_TRUE}
+\title{Calculates the percentage of true values in a logical vector, parsed as text.}
 \usage{
 pc_TRUE(
   logical_vector,
@@ -10,22 +10,31 @@ pc_TRUE(
   NumberAndPC = FALSE,
   NArm = TRUE,
   prefix = NULL,
-  suffix = NULL
+  suffix = NULL,
+  digitz = 3,
+  ...
 )
 }
 \arguments{
-\item{logical_vector}{Percentage of true values in a logical vector, parsed as text (useful for reports).}
+\item{logical_vector}{A logical vector.}
 
-\item{percentify}{PARAM_DESCRIPTION, Default: TRUE}
+\item{percentify}{Whether to return the percentage as a formatted string (default: TRUE).}
 
-\item{NumberAndPC}{PARAM_DESCRIPTION, Default: FALSE}
+\item{NumberAndPC}{Whether to return the percentage and the number of true values (default: FALSE).}
 
-\item{NArm}{PARAM_DESCRIPTION, Default: TRUE}
+\item{NArm}{Whether to ignore NA values (default: TRUE).}
 
-\item{prefix}{PARAM_DESCRIPTION, Default: NULL}
+\item{prefix}{A prefix to add to the output string (default: NULL).}
 
-\item{suffix}{PARAM_DESCRIPTION, Default: NULL}
+\item{suffix}{A suffix to add to the output string (default: NULL).}
+
+\item{digitz}{The number of decimal places to use when formatting the percentage (default: 3).}
+
+\item{...}{Additional arguments to pass to \code{percentage_formatter()}.}
+}
+\value{
+A string representing the percentage of true values in the logical vector.
 }
 \description{
-FUNCTION_DESCRIPTION.
+Calculates the percentage of true values in a logical vector, parsed as text.
 }

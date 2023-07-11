@@ -282,13 +282,14 @@ sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(s
 #' @title as.named.vector.df
 #' @description Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
 #' @param index.rc Which column or row to extract (numeric index).
+#' @param verbose Print the columnname or rowname that is being used
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
 #' @export
-as.named.vector.df <- function(df, col.or.row.name.or.index = 1
+as.named.vector.df <- function(df, col.or.row.name.or.index = 1, verbose = TRUE
                                , WhichDimNames = 1, ...) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 
   name.selection <- dimnames(df)[[ (3-WhichDimNames) ]][col.or.row.name.or.index]
-  iprint("Variable used:", name.selection)
+  if (verbose) iprint("Variable used:", name.selection)
 
   vecc <- if (WhichDimNames == 1) as.vector(unlist(df[ , col.or.row.name.or.index]), ...) else
     if (WhichDimNames == 2) as.vector(unlist(df[col.or.row.name.or.index, ]), ...)
@@ -884,23 +885,39 @@ zero.omit <- function(vec) { # Omit zero values from a vector.
 
 
 # _________________________________________________________________________________________________
-#' @title pc_TRUE
-#' @description FUNCTION_DESCRIPTION.
-#' @param logical_vector Percentage of true values in a logical vector, parsed as text (useful for reports).
-#' @param percentify PARAM_DESCRIPTION, Default: TRUE
-#' @param NumberAndPC PARAM_DESCRIPTION, Default: FALSE
-#' @param NArm PARAM_DESCRIPTION, Default: TRUE
-#' @param prefix PARAM_DESCRIPTION, Default: NULL
-#' @param suffix PARAM_DESCRIPTION, Default: NULL
+#' Calculates the percentage of true values in a logical vector, parsed as text.
+#'
+#' @param logical_vector A logical vector.
+#' @param percentify Whether to return the percentage as a formatted string (default: TRUE).
+#' @param NumberAndPC Whether to return the percentage and the number of true values (default: FALSE).
+#' @param NArm Whether to ignore NA values (default: TRUE).
+#' @param prefix A prefix to add to the output string (default: NULL).
+#' @param suffix A suffix to add to the output string (default: NULL).
+#' @param digitz The number of decimal places to use when formatting the percentage (default: 3).
+#' @param ... Additional arguments to pass to `percentage_formatter()`.
+#'
+#' @return A string representing the percentage of true values in the logical vector.
+#'
 #' @export
-pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE, NArm = TRUE, prefix = NULL, suffix = NULL) { # Percentage of true values in a logical vector, parsed as text (useful for reports.).
+#'
+pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE
+                    , NArm = TRUE, prefix = NULL, suffix = NULL, digitz = 3, ...) {
+
+  # Calculate the percentage of true values
   SUM = sum(logical_vector, na.rm = NArm)
   LEN = length(logical_vector)
   out = SUM / LEN
-  if (percentify) {out = percentage_formatter(out) }
-  if (NumberAndPC) { out = paste0(out, " or " , SUM, " of ", LEN) }
-  if (!is.null(prefix)) {out = paste(prefix, out) }
-  if (!is.null(suffix)) {out = paste(out, suffix) }
+
+  # Format the percentage as a string
+  if (percentify) out = percentage_formatter(out, digitz = digitz, ...)
+
+  # Add the number of true values if requested
+  if (NumberAndPC) out = paste0(out, " or ", SUM, " of ", LEN)
+
+  # Add the prefix and suffix
+  if (!is.null(prefix)) out = paste(prefix, out)
+  if (!is.null(suffix)) out = paste(out, suffix)
+
   return(out)
 }
 
