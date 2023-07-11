@@ -1,7 +1,7 @@
 Package: CodeAndRoll2
 Title: CodeAndRoll2 for vector, matrix and list manipulations
 Version: 2.4.6
-Authors@R: 
+Authors@R:
     person("Abel", "Vertesy", , "abel.vertesy@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
 Description: CodeAndRoll2 is a set of more than >130 productivity
@@ -10,9 +10,9 @@ Description: CodeAndRoll2 is a set of more than >130 productivity
     manipulations; math) of the formerly used CodeAndRoll (v1).
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/CodeAndRoll2/issues
-Depends: 
+Depends:
     Stringendo
-Imports: 
+Imports:
     base,
     colorRamps,
     dplyr,
@@ -30,6 +30,6 @@ Imports:
     stringr,
     utils
 Encoding: UTF-8
-Packaged: 2023-07-11 15:33:42
+Packaged: 2023-07-11 15:00:07
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
