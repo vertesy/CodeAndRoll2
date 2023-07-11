@@ -282,13 +282,14 @@ sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(s
 #' @title as.named.vector.df
 #' @description Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
 #' @param index.rc Which column or row to extract (numeric index).
+#' @param verbose Print the columnname or rowname that is being used
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
 #' @export
-as.named.vector.df <- function(df, col.or.row.name.or.index = 1
+as.named.vector.df <- function(df, col.or.row.name.or.index = 1, verbose = TRUE
                                , WhichDimNames = 1, ...) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 
   name.selection <- dimnames(df)[[ (3-WhichDimNames) ]][col.or.row.name.or.index]
-  iprint("Variable used:", name.selection)
+  if (verbose) iprint("Variable used:", name.selection)
 
   vecc <- if (WhichDimNames == 1) as.vector(unlist(df[ , col.or.row.name.or.index]), ...) else
     if (WhichDimNames == 2) as.vector(unlist(df[col.or.row.name.or.index, ]), ...)

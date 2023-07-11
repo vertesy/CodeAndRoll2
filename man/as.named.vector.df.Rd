@@ -4,9 +4,17 @@
 \alias{as.named.vector.df}
 \title{as.named.vector.df}
 \usage{
-as.named.vector.df(df, col.or.row.name.or.index = 1, WhichDimNames = 1, ...)
+as.named.vector.df(
+  df,
+  col.or.row.name.or.index = 1,
+  verbose = TRUE,
+  WhichDimNames = 1,
+  ...
+)
 }
 \arguments{
+\item{verbose}{Print the columnname or rowname that is being used}
+
 \item{WhichDimNames}{Shall we extract rows (2) or columns (1, default)?, Default: 1}
 
 \item{index.rc}{Which column or row to extract (numeric index).}
