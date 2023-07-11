@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{numerate}
 \alias{numerate}
-\title{numerate}
+\title{Formats a sequence of numbers with zeropadding.}
 \usage{
 numerate(
   x = 1,
@@ -12,16 +12,22 @@ numerate(
 )
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION, Default: 1}
+\item{x}{The starting number.}
 
-\item{y}{PARAM_DESCRIPTION, Default: 100}
+\item{y}{The ending number.}
 
-\item{zeropadding}{PARAM_DESCRIPTION, Default: TRUE}
+\item{zeropadding}{Whether to use zeropadding (default: TRUE).}
 
-\item{pad_length}{PARAM_DESCRIPTION, Default: floor(log10(max(abs(x), abs(y)))) + 1}
+\item{pad_length}{The length of the padded numbers (default: floor(log10(max(abs(x), abs(y)))) + 1).}
+}
+\value{
+A vector of formatted numbers.
 }
 \description{
-Numerate from x to y with additonal zeropadding.
+Formats a sequence of numbers with zeropadding.
+}
+\examples{
+numerate(1, 122)
 }
 \seealso{
 \code{\link[stringr]{str_pad}}

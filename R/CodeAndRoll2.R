@@ -746,22 +746,34 @@ zigzagger <- function(vec = 1:9) { # mix entries so that they differ.
 
 
 # _________________________________________________________________________________________________
-#' @title numerate
-#' @description Numerate from x to y with additonal zeropadding.
-#' @param x PARAM_DESCRIPTION, Default: 1
-#' @param y PARAM_DESCRIPTION, Default: 100
-#' @param zeropadding PARAM_DESCRIPTION, Default: TRUE
-#' @param pad_length PARAM_DESCRIPTION, Default: floor(log10(max(abs(x), abs(y)))) + 1
+#' Formats a sequence of numbers with zeropadding.
+#'
+#' @param x The starting number.
+#' @param y The ending number.
+#' @param zeropadding Whether to use zeropadding (default: TRUE).
+#' @param pad_length The length of the padded numbers (default: floor(log10(max(abs(x), abs(y)))) + 1).
+#' @return A vector of formatted numbers.
 #' @seealso
 #'  \code{\link[stringr]{str_pad}}
 #' @export
+#' @examples numerate(1, 122)
 #' @importFrom stringr str_pad
-numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log10( max(abs(x), abs(y)) ) ) + 1) { # numerate from x to y with additonal zeropadding.
+
+numerate <- function(x = 1, y = 100, zeropadding = TRUE
+                     , pad_length = floor(log10(max(abs(x), abs(y)))) + 1) {
+
+  # Check the arguments
+  if (x > y) stop("x must be less than or equal to y")
+
+  # Create the sequence of numbers
   z = x:y
-  if (zeropadding) { z = stringr::str_pad(z, pad = 0, width = pad_length)   }
+
+  # Pad the numbers with zeros
+  if (zeropadding) z = stringr::str_pad(z, pad = 0, width = pad_length)
   return(z)
 }
-# (numerate(1, 122))
+
+
 
 
 
