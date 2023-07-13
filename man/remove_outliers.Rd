@@ -7,14 +7,17 @@
 remove_outliers(x, na.rm = TRUE, probs = c(0.05, 0.95), ...)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{na.rm}{Remove NA values for calculation? Default: TRUE}
+\item{na.rm}{Remove NA values for calculation? Default: TRUE.}
 
-\item{probs}{PARAM_DESCRIPTION, Default: c(0.05, 0.95)}
+\item{probs}{A vector of two probabilities, specifying the trailing percentiles to use.}
 
-\item{...}{Pass any other argument.}
+\item{...}{Additional arguments passed to \code{quantile()}.}
+}
+\value{
+A vector with the outliers removed.
 }
 \description{
-Remove values that fall outside the trailing N \% of the distribution.
+Remove values that fall outside the trailing \code{probs} percentiles of the distribution.
 }

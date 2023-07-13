@@ -14,4 +14,5 @@ Calculates the mode (modus) of a numeric vector (it excludes NA-s by default). h
 }
 \examples{
 modus(c(1, 1, 2, 3, 3, 3, 4, 5)); modus(1:4)
+
 }

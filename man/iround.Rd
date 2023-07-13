@@ -16,4 +16,5 @@ Rounds a value to the significant amount of digits. Its a wrapper for signif().
 }
 \examples{
 iround(x = 2.3232, digitz = 3)
+
 }

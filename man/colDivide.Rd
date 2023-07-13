@@ -9,7 +9,7 @@ colDivide(mat, vec)
 \arguments{
 \item{mat}{Numeric input matrix with the distribution.}
 
-\item{vec}{PARAM_DESCRIPTION}
+\item{vec}{Vector to divide by.}
 }
 \description{
 See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.

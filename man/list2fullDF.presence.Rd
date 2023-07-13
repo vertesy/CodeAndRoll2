@@ -22,7 +22,6 @@ A matrix with the same elements as \code{your.list}, but with rows and columns n
 }
 \description{
 Converts a list to a full matrix, with rows and columns named by the elements of the list.
-
 The matrix will contain a 1 in each cell where the corresponding element of the list is present, and a 0 otherwise.
 }
 \examples{

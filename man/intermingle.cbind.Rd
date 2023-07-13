@@ -2,8 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{intermingle.cbind}
 \alias{intermingle.cbind}
-\title{intermingle.cbind
-Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().}
+\title{intermingle.cbind}
 \usage{
 intermingle.cbind(df1, df2)
 }
@@ -16,6 +15,5 @@ intermingle.cbind(df1, df2)
 A data frame that combines \code{df1} and \code{df2}, with the columns of \code{df1} alternating with the columns of `
 }
 \description{
-intermingle.cbind
 Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 }

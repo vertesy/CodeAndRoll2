@@ -476,7 +476,8 @@ as.numeric.wNames.factor <- function(vec,  ...) {
 #' @title as.character.wNames
 #' @description Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param vec input vector
-#' @export as.character.wNames
+#'
+#' @export
 as.character.wNames <- function(vec) { # Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
   char_vec = as.character(vec)
   if (!is.null(names(vec))) {names(char_vec) = names(vec)}
@@ -493,9 +494,9 @@ as.character.wNames <- function(vec) { # Converts your input vector into a chara
 #' @param vec set of values where you want to replace
 #' @param oldvalues oldvalues (from)
 #' @param newvalues newvalues (to)
-#' @export
 #' @examples A = 1:3; translate(vec = A, oldvalues = 2:3, newvalues = letters[1:2])
-
+#'
+#' @export
 translate <- function(vec, oldvalues, newvalues) {
   Nr = length(oldvalues)
   if (Nr > length(newvalues)) {
@@ -951,21 +952,25 @@ pc_TRUE <- function(logical_vector, percentify = TRUE, NumberAndPC = FALSE
 
 # _________________________________________________________________________________________________
 #' @title pc_in_total_of_match
-#' @description Percentage of a certain value within a vector or table.
-#' @param vec_or_table PARAM_DESCRIPTION
-#' @param category PARAM_DESCRIPTION
-#' @param NA_omit PARAM_DESCRIPTION, Default: TRUE
-#' @seealso
-#'  \code{\link[stats]{na.omit}}
+#'
+#' @description Calculates the percentage of a certain value within a vector or table.
+#' @param vec_or_table A vector or table.
+#' @param category The value to calculate the percentage for.
+#' @param NA_omit Logical. Whether to omit missing values from the calculation.
+#' @return The percentage of `category` in `vec_or_table`.
+#'
 #' @export
 #' @importFrom stats na.omit
 pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Percentage of a certain value within a vector or table.
   if (is.table(vec_or_table)) { vec_or_table[category]/sum(vec_or_table, na.rm = NA_omit) }
-  else {# if (is.vector(vec_or_table))
+  else {
+    # Check if `NA_omit` is TRUE and there are missing values
     if (NA_omit) {
       if (sum(is.na(vec_or_table))) { vec_or_table = stats::na.omit(vec_or_table); iprint(sum(is.na(vec_or_table)), 'NA are omitted from the vec_or_table of:', length(vec_or_table))}
-      "Not wokring complelety : if NaN is stored as string, it does not detect it"
+      "Not working complelety : if NaN is stored as string, it does not detect it"
     }
+
+    # Calculate the percentage
     sum(vec_or_table == category) /  length(vec_or_table)
   } # else: is vector
 } # fun
@@ -976,11 +981,14 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
 
 # _________________________________________________________________________________________________
 #' @title remove_outliers
-#' @description Remove values that fall outside the trailing N % of the distribution.
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm Remove NA values for calculation? Default: TRUE
-#' @param probs PARAM_DESCRIPTION, Default: c(0.05, 0.95)
-#' @param ... Pass any other argument.
+#'
+#' @description Remove values that fall outside the trailing `probs` percentiles of the distribution.
+#' @param x A numeric vector.
+#' @param na.rm Remove NA values for calculation? Default: TRUE.
+#' @param probs A vector of two probabilities, specifying the trailing percentiles to use.
+#' @param ... Additional arguments passed to `quantile()`.
+#' @return A vector with the outliers removed.
+#'
 #' @export
 remove_outliers <- function(x, na.rm = TRUE, probs = c(.05, .95), ...) { # Remove values that fall outside the trailing N % of the distribution.
   print("Deprecated. Use clip.outliers.at.percentile()")
@@ -994,10 +1002,13 @@ remove_outliers <- function(x, na.rm = TRUE, probs = c(.05, .95), ...) { # Remov
 
 # _________________________________________________________________________________________________
 #' @title simplify_categories
-#' @description Replace every entry that is found in "replaceit", by a single value provided by "to".
-#' @param category_vec PARAM_DESCRIPTION
-#' @param replaceit PARAM_DESCRIPTION
-#' @param to PARAM_DESCRIPTION
+#'
+#' @description Replace all occurrences of `replaceit` in `category_vec` with `to`.
+#' @param category_vec A vector of categories.
+#' @param replaceit The value to replace.
+#' @param to The replacement value.
+#' @return A vector with the simplified categories.
+#'
 #' @export
 simplify_categories <- function(category_vec, replaceit , to ) { # Replace every entry that is found in "replaceit", by a single value provided by "to".
   matches = which(category_vec %in% replaceit); iprint(length(matches), "instances of", replaceit, "are replaced by", to)
@@ -1044,7 +1055,7 @@ rowSubtract <- function(mat = yy, vec = 5:1) {
 #' @title colDivide
 #' @description See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat Numeric input matrix with the distribution.
-#' @param vec PARAM_DESCRIPTION
+#' @param vec Vector to divide by.
 #' @export
 colDivide <- function(mat, vec) { # divide by column # See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
   stopifnot(NCOL(mat) == length(vec))
@@ -1057,7 +1068,7 @@ colDivide <- function(mat, vec) { # divide by column # See more: https://stackov
 #' @title colMutliply
 #' @description See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat Numeric input matrix with the distribution.
-#' @param vec PARAM_DESCRIPTION
+#' @param vec Vector to multiply by.
 #' @export
 colMutliply <- function(mat, vec) { # Mutliply by column # See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
   stopifnot(NCOL(mat) == length(vec))
@@ -1070,7 +1081,7 @@ colMutliply <- function(mat, vec) { # Mutliply by column # See more: https://sta
 #' @title rowDivide
 #' @description Divide by row.
 #' @param mat Numeric input matrix with the distribution.
-#' @param vec PARAM_DESCRIPTION
+#' @param vec Vector to divide by.
 #' @export
 rowDivide <- function(mat, vec) { # divide by row
   stopifnot(NROW(mat) == length(vec))
@@ -1083,7 +1094,7 @@ rowDivide <- function(mat, vec) { # divide by row
 #' @title rowMutliply
 #' @description Mutliply by row.
 #' @param mat Numeric input matrix with the distribution.
-#' @param vec PARAM_DESCRIPTION
+#' @param vec Vector to multiply by.
 #' @export
 rowMutliply <- function(mat, vec) { # Mutliply by row
   stopifnot(NROW(mat) == length(vec))
@@ -1099,14 +1110,6 @@ rowMutliply <- function(mat, vec) { # Mutliply by row
 #' @export
 row.Zscore <- function(x) t(scale(t(x)))
 
-
-
-# _________________________________________________________________________________________________
-#' #' #' @title colNrNAs
-#' #' #' @description Calculates the number of NA-values of each column of a matrix / data frame.
-#' #' #' @param x Numeric input matrix with the distribution.
-#' #' #' @export
-#' colNrNAs <- function(x) colSums(is.na(x), na.rm = FALSE)
 
 
 
@@ -2028,6 +2031,7 @@ as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with 
   past = 0
 
   # Iterate over the list, and fill in the elements with the corresponding elements from the vectorfor (v in 1:length(list_wannabe)) {
+  for (v in 1:length(list_wannabe)) {
     lv = length(list_wannabe[[v]])
     list_return[[v]] = vec[(past + 1):(past + lv)]
     past = past + lv
@@ -2041,11 +2045,8 @@ as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with 
 #' @title reverse.list.hierarchy
 #'
 #' @description Reverses the hierarchy of a list.
-#'
 #' @param my_list A list.
-#'
 #' @return A list with the elements of the original list in reverse order.
-#'
 #' @examples
 #' my_list <- list(a = list(1, 2), b = list(3, 4))
 #' reverse.list.hierarchy(my_list)
@@ -2065,13 +2066,10 @@ reverse.list.hierarchy <- function(my_list) { # reverse list hierarchy
 #' @title list2fullDF.byNames
 #'
 #' @description Converts a list to a full matrix, with rows and columns named by the elements of the list.
-#'
 #' @param your.list A list.
 #' @param byRow Logical. Whether the resulting matrix should be arranged by row (default) or by column.
 #' @param FILL A value to fill in missing entries.
-#'
 #' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.
-#'
 #' @examples
 #' your.list <- list(set.1 = LETTERS[1:5], set.2 = LETTERS[3:9])
 #' list2fullDF.byNames(your.list)
@@ -2105,15 +2103,11 @@ list2fullDF.byNames <- function(your.list = list(
 #' @title list2fullDF.presence
 #'
 #' @description Converts a list to a full matrix, with rows and columns named by the elements of the list.
-#'
 #' The matrix will contain a 1 in each cell where the corresponding element of the list is present, and a 0 otherwise.
-#'
 #' @param your.list A list.
 #' @param byRow Logical. Whether the resulting matrix should be arranged by row (default) or by column.
 #' @param FILL A value to fill in missing entries.
-#'
 #' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.
-#'
 #' @examples
 #' your.list <- list("set.1" = LETTERS[1:5], "set.2" = LETTERS[3:9])
 #' list2fullDF.presence(your.list)
@@ -2176,9 +2170,7 @@ splititsnames_byValues <- function(namedVec) { # split a list by its names
 #' @param V1 A vector.
 #' @param V2 A vector.
 #' @param wNames Logical. Whether to include the names of the vectors in the output vector.
-#'
 #' @return A vector that combines `V1` and `V2`, with the elements of `V1` alternating with the elements of `V2`.
-#'
 #' @examples
 #' V1 <- c(1, 3, 5)
 #' V2 <- c(2, 4, 6)
@@ -2196,12 +2188,12 @@ intermingle2vec <- function(V1, V2, wNames = TRUE) { # Combine 2 vectors (of the
 
 # _________________________________________________________________________________________________
 #' @title intermingle.cbind
-#' Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 #'
+#' @description Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 #' @param df1 A data frame.
 #' @param df2 A data frame.
-#'
 #' @return A data frame that combines `df1` and `df2`, with the columns of `df1` alternating with the columns of `
+#'
 #' @export
 
 intermingle.cbind <- function(df1, df2) { # Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
@@ -2273,7 +2265,6 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
 #' @param x A vector.
 #' @param y A vector.
 #' @param ... Pass any other argument.
-#'
 #' @return A list of vectors, each of which contains the elements that are only present in that vector and not in any of the other vectors.
 #'
 #' @examples
@@ -2302,9 +2293,9 @@ symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of v
 #' @description Rounds a value to the significant amount of digits. Its a wrapper for signif().
 #' @param x Unrounded number.
 #' @param digitz Number of digits to keep. 3 by default.
-#' @export
 #' @examples iround(x = 2.3232, digitz = 3)
-
+#'
+#' @export
 iround <- function(x, digitz = 3) {
   signif(x, digits = digitz)
 }
@@ -2316,9 +2307,9 @@ iround <- function(x, digitz = 3) {
 #' @description Calculates the mode (modus) of a numeric vector (it excludes NA-s by default). https://en.wikipedia.org/wiki/Mode_(statistics)
 #' @param x A numeric vector
 #' @import stats
-#' @export
 #' @examples modus(c(1, 1, 2, 3, 3, 3, 4, 5)); modus(1:4)
-
+#'
+#' @export
 modus <- function(x) {
   x <- unlist(na.exclude(x))
   ux <- unique(x)
@@ -2333,9 +2324,7 @@ modus <- function(x) {
 #'
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
-#'
 #' @return The coefficient of variation of the input vector.
-#'
 #' @examples cv(1:5)
 #'
 #' @export
@@ -2350,10 +2339,10 @@ cv <- function(x, na.rm = TRUE) {
 #'
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
-#'
 #' @return The standard error of the mean of the input vector.
-#'
 #' @examples sem(1:5)
+#'
+#' @export
 sem <- function(x, na.rm = TRUE){
   sd(unlist(x), na.rm = na.rm) / sqrt(length(na.omit.strip(as.numeric(x))))  # Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
   }
@@ -2367,9 +2356,7 @@ sem <- function(x, na.rm = TRUE){
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
 #' @param USE The method used to calculate the variance. Defaults to `"na.or.complete"`.
-#'
 #' @return The fano factor of the input vector.
-#'
 #' @examples fano(1:5)
 #'
 #' @export
@@ -2382,9 +2369,7 @@ fano <-function(x, na.rm = TRUE, USE = "na.or.complete") {
 #'
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
-#'
 #' @return The geometric mean of the input vector.
-#'
 #' @examples geomean(1:5)
 #'
 #' @export
@@ -2400,9 +2385,7 @@ geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a nume
 #' @param x A numeric vector.
 #' @param k The base of the logarithm. Defaults to 2.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
-#'
 #' @return The mean of the log_k of the input vector.
-#'
 #' @examples mean_of_log(1:5)
 #'
 #' @export
@@ -2421,9 +2404,7 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the l
 #'
 #' @param x A numeric vector.
 #' @param oneSide The size of the moving window. Defaults to 5.
-#'
 #' @return A vector of the moving averages.
-#'
 #' @examples movingAve(1:5)
 #'
 #' @export
@@ -2442,9 +2423,7 @@ movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling averag
 #'
 #' @param x A numeric vector.
 #' @param n The size of the moving window. Defaults to 5.
-#'
 #' @return A vector of the moving averages.
-#'
 #' @examples movingAve2(1:5)
 #'
 #' @export

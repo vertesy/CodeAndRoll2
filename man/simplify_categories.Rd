@@ -7,12 +7,15 @@
 simplify_categories(category_vec, replaceit, to)
 }
 \arguments{
-\item{category_vec}{PARAM_DESCRIPTION}
+\item{category_vec}{A vector of categories.}
 
-\item{replaceit}{PARAM_DESCRIPTION}
+\item{replaceit}{The value to replace.}
 
-\item{to}{PARAM_DESCRIPTION}
+\item{to}{The replacement value.}
+}
+\value{
+A vector with the simplified categories.
 }
 \description{
-Replace every entry that is found in "replaceit", by a single value provided by "to".
+Replace all occurrences of \code{replaceit} in \code{category_vec} with \code{to}.
 }

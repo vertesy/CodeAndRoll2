@@ -19,4 +19,5 @@ Calculates the standard error of the mean (SEM) for a numeric vector (it exclude
 }
 \examples{
 sem(1:5)
+
 }

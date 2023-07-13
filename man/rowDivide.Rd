@@ -9,7 +9,7 @@ rowDivide(mat, vec)
 \arguments{
 \item{mat}{Numeric input matrix with the distribution.}
 
-\item{vec}{PARAM_DESCRIPTION}
+\item{vec}{Vector to divide by.}
 }
 \description{
 Divide by row.

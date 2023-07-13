@@ -7,15 +7,15 @@
 pc_in_total_of_match(vec_or_table, category, NA_omit = TRUE)
 }
 \arguments{
-\item{vec_or_table}{PARAM_DESCRIPTION}
+\item{vec_or_table}{A vector or table.}
 
-\item{category}{PARAM_DESCRIPTION}
+\item{category}{The value to calculate the percentage for.}
 
-\item{NA_omit}{PARAM_DESCRIPTION, Default: TRUE}
+\item{NA_omit}{Logical. Whether to omit missing values from the calculation.}
+}
+\value{
+The percentage of \code{category} in \code{vec_or_table}.
 }
 \description{
-Percentage of a certain value within a vector or table.
-}
-\seealso{
-\code{\link[stats]{na.omit}}
+Calculates the percentage of a certain value within a vector or table.
 }
