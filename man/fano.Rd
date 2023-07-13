@@ -2,17 +2,24 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{fano}
 \alias{fano}
-\title{fano}
+\title{Calculates the fano factor on a numeric vector (it excludes NA-s by default).}
 \usage{
 fano(x, na.rm = TRUE, USE = "na.or.complete")
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{na.rm}{Remove NA values for calculation? Default: TRUE}
+\item{na.rm}{Should NA values be removed before calculation? Defaults to TRUE.}
 
-\item{USE}{PARAM_DESCRIPTION, Default: 'na.or.complete'}
+\item{USE}{The method used to calculate the variance. Defaults to \code{"na.or.complete"}.}
+}
+\value{
+The fano factor of the input vector.
 }
 \description{
 Calculates the fano factor on a numeric vector (it excludes NA-s by default).
+}
+\examples{
+fano(1:5)
+
 }

@@ -2,15 +2,22 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{movingAve2}
 \alias{movingAve2}
-\title{movingAve2}
+\title{Calculates the moving / rolling average of a numeric vector, using \code{filter()}.}
 \usage{
 movingAve2(x, n = 5)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{n}{PARAM_DESCRIPTION, Default: 5}
+\item{n}{The size of the moving window. Defaults to 5.}
+}
+\value{
+A vector of the moving averages.
 }
 \description{
-Calculates the moving / rolling average of a numeric vector, using filter().
+Calculates the moving / rolling average of a numeric vector, using \code{filter()}.
+}
+\examples{
+movingAve2(1:5)
+
 }

@@ -2,15 +2,22 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{movingAve}
 \alias{movingAve}
-\title{movingAve}
+\title{Calculates the moving / rolling average of a numeric vector.}
 \usage{
 movingAve(x, oneSide = 5)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{oneSide}{PARAM_DESCRIPTION, Default: 5}
+\item{oneSide}{The size of the moving window. Defaults to 5.}
+}
+\value{
+A vector of the moving averages.
 }
 \description{
 Calculates the moving / rolling average of a numeric vector.
+}
+\examples{
+movingAve(1:5)
+
 }

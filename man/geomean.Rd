@@ -2,15 +2,22 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{geomean}
 \alias{geomean}
-\title{geomean}
+\title{Calculates the geometric mean of a numeric vector (it excludes NA-s by default).}
 \usage{
 geomean(x, na.rm = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{na.rm}{Remove NA values for calculation? Default: TRUE}
+\item{na.rm}{Should NA values be removed before calculation? Defaults to TRUE.}
+}
+\value{
+The geometric mean of the input vector.
 }
 \description{
 Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
+}
+\examples{
+geomean(1:5)
+
 }

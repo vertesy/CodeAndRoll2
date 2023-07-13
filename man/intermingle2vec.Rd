@@ -2,17 +2,26 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{intermingle2vec}
 \alias{intermingle2vec}
-\title{intermingle2vec}
+\title{Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.}
 \usage{
 intermingle2vec(V1, V2, wNames = TRUE)
 }
 \arguments{
-\item{V1}{PARAM_DESCRIPTION}
+\item{V1}{A vector.}
 
-\item{V2}{PARAM_DESCRIPTION}
+\item{V2}{A vector.}
 
-\item{wNames}{PARAM_DESCRIPTION, Default: TRUE}
+\item{wNames}{Logical. Whether to include the names of the vectors in the output vector.}
+}
+\value{
+A vector that combines \code{V1} and \code{V2}, with the elements of \code{V1} alternating with the elements of \code{V2}.
 }
 \description{
 Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
+}
+\examples{
+V1 <- c(1, 3, 5)
+V2 <- c(2, 4, 6)
+intermingle2vec(V1, V2)
+
 }

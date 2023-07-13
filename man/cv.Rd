@@ -2,15 +2,22 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{cv}
 \alias{cv}
-\title{cv}
+\title{Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default).}
 \usage{
 cv(x, na.rm = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{na.rm}{Remove NA values for calculation? Default: TRUE}
+\item{na.rm}{Should NA values be removed before calculation? Defaults to TRUE.}
+}
+\value{
+The coefficient of variation of the input vector.
 }
 \description{
-..
+Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default).
+}
+\examples{
+cv(1:5)
+
 }

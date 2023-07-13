@@ -2,17 +2,27 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{symdiff}
 \alias{symdiff}
-\title{symdiff}
+\title{Quasy symmetric difference of any number of vectors.}
 \usage{
 symdiff(x, y, ...)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A vector.}
 
-\item{y}{PARAM_DESCRIPTION}
+\item{y}{A vector.}
 
 \item{...}{Pass any other argument.}
 }
+\value{
+A list of vectors, each of which contains the elements that are only present in that vector and not in any of the other vectors.
+}
 \description{
 Quasy symmetric difference of any number of vectors.
+}
+\examples{
+x <- c(1, 2, 3, 4, 5)
+y <- c(2, 4, 6, 8, 10)
+z <- c(3, 5, 7, 9, 11)
+symdiff(x, y, z)
+
 }

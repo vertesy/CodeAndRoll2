@@ -2,15 +2,21 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{sem}
 \alias{sem}
-\title{sem}
+\title{Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).}
 \usage{
 sem(x, na.rm = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{na.rm}{Remove NA values for calculation? Default: TRUE}
+\item{na.rm}{Should NA values be removed before calculation? Defaults to TRUE.}
+}
+\value{
+The standard error of the mean of the input vector.
 }
 \description{
 Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
+}
+\examples{
+sem(1:5)
 }

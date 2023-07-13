@@ -2,17 +2,24 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{mean_of_log}
 \alias{mean_of_log}
-\title{mean_of_log}
+\title{Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).}
 \usage{
 mean_of_log(x, k = 2, na.rm = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A numeric vector.}
 
-\item{k}{PARAM_DESCRIPTION, Default: 2}
+\item{k}{The base of the logarithm. Defaults to 2.}
 
-\item{na.rm}{Remove NA values for calculation? Default: TRUE}
+\item{na.rm}{Should NA values be removed before calculation? Defaults to TRUE.}
+}
+\value{
+The mean of the log_k of the input vector.
 }
 \description{
 Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
+}
+\examples{
+mean_of_log(1:5)
+
 }
