@@ -629,7 +629,7 @@ which.NA <- function(vec, verbose = TRUE) { # Which values are NA?.
 pad.na <- function(x, len) {
   c(x, rep(NA, len - length(x)))
 }
-
+# See str_pad
 
 
 # _________________________________________________________________________________________________
@@ -2256,16 +2256,26 @@ geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a nume
 
 
 # _________________________________________________________________________________________________
-#' @title mean_of_log
-#' @description Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
-#' @param x PARAM_DESCRIPTION
-#' @param k PARAM_DESCRIPTION, Default: 2
-#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
+#'
+#' @param x A numeric vector.
+#' @param k The base of the logarithm. Defaults to 2.
+#' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
+#'
+#' @return The mean of the log_k of the input vector.
+#'
+#' @examples
+#' x <- c(1, 2, 3, 4, 5)
+#' mean_of_log(x)
+#'
 #' @export
 mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
+  stopifnot(is.numeric(x), length(k) == 1, is.finite(k), is.logical(na.rm))
+
   negs = sum(x < 0);  zeros = sum(x == 0)
   if (negs | zeros) { iprint("The input vector has", negs, "negative values and", zeros, "zeros." ) }
-  mean(log(x, base = k), na.rm = na.rm) }
+  mean(log(x, base = k), na.rm = na.rm)
+  }
 
 
 
