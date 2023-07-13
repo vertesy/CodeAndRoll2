@@ -2193,12 +2193,15 @@ intermingle.cbind <- function(df1, df2) { # Combine 2 data frames (of the same l
 
 # _________________________________________________________________________________________________
 #' @title ls2categvec
-#' @description Convert a list to a vector repeating list-element names, while vector names are the list elements.
-#' @param your_list PARAM_DESCRIPTION
+#'
+#' @description Converts a list to a vector repeating list-element names, while vector names are the list elements.
+#' @param your_list A list.
+#' @return A vector with the same elements as `your_list`, but with the names of the list elements repeated as many times as the number of elements in each list element.
+#' @examples ls2categvec(list(a = 1, b = 2, c = 3))
 #' @export
 ls2categvec <- function(your_list ) { # Convert a list to a vector repeating list-element names, while vector names are the list elements
-  VEC = rep(names(your_list),unlapply(your_list, length))
-  names(VEC) = unlist(your_list, use.names = TRUE)
+  VEC <- rep(names(your_list), unlapply(your_list, length))
+  names(VEC) <- unlist(your_list, use.names = TRUE)
   return(VEC)
 }
 
@@ -2210,10 +2213,10 @@ ls2categvec <- function(your_list ) { # Convert a list to a vector repeating lis
 #' @param ListWithNames PARAM_DESCRIPTION, Default: Sections.ls.Final
 #' @export
 list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
-  NZ = names(ListWithNames)
-  LZ = unlapply(ListWithNames, length)
-  replicated.name.vec = rep(NZ, LZ)
-  names(replicated.name.vec) = unlist(ListWithNames)
+  NZ <- names(ListWithNames)
+  LZ <- unlapply(ListWithNames, length)
+  replicated.name.vec <- rep(NZ, LZ)
+  names(replicated.name.vec) <- unlist(ListWithNames)
   return(replicated.name.vec)
 }
 
@@ -2238,8 +2241,8 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
 #' @export
 symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of vectors
   big.vec <- c(x, y, ...)
-  ls = list(x, y, ...); if ( length(ls) > 2) {print("# Not Mathematically correct, but logical for n>2 vectors: https://en.wikipedia.org/wiki/Symmetric_difference#Properties")}
-  names(ls) = paste("Only in", as.character(match.call()[-1]))
+  ls <- list(x, y, ...); if ( length(ls) > 2) {print("# Not Mathematically correct, but logical for n>2 vectors: https://en.wikipedia.org/wiki/Symmetric_difference#Properties")}
+  names(ls) <- paste("Only in", as.character(match.call()[-1]))
   duplicates <- big.vec[duplicated(big.vec)]
   lapply(ls, function(x) setdiff(x, duplicates))
 }
@@ -2273,7 +2276,7 @@ iround <- function(x, digitz = 3) {
 #' @examples modus(c(1, 1, 2, 3, 3, 3, 4, 5)); modus(1:4)
 
 modus <- function(x) {
-  x = unlist(na.exclude(x))
+  x <- unlist(na.exclude(x))
   ux <- unique(x)
   tab <- tabulate(match(x, ux));
   ux[tab == max(tab)]
@@ -2362,7 +2365,7 @@ geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a nume
 mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
   stopifnot(is.numeric(x), length(k) == 1, is.finite(k), is.logical(na.rm))
 
-  negs = sum(x < 0);  zeros = sum(x == 0)
+  negs <- sum(x < 0);  zeros <- sum(x == 0)
   if (negs | zeros) { iprint("The input vector has", negs, "negative values and", zeros, "zeros." ) }
   mean(log(x, base = k), na.rm = na.rm)
   }
@@ -2381,9 +2384,9 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the l
 #'
 #' @export
 movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling average of a numeric vector.
-  y = NULL
+  y <- NULL
   for (i in oneSide:length(x)) {
-    y[i] = mean( x[ (i - oneSide):(i + oneSide) ] )
+    y[i] <- mean( x[ (i - oneSide):(i + oneSide) ] )
   };  return(y)
 }
 
@@ -2417,9 +2420,9 @@ movingAve2 <- function(x, n = 5) {
 movingSEM <-
   function(x, oneSide = 5) {
     # Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
-    y = NULL
+    y <- NULL
     for (i in oneSide:length(x)) {
-      y[i] = sem(x[(i - oneSide):(i + oneSide)])
+      y[i] <- sem(x[(i - oneSide):(i + oneSide)])
     }
     return(y)
   }
@@ -2435,13 +2438,12 @@ movingSEM <-
 #' @export
 imovingSEM <- function(x, oneSide = 5) {
   # Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
-  y = NULL
+  y <- NULL
   for (i in 1:length(x)) {
-    oneSideDynamic = min(i - 1, oneSide, length(x) - i)
+    oneSideDynamic <- min(i - 1, oneSide, length(x) - i)
     oneSideDynamic
-    indexx = (i - oneSideDynamic):(i + oneSideDynamic)
-    indexx
-    y[i] = sem(x[indexx])
+    indexx <- (i - oneSideDynamic):(i + oneSideDynamic)
+    y[i] <- sem(x[indexx])
   }
   return(y)
 }
@@ -2461,8 +2463,8 @@ imovingSEM <- function(x, oneSide = 5) {
 #' @param vec input vector
 #' @export
 as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
-  numerified_vec = as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
-  if (!is.null(names(vec))) {names(numerified_vec) = names(vec)}
+  numerified_vec <- as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
+  if (!is.null(names(vec))) { names(numerified_vec) <- names(vec) }
   return(numerified_vec)
 }
 
