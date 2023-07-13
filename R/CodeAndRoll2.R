@@ -236,10 +236,14 @@ count_occurrence_each_element <- function(vec) {
 
 # _________________________________________________________________________________________________
 #' @title top_indices
-#' @description Returns the position / index of the n highest values. For equal values, it maintains the original order.
-#' @param x PARAM_DESCRIPTION
-#' @param n PARAM_DESCRIPTION, Default: 3
-#' @param top PARAM_DESCRIPTION, Default: TRUE
+#'
+#' @description Returns the positions of the `n` highest values in `x`.
+#' @param x A vector.
+#' @param n The number of highest values to return.
+#' @param top Whether to return the `n` highest (or `n` lowest) values.
+#' @return A vector of indices.
+#' @examples top_indices(rnorm(10), n = 3)
+#'
 #' @export
 top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index of the n highest values. For equal values, it maintains the original order.
   head( order(x, decreasing = top), n )
@@ -249,9 +253,13 @@ top_indices <- function(x, n = 3, top = TRUE) { # Returns the position / index o
 
 # _________________________________________________________________________________________________
 #' @title trail
-#' @description A combination of head() and tail() to see both ends.
-#' @param vec input vector
-#' @param N PARAM_DESCRIPTION, Default: 10
+#'
+#' @description Returns a vector containing the first `N` and last `N` elements of `vec`.
+#' @param vec A vector.
+#' @param N The number of elements to include from each end.
+#' @return A vector.
+#' @examples trail(rnorm(10), N = 3)
+#'
 #' @export
 trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combination of head() and tail() to see both ends.
 
@@ -259,9 +267,13 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combin
 
 # _________________________________________________________________________________________________
 #' @title sort.decreasing
-#' @description Sort in decreasing order.
-#' @param vec input vector
-#' @export sort.decreasing
+#'
+#' @description Sorts `vec` in decreasing order.
+#' @param vec A vector.
+#' @return A sorted vector.
+#' @examples sort.decreasing(rnorm(10))
+#'
+#' @export
 sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
 
 
@@ -2209,8 +2221,13 @@ ls2categvec <- function(your_list ) { # Convert a list to a vector repeating lis
 
 # _________________________________________________________________________________________________
 #' @title list.2.replicated.name.vec
-#' @description Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
-#' @param ListWithNames PARAM_DESCRIPTION, Default: Sections.ls.Final
+#'
+#' @description Converts a list to a vector, with list elements names replicated as many times as many elements each element had.
+#' @param ListWithNames A list.
+#' @return A vector with the same elements as `ListWithNames`, but with the names of the list elements repeated as many times as the number of elements in each list element.
+#' @examples
+#' ListWithNames <- list(a = 1, b = 2, c = 3)
+#' list.2.replicated.name.vec(ListWithNames)
 #' @export
 list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
   NZ <- names(ListWithNames)
