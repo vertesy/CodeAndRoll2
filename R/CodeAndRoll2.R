@@ -2209,10 +2209,15 @@ modus <- function(x) {
 
 
 # _________________________________________________________________________________________________
-#' @title cv
-#' @description ..
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default).
+#'
+#' @param x A numeric vector.
+#' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
+#'
+#' @return The coefficient of variation of the input vector.
+#'
+#' @examples cv(1:5)
+#'
 #' @export
 cv <- function(x, na.rm = TRUE) {
   sd( x, na.rm = na.rm)/mean(x, na.rm = na.rm)
@@ -2221,38 +2226,51 @@ cv <- function(x, na.rm = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title sem
-#' @description Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm Remove NA values for calculation? Default: TRUE
-#' @export
-sem <-
-  function(x, na.rm = TRUE)
-    sd(unlist(x), na.rm = na.rm) / sqrt(length(na.omit.strip(as.numeric(x))))  # Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
+#' Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
+#'
+#' @param x A numeric vector.
+#' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
+#'
+#' @return The standard error of the mean of the input vector.
+#'
+#' @examples sem(1:5)
+sem <- function(x, na.rm = TRUE){
+  sd(unlist(x), na.rm = na.rm) / sqrt(length(na.omit.strip(as.numeric(x))))  # Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
+  }
 
-
-
-# _________________________________________________________________________________________________
-#' @title fano
-#' @description Calculates the fano factor on a numeric vector (it excludes NA-s by default).
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm Remove NA values for calculation? Default: TRUE
-#' @param USE PARAM_DESCRIPTION, Default: 'na.or.complete'
-#' @export
-fano <-
-  function(x, na.rm = TRUE, USE = "na.or.complete")
-    var(x, na.rm = na.rm, use = USE) / mean(x, na.rm = na.rm) # Calculates the fano factor on a numeric vector (it excludes NA-s by default)
 
 
 
 # _________________________________________________________________________________________________
-#' @title geomean
-#' @description Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
-#' @param x PARAM_DESCRIPTION
-#' @param na.rm Remove NA values for calculation? Default: TRUE
+#' Calculates the fano factor on a numeric vector (it excludes NA-s by default).
+#'
+#' @param x A numeric vector.
+#' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
+#' @param USE The method used to calculate the variance. Defaults to `"na.or.complete"`.
+#'
+#' @return The fano factor of the input vector.
+#'
+#' @examples fano(1:5)
+#'
+#' @export
+fano <-function(x, na.rm = TRUE, USE = "na.or.complete") {
+  var(x, na.rm = na.rm, use = USE) / mean(x, na.rm = na.rm) # Calculates the fano factor on a numeric vector (it excludes NA-s by default)
+  }
+
+# _________________________________________________________________________________________________
+#' Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
+#'
+#' @param x A numeric vector.
+#' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
+#'
+#' @return The geometric mean of the input vector.
+#'
+#' @examples geomean(1:5)
+#'
 #' @export
 geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a numeric vector (it excludes NA-s by default)
-  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x)) }
+  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
+  }
 
 
 
@@ -2265,9 +2283,7 @@ geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a nume
 #'
 #' @return The mean of the log_k of the input vector.
 #'
-#' @examples
-#' x <- c(1, 2, 3, 4, 5)
-#' mean_of_log(x)
+#' @examples mean_of_log(1:5)
 #'
 #' @export
 mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
@@ -2288,9 +2304,7 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the l
 #'
 #' @return A vector of the moving averages.
 #'
-#' @examples
-#' x <- c(1, 2, 3, 4, 5)
-#' movingAve(x)
+#' @examples movingAve(1:5)
 #'
 #' @export
 movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling average of a numeric vector.
@@ -2311,9 +2325,7 @@ movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling averag
 #'
 #' @return A vector of the moving averages.
 #'
-#' @examples
-#' x <- c(1, 2, 3, 4, 5)
-#' movingAve2(x)
+#' @examples movingAve2(1:5)
 #'
 #' @export
 movingAve2 <- function(x, n = 5) {
