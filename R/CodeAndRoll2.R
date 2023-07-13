@@ -279,14 +279,16 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 
 # _________________________________________________________________________________________________
 #' @title sstrsplit
-#' @description Alias for str_split_fixed in the stringr package.
-#' @param string PARAM_DESCRIPTION
-#' @param pattern PARAM_DESCRIPTION, Default: '_'
-#' @param n PARAM_DESCRIPTION, Default: 2
+#'
+#' @description Alias for `str_split_fixed` in the `stringr` package.
+#' @param string A string.
+#' @param pattern A character string pattern to split on.
+#' @param n The number of elements to return in each split.
+#' @return A list of character vectors.
 #' @seealso
 #'  \code{\link[stringr]{str_split}}
-#' @export
 #' @importFrom stringr str_split_fixed
+#' @export
 sstrsplit <- function(string, pattern = "_", n = 2) { stringr::str_split_fixed(string, pattern = pattern, n = n) } # Alias for str_split_fixed in the stringr package
 
 
@@ -1969,10 +1971,11 @@ reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) { # reor
 
 # _________________________________________________________________________________________________
 #' @title range.list
-#' @description Range of values in whole list.
-#' @param L PARAM_DESCRIPTION
-#' @param namesOrdered PARAM_DESCRIPTION
-#' @export range.list
+#'
+#' @description Calculates the range of values in a list.
+#' @param L A list.
+#' @return A vector of length 2, containing the minimum and maximum values in `L`.
+#' @export
 range.list <- function(L, namesOrdered) { # range of values in whole list
   return(range(unlist(L), na.rm = TRUE))
 }
