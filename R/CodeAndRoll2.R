@@ -561,12 +561,12 @@ flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) { # F
 
 # _________________________________________________________________________________________________
 #' @title sortbyitsnames
-#' @description Sort a vector by the alphanumeric order of its names(instead of its values).
-#' @param vec_or_list PARAM_DESCRIPTION
-#' @param decreasing PARAM_DESCRIPTION, Default: FALSE
-#' @param ... Pass any other argument.
-#' @seealso
-#'  \code{\link[gtools]{mixedsort}}
+#'
+#' @description Sort a vector or list by the alphanumeric order of its names (instead of its values).
+#' @param vec_or_list A vector or list.
+#' @param decreasing Logical. Whether to sort in decreasing order.
+#' @param ... Additional arguments passed to `mixedsort()`.
+#' @return A sorted vector or list.
 #' @export
 #' @importFrom gtools mixedsort
 sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) { # Sort a vector by the alphanumeric order of its names(instead of its values).
@@ -1771,11 +1771,12 @@ df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF
 # Multi-dimensional lists ____________________________________________________________ ----
 
 
-
 #' @title copy.dimension.and.dimnames
-#' @description Copy dimension and dimnames.
-#' @param list.1D PARAM_DESCRIPTION
-#' @param obj.2D PARAM_DESCRIPTION
+#'
+#' @description Copy the dimension and dimnames of a 1D vector to a 2D array.
+#' @param list.1D A 1D vector.
+#' @param obj.2D A 2D array.
+#' @return A 2D array with the same dimension and dimnames as `obj.2D`.
 #' @export
 copy.dimension.and.dimnames <- function(list.1D, obj.2D) { # copy dimension and dimnames
   dim(list.1D) <- dim(obj.2D)
@@ -1784,18 +1785,19 @@ copy.dimension.and.dimnames <- function(list.1D, obj.2D) { # copy dimension and 
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title mdlapply
-#' @description lapply for multidimensional arrays.
-#' @param list_2D PARAM_DESCRIPTION
-#' @param ... Pass any other argument.
+#'
+#' @description A wrapper for `lapply()` that works on multidimensional arrays.
+#' @param list_2D A multidimensional array.
+#' @param ... Function and arguments to pass to `lapply()`.
+#' @return A multidimensional array with the same dimensions as `list_2D`.
 #' @export
+
 mdlapply <- function(list_2D, ...) { #  lapply for multidimensional arrays
   x = lapply(list_2D, ...)
-  copy.dimension.and.dimnames(x,list_2D)
+  copy.dimension.and.dimnames(x, list_2D)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1984,13 +1986,17 @@ range.list <- function(L, namesOrdered) { # range of values in whole list
 
 # _________________________________________________________________________________________________
 #' @title intermingle2lists
+#'
 #' @description Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
-#' @param L1 PARAM_DESCRIPTION
-#' @param L2 PARAM_DESCRIPTION
+#' @param L1 A list.
+#' @param L2 A list.
+#' @return A list.
 #' @export
 intermingle2lists <- function(L1, L2) { # Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
   stopifnot(length(L1) == length(L2) )
   Lout = list(NA)
+
+  # Create a new list with the combined elements of `L1` and `L2`
   for (x in 1:(2*length(L1)) ) {
     if (x  %% 2) {  Lout[[x]] = L1[[((x + 1) / 2)]]; names(Lout)[x] = names(L1)[((x + 1) / 2)]
     } else {    Lout[[x]] = L2[[x / 2]]; names(Lout)[x] = names(L2)[x / 2]      }
