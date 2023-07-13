@@ -2024,26 +2024,39 @@ reverse.list.hierarchy <- function(my_list) { # reverse list hierarchy
 
 # _________________________________________________________________________________________________
 #' @title list2fullDF.byNames
-#' @description ..
-#' @param your.list PARAM_DESCRIPTION, Default: list(set.1 = vec.fromNames(LETTERS[1:5], fill = 1), set.2 = vec.fromNames(LETTERS[3:9],
-#'    fill = 2))
-#' @param byRow PARAM_DESCRIPTION, Default: TRUE
-#' @param FILL PARAM_DESCRIPTION, Default: NA
+#'
+#' @description Converts a list to a full matrix, with rows and columns named by the elements of the list.
+#'
+#' @param your.list A list.
+#' @param byRow Logical. Whether the resulting matrix should be arranged by row (default) or by column.
+#' @param FILL A value to fill in missing entries.
+#'
+#' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.
+#'
+#' @examples
+#' your.list <- list(set.1 = LETTERS[1:5], set.2 = LETTERS[3:9])
+#' list2fullDF.byNames(your.list)
+#'
 #' @export
 list2fullDF.byNames <- function(your.list = list(
   "set.1" = vec.fromNames(LETTERS[1:5], fill = 1),  # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
   "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
 ), byRow = TRUE, FILL = NA) {
-  length.list = length(your.list)
-  list.names = names(your.list)
-  list.element.names = sort(unique(unlist(lapply(your.list, names))))
 
+  # Get the lengths of the list elements
+  length.list <- length(your.list)
+  list.names <- names(your.list)
+  list.element.names <- sort(unique(unlist(lapply(your.list, names))))
+
+  # Create a matrix with the correct dimensions
   mat = matrix.fromNames(rowname_vec = list.element.names, colname_vec = list.names, fill = FILL)
+
+  # Fill in the matrix with the elements of the list
   for (i in 1:length.list) {
-    element = list.names[i]
-    mat[ names(your.list[[element]]), element] = your.list[[element]]
+    element <- list.names[i]
+    mat[ names(your.list[[element]]), element] <- your.list[[element]]
   }
-  if (!byRow) {mat = t(mat)}
+  if (!byRow) {mat <- t(mat)}
   return(mat)
 }
 
@@ -2051,23 +2064,37 @@ list2fullDF.byNames <- function(your.list = list(
 
 # _________________________________________________________________________________________________
 #' @title list2fullDF.presence
-#' @description Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
-#' @param your.list PARAM_DESCRIPTION, Default: list(set.1 = LETTERS[1:5], set.2 = LETTERS[3:9])
-#' @param byRow PARAM_DESCRIPTION, Default: TRUE
-#' @param FILL PARAM_DESCRIPTION, Default: 0
+#'
+#' @description Converts a list to a full matrix, with rows and columns named by the elements of the list.
+#'
+#' The matrix will contain a 1 in each cell where the corresponding element of the list is present, and a 0 otherwise.
+#'
+#' @param your.list A list.
+#' @param byRow Logical. Whether the resulting matrix should be arranged by row (default) or by column.
+#' @param FILL A value to fill in missing entries.
+#'
+#' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.
+#'
+#' @examples
+#' your.list <- list("set.1" = LETTERS[1:5], "set.2" = LETTERS[3:9])
+#' list2fullDF.presence(your.list)
+#'
 #' @export
 list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]  # Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
                                                   , "set.2" = LETTERS[3:9]), byRow = TRUE, FILL = 0) {
-  length.list = length(your.list)
-  list.names = names(your.list)
-  list.elements = sort(Reduce(f = union, your.list))
+  length.list <- length(your.list)
+  list.names <- names(your.list)
+  list.elements  <- sort(Reduce(f = union, your.list))
 
+  # Create a matrix with the correct dimensions
   mat = matrix.fromNames(rowname_vec = list.elements, colname_vec = list.names, fill = FILL)
+
+  # Fill in the matrix with the elements of the list
   for (i in 1:length.list) {
-    element = list.names[i]
-    mat[ your.list[[element]], element] = 1
+    element <- list.names[i]
+    mat[ your.list[[element]], element] <- 1
   }
-  if (!byRow) {mat = t(mat)}
+  if (!byRow) {mat <- t(mat)}
   return(mat)
 }
 
