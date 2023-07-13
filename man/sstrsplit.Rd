@@ -7,14 +7,17 @@
 sstrsplit(string, pattern = "_", n = 2)
 }
 \arguments{
-\item{string}{PARAM_DESCRIPTION}
+\item{string}{A string.}
 
-\item{pattern}{PARAM_DESCRIPTION, Default: '_'}
+\item{pattern}{A character string pattern to split on.}
 
-\item{n}{PARAM_DESCRIPTION, Default: 2}
+\item{n}{The number of elements to return in each split.}
+}
+\value{
+A list of character vectors.
 }
 \description{
-Alias for str_split_fixed in the stringr package.
+Alias for \code{str_split_fixed} in the \code{stringr} package.
 }
 \seealso{
 \code{\link[stringr]{str_split}}

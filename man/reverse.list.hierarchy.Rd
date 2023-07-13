@@ -4,11 +4,19 @@
 \alias{reverse.list.hierarchy}
 \title{reverse.list.hierarchy}
 \usage{
-reverse.list.hierarchy(ll)
+reverse.list.hierarchy(my_list)
 }
 \arguments{
-\item{ll}{PARAM_DESCRIPTION}
+\item{my_list}{A list.}
+}
+\value{
+A list with the elements of the original list in reverse order.
 }
 \description{
-Reverse list hierarchy.
+Reverses the hierarchy of a list.
+}
+\examples{
+my_list <- list(a = list(1, 2), b = list(3, 4))
+reverse.list.hierarchy(my_list)
+
 }

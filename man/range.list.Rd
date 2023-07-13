@@ -7,10 +7,11 @@
 \method{range}{list}(L, namesOrdered)
 }
 \arguments{
-\item{L}{PARAM_DESCRIPTION}
-
-\item{namesOrdered}{PARAM_DESCRIPTION}
+\item{L}{A list.}
+}
+\value{
+A vector of length 2, containing the minimum and maximum values in \code{L}.
 }
 \description{
-Range of values in whole list.
+Calculates the range of values in a list.
 }

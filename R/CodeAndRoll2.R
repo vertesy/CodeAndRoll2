@@ -2028,6 +2028,7 @@ as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with 
   past = 0
 
   # Iterate over the list, and fill in the elements with the corresponding elements from the vectorfor (v in 1:length(list_wannabe)) {
+  for (v in 1:length(list_wannabe)) {
     lv = length(list_wannabe[[v]])
     list_return[[v]] = vec[(past + 1):(past + lv)]
     past = past + lv

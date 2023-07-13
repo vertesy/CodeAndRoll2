@@ -11,12 +11,22 @@ list2fullDF.presence(
 )
 }
 \arguments{
-\item{your.list}{PARAM_DESCRIPTION, Default: list(set.1 = LETTERS\link{1:5}, set.2 = LETTERS\link{3:9})}
+\item{your.list}{A list.}
 
-\item{byRow}{PARAM_DESCRIPTION, Default: TRUE}
+\item{byRow}{Logical. Whether the resulting matrix should be arranged by row (default) or by column.}
 
-\item{FILL}{PARAM_DESCRIPTION, Default: 0}
+\item{FILL}{A value to fill in missing entries.}
+}
+\value{
+A matrix with the same elements as \code{your.list}, but with rows and columns named by the elements of the list.
 }
 \description{
-Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
+Converts a list to a full matrix, with rows and columns named by the elements of the list.
+
+The matrix will contain a 1 in each cell where the corresponding element of the list is present, and a 0 otherwise.
+}
+\examples{
+your.list <- list("set.1" = LETTERS[1:5], "set.2" = LETTERS[3:9])
+list2fullDF.presence(your.list)
+
 }

@@ -7,12 +7,19 @@
 top_indices(x, n = 3, top = TRUE)
 }
 \arguments{
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{A vector.}
 
-\item{n}{PARAM_DESCRIPTION, Default: 3}
+\item{n}{The number of highest values to return.}
 
-\item{top}{PARAM_DESCRIPTION, Default: TRUE}
+\item{top}{Whether to return the \code{n} highest (or \code{n} lowest) values.}
+}
+\value{
+A vector of indices.
 }
 \description{
-Returns the position / index of the n highest values. For equal values, it maintains the original order.
+Returns the positions of the \code{n} highest values in \code{x}.
+}
+\examples{
+top_indices(rnorm(10), n = 3)
+
 }

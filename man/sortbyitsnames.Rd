@@ -7,15 +7,15 @@
 sortbyitsnames(vec_or_list, decreasing = FALSE, ...)
 }
 \arguments{
-\item{vec_or_list}{PARAM_DESCRIPTION}
+\item{vec_or_list}{A vector or list.}
 
-\item{decreasing}{PARAM_DESCRIPTION, Default: FALSE}
+\item{decreasing}{Logical. Whether to sort in decreasing order.}
 
-\item{...}{Pass any other argument.}
+\item{...}{Additional arguments passed to \code{mixedsort()}.}
+}
+\value{
+A sorted vector or list.
 }
 \description{
-Sort a vector by the alphanumeric order of its names(instead of its values).
-}
-\seealso{
-\code{\link[gtools]{mixedsort}}
+Sort a vector or list by the alphanumeric order of its names (instead of its values).
 }

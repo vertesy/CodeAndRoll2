@@ -7,14 +7,21 @@
 \method{as.list}{df.by.row}(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE)
 }
 \arguments{
-\item{dtf}{PARAM_DESCRIPTION}
+\item{dtf}{A dataframe.}
 
-\item{na.omit}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na.omit}{Whether to omit rows with missing values.}
 
-\item{zero.omit}{PARAM_DESCRIPTION, Default: FALSE}
+\item{zero.omit}{Whether to omit rows with all-zero values.}
 
-\item{omit.empty}{PARAM_DESCRIPTION, Default: FALSE}
+\item{omit.empty}{Whether to omit rows with zero length.}
+}
+\value{
+A list.
 }
 \description{
-Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
+Split a dataframe into a list by its columns.
+}
+\examples{
+dtf <- data.frame(x = c(1, 2, NA), y = c(3, 4, 0), z = c(5, 6, 7))
+as.list.df.by.row(dtf)
 }

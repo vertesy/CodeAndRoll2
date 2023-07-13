@@ -7,8 +7,15 @@
 \method{sort}{decreasing}(vec)
 }
 \arguments{
-\item{vec}{input vector}
+\item{vec}{A vector.}
+}
+\value{
+A sorted vector.
 }
 \description{
-Sort in decreasing order.
+Sorts \code{vec} in decreasing order.
+}
+\examples{
+sort.decreasing(rnorm(10))
+
 }

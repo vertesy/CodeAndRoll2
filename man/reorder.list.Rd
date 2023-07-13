@@ -7,12 +7,20 @@
 \method{reorder}{list}(L, namesOrdered = gtools::mixedsort(names(L)))
 }
 \arguments{
-\item{L}{PARAM_DESCRIPTION}
+\item{L}{A list.}
 
-\item{namesOrdered}{PARAM_DESCRIPTION, Default: mixedsort(names(L))}
+\item{namesOrdered}{A vector of names or indices in the desired order.}
+}
+\value{
+A list.
 }
 \description{
 Reorder elements of lists in your custom order of names / indices.
+}
+\examples{
+L <- list(a = 1, b = 2, c = 3)
+namesOrdered <- c("c", "a", "b")
+reorder.list(L, namesOrdered)
 }
 \seealso{
 \code{\link[gtools]{mixedsort}}

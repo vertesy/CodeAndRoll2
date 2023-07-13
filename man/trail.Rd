@@ -7,10 +7,17 @@
 trail(vec, N = 10)
 }
 \arguments{
-\item{vec}{input vector}
+\item{vec}{A vector.}
 
-\item{N}{PARAM_DESCRIPTION, Default: 10}
+\item{N}{The number of elements to include from each end.}
+}
+\value{
+A vector.
 }
 \description{
-A combination of head() and tail() to see both ends.
+Returns a vector containing the first \code{N} and last \code{N} elements of \code{vec}.
+}
+\examples{
+trail(rnorm(10), N = 3)
+
 }

@@ -7,10 +7,13 @@
 mdlapply(list_2D, ...)
 }
 \arguments{
-\item{list_2D}{PARAM_DESCRIPTION}
+\item{list_2D}{A multidimensional array.}
 
-\item{...}{Pass any other argument.}
+\item{...}{Function and arguments to pass to \code{lapply()}.}
+}
+\value{
+A multidimensional array with the same dimensions as \code{list_2D}.
 }
 \description{
-lapply for multidimensional arrays.
+A wrapper for \code{lapply()} that works on multidimensional arrays.
 }

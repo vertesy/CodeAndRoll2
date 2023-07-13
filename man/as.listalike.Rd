@@ -7,10 +7,19 @@
 as.listalike(vec, list_wannabe)
 }
 \arguments{
-\item{vec}{PARAM_DESCRIPTION}
+\item{vec}{A vector.}
 
-\item{list_wannabe}{PARAM_DESCRIPTION}
+\item{list_wannabe}{A list with the desired dimensions.}
+}
+\value{
+A list with the same dimensions as \code{list_wannabe}, and the same elements as \code{vec} in the same order.
 }
 \description{
-Convert a vector to a list with certain dimensions, taken from the list it wanna resemble.
+Converts a vector to a list with the same dimensions as a given list.
+}
+\examples{
+vec <- 1:10
+list_wannabe <- list(a = 1:3, b = 4:6, c = 7:10)
+as.listalike(vec, list_wannabe)
+
 }

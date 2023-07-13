@@ -7,10 +7,13 @@
 copy.dimension.and.dimnames(list.1D, obj.2D)
 }
 \arguments{
-\item{list.1D}{PARAM_DESCRIPTION}
+\item{list.1D}{A 1D vector.}
 
-\item{obj.2D}{PARAM_DESCRIPTION}
+\item{obj.2D}{A 2D array.}
+}
+\value{
+A 2D array with the same dimension and dimnames as \code{obj.2D}.
 }
 \description{
-Copy dimension and dimnames.
+Copy the dimension and dimnames of a 1D vector to a 2D array.
 }

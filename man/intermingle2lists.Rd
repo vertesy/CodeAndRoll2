@@ -7,9 +7,12 @@
 intermingle2lists(L1, L2)
 }
 \arguments{
-\item{L1}{PARAM_DESCRIPTION}
+\item{L1}{A list.}
 
-\item{L2}{PARAM_DESCRIPTION}
+\item{L2}{A list.}
+}
+\value{
+A list.
 }
 \description{
 Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().

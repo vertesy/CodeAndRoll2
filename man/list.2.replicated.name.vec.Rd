@@ -7,8 +7,15 @@
 list.2.replicated.name.vec(ListWithNames = Sections.ls.Final)
 }
 \arguments{
-\item{ListWithNames}{PARAM_DESCRIPTION, Default: Sections.ls.Final}
+\item{ListWithNames}{A list.}
+}
+\value{
+A vector with the same elements as \code{ListWithNames}, but with the names of the list elements repeated as many times as the number of elements in each list element.
 }
 \description{
-Convert a list to a vector, with list elements names replicated as many times, as many elements each element had.
+Converts a list to a vector, with list elements names replicated as many times as many elements each element had.
+}
+\examples{
+ListWithNames <- list(a = 1, b = 2, c = 3)
+list.2.replicated.name.vec(ListWithNames)
 }

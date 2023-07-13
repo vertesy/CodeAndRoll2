@@ -7,8 +7,14 @@
 ls2categvec(your_list)
 }
 \arguments{
-\item{your_list}{PARAM_DESCRIPTION}
+\item{your_list}{A list.}
+}
+\value{
+A vector with the same elements as \code{your_list}, but with the names of the list elements repeated as many times as the number of elements in each list element.
 }
 \description{
-Convert a list to a vector repeating list-element names, while vector names are the list elements.
+Converts a list to a vector repeating list-element names, while vector names are the list elements.
+}
+\examples{
+ls2categvec(list(a = 1, b = 2, c = 3))
 }
