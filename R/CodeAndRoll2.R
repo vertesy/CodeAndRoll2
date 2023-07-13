@@ -2066,9 +2066,16 @@ splitbyitsnames <- function(namedVec) { # split a list by its names
 
 
 # _________________________________________________________________________________________________
-#' @title splititsnames_byValues
-#' @description Split a list by its names.
-#' @param namedVec Vector with names
+#' Split a list by its values.
+#'
+#' @param namedVec A vector with names.
+#'
+#' @return A list of vectors, each of which contains the elements of `namedVec` that have the corresponding value.
+#'
+#' @examples
+#' namedVec <- c("A", "B", "C", "A", "B", "D")
+#' splititsnames_byValues(namedVec)
+#'
 #' @export
 splititsnames_byValues <- function(namedVec) { # split a list by its names
   stopifnot(!is.null(names(namedVec)))
@@ -2078,11 +2085,19 @@ splititsnames_byValues <- function(namedVec) { # split a list by its names
 
 
 # _________________________________________________________________________________________________
-#' @title intermingle2vec
-#' @description Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
-#' @param V1 PARAM_DESCRIPTION
-#' @param V2 PARAM_DESCRIPTION
-#' @param wNames PARAM_DESCRIPTION, Default: TRUE
+#' Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
+#'
+#' @param V1 A vector.
+#' @param V2 A vector.
+#' @param wNames Logical. Whether to include the names of the vectors in the output vector.
+#'
+#' @return A vector that combines `V1` and `V2`, with the elements of `V1` alternating with the elements of `V2`.
+#'
+#' @examples
+#' V1 <- c(1, 3, 5)
+#' V2 <- c(2, 4, 6)
+#' intermingle2vec(V1, V2)
+#'
 #' @export
 intermingle2vec <- function(V1, V2, wNames = TRUE) { # Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
   stopifnot(length(V1) == length(V2) )
@@ -2095,9 +2110,12 @@ intermingle2vec <- function(V1, V2, wNames = TRUE) { # Combine 2 vectors (of the
 
 # _________________________________________________________________________________________________
 #' @title intermingle.cbind
-#' @description Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
-#' @param df1 PARAM_DESCRIPTION
-#' @param df2 PARAM_DESCRIPTION
+#' Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
+#'
+#' @param df1 A data frame.
+#' @param df2 A data frame.
+#'
+#' @return A data frame that combines `df1` and `df2`, with the columns of `df1` alternating with the columns of `
 #' @export
 
 intermingle.cbind <- function(df1, df2) { # Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
@@ -2156,12 +2174,20 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
 ## Set operations ____________________________________________________________ ----
 
 
-
-#' @title symdiff
-#' @description Quasy symmetric difference of any number of vectors.
-#' @param x PARAM_DESCRIPTION
-#' @param y PARAM_DESCRIPTION
+#' Quasy symmetric difference of any number of vectors.
+#'
+#' @param x A vector.
+#' @param y A vector.
 #' @param ... Pass any other argument.
+#'
+#' @return A list of vectors, each of which contains the elements that are only present in that vector and not in any of the other vectors.
+#'
+#' @examples
+#' x <- c(1, 2, 3, 4, 5)
+#' y <- c(2, 4, 6, 8, 10)
+#' z <- c(3, 5, 7, 9, 11)
+#' symdiff(x, y, z)
+#'
 #' @export
 symdiff <- function(x, y, ...) { # Quasy symmetric difference of any number of vectors
   big.vec <- c(x, y, ...)
