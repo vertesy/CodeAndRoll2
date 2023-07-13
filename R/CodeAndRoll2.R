@@ -1895,14 +1895,21 @@ list.wNames <- function(...) { # create a list with names from ALL variables you
 
 # _________________________________________________________________________________________________
 #' @title as.list.df.by.row
-#' @description Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
-#' @param dtf PARAM_DESCRIPTION
-#' @param na.omit PARAM_DESCRIPTION, Default: TRUE
-#' @param zero.omit PARAM_DESCRIPTION, Default: FALSE
-#' @param omit.empty PARAM_DESCRIPTION, Default: FALSE
-#' @export as.list.df.by.row
+#'
+#' @description Split a dataframe into a list by its columns.
+#' @param dtf A dataframe.
+#' @param na.omit Whether to omit rows with missing values.
+#' @param zero.omit Whether to omit rows with all-zero values.
+#' @param omit.empty Whether to omit rows with zero length.
+#' @return A list.
+#' @examples
+#' dtf <- data.frame(x = c(1, 2, NA), y = c(3, 4, 0), z = c(5, 6, 7))
+#' as.list.df.by.row(dtf)
+#' @export
 as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) { # Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
   outList = as.list(as.data.frame(t( dtf ) ) )
+
+  # Omit rows with missing values, all-zero values, or zero length
   if (na.omit) {   outList = lapply(outList, na.omit.strip) }
   if (zero.omit) {   outList = lapply(outList, zero.omit) }
   if (omit.empty) {   outList = outList[(lapply(outList, length)) > 0] }
@@ -1914,12 +1921,17 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 
 # _________________________________________________________________________________________________
 #' @title as.list.df.by.col
-#' @description OSplit a dataframe into a list by its rows. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
-#' @param dtf PARAM_DESCRIPTION
-#' @param na.omit PARAM_DESCRIPTION, Default: TRUE
-#' @param zero.omit PARAM_DESCRIPTION, Default: FALSE
-#' @param omit.empty PARAM_DESCRIPTION, Default: FALSE
-#' @export as.list.df.by.col
+#'
+#' @description Split a dataframe into a list by its rows.
+#' @param dtf A dataframe.
+#' @param na.omit Whether to omit rows with missing values.
+#' @param zero.omit Whether to omit rows with all-zero values.
+#' @param omit.empty Whether to omit rows with zero length.
+#' @return A list.
+#' @examples
+#' dtf <- data.frame(x = c(1, 2, NA), y = c(3, 4, 0), z = c(5, 6, 7))
+#' as.list.df.by.col(dtf)
+#' @export
 as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) { # oSplit a dataframe into a list by its rows. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
   outList = as.list(dtf)
   if (na.omit) {   outList = lapply(outList, na.omit.strip) }
@@ -1933,9 +1945,15 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 
 # _________________________________________________________________________________________________
 #' @title reorder.list
+#'
 #' @description Reorder elements of lists in your custom order of names / indices.
-#' @param L PARAM_DESCRIPTION
-#' @param namesOrdered PARAM_DESCRIPTION, Default: mixedsort(names(L))
+#' @param L A list.
+#' @param namesOrdered A vector of names or indices in the desired order.
+#' @return A list.
+#' @examples
+#' L <- list(a = 1, b = 2, c = 3)
+#' namesOrdered <- c("c", "a", "b")
+#' reorder.list(L, namesOrdered)
 #' @export reorder.list
 #' @seealso
 #'  \code{\link[gtools]{mixedsort}}
