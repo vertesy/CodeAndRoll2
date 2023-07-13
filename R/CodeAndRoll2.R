@@ -2099,6 +2099,7 @@ intermingle2vec <- function(V1, V2, wNames = TRUE) { # Combine 2 vectors (of the
 #' @param df1 PARAM_DESCRIPTION
 #' @param df2 PARAM_DESCRIPTION
 #' @export
+
 intermingle.cbind <- function(df1, df2) { # Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
   stopifnot(ncol(df1) == ncol(df2) )
   if (nrow(df1) != nrow(df2) ) { # not equal rows: subset
@@ -2280,10 +2281,17 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the l
 
 
 # _________________________________________________________________________________________________
-#' @title movingAve
-#' @description Calculates the moving / rolling average of a numeric vector.
-#' @param x PARAM_DESCRIPTION
-#' @param oneSide PARAM_DESCRIPTION, Default: 5
+#' Calculates the moving / rolling average of a numeric vector.
+#'
+#' @param x A numeric vector.
+#' @param oneSide The size of the moving window. Defaults to 5.
+#'
+#' @return A vector of the moving averages.
+#'
+#' @examples
+#' x <- c(1, 2, 3, 4, 5)
+#' movingAve(x)
+#'
 #' @export
 movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling average of a numeric vector.
   y = NULL
@@ -2295,10 +2303,18 @@ movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling averag
 
 
 # _________________________________________________________________________________________________
-#' @title movingAve2
-#' @description Calculates the moving / rolling average of a numeric vector, using filter().
-#' @param x PARAM_DESCRIPTION
-#' @param n PARAM_DESCRIPTION, Default: 5
+
+#' Calculates the moving / rolling average of a numeric vector, using `filter()`.
+#'
+#' @param x A numeric vector.
+#' @param n The size of the moving window. Defaults to 5.
+#'
+#' @return A vector of the moving averages.
+#'
+#' @examples
+#' x <- c(1, 2, 3, 4, 5)
+#' movingAve2(x)
+#'
 #' @export
 movingAve2 <- function(x, n = 5) {
   filter(x, rep(1 / n, n), sides = 2)
