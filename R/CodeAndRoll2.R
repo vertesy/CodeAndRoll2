@@ -1838,7 +1838,8 @@ mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.list
 #' @title any.duplicated.rownames.ls.of.df
 #' @description Check if there are any duplocated rownames in a list of dataframes.
 #' @param ls List of 2 or more vectors (sets) with categorical variables.
-#' @export any.duplicated.rownames.ls.of.df
+#'
+#' @export
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
 
 
@@ -1848,6 +1849,7 @@ any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # 
 #' @description Intersect any number of lists.
 #' @param ls List of 2 or more vectors (sets) with categorical variables.
 #' @param ... Pass any other argument.
+#'
 #' @export
 intersect.ls <- function(ls, ...) { Reduce(intersect, ls) } # Intersect any number of lists.
 
@@ -2013,10 +2015,8 @@ intermingle2lists <- function(L1, L2) { # Combine 2 lists (of the same length) s
 #' @title as.listalike
 #'
 #' @description Converts a vector to a list with the same dimensions as a given list.
-#'
 #' @param vec A vector.
 #' @param list_wannabe A list with the desired dimensions.
-#'
 #' @return A list with the same dimensions as `list_wannabe`, and the same elements as `vec` in the same order.
 #'
 #' @examples
