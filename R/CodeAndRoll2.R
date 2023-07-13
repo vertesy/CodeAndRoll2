@@ -1969,15 +1969,26 @@ intermingle2lists <- function(L1, L2) { # Combine 2 lists (of the same length) s
 
 # _________________________________________________________________________________________________
 #' @title as.listalike
-#' @description Convert a vector to a list with certain dimensions, taken from the list it wanna resemble.
-#' @param vec PARAM_DESCRIPTION
-#' @param list_wannabe PARAM_DESCRIPTION
+#'
+#' @description Converts a vector to a list with the same dimensions as a given list.
+#'
+#' @param vec A vector.
+#' @param list_wannabe A list with the desired dimensions.
+#'
+#' @return A list with the same dimensions as `list_wannabe`, and the same elements as `vec` in the same order.
+#'
+#' @examples
+#' vec <- 1:10
+#' list_wannabe <- list(a = 1:3, b = 4:6, c = 7:10)
+#' as.listalike(vec, list_wannabe)
+#'
 #' @export
 as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with certain dimensions, taken from the list it wanna resemble
   stopifnot(length(vec) == length(unlist(list_wannabe)))
   list_return = list_wannabe
   past = 0
-  for (v in 1:length(list_wannabe)) {
+
+  # Iterate over the list, and fill in the elements with the corresponding elements from the vectorfor (v in 1:length(list_wannabe)) {
     lv = length(list_wannabe[[v]])
     list_return[[v]] = vec[(past + 1):(past + lv)]
     past = past + lv
@@ -1989,15 +2000,24 @@ as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with 
 
 # _________________________________________________________________________________________________
 #' @title reverse.list.hierarchy
-#' @description Reverse list hierarchy.
-#' @param ll PARAM_DESCRIPTION
+#'
+#' @description Reverses the hierarchy of a list.
+#'
+#' @param my_list A list.
+#'
+#' @return A list with the elements of the original list in reverse order.
+#'
+#' @examples
+#' my_list <- list(a = list(1, 2), b = list(3, 4))
+#' reverse.list.hierarchy(my_list)
+#'
 #' @export
-reverse.list.hierarchy <- function(ll) { # reverse list hierarchy
+reverse.list.hierarchy <- function(my_list) { # reverse list hierarchy
   ## https://stackoverflow.com/a/15263737
-  nms <- unique(unlist(lapply(ll, function(X) names(X))))
-  ll <- lapply(ll, function(X) setNames(X[nms], nms))
-  ll <- apply(do.call(rbind, ll), 2, as.list)
-  lapply(ll, function(X) X[!sapply(X, is.null)])
+  nms <- unique(unlist(lapply(my_list, function(X) names(X))))
+  my_list <- lapply(my_list, function(X) setNames(X[nms], nms))
+  my_list <- apply(do.call(rbind, my_list), 2, as.list)
+  lapply(my_list, function(X) X[!sapply(X, is.null)])
 }
 
 
@@ -2363,8 +2383,9 @@ movingAve2 <- function(x, n = 5) {
 # _________________________________________________________________________________________________
 #' @title movingSEM
 #' @description Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
-#' @param x PARAM_DESCRIPTION
-#' @param oneSide PARAM_DESCRIPTION, Default: 5
+#' @param x A numeric vector.
+#' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
+#' @return A vector of the same length as `x`, containing the SEMs for each element.
 #' @export
 movingSEM <-
   function(x, oneSide = 5) {
@@ -2381,8 +2402,9 @@ movingSEM <-
 # _________________________________________________________________________________________________
 #' @title imovingSEM
 #' @description Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
-#' @param x PARAM_DESCRIPTION
-#' @param oneSide PARAM_DESCRIPTION, Default: 5
+#' @param x A numeric vector.
+#' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
+#' @return A vector of the same length as `x`, containing the SEMs for each element.
 #' @export
 imovingSEM <- function(x, oneSide = 5) {
   # Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
