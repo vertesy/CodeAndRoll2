@@ -170,7 +170,7 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
 }
 
 # _________________________________________________________________________________________________
-#' getCategories
+#' @title getCategories
 #'
 #' Extract unique entries with a corresponding name.
 #' @param named_categ_vec A vector of categories with names.
@@ -313,8 +313,7 @@ as.named.vector.df <- function(df, col.or.row.name.or.index = 1, verbose = TRUE
 }
 
 
-# as.named.vector.2colDF
-#' @title as.named.vector
+#' @title as.named.vector.2colDF
 #' @description Convert a 2-column dataframe (value, name) into a named vector. Use for simple tibbles.
 #' @param DF data frame
 #' @param values Index of column with values, Default: 1
@@ -761,7 +760,7 @@ zigzagger <- function(vec = 1:9) { # mix entries so that they differ.
 
 
 # _________________________________________________________________________________________________
-#' Formats a sequence of numbers with zeropadding.
+#' @title Formats a sequence of numbers with zeropadding.
 #'
 #' @param x The starting number.
 #' @param y The ending number.
@@ -845,12 +844,14 @@ which_names <- function(namedVec) { # Return the names where the input vector is
 
 # _________________________________________________________________________________________________
 #' @title which_names_grep
-#' @description Return the vector elements whose names are partially matched.
-#' @param namedVec PARAM_DESCRIPTION
-#' @param pattern PARAM_DESCRIPTION
+#'
+#' @description Return the vector elements whose names partially match a pattern.
+#' @param namedVec A vector of named elements.
+#' @param pattern A regular expression pattern.
+#' @param ... Pass any other argument to grepv()
 #' @export
-which_names_grep <- function(namedVec, pattern) { # Return the vector elements whose names are partially matched.
-  idx = grepv(x = names(namedVec),pattern = pattern)
+which_names_grep <- function(namedVec, pattern, ...) { # Return the vector elements whose names are partially matched.
+  idx = grepv(x = names(namedVec),pattern = pattern, ...)
   return(namedVec[idx])
 }
 
@@ -858,11 +859,12 @@ which_names_grep <- function(namedVec, pattern) { # Return the vector elements w
 
 # _________________________________________________________________________________________________
 #' @title na.omit.strip
+#'
 #' @description Calls na.omit() and returns a clean vector.
 #' Omit NA values from a vector and return a clean vector without any spam.
 #' @param object Values to filter for NA
 #' @param silent Silence the data structure coversion warning: anything ->vector
-#' @param ... Pass any other argument. to na.omit()
+#' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
 #' @export na.omit.strip
 #'
@@ -912,8 +914,9 @@ zero.omit <- function(vec) { # Omit zero values from a vector.
 
 
 # _________________________________________________________________________________________________
-#' Calculates the percentage of true values in a logical vector, parsed as text.
+#' @title pc_TRUE
 #'
+#' @description  Calculates the percentage of true values in a logical vector, parsed as text.
 #' @param logical_vector A logical vector.
 #' @param percentify Whether to return the percentage as a formatted string (default: TRUE).
 #' @param NumberAndPC Whether to return the percentage and the number of true values (default: FALSE).
@@ -1569,7 +1572,7 @@ merge_dfs_by_rn <- function(list_of_dfs) { # Merge any data frames by rownames. 
 }
 
 # _________________________________________________________________________________________________
-#' merge_1col_dfs_by_rn
+#' @title merge_1col_dfs_by_rn
 #'
 #' @param list_of_dfs  list of 1col dfs
 #' @param FILLwith 0 by def
@@ -1596,7 +1599,7 @@ merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE= 1) {
 #' @title merge_numeric_df_by_rn
 #' @description Merge 2 numeric data frames by rownames.
 #' @param x Input matrix, or all-numeric dataframe.
-#' @param y PARAM_DESCRIPTION
+#' @param y Input matrix, or all-numeric dataframe.
 #' @export
 merge_numeric_df_by_rn <- function(x, y) { # Merge 2 numeric data frames by rownames
   rn1 = rownames(x); rn2 = rownames(y);
@@ -1712,9 +1715,9 @@ na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a mat
 
 
 # _________________________________________________________________________________________________
-#' Remove empty rows and columns from a data frame.
+#' @title Remove empty rows and columns from a data frame.
 #'
-#' This function takes a data frame and a threshold value, and removes all rows and columns that contain only zeros or the threshold value.
+#' @description This function takes a data frame and a threshold value, and removes all rows and columns that contain only zeros or the threshold value.
 #'
 #' @param df A data frame.
 #' @param suffix A suffix to add to the plot titles.
@@ -2146,7 +2149,7 @@ splitbyitsnames <- function(namedVec) { # split a list by its names
 
 
 # _________________________________________________________________________________________________
-#' Split a list by its values.
+#' @title Split a list by its values.
 #'
 #' @param namedVec A vector with names.
 #'
@@ -2165,8 +2168,9 @@ splititsnames_byValues <- function(namedVec) { # split a list by its names
 
 
 # _________________________________________________________________________________________________
-#' Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
+#' @title intermingle2vec
 #'
+#' @description Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
 #' @param V1 A vector.
 #' @param V2 A vector.
 #' @param wNames Logical. Whether to include the names of the vectors in the output vector.
@@ -2260,7 +2264,7 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) { # Co
 ## Set operations ____________________________________________________________ ----
 
 
-#' Quasy symmetric difference of any number of vectors.
+#' @title Quasy symmetric difference of any number of vectors.
 #'
 #' @param x A vector.
 #' @param y A vector.
@@ -2304,6 +2308,7 @@ iround <- function(x, digitz = 3) {
 
 # _________________________________________________________________________________________________
 #' @title modus
+#'
 #' @description Calculates the mode (modus) of a numeric vector (it excludes NA-s by default). https://en.wikipedia.org/wiki/Mode_(statistics)
 #' @param x A numeric vector
 #' @import stats
@@ -2320,8 +2325,9 @@ modus <- function(x) {
 
 
 # _________________________________________________________________________________________________
-#' Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default).
+#' @title cv
 #'
+#' @description Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default).
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
 #' @return The coefficient of variation of the input vector.
@@ -2335,8 +2341,9 @@ cv <- function(x, na.rm = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
+#' @title sem
 #'
+#' @description Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
 #' @return The standard error of the mean of the input vector.
@@ -2351,8 +2358,9 @@ sem <- function(x, na.rm = TRUE){
 
 
 # _________________________________________________________________________________________________
-#' Calculates the fano factor on a numeric vector (it excludes NA-s by default).
+#' @title fano
 #'
+#' @description Calculates the fano factor on a numeric vector (it excludes NA-s by default).
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
 #' @param USE The method used to calculate the variance. Defaults to `"na.or.complete"`.
@@ -2365,8 +2373,9 @@ fano <-function(x, na.rm = TRUE, USE = "na.or.complete") {
   }
 
 # _________________________________________________________________________________________________
-#' Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
+#' @title geomean
 #'
+#' @description Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
 #' @param x A numeric vector.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
 #' @return The geometric mean of the input vector.
@@ -2380,8 +2389,9 @@ geomean <- function(x, na.rm = TRUE) { # Calculates the geometric mean of a nume
 
 
 # _________________________________________________________________________________________________
-#' Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
+#' @title mean_of_log
 #'
+#' @description Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
 #' @param x A numeric vector.
 #' @param k The base of the logarithm. Defaults to 2.
 #' @param na.rm Should NA values be removed before calculation? Defaults to TRUE.
@@ -2400,8 +2410,9 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) { # Calculates the mean of the l
 
 
 # _________________________________________________________________________________________________
-#' Calculates the moving / rolling average of a numeric vector.
+#' @title movingAve
 #'
+#' @description Calculates the moving / rolling average of a numeric vector.
 #' @param x A numeric vector.
 #' @param oneSide The size of the moving window. Defaults to 5.
 #' @return A vector of the moving averages.
@@ -2419,7 +2430,7 @@ movingAve <- function(x, oneSide = 5) { # Calculates the moving / rolling averag
 
 # _________________________________________________________________________________________________
 
-#' Calculates the moving / rolling average of a numeric vector, using `filter()`.
+#' @title Calculates the moving / rolling average of a numeric vector, using `filter()`.
 #'
 #' @param x A numeric vector.
 #' @param n The size of the moving window. Defaults to 5.
@@ -2454,6 +2465,7 @@ movingSEM <-
 
 # _________________________________________________________________________________________________
 #' @title imovingSEM
+#'
 #' @description Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
 #' @param x A numeric vector.
 #' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
@@ -2482,6 +2494,7 @@ imovingSEM <- function(x, oneSide = 5) {
 
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.deprecated
+#'
 #' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @param vec input vector
 #' @export
@@ -2493,6 +2506,7 @@ as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a num
 
 # _________________________________________________________________________________________________
 #' @title as.factor.numeric.deprecated
+#'
 #' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
 #' @param vec vector of factors or strings
 #' @param rename Rename the vector?
@@ -2511,6 +2525,7 @@ as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
 
 # _________________________________________________________________________________________________
 #' @title as.named.vector.deprecated
+#'
 #' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
