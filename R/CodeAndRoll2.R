@@ -2042,26 +2042,47 @@ as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with 
   return(list_return)
 }
 
+list_of_lists <- list(a = list(1, 2), b = list(3, 4))
+reverse.list.hierarchy(list_of_lists)
+
 
 
 # _________________________________________________________________________________________________
-#' @title reverse.list.hierarchy
+#' @title Reverse the Hierarchy of a List
 #'
-#' @description Reverses the hierarchy of a list.
-#' @param my_list A list.
-#' @return A list with the elements of the original list in reverse order.
+#' @description This function reverses the hierarchy of a given, 2 level, nested list. The
+#' function will ensure that all lists at the same level have the same names,
+#' and then transpose the structure, creating a new list for each unique name.
+#' Any missing elements in the original lists are not included in the final
+#' output. The result is a list where the top-level names are derived from
+#' the unique names found at the lower levels of the input list.
+#'
+#' @param list_of_lists A list where some or all elements are themselves lists.
+#' The hierarchy of this list will be reversed.
+#'
+#' @return A list with the elements of the original list in reversed order.
+#' @source https://stackoverflow.com/a/15263737
 #' @examples
-#' my_list <- list(a = list(1, 2), b = list(3, 4))
-#' reverse.list.hierarchy(my_list)
+#' list_of_lists <- list('z1' = list(a = 1, b = 2), 'z2' = list(b = 4, a = 1, c = 0))
+#' reverse.list.hierarchy(list_of_lists)
 #'
 #' @export
-reverse.list.hierarchy <- function(my_list) { # reverse list hierarchy
-  ## https://stackoverflow.com/a/15263737
-  nms <- unique(unlist(lapply(my_list, function(X) names(X))))
-  my_list <- lapply(my_list, function(X) setNames(X[nms], nms))
-  my_list <- apply(do.call(rbind, my_list), 2, as.list)
-  lapply(my_list, function(X) X[!sapply(X, is.null)])
+reverse.list.hierarchy <- function(list_of_lists) {
+  # Find unique names in all sublists
+  names_level2 <- unique(unlist(lapply(list_of_lists, function(X) names(X))))
+  iprint("Level-1 names:", names(list_of_lists))
+  iprint("Level-2 names:", names_level2)
+
+  # Ensure all lists have the same names, in the same order
+  list_of_lists <- lapply(list_of_lists, function(X) setNames(X[names_level2], names_level2))
+
+  # Transpose the structure, creating a new list for each unique name
+  list_of_lists <- apply(do.call(rbind, list_of_lists), 2, as.list)
+
+  # Remove null entries
+  lapply(list_of_lists, function(X) X[!sapply(X, is.null)])
 }
+
 
 
 
