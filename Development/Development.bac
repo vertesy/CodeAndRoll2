@@ -272,7 +272,7 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combin
 #' @return A sorted vector.
 #' @examples sort.decreasing(rnorm(10))
 #'
-#' @export
+#' @export sort.decreasing
 sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
 
 
@@ -397,7 +397,7 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
 #' @title Get the unique elements, keep their names
 #'
 #' @param x A vector with names
-#' @export
+#' @export unique.wNames
 unique.wNames <- function(x) { x[!duplicated(x)] }
 
 
@@ -867,6 +867,7 @@ which_names_grep <- function(namedVec, pattern, ...) { # Return the vector eleme
 #' @param silent Silence the data structure coversion warning: anything ->vector
 #' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
+#'
 #' @export na.omit.strip
 #'
 #' @examples # CodeAndRoll2::na.omit.strip(c(1, 2, 3, NA, NaN, 2))
@@ -889,6 +890,7 @@ na.omit.strip <- function(object, silent = FALSE, ...) {
 #' @title inf.omit
 #' @description Omit infinite values from a vector.
 #' @param vec input vector
+#'
 #' @export
 inf.omit <- function(vec) { # Omit infinite values from a vector.
   if (is.data.frame(vec)) {
@@ -1389,11 +1391,14 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 
 # _________________________________________________________________________________________________
 #' @title sort.mat
-#' @description Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r.
-#' @param df Numeric input matrix.
-#' @param colname_in_df PARAM_DESCRIPTION, Default: 1
-#' @param decrease PARAM_DESCRIPTION, Default: FALSE
-#' @param na_last PARAM_DESCRIPTION, Default: TRUE
+#'
+#' @description Sorts a matrix by a given column. This function can only handle single column sort.
+#' An alternative is dd[with(dd, order(-z, b)), ] as found on StackOverflow (https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r).
+#' @param df Numeric input matrix to be sorted.
+#' @param colname_in_df Column name or index to sort by. The function can only handle single column sort. Default: 1
+#' @param decrease Logical indicating whether to sort in decreasing order. Default: FALSE
+#' @param na_last Logical indicating whether NA values should be placed last. Default: TRUE
+#' @return A sorted version of the input matrix.
 #' @export sort.mat
 sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { # Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
   if (length(colname_in_df) > 1) { print("cannot handle multi column sort") }
@@ -1497,12 +1502,14 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL ) { # Subse
 
 # _________________________________________________________________________________________________
 #' @title getRows
-#' @description Get the subset of rows with existing rownames, report how much it could not find.
-#' @param mat In put matrix.
-#' @param rownamez PARAM_DESCRIPTION
-#' @param silent PARAM_DESCRIPTION, Default: FALSE
-#' @param removeNAonly PARAM_DESCRIPTION, Default: FALSE
-#' @param remove0only PARAM_DESCRIPTION, Default: FALSE
+#'
+#' @description Returns a subset of rows based on their names and optionally removes rows with only NA or zero values. Reports the number of missing rows.
+#' @param mat Input matrix.
+#' @param rownamez Vector of row names to search for in the matrix.
+#' @param silent Logical indicating whether to suppress printing of missing rows. Default: FALSE
+#' @param removeNAonly Logical indicating whether to remove rows with only NA values. Default: FALSE
+#' @param remove0only Logical indicating whether to remove rows with only zero values. Default: FALSE
+#' @return A matrix that is a subset of the input matrix.
 #' @export
 getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE ) { # Get the subset of rows with existing rownames, report how much it could not find.
   idx = intersect(rownamez, row.names(mat))
@@ -1516,12 +1523,14 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
 
 # _________________________________________________________________________________________________
 #' @title getCols
-#' @description Get the subset of cols with existing colnames, report how much it could not find.
-#' @param mat In put matrix.
-#' @param colnamez PARAM_DESCRIPTION
-#' @param silent PARAM_DESCRIPTION, Default: FALSE
-#' @param removeNAonly PARAM_DESCRIPTION, Default: FALSE
-#' @param remove0only PARAM_DESCRIPTION, Default: FALSE
+#'
+#' @description Returns a subset of columns based on their names and optionally removes columns with only NA or zero values. Reports the number of missing columns.
+#' @param mat Input matrix.
+#' @param colnamez Vector of column names to search for in the matrix.
+#' @param silent Logical indicating whether to suppress printing of missing columns. Default: FALSE
+#' @param removeNAonly Logical indicating whether to remove columns with only NA values. Default: FALSE
+#' @param remove0only Logical indicating whether to remove columns with only zero values. Default: FALSE
+#' @return A matrix that is a subset of the input matrix.
 #' @export
 getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE ) { # Get the subset of cols with existing colnames, report how much it could not find.
   idx = intersect(colnamez, colnames(mat))
@@ -1536,10 +1545,12 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
 
 # _________________________________________________________________________________________________
 #' @title get.oddoreven
-#' @description Get odd or even columns or rows of a data frame.
-#' @param df_ PARAM_DESCRIPTION, Default: NULL
-#' @param rows PARAM_DESCRIPTION, Default: FALSE
-#' @param odd PARAM_DESCRIPTION, Default: TRUE
+#'
+#' @description Returns either odd or even indexed rows or columns from a data frame.
+#' @param df_ A data frame. Default: NULL
+#' @param rows Logical indicating whether to return rows (if TRUE) or columns (if FALSE). Default: FALSE
+#' @param odd Logical indicating whether to return odd indexed rows/columns (if TRUE) or even indexed rows/columns (if FALSE). Default: TRUE
+#' @return A subset of the input data frame.
 #' @export
 get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) { # Get odd or even columns or rows of a data frame
   counter = if (rows) NROW(df_) else NCOL(df_)
@@ -1705,7 +1716,7 @@ remove.na.cols <- function(mat) { # cols have to be a vector of numbers correspo
 #' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
 #' @param mat In put matrix.
 #' @param any PARAM_DESCRIPTION, Default: TRUE
-#' @export
+#' @export na.omit.mat
 na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a matrix. Rows with any, or full of NA-s
   mat = as.matrix(mat)
   stopifnot(length(dim(mat)) == 2)
@@ -1843,7 +1854,7 @@ mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.list
 #' @description Check if there are any duplocated rownames in a list of dataframes.
 #' @param ls List of 2 or more vectors (sets) with categorical variables.
 #'
-#' @export
+#' @export any.duplicated.rownames.ls.of.df
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
 
 
@@ -1988,7 +1999,8 @@ reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) { # reor
 #' @description Calculates the range of values in a list.
 #' @param L A list.
 #' @return A vector of length 2, containing the minimum and maximum values in `L`.
-#' @export
+#'
+#' @export range.list
 range.list <- function(L, namesOrdered) { # range of values in whole list
   return(range(unlist(L), na.rm = TRUE))
 }
@@ -2543,7 +2555,8 @@ pretty_dput <- function(vec) {
 #'
 #' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @param vec input vector
-#' @export
+#'
+#' @export as.numeric.wNames.deprecated
 as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
   numerified_vec <- as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
   if (!is.null(names(vec))) { names(numerified_vec) <- names(vec) }
@@ -2557,9 +2570,9 @@ as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a num
 #' @param vec vector of factors or strings
 #' @param rename Rename the vector?
 #' @param ... Pass any other argument. to as.factor()
-#' @export
-#'
 #' @examples as.factor.numeric(LETTERS[1:4])
+#'
+#' @export as.factor.numeric.deprecated
 
 as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
   vec2 = as.numeric(as.factor(vec, ...)) ;
@@ -2575,7 +2588,8 @@ as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
 #' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
-#' @export
+#'
+#' @export as.named.vector.deprecated
 as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
   namez = dimnames(df_col)[[WhichDimNames]]
   # use RowNames: WhichDimNames = 1 , 2: use ColNames

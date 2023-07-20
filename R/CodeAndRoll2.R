@@ -1391,11 +1391,14 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 
 # _________________________________________________________________________________________________
 #' @title sort.mat
-#' @description Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r.
-#' @param df Numeric input matrix.
-#' @param colname_in_df PARAM_DESCRIPTION, Default: 1
-#' @param decrease PARAM_DESCRIPTION, Default: FALSE
-#' @param na_last PARAM_DESCRIPTION, Default: TRUE
+#'
+#' @description Sorts a matrix by a given column. This function can only handle single column sort.
+#' An alternative is dd[with(dd, order(-z, b)), ] as found on StackOverflow (https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r).
+#' @param df Numeric input matrix to be sorted.
+#' @param colname_in_df Column name or index to sort by. The function can only handle single column sort. Default: 1
+#' @param decrease Logical indicating whether to sort in decreasing order. Default: FALSE
+#' @param na_last Logical indicating whether NA values should be placed last. Default: TRUE
+#' @return A sorted version of the input matrix.
 #' @export sort.mat
 sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { # Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
   if (length(colname_in_df) > 1) { print("cannot handle multi column sort") }
@@ -1499,12 +1502,14 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL ) { # Subse
 
 # _________________________________________________________________________________________________
 #' @title getRows
-#' @description Get the subset of rows with existing rownames, report how much it could not find.
-#' @param mat In put matrix.
-#' @param rownamez PARAM_DESCRIPTION
-#' @param silent PARAM_DESCRIPTION, Default: FALSE
-#' @param removeNAonly PARAM_DESCRIPTION, Default: FALSE
-#' @param remove0only PARAM_DESCRIPTION, Default: FALSE
+#'
+#' @description Returns a subset of rows based on their names and optionally removes rows with only NA or zero values. Reports the number of missing rows.
+#' @param mat Input matrix.
+#' @param rownamez Vector of row names to search for in the matrix.
+#' @param silent Logical indicating whether to suppress printing of missing rows. Default: FALSE
+#' @param removeNAonly Logical indicating whether to remove rows with only NA values. Default: FALSE
+#' @param remove0only Logical indicating whether to remove rows with only zero values. Default: FALSE
+#' @return A matrix that is a subset of the input matrix.
 #' @export
 getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE ) { # Get the subset of rows with existing rownames, report how much it could not find.
   idx = intersect(rownamez, row.names(mat))
@@ -1518,12 +1523,14 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
 
 # _________________________________________________________________________________________________
 #' @title getCols
-#' @description Get the subset of cols with existing colnames, report how much it could not find.
-#' @param mat In put matrix.
-#' @param colnamez PARAM_DESCRIPTION
-#' @param silent PARAM_DESCRIPTION, Default: FALSE
-#' @param removeNAonly PARAM_DESCRIPTION, Default: FALSE
-#' @param remove0only PARAM_DESCRIPTION, Default: FALSE
+#'
+#' @description Returns a subset of columns based on their names and optionally removes columns with only NA or zero values. Reports the number of missing columns.
+#' @param mat Input matrix.
+#' @param colnamez Vector of column names to search for in the matrix.
+#' @param silent Logical indicating whether to suppress printing of missing columns. Default: FALSE
+#' @param removeNAonly Logical indicating whether to remove columns with only NA values. Default: FALSE
+#' @param remove0only Logical indicating whether to remove columns with only zero values. Default: FALSE
+#' @return A matrix that is a subset of the input matrix.
 #' @export
 getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE ) { # Get the subset of cols with existing colnames, report how much it could not find.
   idx = intersect(colnamez, colnames(mat))
@@ -1538,10 +1545,12 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
 
 # _________________________________________________________________________________________________
 #' @title get.oddoreven
-#' @description Get odd or even columns or rows of a data frame.
-#' @param df_ PARAM_DESCRIPTION, Default: NULL
-#' @param rows PARAM_DESCRIPTION, Default: FALSE
-#' @param odd PARAM_DESCRIPTION, Default: TRUE
+#'
+#' @description Returns either odd or even indexed rows or columns from a data frame.
+#' @param df_ A data frame. Default: NULL
+#' @param rows Logical indicating whether to return rows (if TRUE) or columns (if FALSE). Default: FALSE
+#' @param odd Logical indicating whether to return odd indexed rows/columns (if TRUE) or even indexed rows/columns (if FALSE). Default: TRUE
+#' @return A subset of the input data frame.
 #' @export
 get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) { # Get odd or even columns or rows of a data frame
   counter = if (rows) NROW(df_) else NCOL(df_)
