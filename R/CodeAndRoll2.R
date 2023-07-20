@@ -2505,7 +2505,32 @@ imovingSEM <- function(x, oneSide = 5) {
 }
 
 
+################################################################################################
+# NOT YET ORGANIZED
+
+
 # _________________________________________________________________________________________________
+#' @title Pretty Printing of R Objects (pretty_dput)
+#'
+#' @description This function modifies the output of the traditional dput() function
+#' so that each key-value pair in a vector appears on a new line. It's useful for
+#' creating more readable output.
+#' @param vec A named vector to be printed. The vector should be in the form `c('name' = 'value')`.
+#' @return No return value. Outputs the vector with each element on a new line.
+#' @examples
+#' vec <- c(`0` = "ACyte", `1` = "Misp.1.DCN")
+#' pretty_dput(vec)
+#'
+#' @export
+pretty_dput <- function(vec) {
+  cat("c(", sep = "")
+  for (i in 1:length(vec)) {
+    cat("\n`", names(vec)[i], "` = \"", vec[i], "\"",
+        ifelse(i != length(vec), ",", ""), sep = "")
+  }
+  cat("\n)\n")
+}
+
 
 
 
