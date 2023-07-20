@@ -11,7 +11,7 @@
 
 \item{silent}{Silence the data structure coversion warning: anything ->vector}
 
-\item{...}{Pass any other argument. to na.omit()}
+\item{...}{Pass any other argument to na.omit()}
 }
 \description{
 Calls na.omit() and returns a clean vector.

@@ -172,7 +172,7 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
 # _________________________________________________________________________________________________
 #' @title getCategories
 #'
-#' Extract unique entries with a corresponding name.
+#' @description Extract unique entries with a corresponding name.
 #' @param named_categ_vec A vector of categories with names.
 #' "Uniqueness" in the vector and its name should be the same!!!
 #' @export
@@ -188,9 +188,8 @@ getCategories <-
 # _________________________________________________________________________________________________
 ## Vector operations ____________________________________________________________ ----
 
-
-
 #' @title grepv
+#'
 #' @description grep returning the value. A character string containing a regular expression (or character string for fixed = TRUE) to be matched in the given character vector. Coerced by as.character to a character string if possible. If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values are allowed except for regexpr, gregexpr and regexec.
 #' @param pattern pattern to look for
 #' @param x The haystack to search through. a character vector where matches are sought, or an object which can be coerced by as.character to a character vector. Long vectors are supported.
@@ -2041,9 +2040,6 @@ as.listalike <- function(vec, list_wannabe) { # convert a vector to a list with 
   } # for
   return(list_return)
 }
-
-list_of_lists <- list(a = list(1, 2), b = list(3, 4))
-reverse.list.hierarchy(list_of_lists)
 
 
 

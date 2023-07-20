@@ -9,7 +9,7 @@ merge_numeric_df_by_rn(x, y)
 \arguments{
 \item{x}{Input matrix, or all-numeric dataframe.}
 
-\item{y}{PARAM_DESCRIPTION}
+\item{y}{Input matrix, or all-numeric dataframe.}
 }
 \description{
 Merge 2 numeric data frames by rownames.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{intermingle2vec}
 \alias{intermingle2vec}
-\title{Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.}
+\title{intermingle2vec}
 \usage{
 intermingle2vec(V1, V2, wNames = TRUE)
 }

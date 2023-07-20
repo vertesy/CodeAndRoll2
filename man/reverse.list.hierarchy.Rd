@@ -2,21 +2,30 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{reverse.list.hierarchy}
 \alias{reverse.list.hierarchy}
-\title{reverse.list.hierarchy}
+\title{Reverse the Hierarchy of a List}
+\source{
+https://stackoverflow.com/a/15263737
+}
 \usage{
-reverse.list.hierarchy(my_list)
+reverse.list.hierarchy(list_of_lists)
 }
 \arguments{
-\item{my_list}{A list.}
+\item{list_of_lists}{A list where some or all elements are themselves lists.
+The hierarchy of this list will be reversed.}
 }
 \value{
-A list with the elements of the original list in reverse order.
+A list with the elements of the original list in reversed order.
 }
 \description{
-Reverses the hierarchy of a list.
+This function reverses the hierarchy of a given, 2 level, nested list. The
+function will ensure that all lists at the same level have the same names,
+and then transpose the structure, creating a new list for each unique name.
+Any missing elements in the original lists are not included in the final
+output. The result is a list where the top-level names are derived from
+the unique names found at the lower levels of the input list.
 }
 \examples{
-my_list <- list(a = list(1, 2), b = list(3, 4))
-reverse.list.hierarchy(my_list)
+list_of_lists <- list('z1' = list(a = 1, b = 2), 'z2' = list(b = 4, a = 1, c = 0))
+reverse.list.hierarchy(list_of_lists)
 
 }

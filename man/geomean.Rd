@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{geomean}
 \alias{geomean}
-\title{Calculates the geometric mean of a numeric vector (it excludes NA-s by default).}
+\title{geomean}
 \usage{
 geomean(x, na.rm = TRUE)
 }

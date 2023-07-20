@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{fano}
 \alias{fano}
-\title{Calculates the fano factor on a numeric vector (it excludes NA-s by default).}
+\title{fano}
 \usage{
 fano(x, na.rm = TRUE, USE = "na.or.complete")
 }

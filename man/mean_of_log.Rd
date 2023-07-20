@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{mean_of_log}
 \alias{mean_of_log}
-\title{Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).}
+\title{mean_of_log}
 \usage{
 mean_of_log(x, k = 2, na.rm = TRUE)
 }

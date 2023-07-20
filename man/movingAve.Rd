@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{movingAve}
 \alias{movingAve}
-\title{Calculates the moving / rolling average of a numeric vector.}
+\title{movingAve}
 \usage{
 movingAve(x, oneSide = 5)
 }

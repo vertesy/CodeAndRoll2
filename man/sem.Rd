@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{sem}
 \alias{sem}
-\title{Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).}
+\title{sem}
 \usage{
 sem(x, na.rm = TRUE)
 }

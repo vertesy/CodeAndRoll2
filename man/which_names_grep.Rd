@@ -4,13 +4,15 @@
 \alias{which_names_grep}
 \title{which_names_grep}
 \usage{
-which_names_grep(namedVec, pattern)
+which_names_grep(namedVec, pattern, ...)
 }
 \arguments{
-\item{namedVec}{PARAM_DESCRIPTION}
+\item{namedVec}{A vector of named elements.}
 
-\item{pattern}{PARAM_DESCRIPTION}
+\item{pattern}{A regular expression pattern.}
+
+\item{...}{Pass any other argument to grepv()}
 }
 \description{
-Return the vector elements whose names are partially matched.
+Return the vector elements whose names partially match a pattern.
 }

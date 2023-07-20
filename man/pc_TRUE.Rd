@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{pc_TRUE}
 \alias{pc_TRUE}
-\title{Calculates the percentage of true values in a logical vector, parsed as text.}
+\title{pc_TRUE}
 \usage{
 pc_TRUE(
   logical_vector,

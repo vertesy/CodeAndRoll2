@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{cv}
 \alias{cv}
-\title{Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default).}
+\title{cv}
 \usage{
 cv(x, na.rm = TRUE)
 }

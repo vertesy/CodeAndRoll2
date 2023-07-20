@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{as.named.vector.2colDF}
 \alias{as.named.vector.2colDF}
-\title{as.named.vector}
+\title{as.named.vector.2colDF}
 \usage{
 as.named.vector.2colDF(
   DF = UMI_CBC_1to1,
