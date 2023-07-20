@@ -272,7 +272,7 @@ trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N) ) # A combin
 #' @return A sorted vector.
 #' @examples sort.decreasing(rnorm(10))
 #'
-#' @export
+#' @export sort.decreasing
 sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
 
 
@@ -362,9 +362,10 @@ row2named.vector <- function(df_row) { # Convert a dataframe row into a vector, 
 #' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
-#' @export
 #' @examples tibble_summary_to_namedVec()
 #' @importFrom dplyr tibble
+#'
+#' @export
 tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1:5, size = 20, replace = T), 'value' = rnorm(20) )
                                        ,  idx = c(key =1, value = 2)) { # Convert a key-value tibble into a named vector (as opposed to using rownames).
   iprint("The following name and value columns are taken:",colnames(tbl[idx]), "; with indices:", idx)
@@ -381,9 +382,10 @@ tibble_summary_to_namedVec <- function(tbl =  dplyr::tibble('key' = sample(x = 1
 #' @description Convert a vector with names into a tibble, keeping the names as rownames.
 #' @param vec.w.names A vector with names, Default: c(a = 1, b = 2)
 #' @param transpose Transpose? Default: T
-#' @export
 #' @examples as_tibble_from_namedVec()
 #' @importFrom dplyr bind_rows
+#'
+#' @export
 as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpose = T) { # Convert a vector with names into a tibble, keeping the names as rownames.
   stopifnot(!is.null(names(vec.w.names)))
   tbl <- dplyr::bind_rows(vec.w.names)
@@ -395,7 +397,7 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
 #' @title Get the unique elements, keep their names
 #'
 #' @param x A vector with names
-#' @export
+#' @export unique.wNames
 unique.wNames <- function(x) { x[!duplicated(x)] }
 
 
@@ -403,6 +405,7 @@ unique.wNames <- function(x) { x[!duplicated(x)] }
 
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.character
+#'
 #' @description Converts (1) a 'character' v. into a numeric v., or
 #' a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.
 #' The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via facotr in any case. Code saved at the end.
@@ -410,11 +413,10 @@ unique.wNames <- function(x) { x[!duplicated(x)] }
 #' @param verbose Print troubleshooting messages
 #' @param factor.to.character convert Input vector to first to 'character', then numeric.
 #' @param ... Pass any other argument to as.numeric()
-#' @export
-#'
 #' @examples vec <- as.character(c(1,2,8,9)); names(vec) <- LETTERS[1:4]; vec; as.numeric.wNames.character(vec);
 #' vec2 <- as.factor(c(1,2,8,9)); names(vec2) <- LETTERS[1:4]; vec2; as.numeric.wNames.character(vec2, factor.to.character = FALSE)
-
+#'
+#' @export as.numeric.wNames.character
 as.numeric.wNames.character <- function(vec, verbose = TRUE
                                            , factor.to.character = TRUE, ...) {
 
@@ -451,9 +453,9 @@ as.numeric.wNames.character <- function(vec, verbose = TRUE
 #' Forerly as.factor.numeric
 #' @param vec vector of factors, strings, (or even logical)
 #' @param ... Pass any other argument to as.factor()
-#' @export
-#'
 #' @examples as.numeric.wNames.factor(LETTERS[1:4])
+#'
+#' @export as.numeric.wNames.factor
 
 as.numeric.wNames.factor <- function(vec,  ...) {
 
@@ -475,7 +477,7 @@ as.numeric.wNames.factor <- function(vec,  ...) {
 #' @description Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
 #' @param vec input vector
 #'
-#' @export
+#' @export as.character.wNames
 as.character.wNames <- function(vec) { # Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
   char_vec = as.character(vec)
   if (!is.null(names(vec))) {names(char_vec) = names(vec)}
@@ -865,6 +867,7 @@ which_names_grep <- function(namedVec, pattern, ...) { # Return the vector eleme
 #' @param silent Silence the data structure coversion warning: anything ->vector
 #' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
+#'
 #' @export na.omit.strip
 #'
 #' @examples # CodeAndRoll2::na.omit.strip(c(1, 2, 3, NA, NaN, 2))
@@ -887,6 +890,7 @@ na.omit.strip <- function(object, silent = FALSE, ...) {
 #' @title inf.omit
 #' @description Omit infinite values from a vector.
 #' @param vec input vector
+#'
 #' @export
 inf.omit <- function(vec) { # Omit infinite values from a vector.
   if (is.data.frame(vec)) {
@@ -1703,7 +1707,7 @@ remove.na.cols <- function(mat) { # cols have to be a vector of numbers correspo
 #' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
 #' @param mat In put matrix.
 #' @param any PARAM_DESCRIPTION, Default: TRUE
-#' @export
+#' @export na.omit.mat
 na.omit.mat <- function(mat, any = TRUE) { # Omit rows with NA values from a matrix. Rows with any, or full of NA-s
   mat = as.matrix(mat)
   stopifnot(length(dim(mat)) == 2)
@@ -1841,7 +1845,7 @@ mdlapply2df <- function(list_2D, ...) { # multi dimensional lapply + arr.of.list
 #' @description Check if there are any duplocated rownames in a list of dataframes.
 #' @param ls List of 2 or more vectors (sets) with categorical variables.
 #'
-#' @export
+#' @export any.duplicated.rownames.ls.of.df
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
 
 
@@ -1916,7 +1920,8 @@ list.wNames <- function(...) { # create a list with names from ALL variables you
 #' @examples
 #' dtf <- data.frame(x = c(1, 2, NA), y = c(3, 4, 0), z = c(5, 6, 7))
 #' as.list.df.by.row(dtf)
-#' @export
+#'
+#' @export as.list.df.by.row
 as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) { # Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
   outList = as.list(as.data.frame(t( dtf ) ) )
 
@@ -1942,7 +1947,8 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' @examples
 #' dtf <- data.frame(x = c(1, 2, NA), y = c(3, 4, 0), z = c(5, 6, 7))
 #' as.list.df.by.col(dtf)
-#' @export
+#'
+#' @export as.list.df.by.col
 as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) { # oSplit a dataframe into a list by its rows. omit.empty for the listelments; na.omit and zero.omit are applied on entries inside each list element.
   outList = as.list(dtf)
   if (na.omit) {   outList = lapply(outList, na.omit.strip) }
@@ -1984,7 +1990,8 @@ reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) { # reor
 #' @description Calculates the range of values in a list.
 #' @param L A list.
 #' @return A vector of length 2, containing the minimum and maximum values in `L`.
-#' @export
+#'
+#' @export range.list
 range.list <- function(L, namesOrdered) { # range of values in whole list
   return(range(unlist(L), na.rm = TRUE))
 }
@@ -2539,7 +2546,8 @@ pretty_dput <- function(vec) {
 #'
 #' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @param vec input vector
-#' @export
+#'
+#' @export as.numeric.wNames.deprecated
 as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
   numerified_vec <- as.numeric(as.factor(vec)) - 1 # as factor gives numbers [1:n] instead [0:n]
   if (!is.null(names(vec))) { names(numerified_vec) <- names(vec) }
@@ -2553,9 +2561,9 @@ as.numeric.wNames.deprecated <- function(vec) { # Converts any vector into a num
 #' @param vec vector of factors or strings
 #' @param rename Rename the vector?
 #' @param ... Pass any other argument. to as.factor()
-#' @export
-#'
 #' @examples as.factor.numeric(LETTERS[1:4])
+#'
+#' @export as.factor.numeric.deprecated
 
 as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
   vec2 = as.numeric(as.factor(vec, ...)) ;
@@ -2571,7 +2579,8 @@ as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
 #' @description Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
-#' @export
+#'
+#' @export as.named.vector.deprecated
 as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) { # Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
   namez = dimnames(df_col)[[WhichDimNames]]
   # use RowNames: WhichDimNames = 1 , 2: use ColNames

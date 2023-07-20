@@ -17,4 +17,5 @@ Forerly as.factor.numeric
 }
 \examples{
 as.numeric.wNames.factor(LETTERS[1:4])
+
 }

@@ -18,4 +18,5 @@ Turn any vector into numeric categories as.numeric(as.factor(vec))
 }
 \examples{
 as.factor.numeric(LETTERS[1:4])
+
 }
