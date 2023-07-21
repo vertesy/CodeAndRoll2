@@ -7,12 +7,15 @@
 get.oddoreven(df_ = NULL, rows = FALSE, odd = TRUE)
 }
 \arguments{
-\item{df_}{PARAM_DESCRIPTION, Default: NULL}
+\item{df_}{A data frame. Default: NULL}
 
-\item{rows}{PARAM_DESCRIPTION, Default: FALSE}
+\item{rows}{Logical indicating whether to return rows (if TRUE) or columns (if FALSE). Default: FALSE}
 
-\item{odd}{PARAM_DESCRIPTION, Default: TRUE}
+\item{odd}{Logical indicating whether to return odd indexed rows/columns (if TRUE) or even indexed rows/columns (if FALSE). Default: TRUE}
+}
+\value{
+A subset of the input data frame.
 }
 \description{
-Get odd or even columns or rows of a data frame.
+Returns either odd or even indexed rows or columns from a data frame.
 }

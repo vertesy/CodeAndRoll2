@@ -13,16 +13,19 @@ getCols(
 )
 }
 \arguments{
-\item{mat}{In put matrix.}
+\item{mat}{Input matrix.}
 
-\item{colnamez}{PARAM_DESCRIPTION}
+\item{colnamez}{Vector of column names to search for in the matrix.}
 
-\item{silent}{PARAM_DESCRIPTION, Default: FALSE}
+\item{silent}{Logical indicating whether to suppress printing of missing columns. Default: FALSE}
 
-\item{removeNAonly}{PARAM_DESCRIPTION, Default: FALSE}
+\item{removeNAonly}{Logical indicating whether to remove columns with only NA values. Default: FALSE}
 
-\item{remove0only}{PARAM_DESCRIPTION, Default: FALSE}
+\item{remove0only}{Logical indicating whether to remove columns with only zero values. Default: FALSE}
+}
+\value{
+A matrix that is a subset of the input matrix.
 }
 \description{
-Get the subset of cols with existing colnames, report how much it could not find.
+Returns a subset of columns based on their names and optionally removes columns with only NA or zero values. Reports the number of missing columns.
 }

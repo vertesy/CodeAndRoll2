@@ -7,14 +7,18 @@
 \method{sort}{mat}(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE)
 }
 \arguments{
-\item{df}{Numeric input matrix.}
+\item{df}{Numeric input matrix to be sorted.}
 
-\item{colname_in_df}{PARAM_DESCRIPTION, Default: 1}
+\item{colname_in_df}{Column name or index to sort by. The function can only handle single column sort. Default: 1}
 
-\item{decrease}{PARAM_DESCRIPTION, Default: FALSE}
+\item{decrease}{Logical indicating whether to sort in decreasing order. Default: FALSE}
 
-\item{na_last}{PARAM_DESCRIPTION, Default: TRUE}
+\item{na_last}{Logical indicating whether NA values should be placed last. Default: TRUE}
+}
+\value{
+A sorted version of the input matrix.
 }
 \description{
-Sort a matrix. ALTERNATIVE: dd\link{with(dd, order(-z, b)), }. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r.
+Sorts a matrix by a given column. This function can only handle single column sort.
+An alternative is dd\link{with(dd, order(-z, b)), } as found on StackOverflow (https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r).
 }

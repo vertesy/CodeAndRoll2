@@ -13,16 +13,19 @@ getRows(
 )
 }
 \arguments{
-\item{mat}{In put matrix.}
+\item{mat}{Input matrix.}
 
-\item{rownamez}{PARAM_DESCRIPTION}
+\item{rownamez}{Vector of row names to search for in the matrix.}
 
-\item{silent}{PARAM_DESCRIPTION, Default: FALSE}
+\item{silent}{Logical indicating whether to suppress printing of missing rows. Default: FALSE}
 
-\item{removeNAonly}{PARAM_DESCRIPTION, Default: FALSE}
+\item{removeNAonly}{Logical indicating whether to remove rows with only NA values. Default: FALSE}
 
-\item{remove0only}{PARAM_DESCRIPTION, Default: FALSE}
+\item{remove0only}{Logical indicating whether to remove rows with only zero values. Default: FALSE}
+}
+\value{
+A matrix that is a subset of the input matrix.
 }
 \description{
-Get the subset of rows with existing rownames, report how much it could not find.
+Returns a subset of rows based on their names and optionally removes rows with only NA or zero values. Reports the number of missing rows.
 }
