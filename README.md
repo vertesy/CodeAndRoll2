@@ -73,407 +73,440 @@ source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRol
 
 ## List of Functions
 
-- #### vec.fromNames 
-create a vector from a vector of names
+- ### `vec.fromNames()`
+Create a vector from a vector of names.
 
-- #### list.fromNames 
-create list from a vector with the names of the elements
+- ### `list.fromNames()`
+create list from a vector with the names of the elements.
 
-- #### matrix.fromNames 
-Create a matrix from 2 vectors defining the row- and column names of the matrix. Default 
+- ### `matrix.fromNames()`
+Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
 
-- #### matrix.fromVector 
-Create a matrix from values in a vector repeated for each column / each row. Similar to 
+- ### `matrix.fromVector()`
+Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
 
-- #### array.fromNames 
-create an N-dimensional array from N vectors defining the row-, 
+- ### `array.fromNames()`
+Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
 
-- #### what 
+- ### `what()`
 A better version of is(). It can print the first "printme" elements.
 
-- #### idim 
+- ### `idim()`
 A dim() function that can handle if you pass on a vector: then, it gives the length.
 
-- #### idimnames 
+- ### `is.list2()`
+The 'is.list()' function fails on tibbles: it returns TRUE, as if it were a list. This distiguishes. Thaat's why we need this function.
+
+- ### `idimnames()`
 A dimnames() function that can handle if you pass on a vector: it gives back the names.
 
-- #### table_fixed_categories 
-generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant 
+- ### `printEveryN()`
+Report iterator value at every e.g. 1000
 
-- #### grepv 
-grep returning the value
+- ### `table_fixed_categories()`
+Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors. 
 
-- #### most_frequent_elements 
-Show the most frequent elements of a table
+- ### `getCategories()`
+Extract unique entries with a corresponding name.
 
-- #### top_indices 
-Returns the position / index of the n highest values. For equal values, it maintains the original order
+- ### `grepv()`
+grep returning the value. A character string containing a regular expression (or character string for fixed = TRUE) to be matched in the given character vector. Coerced by as.character to a character string if possible. If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values are allowed except for regexpr, gregexpr and regexec.
 
-- #### trail 
-A combination of head() and tail() to see both ends.
+- ### `most_frequent_elements()`
+Show the most frequent elements of a table.
 
-- #### sort.decreasing 
-Sort in decreasing order.
+- ### `count_occurrence_each_element()`
+Count the number of times each element occurs in the full vector, AND give it back as a vector, that is the same length as the input vector, each element corresponding one-by-one.
 
-- #### sstrsplit 
-Alias for str_split_fixed in the stringr package
+- ### `top_indices()`
+Returns the positions of the `n` highest values in `x`.
 
-- #### topN.dfCol 
-Find the n highest values in a named vector
+- ### `trail()`
+Returns a vector containing the first `N` and last `N` elements of `vec`.
 
-- #### bottomN.dfCol 
-Find the n lowest values in a named vector
+- ### `sort.decreasing()`
+Sorts `vec` in decreasing order.
 
-- #### as.named.vector 
-Convert a dataframe column or row into a vector, keeping the corresponding dimension name.
+- ### `sstrsplit()`
+Alias for `str_split_fixed` in the `stringr` package.
 
-- #### col2named.vector 
+- ### `as.named.vector.df()`
+Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
+
+- ### `as.named.vector.2colDF()`
+Convert a 2-column dataframe (value, name) into a named vector. Use for simple tibbles.
+
+- ### `col2named.vector()`
 Convert a dataframe column into a vector, keeping the corresponding dimension name.
 
-- #### row2named.vector 
+- ### `row2named.vector()`
 Convert a dataframe row into a vector, keeping the corresponding dimension name.
 
-- #### tibble_summary_to_named_vec 
-...
+- ### `tibble_summary_to_namedVec()`
+Convert a key-value tibble into a named vector (as opposed to using rownames).
 
-- #### as_tibble_from_named_vec 
+- ### `unique.wNames()`
 Convert a vector with names into a tibble, keeping the names as rownames.
 
-- #### as.numeric.wNames 
-Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has 
+- ### `as.numeric.wNames.character()`
+Converts (1) a 'character' v. into a numeric v., or  a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.  The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via facotr in any case. Code saved at the end.
 
-- #### as.numeric.wNames.old 
-Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has 
+- ### `as.numeric.wNames.factor()`
+Turn any vector into numeric categories as.numeric(as.factor(vec))  Forerly as.factor.numeric
 
-- #### as.character.wNames 
-Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it 
+- ### `as.character.wNames()`
+Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
 
-- #### rescale 
-linear transformation to a given range of values
+- ### `translate()`
+Replaces a set of values in a vector with another set of values,  it translates your vector. Oldvalues and newvalues have to be 1-to-1  correspoding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above  in theory, but it did not seem very robust regarding your input...'
 
-- #### flip_value2name 
-Flip the values and the names of a vector with names
+- ### `rescale()`
+Linear transformation to a given range of values.
 
-- #### sortbyitsnames 
-Sort a vector by the alphanumeric order of its names(instead of its values).
+- ### `fractions()`
+x/sum(x)
 
-- #### any.duplicated 
-How many entries are duplicated
+- ### `flip_value2name()`
+Flip the values and the names of a vector with names.
 
-- #### which.duplicated 
-which values are duplicated?
+- ### `sortbyitsnames()`
+Sort a vector or list by the alphanumeric order of its names (instead of its values).
 
-- #### which.NA 
-which values are NA?
+- ### `any.duplicated()`
+How many entries are duplicated?.
 
-- #### pad.na 
-Fill up with a vector to a given length with NA-values at the end.
+- ### `which.duplicated()`
+Which values are duplicated?.
 
-- #### clip.values 
+- ### `which.NA()`
+Which values are NA?.
+
+- ### `pad.na()`
+This function fills up a vector to a given length by appending NA-values at the end.    If the input vector's length is less than the provided length, the function pads the vector    with NA. If the vector's length is already equal to or greater than the given length, no change    will be made.
+
+- ### `clip.at.fixed.value()`
 Signal clipping. Cut values above or below a threshold.
 
-- #### clip.outliers 
-Signal clipping based on the input data's distribution. It clips values 
+- ### `clip.outliers.at.percentile()`
+Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
 
-- #### as.logical.wNames 
-Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it 
+- ### `as.logical.wNames()`
+Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
 
-- #### col2named.vec.tbl 
+- ### `col2named.vec.tbl()`
 Convert a 2-column table(data frame) into a named vector. 1st column will be used as names.
 
-- #### iterBy.over 
+- ### `topN.dfCol()`
+Find the n highest values in a named vector.
+
+- ### `bottomN.dfCol()`
+Find the n lowest values in a named vector.
+
+- ### `iterBy.over()`
 Iterate over a vector by every N-th element.
 
-- #### zigzagger 
-mix entries so that they differ
+- ### `numerate()`
+Mix entries so that they differ.
 
-- #### numerate 
-numerate from x to y with additonal zeropadding
+- ### `MaxN()`
+Find second (third…) highest/lowest value in vector.
 
-- #### MaxN 
-find second (third…) highest/lowest value in vector
+- ### `cumsubtract()`
+Cumulative subtraction, opposite of cumsum().
 
-- #### cumsubtract 
-Cumulative subtraction, opposite of cumsum()
+- ### `sumBySameName()`
+Sum up vector elements with the same name.
 
-- #### sumBySameName 
-Sum up vector elements with the same name
-
-- #### which_names 
+- ### `which_names()`
 Return the names where the input vector is TRUE. The input vector is converted to logical.
 
-- #### which_names_grep 
-Return the vector elements whose names are partially matched
+- ### `which_names_grep()`
+Return the vector elements whose names partially match a pattern.
 
-- #### na.omit.strip 
-Calls na.omit() and returns a clean vector
+- ### `na.omit.strip()`
+Calls na.omit() and returns a clean vector.  Omit NA values from a vector and return a clean vector without any spam.
 
-- #### inf.omit 
+- ### `inf.omit()`
 Omit infinite values from a vector.
 
-- #### zero.omit 
+- ### `zero.omit()`
 Omit zero values from a vector.
 
-- #### pc_TRUE 
-Percentage of true values in a logical vector, parsed as 
+- ### `pc_TRUE()`
+Calculates the percentage of true values in a logical vector, parsed as text.
 
-- #### pc_in_total_of_match 
-Percentage of a certain value within a vector or table.
+- ### `pc_in_total_of_match()`
+Calculates the percentage of a certain value within a vector or table.
 
-- #### filter_survival_length 
-Parse a sentence reporting the % of filter survival.
+- ### `remove_outliers()`
+Remove values that fall outside the trailing `probs` percentiles of the distribution.
 
-- #### remove_outliers 
-Remove values that fall outside the trailing N % of the distribution.
+- ### `simplify_categories()`
+Replace all occurrences of `replaceit` in `category_vec` with `to`.
 
-- #### simplify_categories 
-Replace every entry that is found in "replaceit", by a single value provided by "to"
+- ### `colSubtract()`
+Subtract a vector (length = nr. columns) column by column from each value of the matrix.
 
-- #### lookup 
-Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of 
+- ### `rowSubtract()`
+Subtract a vector (length = nr. rows) row by row from each value of the matrix
 
-- #### rowMedians 
-Calculates the median of each row of a numeric matrix / data frame.
+- ### `colDivide()`
+See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 
-- #### colMedians 
-Calculates the median of each column of a numeric matrix / data frame.
+- ### `colMutliply()`
+See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 
-- #### rowGeoMeans 
-Calculates the median of each row of a numeric matrix / data frame.
+- ### `rowDivide()`
+Divide by row.
 
-- #### colGeoMeans 
-Calculates the median of each column of a numeric matrix / data frame.
+- ### `rowMutliply()`
+Mutliply by row.
 
-- #### rowCV 
-Calculates the CV of each ROW of a numeric matrix / data frame.
-
-- #### colCV 
-Calculates the CV of each column of a numeric matrix / data frame.
-
-- #### rowVariance 
-Calculates the CV of each ROW of a numeric matrix / data frame.
-
-- #### colVariance 
-Calculates the CV of each column of a numeric matrix / data frame.
-
-- #### rowMin 
-Calculates the minimum of each row of a numeric matrix / data frame.
-
-- #### colMin 
-Calculates the minimum of each column of a numeric matrix / data frame.
-
-- #### rowMax 
-Calculates the maximum of each row of a numeric matrix / data frame.
-
-- #### colMax 
-Calculates the maximum of each column of a numeric matrix / data frame.
-
-- #### rowSEM 
-Calculates the SEM of each row of a numeric matrix / data frame.
-
-- #### colSEM 
-Calculates the SEM of each column of a numeric matrix / data frame.
-
-- #### rowSD 
-Calculates the SEM of each row of a numeric matrix / data frame.
-
-- #### colSD 
-Calculates the SEM of each column of a numeric matrix / data frame.
-
-- #### rowIQR 
-Calculates the SEM of each row of a numeric matrix / data frame.
-
-- #### colIQR 
-Calculates the SEM of each column of a numeric matrix / data frame.
-
-- #### rowquantile 
-Calculates the SEM of each row of a numeric matrix / data frame.
-
-- #### colquantile 
-Calculates the SEM of each column of a numeric matrix / data frame.
-
-- #### colDivide 
-See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
-
-- #### colMutliply 
-See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
-
-- #### rowDivide 
-divide by row
-
-- #### rowMutliply 
-Mutliply by row
-
-- #### row.Zscore 
+- ### `row.Zscore()`
 Calculate Z-score over rows of data frame.
 
-- #### TPM_normalize 
-normalize each column to 1 million
+- ### `rowMin()`
+Calculates the minimum of each row of a numeric matrix / data frame.
 
-- #### median_normalize 
-normalize each column to the median of all the column-sums
+- ### `colMin()`
+Calculates the minimum of each column of a numeric matrix / data frame.
 
-- #### mean_normalize 
-normalize each column to the median of the columns
+- ### `rowMax()`
+Calculates the maximum of each row of a numeric matrix / data frame.
 
-- #### rotate 
-rotate a matrix 90 degrees.
+- ### `colMax()`
+Calculates the maximum of each column of a numeric matrix / data frame.
 
-- #### sortEachColumn 
+- ### `rowMedians()`
+Calculates the median of each row of a numeric matrix / data frame.
+
+- ### `colMedians()`
+Calculates the median of each column of a numeric matrix / data frame.
+
+- ### `rowGeoMeans()`
+Calculates the median of each row of a numeric matrix / data frame.
+
+- ### `colGeoMeans()`
+Calculates the median of each column of a numeric matrix / data frame.
+
+- ### `rowCV()`
+Calculates the CV of each ROW of a numeric matrix / data frame.
+
+- ### `colCV()`
+Calculates the CV of each column of a numeric matrix / data frame.
+
+- ### `rowVariance()`
+Calculates the CV of each ROW of a numeric matrix / data frame.
+
+- ### `colVariance()`
+Calculates the CV of each column of a numeric matrix / data frame.
+
+- ### `rowSEM()`
+Calculates the SEM of each row of a numeric matrix / data frame.
+
+- ### `colSEM()`
+Calculates the SEM of each column of a numeric matrix / data frame.
+
+- ### `rowSD()`
+Calculates the SEM of each row of a numeric matrix / data frame.
+
+- ### `colSD()`
+Calculates the SD of each column of a numeric matrix / data frame.
+
+- ### `rowIQR()`
+Calculates the IQR of each row of a numeric matrix / data frame.
+
+- ### `colIQR()`
+Calculates the IQR of each column of a numeric matrix / data frame.
+
+- ### `rowQuantile()`
+Calculates the quantile of each row of a numeric matrix / data frame.
+
+- ### `colQuantile()`
+Calculates the quantile of each column of a numeric matrix / data frame.
+
+- ### `TPM_normalize()`
+Normalize each column to 1 million.
+
+- ### `median_normalize()`
+Normalize each column to the median of all the column-sums.
+
+- ### `mean_normalize()`
+Normalize each column to the median of the columns.
+
+- ### `rotate()`
+Rotate a matrix 90 degrees.
+
+- ### `sortEachColumn()`
 Sort each column of a numeric matrix / data frame.
 
-- #### sort.mat 
-Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/
+- ### `sort.mat()`
+Sorts a matrix by a given column. This function can only handle single column sort.  An alternative is dd[with(dd, order(-z, b)), ] as found on StackOverflow (https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r).
 
-- #### rowNameMatrix 
-Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a 
+- ### `rowNameMatrix()`
+Create a copy of your matrix, where every entry is replaced by the corresponding row name. Useful if you want to color by row name in a plot (where you have different number of NA-values in each row).
 
-- #### colNameMatrix 
-Create a copy of your matrix, where every entry is replaced by the corresponding column name. Useful if you want to color by column 
+- ### `colNameMatrix()`
+Create a copy of your matrix, where every entry is replaced by the corresponding column name. Useful if you want to color by column name in a plot (where you have different number of NA-values in each column).
 
-- #### rownames.trimws 
-trim whitespaces from the rownames
+- ### `rownames.trimws()`
+Trim whitespaces from the rownames.
 
-- #### colsplit 
-split a data frame by a factor corresponding to columns.
+- ### `colsplit()`
+Split a data frame by a factor corresponding to columns.
 
-- #### rowsplit 
-split a data frame by a factor corresponding to columns.
+- ### `rowsplit()`
+Split a data frame by a factor corresponding to columns.
 
-- #### select.rows.and.columns 
-Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they 
+- ### `select_rows_and_columns()`
+Subset rows and columns. It checks if the selected dimension names exist and reports if any of those they aren't found.
 
-- #### getRows 
-Get the subset of rows with existing rownames, report how much it could not find.
+- ### `getRows()`
+Returns a subset of rows based on their names and optionally removes rows with only NA or zero values. Reports the number of missing rows.
 
-- #### getCols 
-Get the subset of cols with existing colnames, report how much it could not find.
+- ### `getCols()`
+Returns a subset of columns based on their names and optionally removes columns with only NA or zero values. Reports the number of missing columns.
 
-- #### get.oddoreven 
-Get odd or even columns or rows of a data frame
+- ### `get.oddoreven()`
+Returns either odd or even indexed rows or columns from a data frame.
 
-- #### combine.matrices.intersect 
-combine matrices by rownames intersect
+- ### `merge_1col_dfs_by_rn()`
+Merge any data frames by rownames. Required plyr package.
 
-- #### merge_dfs_by_rn 
-Merge any data frames by rownames. Required plyr package
+- ### `merge_numeric_df_by_rn()`
+Merge 2 numeric data frames by rownames.
 
-- #### merge_numeric_df_by_rn 
-Merge 2 numeric data frames by rownames
+- ### `merge_2_named_vec_as_df()`
+Merge two named vectors by names, into a dataframe with 2 columns.
 
-- #### remove.na.rows 
-cols have to be a vector of numbers corresponding to columns
+- ### `merge_ls_of_named_vec_as_df_cols()`
+Merge any number of named vectors (presented as a list) by names, into a dataframe
 
-- #### remove.na.cols 
-cols have to be a vector of numbers corresponding to columns
+- ### `remove.na.rows()`
+Cols have to be a vector of numbers corresponding to columns.
 
-- #### na.omit.mat 
-Omit rows with NA values from a matrix. Rows with any, or full of NA-s
+- ### `remove.na.cols()`
+Cols have to be a vector of numbers corresponding to columns.
 
-- #### copy.dimension.and.dimnames 
-copy dimension and dimnames
+- ### `na.omit.mat()`
+Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
 
-- #### mdlapply 
- lapply for multidimensional arrays
+- ### `df.remove.empty.rows.and.columns()`
+This function takes a data frame and a threshold value, and removes all rows and columns that contain only zeros or the threshold value. 
 
-- #### arr.of.lists.2.df 
-simplify 2D-list-array to a DF
+- ### `copy.dimension.and.dimnames()`
+Copy the dimension and dimnames of a 1D vector to a 2D array.
 
-- #### mdlapply2df 
-multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF)
+- ### `mdlapply()`
+A wrapper for `lapply()` that works on multidimensional arrays.
 
-- #### any.duplicated.rownames.ls.of.df 
+- ### `arr.of.lists.2.df()`
+Simplify 2D-list-array to a DF.
+
+- ### `mdlapply2df()`
+Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
+
+- ### `any.duplicated.rownames.ls.of.df()`
 Check if there are any duplocated rownames in a list of dataframes.
 
-- #### intersect.ls 
+- ### `intersect.ls()`
 Intersect any number of lists.
 
-- #### union.ls 
+- ### `union.ls()`
 Intersect any number of list elements. Faster than reduce.
 
-- #### unlapply 
-lapply, then unlist
+- ### `symdiff.ls()`
+Calculate symmetric difference on a list (of 2 vectors).
 
-- #### list.wNames 
-create a list with names from ALL variables you pass on to the function
+- ### `setdiff.ls()`
+Calculate set difference on a list (of 2 vectors).
 
-- #### as.list.df.by.row 
-Split a dataframe into a list by its columns. omit.empty for the listelments; na.omit 
+- ### `unlapply()`
+Lapply, then unlist.
 
-- #### as.list.df.by.col 
-oSplit a dataframe into a list by its rows. omit.empty for the listelments; na.omit and 
+- ### `list.wNames()`
+Create a list with names from ALL variables you pass on to the function.
 
-- #### reorder.list 
-reorder elements of lists in your custom order of names / indices.
+- ### `as.list.df.by.row()`
+Split a dataframe into a list by its columns.
 
-- #### range.list 
-range of values in whole list
+- ### `as.list.df.by.col()`
+Split a dataframe into a list by its rows.
 
-- #### intermingle2lists 
-Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, 
+- ### `reorder.list()`
+Reorder elements of lists in your custom order of names / indices.
 
-- #### as.listalike 
-convert a vector to a list with certain dimensions, taken from the list it wanna resemble
+- ### `range.list()`
+Calculates the range of values in a list.
 
-- #### reverse.list.hierarchy 
-reverse list hierarchy
+- ### `intermingle2lists()`
+Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 
-- #### list2fullDF.byNames 
-...
+- ### `as.listalike()`
+Converts a vector to a list with the same dimensions as a given list.
 
-- #### list2fullDF.presence 
-Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES 
+- ### `reverse.list.hierarchy()`
+This function reverses the hierarchy of a given, 2 level, nested list. The  function will ensure that all lists at the same level have the same names,  and then transpose the structure, creating a new list for each unique name.  Any missing elements in the original lists are not included in the final  output. The result is a list where the top-level names are derived from  the unique names found at the lower levels of the input list. 
 
-- #### splitbyitsnames 
-split a list by its names
+- ### `list2fullDF.byNames()`
+Converts a list to a full matrix, with rows and columns named by the elements of the list.
 
-- #### splititsnames_byValues 
-split a list by its names
+- ### `list2fullDF.presence()`
+Converts a list to a full matrix, with rows and columns named by the elements of the list.  The matrix will contain a 1 in each cell where the corresponding element of the list is present, and a 0 otherwise.
 
-- #### intermingle2vec 
+- ### `splititsnames_byValues()`
+Split a list by its names.
+
+- ### `intermingle2vec()`
 Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
 
-- #### intermingle.cbind 
-Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side 
+- ### `intermingle.cbind()`
+Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 
-- #### ls2categvec 
-Convert a list to a vector repeating list-element names, while vector names are the list elements
+- ### `ls2categvec()`
+Converts a list to a vector repeating list-element names, while vector names are the list elements.
 
-- #### list.2.replicated.name.vec 
-Convert a list to a vector, with list elements names replicated as many times, as many elements each 
+- ### `symdiff()`
+Converts a list to a vector, with list elements names replicated as many times as many elements each element had.
 
-- #### symdiff 
-Quasy symmetric difference of any number of vectors
+- ### `iround()`
+Rounds a value to the significant amount of digits. Its a wrapper for signif().
 
-- #### cv 
-...
+- ### `modus()`
+Calculates the mode (modus) of a numeric vector (it excludes NA-s by default). https://en.wikipedia.org/wiki/Mode_(statistics)
 
-- #### sem 
-Calculates the standard error of the mean (SEM) for a numeric vector (it 
+- ### `cv()`
+Calculates the coefficient of variation (CV) for a numeric vector (it excludes NA-s by default).
 
-- #### fano 
-Calculates the fano factor on a numeric vector (it excludes NA-s 
+- ### `sem()`
+Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default).
 
-- #### geomean 
-Calculates the geometric mean of a numeric vector (it excludes NA-s by default)
+- ### `fano()`
+Calculates the fano factor on a numeric vector (it excludes NA-s by default).
 
-- #### mean_of_log 
-Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default)
+- ### `geomean()`
+Calculates the geometric mean of a numeric vector (it excludes NA-s by default).
 
-- #### movingAve 
+- ### `mean_of_log()`
+Calculates the mean of the log_k of a numeric vector (it excludes NA-s by default).
+
+- ### `movingAve2()`
 Calculates the moving / rolling average of a numeric vector.
 
-- #### movingAve2 
-Calculates the moving / rolling average of a numeric vector, using filter().
-
-- #### movingSEM 
+- ### `movingSEM()`
 Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
 
-- #### imovingSEM 
-Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller 
+- ### `imovingSEM()`
+Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
 
-- #### shannon.entropy 
-Calculate shannon entropy
+- ### `pretty_dput()`
+This function modifies the output of the traditional dput() function  so that each key-value pair in a vector appears on a new line. It's useful for  creating more readable output.
+
+- ### `as.numeric.wNames.deprecated()`
+Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+
+- ### `as.factor.numeric.deprecated()`
+Turn any vector into numeric categories as.numeric(as.factor(vec))
 
 
 

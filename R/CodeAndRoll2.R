@@ -160,7 +160,9 @@ printEveryN <- function(iterator = i, N = 1000) { if ((iterator %% N) == 0 ) ipr
 
 # _________________________________________________________________________________________________
 #' @title table_fixed_categories
+#'
 #' @description Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
+#'
 #' @param vec Input vector
 #' @param categories_vec PARAM_DESCRIPTION
 #' @export
@@ -171,15 +173,13 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
 
 # _________________________________________________________________________________________________
 #' @title getCategories
-#'
 #' @description Extract unique entries with a corresponding name.
 #' @param named_categ_vec A vector of categories with names.
 #' "Uniqueness" in the vector and its name should be the same!!!
 #' @export
 #' @examples getCategories(c("A" = 1,"B" = 1, "C" = 2, 3))
 
-getCategories <-
-  function(named_categ_vec) {
+getCategories <- function(named_categ_vec) {
     named_categ_vec[unique(names(named_categ_vec))]
   }
 
@@ -2401,7 +2401,7 @@ sem <- function(x, na.rm = TRUE){
 #' @examples fano(1:5)
 #'
 #' @export
-fano <-function(x, na.rm = TRUE, USE = "na.or.complete") {
+fano  <- function(x, na.rm = TRUE, USE = "na.or.complete") {
   var(x, na.rm = na.rm, use = USE) / mean(x, na.rm = na.rm) # Calculates the fano factor on a numeric vector (it excludes NA-s by default)
   }
 
@@ -2484,8 +2484,7 @@ movingAve2 <- function(x, n = 5) {
 #' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
 #' @return A vector of the same length as `x`, containing the SEMs for each element.
 #' @export
-movingSEM <-
-  function(x, oneSide = 5) {
+movingSEM <- function(x, oneSide = 5) {
     # Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
     y <- NULL
     for (i in oneSide:length(x)) {
