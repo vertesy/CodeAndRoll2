@@ -2534,6 +2534,7 @@ imovingSEM <- function(x, oneSide = 5) {
 #'
 #' @export
 pretty_dput <- function(vec) {
+  if (is.null(names(vec))) names(vec) <- 1:length(vec)
   cat("c(", sep = "")
   for (i in 1:length(vec)) {
     cat("\n`", names(vec)[i], "` = \"", vec[i], "\"",
