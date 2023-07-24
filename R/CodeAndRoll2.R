@@ -180,7 +180,7 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
 #' @examples getCategories(c("A" = 1,"B" = 1, "C" = 2, 3))
 
 getCategories <- function(named_categ_vec) {
-    named_categ_vec[unique(names(named_categ_vec))]
+    named_categ_vec[names(unique(named_categ_vec))]
   }
 
 
