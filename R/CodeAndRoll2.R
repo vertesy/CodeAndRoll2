@@ -449,6 +449,7 @@ as.numeric.wNames.character <- function(vec, verbose = TRUE
 
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.factor
+#'
 #' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
 #' Forerly as.factor.numeric
 #' @param vec vector of factors, strings, (or even logical)
