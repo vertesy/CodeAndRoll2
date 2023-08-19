@@ -141,6 +141,7 @@ idimnames <- function(any_object, print_max = 25) {
   iprint("print max:", print_max, "names.")
   if (!is.null(dimnames(any_object)))   {
     dimNamesShort <- lapply(dimnames(any_object), head, n = print_max)
+    idim(any_object)
     print(dimNamesShort)
     }
   else if (!is.null(colnames(any_object))) { iprint("colnames:", colnames(any_object))  }
@@ -2534,7 +2535,7 @@ imovingSEM <- function(x, oneSide = 5) {
 #' pretty_dput(vec)
 #'
 #' @export
-pretty_dput <- function(vec) {
+dput_pretty <- pretty_dput <- function(vec) {
   if (is.null(names(vec))) names(vec) <- 1:length(vec)
   cat("c(", sep = "")
   for (i in 1:length(vec)) {
