@@ -482,7 +482,7 @@ as.numeric.wNames.factor <- function(vec,  ...) {
 #' @export as.character.wNames
 as.character.wNames <- function(vec) { # Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
   char_vec = as.character(vec)
-  if (!is.null(names(vec))) {names(char_vec) = names(vec)}
+  if (!is.null(names(vec))) { names(char_vec) = names(vec) }
   return(char_vec)
 }
 
