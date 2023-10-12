@@ -141,6 +141,7 @@ idimnames <- function(any_object, print_max = 25) {
   iprint("print max:", print_max, "names.")
   if (!is.null(dimnames(any_object)))   {
     dimNamesShort <- lapply(dimnames(any_object), head, n = print_max)
+    idim(any_object)
     print(dimNamesShort)
     }
   else if (!is.null(colnames(any_object))) { iprint("colnames:", colnames(any_object))  }
@@ -160,7 +161,9 @@ printEveryN <- function(iterator = i, N = 1000) { if ((iterator %% N) == 0 ) ipr
 
 # _________________________________________________________________________________________________
 #' @title table_fixed_categories
+#'
 #' @description Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
+#'
 #' @param vec Input vector
 #' @param categories_vec PARAM_DESCRIPTION
 #' @export
@@ -171,16 +174,14 @@ table_fixed_categories <- function(vec, categories_vec) { # generate a table() w
 
 # _________________________________________________________________________________________________
 #' @title getCategories
-#'
 #' @description Extract unique entries with a corresponding name.
 #' @param named_categ_vec A vector of categories with names.
 #' "Uniqueness" in the vector and its name should be the same!!!
 #' @export
 #' @examples getCategories(c("A" = 1,"B" = 1, "C" = 2, 3))
 
-getCategories <-
-  function(named_categ_vec) {
-    named_categ_vec[unique(names(named_categ_vec))]
+getCategories <- function(named_categ_vec) {
+    named_categ_vec[names(unique(named_categ_vec))]
   }
 
 
@@ -449,6 +450,7 @@ as.numeric.wNames.character <- function(vec, verbose = TRUE
 
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.factor
+#'
 #' @description  Turn any vector into numeric categories as.numeric(as.factor(vec))
 #' Forerly as.factor.numeric
 #' @param vec vector of factors, strings, (or even logical)
@@ -480,7 +482,7 @@ as.numeric.wNames.factor <- function(vec,  ...) {
 #' @export as.character.wNames
 as.character.wNames <- function(vec) { # Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
   char_vec = as.character(vec)
-  if (!is.null(names(vec))) {names(char_vec) = names(vec)}
+  if (!is.null(names(vec))) { names(char_vec) = names(vec) }
   return(char_vec)
 }
 
@@ -2401,7 +2403,7 @@ sem <- function(x, na.rm = TRUE){
 #' @examples fano(1:5)
 #'
 #' @export
-fano <-function(x, na.rm = TRUE, USE = "na.or.complete") {
+fano  <- function(x, na.rm = TRUE, USE = "na.or.complete") {
   var(x, na.rm = na.rm, use = USE) / mean(x, na.rm = na.rm) # Calculates the fano factor on a numeric vector (it excludes NA-s by default)
   }
 
@@ -2484,8 +2486,7 @@ movingAve2 <- function(x, n = 5) {
 #' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
 #' @return A vector of the same length as `x`, containing the SEMs for each element.
 #' @export
-movingSEM <-
-  function(x, oneSide = 5) {
+movingSEM <- function(x, oneSide = 5) {
     # Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
     y <- NULL
     for (i in oneSide:length(x)) {
@@ -2534,7 +2535,8 @@ imovingSEM <- function(x, oneSide = 5) {
 #' pretty_dput(vec)
 #'
 #' @export
-pretty_dput <- function(vec) {
+dput_pretty <- pretty_dput <- function(vec) {
+  if (is.null(names(vec))) names(vec) <- 1:length(vec)
   cat("c(", sep = "")
   for (i in 1:length(vec)) {
     cat("\n`", names(vec)[i], "` = \"", vec[i], "\"",
