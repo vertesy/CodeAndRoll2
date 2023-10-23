@@ -179,13 +179,26 @@ printEveryN <- function(iterator = i, N = 1000) { if ((iterator %% N) == 0 ) ipr
 #'
 #' @description Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
 #'
-#' @param vec Input vector
-#' @param categories_vec PARAM_DESCRIPTION
+#' @param vec Input vector to be counted.
+#' @param categories_vec Fixed list of categories to be counted in your input vector.
+#' @param strict Stop or warn if not all values are covered in the categories vector?
 #' @export
-table_fixed_categories <- function(vec, categories_vec) { # generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
-  if ( !is.vector(vec)) {print(is(vec[]))}
+
+table_fixed_categories <- function(vec, categories_vec, strict = TRUE) {
+  if ( !is.vector(vec)) { iprint("vec is not a vector -  it is a:", is(vec)[1]) }
+
+  missing_from_category <- unique(vec) %!in% categories_vec
+  if ( any(missing_from_category))  {
+    txt1 <- pc_TRUE(logical_vector = missing_from_category, NumberAndPC = T, suffix = "values are NOT found in the categories vector!")
+    if (strict) stop(txt1) else warning(txt1)
+  }
+
+  txt2 <- pc_TRUE(logical_vector = categories_vec %in% vec, NumberAndPC = T, suffix = "categories are found in the vector")
+  print(txt2)
+
   table(factor(unlist(vec), levels = categories_vec))
 }
+
 
 # _________________________________________________________________________________________________
 #' @title getCategories
