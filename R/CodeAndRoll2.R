@@ -41,6 +41,21 @@ list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) { # create list 
 
 
 # _________________________________________________________________________________________________
+#' @title list.from.list
+#' @description create an empty list from named and structured as the template list.
+#' @param template A template list with names,.
+#' @param fill The value to fill the new vector, Default: NaN
+#' @export
+list.from.list <- function(template, fill = NaN) { # create list from a vector with the names of the elements.
+  stopifnot(is(template)[1] == 'list')
+  liszt = as.list(rep(fill, length(template)))
+  names(liszt) = names(template)
+  return(liszt)
+}
+
+
+
+# _________________________________________________________________________________________________
 #' @title matrix.fromNames
 #' @description Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
 #' @param rowname_vec A vector of names for rows, Default: 1:10
