@@ -200,6 +200,7 @@ table_fixed_categories <- function(vec, categories_vec, strict = TRUE) {
 }
 
 
+
 # _________________________________________________________________________________________________
 #' @title getCategories
 #' @description Extract unique entries with a corresponding name.
