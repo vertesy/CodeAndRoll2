@@ -1815,6 +1815,73 @@ df.remove.empty.rows.and.columns <- function(df = UVI.assignment.filtered.3.HF
 }
 
 
+# _________________________________________________________________________________________________
+#' Extract and Display Column Types of a Data Frame or Tibble
+#'
+#' This function returns the primary class/type of each column in a data frame or tibble.
+#' Additionally, it can print a summary of the column types.
+#'
+#' @param df A data frame or tibble whose column types are to be extracted.
+#' @param print_it Logical; if `TRUE` (default), prints a table of column types and a summary.
+#' @return A named character vector where names are column names and the values are their respective primary types.
+#' @examples
+#' df <- data.frame(a = 1:3, b = c("A", "B", "C"), c = factor(c("X", "Y", "X")))
+#' get_col_types(df)
+#'
+#' @importFrom purrr map_chr
+#' @export
+
+get_col_types <- function(df, print_it = T) {
+  x <- purrr::map_chr(df, ~ class(.x)[1])
+  if (print_it) {
+    typetable <- t(t(x))
+    colnames(typetable) <- "Type"
+    print(typetable)
+  }
+  print("Summary")
+  print(table(x))
+  return(x)
+}
+
+# _________________________________________________________________________________________________
+#' Convert List Columns of a Tibble to String Vectors
+#'
+#' This function identifies columns of type `list` in a tibble or data frame
+#' and converts them to string vectors.
+#'
+#' @param df A tibble or data frame where list columns are to be converted to string vectors.
+#' @param verbose Print anything? Default: `TRUE`.
+#' @param print_full Print full details? Default: `FALSE`.
+#'
+#' @return A tibble or data frame with list columns converted to string vectors.
+#'
+#' @examples
+#' df <- tibble::tibble(a = list(1:2, 3:4, 5:6), b = c("A", "B", "C"))
+#' fix_tibble_lists(df)
+#'
+#' @importFrom purrr map_chr
+#' @importFrom tibble as_tibble
+#'
+#' @export
+fix_tibble_lists <- function(d, verbose = T, print_full = F, collapse_by = ",") {
+  if (verbose) {
+    cat("Before conversion:\n")
+    coltypes <- get_col_types(df, print_it = print_full)
+  }
+
+  list_cols <- which(coltypes %in% 'list') # Identify list columns
+
+  # Convert list columns to string vectors
+  df[, list_cols] <- purrr::map(df[, list_cols], ~ sapply(.x, paste, collapse = collapse_by))
+
+  if (verbose) {
+    cat("\nAfter conversion:\n")
+    get_col_types(df, print_it = print_full)
+  }
+  return(df)
+}
+
+
 
 # _________________________________________________________________________________________________
 # Multi-dimensional lists ____________________________________________________________ ----
