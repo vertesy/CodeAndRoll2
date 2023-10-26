@@ -1843,6 +1843,7 @@ get_col_types <- function(df, print_it = T) {
   return(x)
 }
 
+
 # _________________________________________________________________________________________________
 #' Convert List Columns of a Tibble to String Vectors
 #'
@@ -1863,7 +1864,7 @@ get_col_types <- function(df, print_it = T) {
 #' @importFrom tibble as_tibble
 #'
 #' @export
-fix_tibble_lists <- function(d, verbose = T, print_full = F, collapse_by = ",") {
+fix_tibble_lists <- function(df, verbose = T, print_full = F, collapse_by = ",") {
   if (verbose) {
     cat("Before conversion:\n")
     coltypes <- get_col_types(df, print_it = print_full)
