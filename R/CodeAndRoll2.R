@@ -767,19 +767,23 @@ bottomN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 
 
 
 # _________________________________________________________________________________________________
-#' @title iterBy.over
-#' @description Iterate over a vector by every N-th element.
-#' @param vec Input vector
-#' @param by PARAM_DESCRIPTION, Default: 9
+#' @title Split a Vector into a List by Every N-th Element
+#' This function divides a given vector into chunks of size `by` (default is 9).
+#' The resulting list contains vectors of the specified chunk size or smaller.
+#' @param vec A numeric or character vector to be split.
+#' @param by Integer value specifying the chunk size. Default is 9.
+#' @return A list where each element is a vector containing up to `by` elements from `vec`.
 #' @export
-iterBy.over <- function(vec, by = 9) { # Iterate over a vec by every N-th element.
-  steps = ceiling(length(vec)/by)
-  lsX = split(vec, sort(rank(vec) %% steps))
-  names(lsX) = 1:length(lsX)
+split_vec_to_list_by_N <- function(vec = 1:27, by = 9) {
+  stopifnot(length(vec) > by)
+  n_groups <- ceiling(length(vec) / by)
+  assignment <- gl(n_groups, by, length = length(vec))
+  lsX = split(x = vec, f = assignment)
+  names(lsX) = paste0('v', 1:length(lsX))
   lsX
-} # for (i in iterBy.over(vec = x)) { print(i) }
-
-
+}
+# FORMERLY / aka: iterBy.over()
+# lsX = split(vec, sort(rank(vec) %% steps))
 
 # _________________________________________________________________________________________________
 #' @title zigzagger
