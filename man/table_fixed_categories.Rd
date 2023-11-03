@@ -4,12 +4,14 @@
 \alias{table_fixed_categories}
 \title{table_fixed_categories}
 \usage{
-table_fixed_categories(vec, categories_vec)
+table_fixed_categories(vec, categories_vec, strict = TRUE)
 }
 \arguments{
-\item{vec}{Input vector}
+\item{vec}{Input vector to be counted.}
 
-\item{categories_vec}{PARAM_DESCRIPTION}
+\item{categories_vec}{Fixed list of categories to be counted in your input vector.}
+
+\item{strict}{Stop or warn if not all values are covered in the categories vector?}
 }
 \description{
 Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.

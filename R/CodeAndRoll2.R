@@ -1,7 +1,7 @@
 ######################################################################
 # CodeAndRoll2 - A collection of custom R functions
 ######################################################################
-# devtools::load_all("~/GitHub/Packages/CodeAndRoll2")
+# devtools::load_all("~/GitHub/Packages/CodeAndRoll2"); devtools::document("~/GitHub/Packages/CodeAndRoll2")
 # source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.R')
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
 # source('~/.pack.R')
@@ -323,7 +323,7 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 #'   if (!n) n <- stringr::str_count(string = string, pattern = pattern)
 #'   stringr::str_split_fixed(string, pattern = pattern, n = n)
 #'   }
-"replace with str_split_1"
+# "replace with str_split_1"
 
 
 # _________________________________________________________________________________________________
