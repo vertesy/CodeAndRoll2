@@ -412,8 +412,8 @@ as_tibble_from_namedVec <- function(vec.w.names =  c("a" = 1, "b" = 2), transpos
 
 
 # _________________________________________________________________________________________________
-#' @title Get the unique elements, keep their names
-#'
+#' @title Unique elements
+#' @description Get the unique elements of a vector, keep their names
 #' @param x A vector with names
 #' @export unique.wNames
 unique.wNames <- function(x) { x[!duplicated(x)] }
@@ -493,7 +493,8 @@ as.numeric.wNames.factor <- function(vec,  ...) {
 
 # _________________________________________________________________________________________________
 #' @title as.character.wNames
-#' @description Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
+#' @description Converts your input vector into a character vector, and puts the original
+#' character values into the names of the new vector, unless it already has names.
 #' @param vec input vector
 #'
 #' @export as.character.wNames
@@ -756,7 +757,7 @@ bottomN.dfCol <- function(df_col = as.named.vector(df[ , 1, drop = FALSE]), n = 
 
 # _________________________________________________________________________________________________
 #' @title Split a Vector into a List by Every N-th Element
-#' This function divides a given vector into chunks of size `by` (default is 9).
+#' @description This function divides a given vector into chunks of size `by` (default is 9).
 #' The resulting list contains vectors of the specified chunk size or smaller.
 #' @param vec A numeric or character vector to be split.
 #' @param by Integer value specifying the chunk size. Default is 9.
@@ -785,7 +786,7 @@ zigzagger <- function(vec = 1:9) {
 
 # _________________________________________________________________________________________________
 #' @title Formats a sequence of numbers with zeropadding.
-#'
+#' @description
 #' @param x The starting number.
 #' @param y The ending number.
 #' @param zeropadding Whether to use zeropadding (default: TRUE).
@@ -1612,7 +1613,7 @@ merge_dfs_by_rn <- function(list_of_dfs) {
 
 # _________________________________________________________________________________________________
 #' @title merge_1col_dfs_by_rn
-#'
+#' @description A function that merges single-column data frames based on rownames.
 #' @param list_of_dfs  list of 1col dfs
 #' @param FILLwith 0 by def
 #' @param columnUSE column index in both. 1 by default.
@@ -2280,8 +2281,8 @@ splitbyitsnames <- function(namedVec) {
 
 
 # _________________________________________________________________________________________________
-#' @title Split a list by its values.
-#'
+#' @title Split the names of list by its values.
+#' @description Split the names of a list by its its values.
 #' @param namedVec A vector with names.
 #'
 #' @return A list of vectors, each of which contains the elements of `namedVec` that have the corresponding value.
@@ -2396,8 +2397,9 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 ## Set operations ____________________________________________________________ ----
 
 
-#' @title Quasi symmetric difference of any number of vectors.
+#' @title Symmetric difference
 #'
+#' @description Quasi symmetric difference of any number of vectors.
 #' @param x A vector.
 #' @param y A vector.
 #' @param ... Pass any other argument.
@@ -2542,7 +2544,7 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title movingAve
+#' @title Moving / rolling average
 #'
 #' @description Calculates the moving / rolling average of a numeric vector.
 #' @param x A numeric vector.
@@ -2561,9 +2563,8 @@ movingAve <- function(x, oneSide = 5) {
 
 
 # _________________________________________________________________________________________________
-
-#' @title Calculates the moving / rolling average of a numeric vector, using `filter()`.
-#'
+#' @title Moving / rolling average (v2, filter)
+#' @description Calculates the moving / rolling average of a numeric vector, using `filter()`.
 #' @param x A numeric vector.
 #' @param n The size of the moving window. Defaults to 5.
 #' @return A vector of the moving averages.
