@@ -82,26 +82,24 @@ warnings()
 # # setwd(RepositoryDir)
 install(RepositoryDir, upgrade = F)
 
-
-
-# require("CodeAndRoll2")
-# # remove.packages("CodeAndRoll2")
-# # Test your package ------------------------------------------------
-# help("wplot")
-# cat("\014")
-# devtools::run_examples()
-
+# Install your package ------------------------------------------------
+devtools::install(RepositoryDir, upgrade = F)
 
 # Test if you can install from github ------------------------------------------------
-# devtools::install_github(repo = "vertesy/CodeAndRoll2")
-# devtools::install_github(repo = "vertesy/CodeAndRoll2/CodeAndRoll2")
+pak::pkg_install("vertesy/CodeAndRoll2")
+# unload("CodeAndRoll2")
 # require("CodeAndRoll2")
+# # remove.packages("CodeAndRoll2")
 
-# Clean up if not needed anymore ------------------------------------------------
-# View(installed.packages())
-# remove.packages("CodeAndRoll2")
 
+# Check CRAN ------------------------------------------------
 check(RepositoryDir, cran = TRUE)
+# as.package(RepositoryDir)
+# # source("https://install-github.me/r-lib/desc")
+# # library(desc)
+# # desc$set("CodeAndRoll2", "foo")
+# # desc$get(CodeAndRoll2)
+# system("cd ~/GitHub/CodeAndRoll2/; ls -a; open .Rbuildignore")
 
 
 # Check package dependencies ------------------------------------------------
@@ -124,7 +122,7 @@ check(RepositoryDir, cran = TRUE)
 # Package styling, and visualization ------------------------------------------------
 {
   styler::style_pkg(RepositoryDir)
-  styler::style_file("~/GitHub/Packages/CodeAndRoll2/Development/02.Compile.the.CodeAndRoll2.package.R")
+  # styler::style_file("~/GitHub/Packages/CodeAndRoll2/Development/02.Compile.the.CodeAndRoll2.package.R")
 
   {
     # Exploring the Structure and Dependencies of my R Package:
