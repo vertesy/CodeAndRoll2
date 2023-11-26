@@ -11,11 +11,11 @@ try(dev.off(), silent = TRUE)
 
 # Setup ------------------------
 package.name <- "CodeAndRoll2"
-package.version <- "2.5.4"
+package.version <- "2.5.5"
 
-RepositoryDir <- kollapse("~/GitHub/Packages/", package.name, "/")
-fname <- kollapse(package.name, ".R")
-package.FnP <- kollapse(RepositoryDir, "R/", fname)
+RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")
+fname <- paste0(package.name, ".R")
+package.FnP <- paste0(RepositoryDir, "R/", fname)
 
 BackupDir <- "~/GitHub/Packages/CodeAndRoll2/Development/"
 dir.create(BackupDir)
@@ -23,8 +23,8 @@ dir.create(BackupDir)
 # devtools::use_package("vioplot")
 DESCRIPTION <- list(
   "Title" = "CodeAndRoll2 for vector, matrix and list manipulations",
-  "Author" = person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role = c("aut", "cre")),
-  "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )',
+  "Author" = person(given = "Abel", family = "Vertesy", email = "av@imba.oeaw.ac.at", role = c("aut", "cre")),
+  "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "av@imba.oeaw.ac.at", role =  c("aut", "cre") )',
   "Description" = "CodeAndRoll2 is a set of more than >130 productivity functions. Used by MarkdownReports, ggExpress, SeuratUtils.
     Packaged version of the core functionalities  (vector, matrix and list manipulations; math) of the formerly used CodeAndRoll (v1).",
   "License" = "GPL-3 + file LICENSE",
@@ -44,7 +44,7 @@ if (!dir.exists(RepositoryDir)) {
 } else {
   getwd()
   try(file.remove(c("DESCRIPTION", "NAMESPACE", "CodeAndRoll2.Rproj")))
-  create_package(path = RepositoryDir, fields = DESCRIPTION, open = F)
+  usethis::create_package(path = RepositoryDir, fields = DESCRIPTION, open = F)
 }
 
 
@@ -55,8 +55,8 @@ if (!dir.exists(RepositoryDir)) {
 # RoxygenReady(package.FnP)
 
 # replace output files ------------------------------------------------
-BackupOldFile <- kollapse(BackupDir, "Development", ".bac", print = FALSE)
-AnnotatedFile <- kollapse(BackupDir, "Development", ".annot.R", print = FALSE)
+BackupOldFile <- paste0(BackupDir, "Development", ".bac", print = FALSE)
+AnnotatedFile <- paste0(BackupDir, "Development", ".annot.R", print = FALSE)
 file.copy(from = package.FnP, to = BackupOldFile, overwrite = TRUE)
 # file.copy(from = AnnotatedFile, to = package.FnP, overwrite = TRUE)
 
@@ -66,7 +66,7 @@ file.copy(from = package.FnP, to = BackupOldFile, overwrite = TRUE)
 # Compile a package ------------------------------------------------
 setwd(RepositoryDir)
 getwd()
-document()
+devtools::document()
 warnings()
 
 {
