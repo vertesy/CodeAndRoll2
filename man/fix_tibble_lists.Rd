@@ -4,21 +4,24 @@
 \alias{fix_tibble_lists}
 \title{Convert List Columns of a Tibble to String Vectors}
 \usage{
-fix_tibble_lists(df, verbose = T, print_full = F, collapse_by = ",")
+fix_tibble_lists(df, verbose = TRUE, print_full = FALSE, collapse_by = ",")
 }
 \arguments{
-\item{df}{A tibble or data frame where list columns are to be converted to string vectors.}
+\item{df}{A tibble or data frame where list columns are to be converted.
+Default: None, must be supplied by the user.}
 
-\item{verbose}{Print anything? Default: \code{TRUE}.}
+\item{verbose}{Logical; whether to print progress messages. Default: TRUE.}
 
-\item{print_full}{Print full details? Default: \code{FALSE}.}
+\item{print_full}{Logical; whether to print full details. Default: FALSE.}
+
+\item{collapse_by}{The character used to collapse list elements. Default: ",".}
 }
 \value{
 A tibble or data frame with list columns converted to string vectors.
 }
 \description{
-This function identifies columns of type \code{list} in a tibble or data frame
-and converts them to string vectors.
+Converts columns of type \code{list} in a tibble or data frame to string vectors.
+It combines list elements into a single string per cell, using a specified separator.
 }
 \examples{
 df <- tibble::tibble(a = list(1:2, 3:4, 5:6), b = c("A", "B", "C"))
