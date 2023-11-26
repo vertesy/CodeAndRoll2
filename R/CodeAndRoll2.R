@@ -1854,13 +1854,13 @@ get_col_types <- function(df, print_it = T) {
 # _________________________________________________________________________________________________
 #' @title Convert List Columns of a Tibble to String Vectors
 #'
-#' @description This function identifies columns of type `list` in a tibble or data frame
-#' and converts them to string vectors.
-#'
-#' @param df A tibble or data frame where list columns are to be converted to string vectors.
-#' @param verbose Print anything? Default: `TRUE`.
-#' @param print_full Print full details? Default: `FALSE`.
-#'
+#' @description Converts columns of type `list` in a tibble or data frame to string vectors.
+#' It combines list elements into a single string per cell, using a specified separator.
+#' @param df A tibble or data frame where list columns are to be converted.
+#'           Default: None, must be supplied by the user.
+#' @param verbose Logical; whether to print progress messages. Default: TRUE.
+#' @param print_full Logical; whether to print full details. Default: FALSE.
+#' @param collapse_by The character used to collapse list elements. Default: ",".
 #' @return A tibble or data frame with list columns converted to string vectors.
 #'
 #' @examples
@@ -1871,7 +1871,11 @@ get_col_types <- function(df, print_it = T) {
 #' @importFrom tibble as_tibble
 #'
 #' @export
-fix_tibble_lists <- function(df, verbose = T, print_full = F, collapse_by = ",") {
+fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by = ",") {
+
+  stopifnot(is.data.frame(df), is.logical(verbose),
+            is.logical(print_full), is.character(collapse_by))
+
   if (verbose) {
     cat("Before conversion:\n")
     coltypes <- get_col_types(df, print_it = print_full)
@@ -1880,14 +1884,20 @@ fix_tibble_lists <- function(df, verbose = T, print_full = F, collapse_by = ",")
   list_cols <- which(coltypes %in% 'list') # Identify list columns
 
   # Convert list columns to string vectors
-  df[, list_cols] <- purrr::map(df[, list_cols], ~ sapply(.x, paste, collapse = collapse_by))
+  df[, list_cols] <- purrr::map(df[, list_cols],
+                                ~ sapply(.x, paste, collapse = collapse_by))
 
   if (verbose) {
     cat("\nAfter conversion:\n")
     get_col_types(df, print_it = print_full)
   }
+
+  # Output assertion
+  stopifnot(is.data.frame(df))
+
   return(df)
 }
+
 
 
 
