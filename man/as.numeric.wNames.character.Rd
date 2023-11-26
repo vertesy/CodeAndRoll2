@@ -21,7 +21,13 @@ a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.
 The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via facotr in any case. Code saved at the end.
 }
 \examples{
-vec <- as.character(c(1,2,8,9)); names(vec) <- LETTERS[1:4]; vec; as.numeric.wNames.character(vec);
-vec2 <- as.factor(c(1,2,8,9)); names(vec2) <- LETTERS[1:4]; vec2; as.numeric.wNames.character(vec2, factor.to.character = FALSE)
+vec <- as.character(c(1, 2, 8, 9))
+names(vec) <- LETTERS[1:4]
+vec
+as.numeric.wNames.character(vec)
+vec2 <- as.factor(c(1, 2, 8, 9))
+names(vec2) <- LETTERS[1:4]
+vec2
+as.numeric.wNames.character(vec2, factor.to.character = FALSE)
 
 }

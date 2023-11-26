@@ -11,7 +11,7 @@ try(dev.off(), silent = TRUE)
 
 # Setup ------------------------
 package.name <- "CodeAndRoll2"
-package.version <- "2.5.5"
+package.version <- "2.5.6"
 
 RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")
 fname <- paste0(package.name, ".R")

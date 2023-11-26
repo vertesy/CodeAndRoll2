@@ -14,5 +14,5 @@ getCategories(named_categ_vec)
 Extract unique entries with a corresponding name.
 }
 \examples{
-getCategories(c("A" = 1,"B" = 1, "C" = 2, 3))
+getCategories(c("A" = 1, "B" = 1, "C" = 2, 3))
 }

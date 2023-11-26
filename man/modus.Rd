@@ -13,6 +13,7 @@ modus(x)
 Calculates the mode (modus) of a numeric vector (it excludes NA-s by default). https://en.wikipedia.org/wiki/Mode_(statistics)
 }
 \examples{
-modus(c(1, 1, 2, 3, 3, 3, 4, 5)); modus(1:4)
+modus(c(1, 1, 2, 3, 3, 3, 4, 5))
+modus(1:4)
 
 }

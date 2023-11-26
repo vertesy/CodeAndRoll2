@@ -25,7 +25,7 @@ output. The result is a list where the top-level names are derived from
 the unique names found at the lower levels of the input list.
 }
 \examples{
-list_of_lists <- list('z1' = list(a = 1, b = 2), 'z2' = list(b = 4, a = 1, c = 0))
+list_of_lists <- list("z1" = list(a = 1, b = 2), "z2" = list(b = 4, a = 1, c = 0))
 reverse.list.hierarchy(list_of_lists)
 
 }

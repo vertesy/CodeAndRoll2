@@ -13,5 +13,6 @@ is.list2(object)
 The 'is.list()' function fails on tibbles: it returns TRUE, as if it were a list. This distiguishes. Thaat's why we need this function.
 }
 \examples{
-is.list2(list()); is.list2(dplyr::tibble())
+is.list2(list())
+is.list2(dplyr::tibble())
 }
