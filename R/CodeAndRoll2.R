@@ -1,7 +1,8 @@
 ######################################################################
 # CodeAndRoll2 - A collection of custom R functions
 ######################################################################
-# devtools::load_all("~/GitHub/Packages/CodeAndRoll2"); devtools::document("~/GitHub/Packages/CodeAndRoll2")
+# devtools::load_all("~/GitHub/Packages/CodeAndRoll2")
+# devtools::document("~/GitHub/Packages/CodeAndRoll2")
 # source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.R')
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
 # source('~/.pack.R')
@@ -2689,9 +2690,12 @@ as.numeric.wNames.deprecated <- function(vec) {
 #' @param ... Pass any other argument. to as.factor()
 #' @examples as.factor.numeric(LETTERS[1:4])
 #'
-#' @export as.factor.numeric.deprecated
+#' @export as.factor.numeric
 
-as.factor.numeric.deprecated <- function(vec, rename = FALSE, ...) {
+as.factor.numeric <- function(vec, rename = FALSE, ...) {
+
+  .Deprecated('as.numeric.wNames.factor')
+
   vec2 = as.numeric(as.factor(vec, ...)) ;
   names (vec2) <- if ( !rename & !is.null(names(vec) ) ) { names (vec)
   } else { vec }
