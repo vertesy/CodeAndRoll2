@@ -15,5 +15,6 @@ intermingle.cbind(df1, df2)
 A data frame that combines \code{df1} and \code{df2}, with the columns of \code{df1} alternating with the columns of `
 }
 \description{
-Combine 2 data frames (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
+Combine 2 data frames (of the same length) so that form every odd and every even
+element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 }

@@ -22,20 +22,3 @@ as.named.vector.df(
 \description{
 Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
 }
-\details{
-#' @title sstrsplit
-#'
-#' @description Alias for \code{str_split_fixed} in the \code{stringr} package.
-#' @param string A string.
-#' @param pattern A character string pattern to split on.
-#' @param n The number of elements to return in each split.
-#' @return A list of character vectors.
-#' @seealso
-#'  \code{\link[stringr]{str_split}}
-#' @importFrom stringr str_split_fixed
-#' @export
-sstrsplit <- function(string, pattern = "_", n = F) {
-if (!n) n <- stringr::str_count(string = string, pattern = pattern)
-stringr::str_split_fixed(string, pattern = pattern, n = n)
-}
-}

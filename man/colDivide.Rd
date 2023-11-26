@@ -12,5 +12,5 @@ colDivide(mat, vec)
 \item{vec}{Vector to divide by.}
 }
 \description{
-See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
+Divide by column. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 }

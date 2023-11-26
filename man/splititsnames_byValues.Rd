@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{splititsnames_byValues}
 \alias{splititsnames_byValues}
-\title{Split a list by its values.}
+\title{Split the names of list by its values.}
 \usage{
 splititsnames_byValues(namedVec)
 }
@@ -13,7 +13,7 @@ splititsnames_byValues(namedVec)
 A list of vectors, each of which contains the elements of \code{namedVec} that have the corresponding value.
 }
 \description{
-Split a list by its values.
+Split the names of a list by its its values.
 }
 \examples{
 namedVec <- c("A", "B", "C", "A", "B", "D")

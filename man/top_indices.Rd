@@ -17,7 +17,7 @@ top_indices(x, n = 3, top = TRUE)
 A vector of indices.
 }
 \description{
-Returns the positions of the \code{n} highest values in \code{x}.
+Returns the positions of the \code{n} highest values in \code{x}. For equal values, it maintains the original order.
 }
 \examples{
 top_indices(rnorm(10), n = 3)

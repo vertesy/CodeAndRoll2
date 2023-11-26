@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{grepv}
 \alias{grepv}
-\title{grepv}
+\title{grep that returns the value of the match.}
 \usage{
 grepv(
   pattern,

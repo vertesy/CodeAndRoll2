@@ -2,9 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{split_vec_to_list_by_N}
 \alias{split_vec_to_list_by_N}
-\title{Split a Vector into a List by Every N-th Element
-This function divides a given vector into chunks of size \code{by} (default is 9).
-The resulting list contains vectors of the specified chunk size or smaller.}
+\title{Split a Vector into a List by Every N-th Element}
 \usage{
 split_vec_to_list_by_N(vec = 1:27, by = 9)
 }
@@ -17,7 +15,6 @@ split_vec_to_list_by_N(vec = 1:27, by = 9)
 A list where each element is a vector containing up to \code{by} elements from \code{vec}.
 }
 \description{
-Split a Vector into a List by Every N-th Element
 This function divides a given vector into chunks of size \code{by} (default is 9).
 The resulting list contains vectors of the specified chunk size or smaller.
 }

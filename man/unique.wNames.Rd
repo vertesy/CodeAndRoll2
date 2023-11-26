@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{unique.wNames}
 \alias{unique.wNames}
-\title{Get the unique elements, keep their names}
+\title{Unique elements}
 \usage{
 \method{unique}{wNames}(x)
 }
@@ -10,5 +10,5 @@
 \item{x}{A vector with names}
 }
 \description{
-Get the unique elements, keep their names
+Get the unique elements of a vector, keep their names
 }

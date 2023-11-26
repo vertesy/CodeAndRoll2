@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{movingAve}
 \alias{movingAve}
-\title{movingAve}
+\title{Moving / rolling average}
 \usage{
 movingAve(x, oneSide = 5)
 }

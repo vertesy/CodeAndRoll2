@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{symdiff}
 \alias{symdiff}
-\title{Quasy symmetric difference of any number of vectors.}
+\title{Symmetric difference}
 \usage{
 symdiff(x, y, ...)
 }
@@ -17,7 +17,7 @@ symdiff(x, y, ...)
 A list of vectors, each of which contains the elements that are only present in that vector and not in any of the other vectors.
 }
 \description{
-Quasy symmetric difference of any number of vectors.
+Quasi symmetric difference of any number of vectors.
 }
 \examples{
 x <- c(1, 2, 3, 4, 5)

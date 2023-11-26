@@ -14,7 +14,7 @@ merge_1col_dfs_by_rn(list_of_dfs, FILLwith = 0, columnUSE = 1)
 \item{columnUSE}{column index in both. 1 by default.}
 }
 \description{
-merge_1col_dfs_by_rn
+A function that merges single-column data frames based on rownames.
 }
 \examples{
 merge_1col_dfs_by_rn()

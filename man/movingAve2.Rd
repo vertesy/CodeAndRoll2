@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{movingAve2}
 \alias{movingAve2}
-\title{Calculates the moving / rolling average of a numeric vector, using \code{filter()}.}
+\title{Moving / rolling average (v2, filter)}
 \usage{
 movingAve2(x, n = 5)
 }

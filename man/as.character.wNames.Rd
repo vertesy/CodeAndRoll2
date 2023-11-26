@@ -10,5 +10,6 @@
 \item{vec}{input vector}
 }
 \description{
-Converts your input vector into a character vector, and puts the original character values into the names of the new vector, unless it already has names.
+Converts your input vector into a character vector, and puts the original
+character values into the names of the new vector, unless it already has names.
 }
