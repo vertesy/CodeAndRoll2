@@ -6,14 +6,6 @@ Packaged version of the core functionalities (vector, matrix and list manipulati
 
 Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [Seurat.utils](https://github.com/vertesy/Seurat.utils).
 
-
-
-*In 2021, function libraries got reorganized as below:*
-
-<img width="1005" alt="R-package Tree" src="https://user-images.githubusercontent.com/5101911/143560128-065d8a49-0283-4a3a-9448-540fa424d0ef.png">
-
-
-
 CodeAndRoll2 depends on:
 
 - [Stringendo](https://github.com/vertesy/Stringendo)
@@ -27,9 +19,7 @@ CodeAndRoll2 depends on:
 - [Seurat.utils](https://github.com/vertesy/Seurat.utils)
 - [Seurat.pipeline](https://github.com/vertesy/Seurat.pipeline)
 
-
-
-<br><br>
+<br>
 
 ## Installation
 
@@ -69,7 +59,62 @@ source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRol
 
 <br>
 
-=======
+----------------------------------------------------------------------------------------------------
+
+## Function relationships
+ > (of connected functions)
+
+ ```mermaid
+ flowchart LR 
+
+  zigzagger(zigzagger) --> intermingle2vec(intermingle2vec)
+  which_names_grep(which_names_grep) --> grepv(grepv)
+  table_fixed_categories(table_fixed_categories) --> pc_TRUE(pc_TRUE)
+  symdiff.ls(symdiff.ls) --> symdiff(symdiff)
+  rowSEM(rowSEM) --> sem(sem)
+  rowGeoMeans(rowGeoMeans) --> geomean(geomean)
+  rowCV(rowCV) --> cv(cv)
+  movingSEM(movingSEM) --> sem(sem)
+  merge_numeric_df_by_rn(merge_numeric_df_by_rn) --> symdiff(symdiff)
+  merge_ls_of_named_vec_as_df_cols(merge_ls_of_named_vec_as_df_cols) --> unlapply(unlapply)
+  merge_dfs_by_rn(merge_dfs_by_rn) --> idim(idim)
+  merge_1col_dfs_by_rn(merge_1col_dfs_by_rn) --> union.ls(union.ls)
+  median_normalize(median_normalize) --> colMedians(colMedians)
+  mdlapply2df(mdlapply2df) --> arr.of.lists.2.df(arr.of.lists.2.df)
+  mdlapply2df(mdlapply2df) --> copy.dimension.and.dimnames(copy.dimension.and.dimnames)
+  mdlapply(mdlapply) --> copy.dimension.and.dimnames(copy.dimension.and.dimnames)
+  ls2categvec(ls2categvec) --> unlapply(unlapply)
+  list2fullDF.presence(list2fullDF.presence) --> matrix.fromNames(matrix.fromNames)
+  list2fullDF.byNames(list2fullDF.byNames) --> matrix.fromNames(matrix.fromNames)
+  list.2.replicated.name.vec(list.2.replicated.name.vec) --> unlapply(unlapply)
+  intermingle.cbind(intermingle.cbind) --> matrix.fromNames(matrix.fromNames)
+  intermingle.cbind(intermingle.cbind) --> intermingle2vec(intermingle2vec)
+  intermingle.cbind(intermingle.cbind) --> symdiff(symdiff)
+  intermingle.cbind(intermingle.cbind) --> idim(idim)
+  imovingSEM(imovingSEM) --> sem(sem)
+  idimnames(idimnames) --> idim(idim)
+  getRows(getRows) --> which_names(which_names)
+  which_names(which_names) --> as.logical.wNames(as.logical.wNames)
+  getCols(getCols) --> which_names(which_names)
+  getCols(getCols) --> symdiff(symdiff)
+  fix_tibble_lists(fix_tibble_lists) --> get_col_types(get_col_types)
+  df.remove.empty.rows.and.columns(df.remove.empty.rows.and.columns) --> pc_TRUE(pc_TRUE)
+  df.remove.empty.rows.and.columns(df.remove.empty.rows.and.columns) --> idim(idim)
+  sem(sem) --> na.omit.strip(na.omit.strip)
+  colSEM(colSEM) --> sem(sem)
+  colGeoMeans(colGeoMeans) --> geomean(geomean)
+  colCV(colCV) --> cv(cv)
+  as.list.df.by.row(as.list.df.by.row) --> zero.omit(zero.omit)
+  as.list.df.by.row(as.list.df.by.row) --> na.omit.strip(na.omit.strip)
+  as.list.df.by.col(as.list.df.by.col) --> zero.omit(zero.omit)
+  as.list.df.by.col(as.list.df.by.col) --> na.omit.strip(na.omit.strip)
+  any.duplicated.rownames.ls.of.df(any.duplicated.rownames.ls.of.df) --> any.duplicated(any.duplicated)
+ ```
+ *created by `convert_igraph_to_mermaid()`*
+
+
+
+----------------------------------------------------------------------------------------------------
 
 ## List of Functions (153) 
 
@@ -686,6 +731,14 @@ Updated: 2023/11/24 15:46
 - #### 153 `as.factor.numeric.deprecated()`
 
   as.factor.numeric.deprecated. Turn any vector into numeric categories as.numeric(as.factor(vec))
+
+
+
+
+
+*In 2021, function libraries got reorganized as below:*
+
+<img width="1005" alt="R-package Tree" src="https://user-images.githubusercontent.com/5101911/143560128-065d8a49-0283-4a3a-9448-540fa424d0ef.png">
 
 
 
