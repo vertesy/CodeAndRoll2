@@ -785,33 +785,40 @@ zigzagger <- function(vec = 1:9) {
 
 
 # _________________________________________________________________________________________________
-#' @title Formats a sequence of numbers with zeropadding.
-#' @description
-#' @param x The starting number.
-#' @param y The ending number.
-#' @param zeropadding Whether to use zeropadding (default: TRUE).
-#' @param pad_length The length of the padded numbers (default: floor(log10(max(abs(x), abs(y)))) + 1).
-#' @return A vector of formatted numbers.
-#' @seealso
-#'  \code{\link[stringr]{str_pad}}
+#' @title Formats a Sequence of Numbers with Zero Padding
+#'
+#' @description This function generates a sequence of numbers between two specified values,
+#' optionally padding them with leading zeros to a specified length. It is useful
+#' for creating numeric sequences with consistent character lengths.
+#' @param x The starting number of the sequence. Default: 1.
+#' @param y The ending number of the sequence. Default: 100.
+#' @param zeropadding Logical; whether to pad numbers with zeros. Default: TRUE.
+#' @param pad_length The length of padding for the numbers. Default: Calculated as
+#' floor(log10(max(abs(x), abs(y)))) + 1.
+#' @return A vector of formatted numbers, with or without zero padding.
+#' @seealso \code{\link[stringr]{str_pad}}
 #' @export
 #' @examples numerate(1, 122)
 #' @importFrom stringr str_pad
+numerate <- function(x = 1, y = 100, zeropadding = TRUE,
+                     pad_length = floor(log10(max(abs(x), abs(y)))) + 1) {
 
-numerate <- function(x = 1, y = 100, zeropadding = TRUE
-                     , pad_length = floor(log10(max(abs(x), abs(y)))) + 1) {
-
-  # Check the arguments
-  if (x > y) stop("x must be less than or equal to y")
+  # Input argument assertions
+  stopifnot(is.numeric(x), is.numeric(y),
+            x <= y,
+            is.logical(zeropadding), is.numeric(pad_length)
+            , pad_length > 0)
 
   # Create the sequence of numbers
   z = x:y
 
-  # Pad the numbers with zeros
-  if (zeropadding) z = stringr::str_pad(z, pad = 0, width = pad_length)
+  # Pad the numbers with zeros if required
+  if (zeropadding) {
+    z = stringr::str_pad(z, pad = '0', width = pad_length)
+  }
+
   return(z)
 }
-
 
 
 
@@ -1845,7 +1852,7 @@ get_col_types <- function(df, print_it = T) {
 
 
 # _________________________________________________________________________________________________
-#' @titleConvert List Columns of a Tibble to String Vectors
+#' @title Convert List Columns of a Tibble to String Vectors
 #'
 #' @description This function identifies columns of type `list` in a tibble or data frame
 #' and converts them to string vectors.
