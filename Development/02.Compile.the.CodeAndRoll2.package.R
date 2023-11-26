@@ -79,11 +79,7 @@ warnings()
 }
 
 # Install your package ------------------------------------------------
-# # setwd(RepositoryDir)
 install(RepositoryDir, upgrade = F)
-
-# Install your package ------------------------------------------------
-devtools::install(RepositoryDir, upgrade = F)
 
 # Test if you can install from github ------------------------------------------------
 pak::pkg_install("vertesy/CodeAndRoll2")
