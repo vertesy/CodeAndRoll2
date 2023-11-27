@@ -5,9 +5,8 @@ Authors@R:
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
 Description: CodeAndRoll2 is a set of more than >130 productivity
-    functions. Used by MarkdownReports, ggExpress, SeuratUtils.  Packaged
-    version of the core functionalities (vector, matrix and list
-    manipulations; math) of the formerly used CodeAndRoll (v1).
+    functions for vector, matrix and list manipulations and math. Used by
+    MarkdownReports, ggExpress, SeuratUtils, etc.
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/CodeAndRoll2/issues
 Depends: 
@@ -25,6 +24,6 @@ Imports:
     sm,
     stringr
 Encoding: UTF-8
-Packaged: 2023-11-26 15:43:34.17977
+Packaged: 2023-11-27 16:52:00.498744
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

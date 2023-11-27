@@ -1,12 +1,11 @@
 ######################################################################################################
-# Create_the_PackageTools_Package.R
+# Create_the_CodeAndRoll2_Package.R
 ######################################################################################################
-# source("~/GitHub/Packages/PackageTools/Development/Create_the_PackageTools_Package.R")
-# rm(list = ls(all.names = TRUE));
-try(dev.off(), silent = TRUE)
+# source("~/GitHub/Packages/CodeAndRoll2/Development/Create_the_CodeAndRoll2_Package.R")
+# rm(list = ls(all.names = TRUE)); try(dev.off(), silent = TRUE)
 
 # Functions ------------------------
-repository.dir <- "~/GitHub/Packages/PackageTools"
+repository.dir <- "~/GitHub/Packages/CodeAndRoll2"
 config.path <- file.path(repository.dir, "Development/config.R")
 
 "TAKE A LOOK AT"
