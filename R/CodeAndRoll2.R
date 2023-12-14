@@ -659,17 +659,19 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
 #' @description How many entries are duplicated?.
 #' @param vec input vector
 #' @param summarize Print summary? Default: TRUE
+#' @param max.shown Print first X elements. Default: 25
 #' @export any.duplicated
 
-any.duplicated <- function(vec, summarize = TRUE) {
+any.duplicated <- function(vec, summarize = TRUE, max.shown = 25) {
   y <- sum(duplicated(vec))
   if (summarize & y) {
     x <- table(vec)
-    x <- x[x > 1] - 1
-    print("The following elements have  > 1 extra copies:")
-    print(x) # table formatting requires a separate entry
+    x <- sort.decreasing(x[x > 1])
+
+    print(paste("The following", y, "elements have  > 1 extra copies: (max", max.shown, "shown.)"))
+    print(head(x, n = max.shown))
   }
-  return(y)
+  invisible(y)
 }
 
 
