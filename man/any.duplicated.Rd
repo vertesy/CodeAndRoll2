@@ -4,12 +4,14 @@
 \alias{any.duplicated}
 \title{any.duplicated}
 \usage{
-\method{any}{duplicated}(vec, summarize = TRUE)
+\method{any}{duplicated}(vec, summarize = TRUE, max.shown = 25)
 }
 \arguments{
 \item{vec}{input vector}
 
 \item{summarize}{Print summary? Default: TRUE}
+
+\item{max.shown}{Print first X elements. Default: 25}
 }
 \description{
 How many entries are duplicated?.

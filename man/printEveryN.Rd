@@ -4,12 +4,12 @@
 \alias{printEveryN}
 \title{printEveryN}
 \usage{
-printEveryN(iterator = i, N = 1000)
+printEveryN(i = i, N = 1000)
 }
 \arguments{
-\item{iterator}{iterator that increases (in a loop). Default: i.}
-
 \item{N}{print Every N}
+
+\item{iterator}{Current iteration of the loop. Default: i.}
 }
 \description{
 Report iterator value at every e.g. 1000
