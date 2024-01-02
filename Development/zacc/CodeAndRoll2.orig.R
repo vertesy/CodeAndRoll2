@@ -264,12 +264,12 @@ col2named.vec.tbl <- function(tbl.2col) { # Convert a 2-column table(data frame)
 }
 
 
-iterBy.over <- function(yourvec, by = 9) { # Iterate over a vector by every N-th element.
+split_vec_to_list_by_N <- function(yourvec, by = 9) { # Iterate over a vector by every N-th element.
   steps = ceiling(length(yourvec)/by)
   lsX = split(yourvec, sort(rank(yourvec) %% steps))
   names(lsX) = 1:length(lsX)
   lsX
-} # for (i in iterBy.over(yourvec = x)) { print(i) }
+} # for (i in split_vec_to_list_by_N(yourvec = x)) { print(i) }
 
 zigzagger <- function(vec = 1:9) { # mix entries so that they differ
   intermingle2vec(vec, rev(vec))[1:length(vec)]
