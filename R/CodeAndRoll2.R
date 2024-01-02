@@ -949,6 +949,52 @@ sumBySameName <- function(namedVec) {
 
 
 # _________________________________________________________________________________________________
+#' @title Check Minimum Overlap Between Two Vectors
+#'
+#' @description Checks if the overlap between two character vectors is at least a specified
+#' percentage of the shorter vector. Stops execution with an error if the condition is not met.
+#'
+#' @param x First character vector.
+#' @param y Second character vector.
+#' @param min_overlap Minimum required overlap as a fraction of the shorter vector's length.
+#' @param stop_it Use stop(), else warning()
+#' @param verbose verbose
+#' @return Invisible TRUE if the overlap is sufficient, otherwise stops with an error.
+#' @export
+checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = TRUE) {
+  stopifnot(is.character(x), is.character(y), is.numeric(min_overlap), min_overlap >= 0)
+
+  namez <- c(substitute(x), substitute(y))
+  lengths <- c(length(x), length(y))
+
+  min_len <- min(lengths)
+  max_len <- max(lengths)
+
+  overlap_len <- length(intersect(x, y))
+
+  required_overlap <- min_len * min_overlap
+
+  if (verbose) {
+    iprint("Overlap is", overlap_len)
+    iprint(percentage_formatter(overlap_len/min_len), "or", min_len, "of", namez[which.min(lengths)])
+    iprint(percentage_formatter(overlap_len/max_len), "or", max_len, "of", namez[which.max(lengths)])
+  }
+
+  pass <- overlap_len > required_overlap
+  if (!pass) {
+    iprint(substitute(x), "-" ,head(x))
+    iprint(substitute(y), "-", head(y))
+
+    msg <- "Minimum overlap condition not met."
+    if (stop_it) stop(msg) else warning(msg, immediate. = TRUE)
+  }
+  invisible(pass)
+
+}
+
+
+
+# _________________________________________________________________________________________________
 ### Vector filtering ____________________________________________________________ ----
 
 #' @title which_names
