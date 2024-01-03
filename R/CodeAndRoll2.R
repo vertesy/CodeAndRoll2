@@ -1,6 +1,6 @@
-######################################################################
-# CodeAndRoll2 - A collection of custom R functions
-######################################################################
+#####################################################################_
+# CodeAndRoll2 - A collection of custom R functions ----
+#####################################################################_
 # devtools::load_all("~/GitHub/Packages/CodeAndRoll2")
 # devtools::document("~/GitHub/Packages/CodeAndRoll2")
 # source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.R')
@@ -11,8 +11,29 @@
 ### CHAPTERS:
 
 # _________________________________________________________________________________________________
-## Create and check variables ____________________________________________________________ ----
+## Assertions ____________________________________________________________ ----
 
+
+# ______________________________________________________________________________________________________________________________
+#' @title Stop Execution If Condition is True
+#'
+#' @description This function stops the execution of the script if the provided condition evaluates to TRUE.
+#' It is the complement of the `stopifnot()` function and is used for asserting conditions where
+#' an error should be thrown if the condition is TRUE, rather than FALSE.
+#' @param condition A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.
+#' @param message An optional error message to display if the condition is TRUE.
+#'
+#' @examples a <- 1
+#' stopif(a != 1, message = "A is 1")
+#' @export
+stopif <- function(condition, message = 'Condition is TRUE.') {
+  if (isTRUE(condition)) stop(message)
+}
+
+
+
+# _________________________________________________________________________________________________
+## Create and check variables ____________________________________________________________ ----
 
 #' @title vec.fromNames
 #' @description Create a vector from a vector of names.
@@ -658,8 +679,8 @@ flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) {
 #' @param decreasing Logical. Whether to sort in decreasing order.
 #' @param ... Additional arguments passed to `mixedsort()`.
 #' @return A sorted vector or list.
-#' @export
 #' @importFrom gtools mixedsort
+#' @export
 sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
   xx <- names(vec_or_list)
   names(xx) <- 1:length(vec_or_list)
@@ -676,7 +697,6 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
 #' @param summarize Print summary? Default: TRUE
 #' @param max.shown Print first X elements. Default: 25
 #' @export any.duplicated
-
 any.duplicated <- function(vec, summarize = TRUE, max.shown = 25) {
   y <- sum(duplicated(vec))
   if (summarize & y) {
@@ -686,7 +706,7 @@ any.duplicated <- function(vec, summarize = TRUE, max.shown = 25) {
     print(paste("The following", y, "elements have  > 1 extra copies: (max", max.shown, "shown.)"))
     print(head(x, n = max.shown))
   }
-  invisible(y)
+  invisible(y>0)
 }
 
 
