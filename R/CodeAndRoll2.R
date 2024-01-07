@@ -14,24 +14,6 @@
 ## Assertions ____________________________________________________________ ----
 
 
-# ______________________________________________________________________________________________________________________________
-#' @title Stop Execution If Condition is True
-#'
-#' @description This function stops the execution of the script if the provided condition evaluates to TRUE.
-#' It is the complement of the `stopifnot()` function and is used for asserting conditions where
-#' an error should be thrown if the condition is TRUE, rather than FALSE.
-#' @param condition A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.
-#' @param message An optional error message to display if the condition is TRUE.
-#'
-#' @examples a <- 1
-#' stopif(a != 1, message = "A is 1")
-#' @export
-stopif <- function(condition, message = 'Condition is TRUE.') {
-  if (isTRUE(condition)) stop(message)
-}
-
-
-
 # _________________________________________________________________________________________________
 ## Create and check variables ____________________________________________________________ ----
 
