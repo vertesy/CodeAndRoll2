@@ -36,14 +36,32 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 
 
 # _________________________________________________________________________________________________
-#' @title list.fromNames
-#' @description create list from a vector with the names of the elements.
-#' @param name_vec A vector of names, Default: LETTERS[1:5]
-#' @param fill The value to fill the new vector, Default: NaN
+#' Create a Named List from a Character Vector of Names or a Named Object
+
+#' @title Create Named List from Names
+#' @description This function takes a character vector of names and creates a list where each
+#' element is named according to the character vector and filled with a specified value.
+#' @param x A character vector of names, with a default of the first five letters of the alphabet.
+#' @param fill The value used to fill the elements of the list, with a default of `NaN`.
+#'
+#' @return A named list with elements filled with the specified value.
+#' @examples
+#' list.fromNames()  # Default behavior with LETTERS[1:5] and NaN
 #' @export
-list.fromNames <- function(name_vec = LETTERS[1:5], fill = NaN) {
-  liszt <- as.list(rep(fill, length(name_vec)))
-  names(liszt) <- name_vec
+list.fromNames <- function(x = LETTERS[1:5], fill = NaN) {
+  liszt <- as.list(rep(fill, length(x)))
+
+  names(liszt) <-
+    if (is.character(x)) {
+      x
+    } else {
+      if (!is.null(names(x))) {
+        names(x)
+      } else {
+        stop("Input is nor a chacter vector, nor an object with names")
+      }
+    }
+  message(kollapse("List of", length(liszt), "| names:", head(names(liszt)), "...", collapseby =  " "))
   return(liszt)
 }
 

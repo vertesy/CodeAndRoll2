@@ -2,15 +2,25 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{list.fromNames}
 \alias{list.fromNames}
-\title{list.fromNames}
+\title{Create Named List from Names}
 \usage{
-list.fromNames(name_vec = LETTERS[1:5], fill = NaN)
+list.fromNames(x = LETTERS[1:5], fill = NaN)
 }
 \arguments{
-\item{name_vec}{A vector of names, Default: LETTERS\link{1:5}}
+\item{x}{A character vector of names, with a default of the first five letters of the alphabet.}
 
-\item{fill}{The value to fill the new vector, Default: NaN}
+\item{fill}{The value used to fill the elements of the list, with a default of \code{NaN}.}
+}
+\value{
+A named list with elements filled with the specified value.
 }
 \description{
-create list from a vector with the names of the elements.
+This function takes a character vector of names and creates a list where each
+element is named according to the character vector and filled with a specified value.
+}
+\details{
+Create a Named List from a Character Vector of Names or a Named Object
+}
+\examples{
+list.fromNames()  # Default behavior with LETTERS[1:5] and NaN
 }
