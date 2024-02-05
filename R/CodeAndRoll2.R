@@ -1120,7 +1120,6 @@ zero.omit <- function(vec) {
 #' @return A string representing the percentage of true values in the logical vector.
 #'
 #' @export
-#'
 pc_TRUE <- function(
     logical_vector, percentify = TRUE, NumberAndPC = FALSE,
     NArm = TRUE, prefix = NULL, suffix = NULL, digitz = 3, ...) {
@@ -1141,6 +1140,51 @@ pc_TRUE <- function(
 
   return(out)
 }
+
+
+
+# _________________________________________________________________________________________________
+#' @title Calculate Percentage Overlap Between Two Vectors
+#'
+#' @description Computes the percentage of overlap between two vectors based on the specified basis of calculation.
+#'
+#' @param x The first vector for overlap calculation.
+#' @param y The second vector for overlap calculation.
+#' @param basis A character string specifying the basis for calculating the percentage overlap.
+#' Can be "x" for the length of `x`, "y" for the length of `y`, or "sum" for the sum
+#' of lengths of both `x` and `y`. Default is "x".
+#'
+#' @return The percentage of overlap between `x` and `y` based on the specified basis.
+#' @examples x= 1:5; y=3:8;  pc_overlap(x, y, basis = "x")
+#'
+#' @export
+
+pc_overlap <- function(x, y, basis = "x", prefix = NULL, suffix = NULL, ...) {
+
+  # Assertions to ensure input validity
+  stopifnot(is.character(basis),
+            basis %in% c("x", "y", "sum"),
+            is.vector(x),
+            is.vector(y))
+
+  # Calculate intersection
+  overlap <- length(intersect(x, y))
+
+  # Calculate denominator based on the basis argument
+  denominator <- switch(basis,
+                        "x" = length(x),
+                        "y" = length(y),
+                        "sum" = length(x) + length(y))
+
+  # Calculate and return percent overlap
+  percent_overlap <- Stringendo::percentage_formatter(x = overlap / denominator)
+  if (is.null(suffix)) suffix <- kppws("of", substitute(basis), "is found in both vectors." ) }
+text <- kppws(prefix, percent_overlap, suffix)
+message(text)
+
+return(overlap / denominator)
+}
+
 
 
 
