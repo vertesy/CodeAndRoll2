@@ -1178,11 +1178,11 @@ pc_overlap <- function(x, y, basis = "x", prefix = NULL, suffix = NULL, ...) {
 
   # Calculate and return percent overlap
   percent_overlap <- Stringendo::percentage_formatter(x = overlap / denominator)
-  if (is.null(suffix)) suffix <- kppws("of", substitute(basis), "is found in both vectors." ) }
-text <- kppws(prefix, percent_overlap, suffix)
-message(text)
+  if (is.null(suffix)) suffix <- kppws("of", substitute(basis), "is found in both vectors." )
+  text <- kppws(prefix, percent_overlap, suffix)
+  message(text)
 
-return(overlap / denominator)
+  return(overlap / denominator)
 }
 
 
