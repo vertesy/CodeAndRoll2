@@ -2,15 +2,25 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{na.omit.mat}
 \alias{na.omit.mat}
-\title{na.omit.mat}
+\title{Omit Rows with NA Values from a Matrix}
 \usage{
 \method{na.omit}{mat}(mat, any = TRUE)
 }
 \arguments{
-\item{mat}{In put matrix.}
+\item{mat}{Input matrix from which rows with NAs are to be omitted.}
 
-\item{any}{PARAM_DESCRIPTION, Default: TRUE}
+\item{any}{Logical; if TRUE (default), removes rows containing any NA values.
+If FALSE, removes only rows completely filled with NA values.}
+}
+\value{
+A matrix with rows containing NA values omitted according to the specified criteria.
 }
 \description{
-Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
+Removes rows from a matrix based on the presence of NA values. Can remove rows with any NA values or only those completely filled with NAs.
+}
+\examples{
+mat <- matrix(c(1, NA, 3, 4, 5, NA, NA, NA, 9), ncol = 3)
+na.omit.mat(mat) # Default, any = TRUE
+na.omit.mat(mat, any = FALSE)
+
 }

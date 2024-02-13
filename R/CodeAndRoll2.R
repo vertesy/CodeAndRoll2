@@ -1354,6 +1354,46 @@ rowMutliply <- function(mat, vec) {
 row.Zscore <- function(x) t(scale(t(x)))
 
 
+# _________________________________________________________________________________________________
+#' @title TPM_normalize
+#' @description Normalize each column to 1 million.
+#' @param mat Numeric input matrix with the distribution.
+#' @param SUM PARAM_DESCRIPTION, Default: 1e+06
+#' @export
+TPM_normalize <- function(mat, SUM = 1e6) {
+  cs <- colSums(mat, na.rm = TRUE)
+  norm_mat <- (t(t(mat) / cs)) * SUM
+  return(norm_mat)
+}
+
+
+
+# _________________________________________________________________________________________________
+#' @title median_normalize
+#' @description Normalize each column to the median of all the column-sums.
+#' @param mat Numeric input matrix with the distribution.
+#' @export
+median_normalize <- function(mat) {
+  cs <- colSums(mat, na.rm = TRUE)
+  norm_mat <- (t(t(mat) / cs)) * median(cs)
+  iprint("colMedians: ", head(signif(colMedians(norm_mat), digits = 3)))
+  return(norm_mat)
+}
+
+
+
+# _________________________________________________________________________________________________
+#' @title mean_normalize
+#' @description Normalize each column to the median of the columns.
+#' @param mat Numeric input matrix.
+#' @export
+mean_normalize <- function(mat) {
+  cs <- colSums(mat, na.rm = TRUE)
+  norm_mat <- (t(t(mat) / cs)) * mean(cs)
+  iprint("colMeans: ", head(signif(colMeans(norm_mat))))
+  return(norm_mat)
+}
+
 
 
 # _________________________________________________________________________________________________
@@ -1597,65 +1637,9 @@ colQuantile <- function(x, na.rm = TRUE, ...) {
 
 
 
-# _________________________________________________________________________________________________
-# _________________________________________________________________________________________________
-# _________________________________________________________________________________________________
-#' @title TPM_normalize
-#' @description Normalize each column to 1 million.
-#' @param mat Numeric input matrix with the distribution.
-#' @param SUM PARAM_DESCRIPTION, Default: 1e+06
-#' @export
-TPM_normalize <- function(mat, SUM = 1e6) {
-  cs <- colSums(mat, na.rm = TRUE)
-  norm_mat <- (t(t(mat) / cs)) * SUM
-  return(norm_mat)
-}
-
-
-
-# _________________________________________________________________________________________________
-#' @title median_normalize
-#' @description Normalize each column to the median of all the column-sums.
-#' @param mat Numeric input matrix with the distribution.
-#' @export
-median_normalize <- function(mat) {
-  cs <- colSums(mat, na.rm = TRUE)
-  norm_mat <- (t(t(mat) / cs)) * median(cs)
-  iprint("colMedians: ", head(signif(colMedians(norm_mat), digits = 3)))
-  return(norm_mat)
-}
-
-
-
-# _________________________________________________________________________________________________
-#' @title mean_normalize
-#' @description Normalize each column to the median of the columns.
-#' @param mat Numeric input matrix.
-#' @export
-mean_normalize <- function(mat) {
-  cs <- colSums(mat, na.rm = TRUE)
-  norm_mat <- (t(t(mat) / cs)) * mean(cs)
-  iprint("colMeans: ", head(signif(colMeans(norm_mat))))
-  return(norm_mat)
-}
-
 
 # _________________________________________________________________________________________________
 ## Matrix manipulations ____________________________________________________________ ----
-
-
-#' @title rotate
-#' @description Rotate a matrix 90 degrees.
-#' @param x Numeric input matrix.
-#' @param clockwise PARAM_DESCRIPTION, Default: TRUE
-#' @export
-rotate <- function(x, clockwise = TRUE) {
-  if (clockwise) {
-    t(apply(x, 2, rev)) # first reverse, then transpose, it's the same as rotate 90 degrees
-  } else {
-    apply(t(x), 2, rev)
-  } # first transpose, then reverse, it's the same as rotate -90 degrees:
-}
 
 
 
@@ -1689,31 +1673,6 @@ sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) {
 }
 
 
-
-# _________________________________________________________________________________________________
-#' @title rowNameMatrix
-#' @description Create a copy of your matrix, where every entry is replaced by the corresponding
-#' row name. Useful if you want to color by row name in a plot (where you have different number of
-#'  NA-values in each row).
-#' @param mat_w_dimnames A named matrix to copy from.
-#' @export
-rowNameMatrix <- function(mat_w_dimnames) {
-  matrix(rep(rownames(mat_w_dimnames), ncol(mat_w_dimnames)), nrow = nrow(mat_w_dimnames), ncol = ncol(mat_w_dimnames))
-}
-
-
-
-# _________________________________________________________________________________________________
-#' @title colNameMatrix
-#' @description Create a copy of your matrix, where every entry is replaced by the corresponding
-#' column name. Useful if you want to color by column name in a plot (where you have different
-#' number of NA-values in each column).
-#' @param mat_w_dimnames A named matrix to copy from.
-#' @export
-colNameMatrix <- function(mat_w_dimnames) {
-  x <- rep(colnames(mat_w_dimnames), nrow(mat_w_dimnames))
-  t(matrix(x, nrow = ncol(mat_w_dimnames), ncol = nrow(mat_w_dimnames)))
-}
 
 
 
@@ -1999,113 +1958,6 @@ merge_ls_of_named_vec_as_df_cols <- function(
 }
 
 
-
-
-# _________________________________________________________________________________________________
-#' @title remove.na.rows
-#' @description Cols have to be a vector of numbers corresponding to columns.
-#' @param mat In put matrix.
-#' @param cols PARAM_DESCRIPTION, Default: 1:NCOL(mat)
-#' @export
-remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
-  mat2 <- mat[, cols]
-  idxOK <- which(rowSums(!apply(mat2, 2, is.na)) == NCOL(mat))
-  mat[idxOK, ]
-}
-
-
-
-# _________________________________________________________________________________________________
-#' @title remove.na.cols
-#' @description Cols have to be a vector of numbers corresponding to columns.
-#' @param mat In put matrix.
-#' @export
-remove.na.cols <- function(mat) {
-  idxOK <- !is.na(colSums(mat))
-  return(mat[, idxOK])
-}
-
-
-
-# _________________________________________________________________________________________________
-#' @title na.omit.mat
-#' @description Omit rows with NA values from a matrix. Rows with any, or full of NA-s.
-#' @param mat In put matrix.
-#' @param any PARAM_DESCRIPTION, Default: TRUE
-#' @export na.omit.mat
-na.omit.mat <- function(mat, any = TRUE) {
-  mat <- as.matrix(mat)
-  stopifnot(length(dim(mat)) == 2)
-  if (any) {
-    outMat <- mat[!is.na(rowSums(mat)), ]
-  } else {
-    outMat <- mat[(rowSums(is.na(mat)) <= ncol(mat)), ]
-  } # keep rows not full with NA
-  outMat
-}
-
-
-# _________________________________________________________________________________________________
-#' @title Remove empty rows and columns from a data frame.
-#'
-#' @description This function takes a data frame and a threshold value, and removes all rows and columns that contain only zeros or the threshold value.
-#'
-#' @param df A data frame.
-#' @param suffix A suffix to add to the plot titles.
-#' @param rows The name of the variable that will store the fraction of rows that were removed.
-#' @param cols The name of the variable that will store the fraction of columns that were removed.
-#' @param thr.cell.empty The threshold value below a cell is considered "empty".
-#' @param plot_stats Whether to plot the fraction of rows and columns that were removed.
-#' @param ... Additional arguments to pass to `qbarplot`.
-#'
-#' @return A data frame with the empty rows and columns removed.
-#' @export
-
-df.remove.empty.rows.and.columns <- function(
-    df = UVI.assignment.filtered.3.HF,
-    suffix = substitute(df),
-    rows = "rows",
-    cols = "cols",
-    thr.cell.empty = 0,
-    plot_stats = T,
-    ...) {
-  # Create a boolean vector that indicates whether each cell is non-empty
-  df.boolean <- (df != thr.cell.empty)
-  # view.head(df.boolean)
-
-  # Calculate the number of non-empty rows and columns
-  rsx <- rowSums(df.boolean)
-  csx <- colSums(df.boolean)
-
-  # Calculate the fraction of rows and columns that were removed
-  s1 <- pc_TRUE(csx == 0, suffix = paste0(cols, " are empty/removed."), NumberAndPC = T)
-  s2 <- pc_TRUE(rsx == 0, suffix = paste0(rows, " are empty/removed."), NumberAndPC = T)
-  print(s1)
-  print(s2)
-
-  # Plot the fraction of rows and columns that were removed, if requested
-  if (plot_stats) {
-    Removal.Dimensions <- c(
-      "rows" = pc_TRUE(rsx == 0, percentify = F),
-      "cols" = pc_TRUE(csx == 0, percentify = F)
-    )
-    names(Removal.Dimensions) <- c(rows, cols)
-    qbarplot(Removal.Dimensions,
-      label = percentage_formatter(Removal.Dimensions),
-      suffix = suffix,
-      xlab.angle = 45, xlab = "",
-      ylim = 0:1, ylab = "Fractions removed",
-      ...
-    )
-  }
-
-  # Remove the empty rows and columns
-  df.filt <- df[rsx > 0, csx > 0]
-  idim(df.filt)
-  return(df.filt)
-}
-
-
 # _________________________________________________________________________________________________
 #' @title Extract and Display Column Types of a Data Frame or Tibble
 #'
@@ -2186,6 +2038,185 @@ fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by
   stopifnot(is.data.frame(df))
 
   return(df)
+}
+
+# _________________________________________________________________________________________________
+#' @title Rotate a Matrix by 90 Degrees
+#'
+#' @description Rotates a given numeric matrix 90 degrees in a specified direction. The rotation
+#' can be either clockwise or counterclockwise, determined by the `clockwise` parameter.
+#'
+#' @param x A numeric matrix that is to be rotated.
+#' @param clockwise Logical; if TRUE (default), rotates the matrix 90 degrees clockwise.
+#'
+#' @return A numeric matrix rotated 90 degrees in the specified direction.
+#'
+#' @examples
+#' # Define a 3x3 matrix
+#' matrix_original <- matrix(1:9, nrow = 3)
+#'
+#' # Rotate the matrix clockwise
+#' rotated_clockwise <- rotate(matrix_original, TRUE)
+#'
+#' # Rotate the matrix counterclockwise
+#' rotated_counterclockwise <- rotate(matrix_original, FALSE)
+#'
+#' @export
+rotate_matrix <- function(x, clockwise = TRUE) {
+  if (clockwise) {
+    t(apply(x, 2, rev)) # first reverse, then transpose, it's the same as rotate 90 degrees
+  } else {
+    apply(t(x), 2, rev) # first transpose, then reverse, it's the same as rotate -90 degrees
+  }
+}
+
+
+# _________________________________________________________________________________________________
+## Matrix filtering ____________________________________________________________ ----
+
+
+#' @title Omit Rows with NA Values from a Matrix
+#'
+#' @description Removes rows from a matrix based on the presence of NA values. Can remove rows with any NA values or only those completely filled with NAs.
+#'
+#' @param mat Input matrix from which rows with NAs are to be omitted.
+#' @param any Logical; if TRUE (default), removes rows containing any NA values.
+#' If FALSE, removes only rows completely filled with NA values.
+#'
+#' @return A matrix with rows containing NA values omitted according to the specified criteria.
+#'
+#' @examples
+#' mat <- matrix(c(1, NA, 3, 4, 5, NA, NA, NA, 9), ncol = 3)
+#' na.omit.mat(mat) # Default, any = TRUE
+#' na.omit.mat(mat, any = FALSE)
+#'
+#' @export
+na.omit.mat <- function(mat, any = TRUE) {
+  mat <- as.matrix(mat)
+  stopifnot(length(dim(mat)) == 2)
+  if (any) {
+    outMat <- mat[!is.na(rowSums(mat)), ]
+  } else {
+    outMat <- mat[(rowSums(is.na(mat)) < ncol(mat)), ]
+  }
+  outMat
+}
+
+# _________________________________________________________________________________________________
+#' @title remove.na.rows
+#' @description Cols have to be a vector of numbers corresponding to columns.
+#' @param mat In put matrix.
+#' @param cols PARAM_DESCRIPTION, Default: 1:NCOL(mat)
+#' @export
+remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
+  mat2 <- mat[, cols]
+  idxOK <- which(rowSums(!apply(mat2, 2, is.na)) == NCOL(mat))
+  mat[idxOK, ]
+}
+
+
+
+# _________________________________________________________________________________________________
+#' @title remove.na.cols
+#' @description Cols have to be a vector of numbers corresponding to columns.
+#' @param mat In put matrix.
+#' @export
+remove.na.cols <- function(mat) {
+  idxOK <- !is.na(colSums(mat))
+  return(mat[, idxOK])
+}
+
+
+
+
+# _________________________________________________________________________________________________
+#' @title Remove empty rows and columns from a data frame.
+#'
+#' @description This function takes a data frame and a threshold value, and removes all rows and columns that contain only zeros or the threshold value.
+#'
+#' @param df A data frame.
+#' @param suffix A suffix to add to the plot titles.
+#' @param rows The name of the variable that will store the fraction of rows that were removed.
+#' @param cols The name of the variable that will store the fraction of columns that were removed.
+#' @param thr.cell.empty The threshold value below a cell is considered "empty".
+#' @param plot_stats Whether to plot the fraction of rows and columns that were removed.
+#' @param ... Additional arguments to pass to `qbarplot`.
+#'
+#' @return A data frame with the empty rows and columns removed.
+#' @export
+
+df.remove.empty.rows.and.columns <- function(
+    df = UVI.assignment.filtered.3.HF,
+    suffix = substitute(df),
+    rows = "rows",
+    cols = "cols",
+    thr.cell.empty = 0,
+    plot_stats = T,
+    ...) {
+  # Create a boolean vector that indicates whether each cell is non-empty
+  df.boolean <- (df != thr.cell.empty)
+  # view.head(df.boolean)
+
+  # Calculate the number of non-empty rows and columns
+  rsx <- rowSums(df.boolean)
+  csx <- colSums(df.boolean)
+
+  # Calculate the fraction of rows and columns that were removed
+  s1 <- pc_TRUE(csx == 0, suffix = paste0(cols, " are empty/removed."), NumberAndPC = T)
+  s2 <- pc_TRUE(rsx == 0, suffix = paste0(rows, " are empty/removed."), NumberAndPC = T)
+  print(s1)
+  print(s2)
+
+  # Plot the fraction of rows and columns that were removed, if requested
+  if (plot_stats) {
+    Removal.Dimensions <- c(
+      "rows" = pc_TRUE(rsx == 0, percentify = F),
+      "cols" = pc_TRUE(csx == 0, percentify = F)
+    )
+    names(Removal.Dimensions) <- c(rows, cols)
+    qbarplot(Removal.Dimensions,
+      label = percentage_formatter(Removal.Dimensions),
+      suffix = suffix,
+      xlab.angle = 45, xlab = "",
+      ylim = 0:1, ylab = "Fractions removed",
+      ...
+    )
+  }
+
+  # Remove the empty rows and columns
+  df.filt <- df[rsx > 0, csx > 0]
+  idim(df.filt)
+  return(df.filt)
+}
+
+
+
+# _________________________________________________________________________________________________
+## Create Special Matrices ____________________________________________________________ ----
+
+# _________________________________________________________________________________________________
+#' @title rowNameMatrix
+#' @description Create a copy of your matrix, where every entry is replaced by the corresponding
+#' row name. Useful if you want to color by row name in a plot (where you have different number of
+#'  NA-values in each row).
+#' @param mat_w_dimnames A named matrix to copy from.
+#' @export
+rowNameMatrix <- function(mat_w_dimnames) {
+  matrix(rep(rownames(mat_w_dimnames), ncol(mat_w_dimnames)), nrow = nrow(mat_w_dimnames), ncol = ncol(mat_w_dimnames))
+}
+
+
+
+# _________________________________________________________________________________________________
+#' @title colNameMatrix
+#' @description Create a copy of your matrix, where every entry is replaced by the corresponding
+#' column name. Useful if you want to color by column name in a plot (where you have different
+#' number of NA-values in each column).
+#' @param mat_w_dimnames A named matrix to copy from.
+#' @export
+colNameMatrix <- function(mat_w_dimnames) {
+  x <- rep(colnames(mat_w_dimnames), nrow(mat_w_dimnames))
+  t(matrix(x, nrow = ncol(mat_w_dimnames), ncol = nrow(mat_w_dimnames)))
 }
 
 
