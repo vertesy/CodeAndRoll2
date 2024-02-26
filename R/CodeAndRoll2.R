@@ -511,6 +511,7 @@ unique.wNames <- function(x) {
 as.numeric.wNames.character <- function(
     vec, verbose = TRUE,
     factor.to.character = TRUE, ...) {
+
   if (is.character(vec) | is.logical(vec)) {
     numerified_vec <- as.numeric(vec, ...)
   } else {
@@ -533,7 +534,7 @@ as.numeric.wNames.character <- function(
   } # else / is.character or is.logical
 
   if (is.null(names(vec))) {
-    warning("Input vector has no names!")
+    if (verbose) warning("Input vector has no names!")
   } else {
     names(numerified_vec) <- names(vec)
   } # else: has names
