@@ -2,15 +2,24 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{colDivide}
 \alias{colDivide}
-\title{colDivide}
+\title{Row-wise division of a matrix by a column vector}
 \usage{
-colDivide(mat, vec)
+colDivide(mat, vec = colSums(mat))
 }
 \arguments{
-\item{mat}{Numeric input matrix with the distribution.}
+\item{mat}{A numeric matrix where each row represents a distribution to be divided.}
 
-\item{vec}{Vector to divide by.}
+\item{vec}{A numeric vector whose elements are the divisors for each column of the matrix.
+The length of the vector must match the number of columns in the matrix. If not supplied,
+the default is to use the column sums of the matrix as divisors.}
+}
+\value{
+A matrix with the same dimensions as the input where each element in the original matrix
+has been divided by the corresponding element in the vector.
 }
 \description{
-Divide by column. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
+Each element of the matrix is divided by the corresponding element of the vector
+that matches the column of the matrix element. This is typically used to normalize data,
+for example, to scale values in each row by certain factors like totals or means. Soruce
+\url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}.
 }

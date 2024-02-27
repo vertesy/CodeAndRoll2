@@ -283,6 +283,19 @@ getCategories <- function(named_categ_vec) {
 # _________________________________________________________________________________________________
 ## Vector operations ____________________________________________________________ ----
 
+
+#' @title Count the number of unique values
+#'
+#' @description Count the number of unique values
+#' @param x vector
+#' @export
+nr.unique <- function(x) {
+  if (is.data.frame(x)) x <- x[[1]]
+  length(unique(x))
+}
+
+
+
 #' @title grep that returns the value of the match.
 #'
 #' @description grep returning the value. A character string containing a regular expression (or character string for fixed = TRUE) to be matched in the given character vector. Coerced by as.character to a character string if possible. If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values are allowed except for regexpr, gregexpr and regexec.
