@@ -2813,9 +2813,8 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 #' vector and not in any of the other vectors.
 #'
 #' @examples
-x <- c(1, 2, 3, 4, 5)
-y <- c(2, 4, 6, 8, 10)
-z <- NULL
+#' x <- c(1, 2, 3, 4, 5)
+#' y <- c(2, 4, 6, 8, 10)
 #' z <- c(3, 5, 7, 9, 11)
 #' symdiff(x, y, z)
 #'
