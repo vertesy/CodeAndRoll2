@@ -883,7 +883,6 @@ bottomN.dfCol <- function(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5
 #' @return A list where each element is a vector containing up to `by` elements from `vec`.
 #' @export
 split_vec_to_list_by_N <- function(vec = 1:27, by = 9) {
-  stopifnot(length(vec) >= by)
   n_groups <- ceiling(length(vec) / by)
   assignment <- gl(n_groups, by, length = length(vec))
   lsX <- split(x = vec, f = assignment)
