@@ -2808,21 +2808,25 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 #' @description Quasi symmetric difference of any number of vectors.
 #' @param x A vector.
 #' @param y A vector.
-#' @param ... Pass any other argument.
-#' @return A list of vectors, each of which contains the elements that are only present in that vector and not in any of the other vectors.
+#' @param z A vector.
+#' @return A list of vectors, each of which contains the elements that are only present in that
+#' vector and not in any of the other vectors.
 #'
 #' @examples
-#' x <- c(1, 2, 3, 4, 5)
-#' y <- c(2, 4, 6, 8, 10)
+x <- c(1, 2, 3, 4, 5)
+y <- c(2, 4, 6, 8, 10)
+z <- NULL
 #' z <- c(3, 5, 7, 9, 11)
 #' symdiff(x, y, z)
 #'
 #' @export
-symdiff <- function(x, y, ...) {
-  big.vec <- c(x, y, ...)
-  ls <- list(x, y, ...)
+symdiff <- function(x, y, z = NULL) {
+  big.vec <- c(unique(x), unique(y), unique(z))
+  # ls <- list(x, y, z)
+  ls <- Filter(function(l) !is.null(l), list(x, y, z))
   if (length(ls) > 2) {
-    print("# Not Mathematically correct, but logical for n>2 vectors: https://en.wikipedia.org/wiki/Symmetric_difference#Properties")
+    print("# Not Mathematically correct for more than 2 vectors,
+          but logical: https://en.wikipedia.org/wiki/Symmetric_difference#Properties")
   }
   names(ls) <- paste("Only in", as.character(match.call()[-1]))
   duplicates <- big.vec[duplicated(big.vec)]
