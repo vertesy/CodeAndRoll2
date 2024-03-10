@@ -22,6 +22,8 @@ The percentage of overlap between \code{x} and \code{y} based on the specified b
 Computes the percentage of overlap between two vectors based on the specified basis of calculation.
 }
 \examples{
-x= 1:5; y=3:8;  pc_overlap(x, y, basis = "x")
+x <- 1:5
+y <- 3:8
+pc_overlap(x, y, basis = "x")
 
 }

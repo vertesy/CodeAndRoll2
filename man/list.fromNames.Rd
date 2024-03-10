@@ -22,5 +22,5 @@ element is named according to the character vector and filled with a specified v
 Create a Named List from a Character Vector of Names or a Named Object
 }
 \examples{
-list.fromNames()  # Default behavior with LETTERS[1:5] and NaN
+list.fromNames() # Default behavior with LETTERS[1:5] and NaN
 }

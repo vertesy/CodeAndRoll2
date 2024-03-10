@@ -1,6 +1,6 @@
-#####################################################################_
+##################################################################### _
 # CodeAndRoll2 - A collection of custom R functions ----
-#####################################################################_
+##################################################################### _
 # devtools::load_all("~/GitHub/Packages/CodeAndRoll2")
 # devtools::document("~/GitHub/Packages/CodeAndRoll2")
 # source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.R')
@@ -51,7 +51,8 @@ getScriptName <- function() {
 getProject <- function() {
   if (!requireNamespace("rstudioapi", quietly = TRUE)) {
     warning("rstudioapi package is not available. Please install it using install.packages('rstudioapi').",
-            immediate. = TRUE)
+      immediate. = TRUE
+    )
   } else {
     tryCatch(basename(rstudioapi::getActiveProject()), error = function(e) {})
   }
@@ -91,7 +92,7 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 #'
 #' @return A named list with elements filled with the specified value.
 #' @examples
-#' list.fromNames()  # Default behavior with LETTERS[1:5] and NaN
+#' list.fromNames() # Default behavior with LETTERS[1:5] and NaN
 #' @export
 list.fromNames <- function(x = LETTERS[1:5], fill = NaN) {
   liszt <- as.list(rep(fill, length(x)))
@@ -106,7 +107,7 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN) {
         stop("Input is nor a chacter vector, nor an object with names")
       }
     }
-  message(kollapse("List of", length(liszt), "| names:", head(names(liszt)), "...", collapseby =  " "))
+  message(kollapse("List of", length(liszt), "| names:", head(names(liszt)), "...", collapseby = " "))
   return(liszt)
 }
 
@@ -569,7 +570,6 @@ unique.wNames <- function(x) {
 as.numeric.wNames.character <- function(
     vec, verbose = TRUE,
     factor.to.character = TRUE, ...) {
-
   if (is.character(vec) | is.logical(vec)) {
     numerified_vec <- as.numeric(vec, ...)
   } else {
@@ -765,7 +765,7 @@ any.duplicated <- function(vec, summarize = TRUE, max.shown = 25) {
     print(paste("The following", y, "elements have  > 1 extra copies: (max", max.shown, "shown.)"))
     print(head(x, n = max.shown))
   }
-  invisible(y>0)
+  invisible(y > 0)
 }
 
 
@@ -1054,20 +1054,19 @@ checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = T
 
   if (verbose) {
     iprint("Overlap is", overlap_len)
-    iprint(percentage_formatter(overlap_len/min_len), "or", min_len, "of", namez[which.min(lengths)])
-    iprint(percentage_formatter(overlap_len/max_len), "or", max_len, "of", namez[which.max(lengths)])
+    iprint(percentage_formatter(overlap_len / min_len), "or", min_len, "of", namez[which.min(lengths)])
+    iprint(percentage_formatter(overlap_len / max_len), "or", max_len, "of", namez[which.max(lengths)])
   }
 
   pass <- overlap_len > required_overlap
   if (!pass) {
-    iprint(substitute(x), "-" ,head(x))
+    iprint(substitute(x), "-", head(x))
     iprint(substitute(y), "-", head(y))
 
     msg <- "Minimum overlap condition not met."
     if (stop_it) stop(msg) else warning(msg, immediate. = TRUE)
   }
   invisible(pass)
-
 }
 
 
@@ -1213,30 +1212,34 @@ pc_TRUE <- function(
 #' of lengths of both `x` and `y`. Default is "x".
 #'
 #' @return The percentage of overlap between `x` and `y` based on the specified basis.
-#' @examples x= 1:5; y=3:8;  pc_overlap(x, y, basis = "x")
+#' @examples x <- 1:5
+#' y <- 3:8
+#' pc_overlap(x, y, basis = "x")
 #'
 #' @export
 
 pc_overlap <- function(x, y, basis = "x", prefix = NULL, suffix = NULL, ...) {
-
   # Assertions to ensure input validity
-  stopifnot(is.character(basis),
-            basis %in% c("x", "y", "sum"),
-            is.vector(x),
-            is.vector(y))
+  stopifnot(
+    is.character(basis),
+    basis %in% c("x", "y", "sum"),
+    is.vector(x),
+    is.vector(y)
+  )
 
   # Calculate intersection
   overlap <- length(intersect(x, y))
 
   # Calculate denominator based on the basis argument
   denominator <- switch(basis,
-                        "x" = length(x),
-                        "y" = length(y),
-                        "sum" = length(x) + length(y))
+    "x" = length(x),
+    "y" = length(y),
+    "sum" = length(x) + length(y)
+  )
 
   # Calculate and return percent overlap
-  percent_overlap <- Stringendo::percentage_formatter(x = overlap / denominator)
-  if (is.null(suffix)) suffix <- kppws("of", substitute(basis), "is found in both vectors." )
+  percent_overlap <- percentage_formatter(x = overlap / denominator)
+  if (is.null(suffix)) suffix <- kppws("of", substitute(basis), "is found in both vectors.")
   text <- kppws(prefix, percent_overlap, suffix)
   message(text)
 
