@@ -4,7 +4,7 @@
 \alias{list.fromNames}
 \title{Create Named List from Names}
 \usage{
-list.fromNames(x = LETTERS[1:5], fill = NaN)
+list.fromNames(x = LETTERS[1:5], fill = NaN, use.names = FALSE)
 }
 \arguments{
 \item{x}{A character vector of names, with a default of the first five letters of the alphabet.}

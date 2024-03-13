@@ -94,19 +94,27 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 #' @examples
 #' list.fromNames() # Default behavior with LETTERS[1:5] and NaN
 #' @export
-list.fromNames <- function(x = LETTERS[1:5], fill = NaN) {
+list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
   liszt <- as.list(rep(fill, length(x)))
 
+  # names(liszt) <-
+  #   if (is.character(x) | ) {
+  #     x
+  #   } else {
+  #     if (!is.null(names(x))) {
+  #       names(x)
+  #     } else {
+  #       stop("Input is nor a chacter vector, nor an object with names")
+  #     }
+  #   }
+
   names(liszt) <-
-    if (is.character(x)) {
-      x
+    if (!is.null(names(x)) & use.names) {
+      names(x)
     } else {
-      if (!is.null(names(x))) {
-        names(x)
-      } else {
-        stop("Input is nor a chacter vector, nor an object with names")
-      }
+      x
     }
+
   message(kollapse("List of", length(liszt), "| names:", head(names(liszt)), "...", collapseby = " "))
   return(liszt)
 }
