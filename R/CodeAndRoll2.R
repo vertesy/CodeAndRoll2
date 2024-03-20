@@ -31,7 +31,6 @@ getScriptName <- function() {
   } else {
     scriptName <- basename(rstudioapi::getSourceEditorContext()$path)
   }
-
   # If scriptName is empty, return basename of OutDir
   # Can happen at an unsaved file, etc.
   if (scriptName == "") scriptName <- basename(OutDir)
@@ -3110,7 +3109,7 @@ dput_pretty <- pretty_dput <- function(vec) {
   if (is.null(names(vec))) names(vec) <- 1:length(vec)
   cat("c(", sep = "")
   for (i in 1:length(vec)) {
-    cat("\n`", names(vec)[i], "` = \"", vec[i], "\"",
+    cat("\n`", vec[i], "` = \"", names(vec)[i], "\"",
       ifelse(i != length(vec), ",", ""),
       sep = ""
     )
