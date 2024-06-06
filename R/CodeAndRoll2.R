@@ -2403,7 +2403,14 @@ union.ls <- function(ls, ...) {
 #' @param ... Pass any other argument.
 #' @export
 symdiff.ls <- function(ls, ...) {
-  Reduce(symdiff, ls)
+  res <- Reduce(symdiff, ls)
+  if(length(names(ls)) == length(ls)) {
+    names(res) <- names(ls)
+  } else {
+    message("No names in list / some names missing. Numeric names will be used.")
+    names(res) <- 1:length(res)
+  }
+  return(res)
 } # Intersect any number of list elements. Faster than reduce.
 
 # _________________________________________________________________________________________________

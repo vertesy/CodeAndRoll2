@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{list.fromNames}
 \alias{list.fromNames}
-\title{Create Named List from Names}
+\title{Create a Named List from a Character Vector of Names, or a names of an object}
 \usage{
 list.fromNames(x = LETTERS[1:5], fill = NaN, use.names = FALSE)
 }
@@ -17,9 +17,6 @@ A named list with elements filled with the specified value.
 \description{
 This function takes a character vector of names and creates a list where each
 element is named according to the character vector and filled with a specified value.
-}
-\details{
-Create a Named List from a Character Vector of Names or a Named Object
 }
 \examples{
 list.fromNames() # Default behavior with LETTERS[1:5] and NaN
