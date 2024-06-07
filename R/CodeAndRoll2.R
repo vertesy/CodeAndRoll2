@@ -8,6 +8,7 @@
 # source('~/.pack.R')
 
 
+
 ### CHAPTERS:
 
 # _________________________________________________________________________________________________
@@ -2410,6 +2411,7 @@ symdiff.ls <- function(ls, ...) {
     message("No names in list / some names missing. Numeric names will be used.")
     names(res) <- 1:length(res)
   }
+
   return(res)
 } # Intersect any number of list elements. Faster than reduce.
 
