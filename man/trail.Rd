@@ -15,7 +15,8 @@ trail(vec, N = 10)
 A vector.
 }
 \description{
-Returns a vector containing the first \code{N} and last \code{N} elements of \code{vec}.
+A combination of \code{head()} and \code{tail()}: Returns a vector containing the first
+\code{N} and last \code{N} elements of vector.
 }
 \examples{
 trail(rnorm(10), N = 3)

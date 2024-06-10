@@ -417,14 +417,16 @@ top_indices <- function(x, n = 3, top = TRUE) {
 # _________________________________________________________________________________________________
 #' @title trail
 #'
-#' @description Returns a vector containing the first `N` and last `N` elements of `vec`.
+#' @description A combination of `head()` and `tail()`: Returns a vector containing the first
+#' `N` and last `N` elements of vector.
+#'
 #' @param vec A vector.
 #' @param N The number of elements to include from each end.
 #' @return A vector.
 #' @examples trail(rnorm(10), N = 3)
 #'
 #' @export
-trail <- function(vec, N = 10) c(head(vec, n = N), tail(vec, n = N)) # A combination of head() and tail() to see both ends.
+trail <- function(vec, N = 10) unique(c(head(vec, n = N), tail(vec, n = N)))
 
 
 
