@@ -267,12 +267,15 @@ idimnames <- function(any_object, print_max = 25) {
 
 # _________________________________________________________________________________________________
 #' @title printEveryN
+#'
 #' @description Report iterator value at every e.g. 1000
 #' @param iterator Current iteration of the loop. Default: i.
 #' @param N  print Every N
+#' @param prefix Optional prefix to display alongside the progress.
+#'
 #' @export
-printEveryN <- function(i = i, N = 1000) {
-  if ((i %% N) == 0) print(i)
+printEveryN <- function(i = i, N = 1000, prefix = NULL) {
+  if ((i %% N) == 0) message(prefix, i)
 }
 
 # _________________________________________________________________________________________________
@@ -284,6 +287,7 @@ printEveryN <- function(i = i, N = 1000) {
 #' @param total Total number of iterations in the loop.
 #' @param digits Digits to display
 #' @param message Optional message to display alongside the progress.
+#'
 #' @export
 printProgress <- function(i = i, total, message = "Progress", digits = 0) {
   percentage <- formatC(100 * i / total, format = "f", digits = digits)
@@ -681,6 +685,7 @@ translate <- function(vec, oldvalues, newvalues) {
   for (i in 1:Nr) {
     oldval <- oldvalues[i]
     tmp[vec == oldval] <- newvalues[i]
+    printEveryN(i = i, N = 1000)
   }
   return(tmp)
 }
