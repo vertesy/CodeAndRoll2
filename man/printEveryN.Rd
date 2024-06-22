@@ -4,10 +4,12 @@
 \alias{printEveryN}
 \title{printEveryN}
 \usage{
-printEveryN(i = i, N = 1000)
+printEveryN(i = i, N = 1000, prefix = NULL)
 }
 \arguments{
 \item{N}{print Every N}
+
+\item{prefix}{Optional prefix to display alongside the progress.}
 
 \item{iterator}{Current iteration of the loop. Default: i.}
 }

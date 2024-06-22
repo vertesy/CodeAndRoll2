@@ -4,7 +4,7 @@
 \alias{table_fixed_categories}
 \title{table_fixed_categories}
 \usage{
-table_fixed_categories(vec, categories_vec, strict = TRUE)
+table_fixed_categories(vec, categories_vec, strict = TRUE, v = TRUE)
 }
 \arguments{
 \item{vec}{Input vector to be counted.}
@@ -12,7 +12,13 @@ table_fixed_categories(vec, categories_vec, strict = TRUE)
 \item{categories_vec}{Fixed list of categories to be counted in your input vector.}
 
 \item{strict}{Stop or warn if not all values are covered in the categories vector?}
+
+\item{v}{Verbose. Default: TRUE.}
+}
+\value{
+A table with the fixed set of categories.
 }
 \description{
-Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
+Generate a table() with a fixed set of categories. It fills up the table with
+missing categories, that are relevant when comparing to other vectors.
 }

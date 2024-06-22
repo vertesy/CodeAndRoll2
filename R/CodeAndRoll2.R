@@ -724,10 +724,12 @@ as.character.wNames <- function(vec) {
 
 # _________________________________________________________________________________________________
 #' @title Translate values to a new set using a dictionary
+#'
 #' @description Replaces a set of values in a vector with another set of values,
 #' it translates your vector. Oldvalues and newvalues have to be 1-to-1
 #' correspoding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
 #' in theory, but it did not seem very robust regarding your input...'
+#'
 #' @param vec set of values where you want to replace
 #' @param oldvalues oldvalues (from)
 #' @param newvalues newvalues (to)

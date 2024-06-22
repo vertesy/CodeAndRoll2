@@ -13,12 +13,15 @@ as.named.vector.df(
 )
 }
 \arguments{
+\item{col.or.row.name.or.index}{Which column or row to extract (numeric index).}
+
 \item{verbose}{Print the columnname or rowname that is being used}
 
 \item{WhichDimNames}{Shall we extract rows (2) or columns (1, default)?, Default: 1}
 
-\item{index.rc}{Which column or row to extract (numeric index).}
+\item{...}{Additional arguments passed to \code{as.vector()}.}
 }
 \description{
-Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
+Convert any column or row of a dataframe into a vector, keeping the
+corresponding dimension name.
 }
