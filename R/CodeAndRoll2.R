@@ -298,26 +298,34 @@ printProgress <- function(i = i, total, message = "Progress", digits = 0) {
 # _________________________________________________________________________________________________
 #' @title table_fixed_categories
 #'
-#' @description Generate a table() with a fixed set of categories. It fills up the table with missing categories, that are relevant when comparing to other vectors.
+#' @description Generate a table() with a fixed set of categories. It fills up the table with
+#' missing categories, that are relevant when comparing to other vectors.
 #'
 #' @param vec Input vector to be counted.
 #' @param categories_vec Fixed list of categories to be counted in your input vector.
 #' @param strict Stop or warn if not all values are covered in the categories vector?
+#' @param v Verbose. Default: TRUE.
+#'
+#' @return A table with the fixed set of categories.
+#'
 #' @export
 
-table_fixed_categories <- function(vec, categories_vec, strict = TRUE) {
+table_fixed_categories <- function(vec, categories_vec, strict = TRUE,
+                                   v = TRUE) {
   if (!is.vector(vec)) {
     iprint("vec is not a vector -  it is a:", is(vec)[1])
   }
 
   missing_from_category <- unique(vec) %!in% categories_vec
   if (any(missing_from_category)) {
-    txt1 <- pc_TRUE(logical_vector = missing_from_category, NumberAndPC = T, suffix = "values are NOT found in the categories vector!")
+    txt1 <- pc_TRUE(logical_vector = missing_from_category, NumberAndPC = T,
+                    suffix = "values are NOT found in the categories vector!")
     if (strict) stop(txt1) else warning(txt1)
   }
 
-  txt2 <- pc_TRUE(logical_vector = categories_vec %in% vec, NumberAndPC = T, suffix = "categories are found in the vector")
-  print(txt2)
+  txt2 <- pc_TRUE(logical_vector = categories_vec %in% vec, NumberAndPC = T,
+                  suffix = "categories are found in the vector")
+  if(v) print(txt2)
 
   table(factor(unlist(vec), levels = categories_vec))
 }
@@ -448,22 +456,75 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 
 # _________________________________________________________________________________________________
 #' @title as.named.vector.df
-#' @description Convert any column or row of a dataframe into a vector, keeping the corresponding dimension name.
-#' @param index.rc Which column or row to extract (numeric index).
+#'
+#' @description Convert any column or row of a dataframe into a vector, keeping the
+#' corresponding dimension name.
+#' @param col.or.row.name.or.index Which column or row to extract (numeric index).
 #' @param verbose Print the columnname or rowname that is being used
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
+#' @param ... Additional arguments passed to `as.vector()`.
+#'
 #' @export
 as.named.vector.df <- function(
     df, col.or.row.name.or.index = 1, verbose = TRUE,
-    WhichDimNames = 1, ...) {
+    WhichDimNames = 1,
+    ...) {
+  .Deprecated(old = 'as.named.vector.df' ,new = "df.col.2.named.vector or df.row.2.named.vector")
+
+  if(verbose) message("input df dimensions: ", kppc(idim(df)))
+
   name.selection <- dimnames(df)[[(3 - WhichDimNames)]][col.or.row.name.or.index]
   if (verbose) iprint("Variable used:", name.selection)
 
-  vecc <- if (WhichDimNames == 1) as.vector(unlist(df[, col.or.row.name.or.index]), ...) else if (WhichDimNames == 2) as.vector(unlist(df[col.or.row.name.or.index, ]), ...)
+  vecc <- if (WhichDimNames == 1) {
+    as.vector(unlist(df[, col.or.row.name.or.index]), ...)
+  } else if (WhichDimNames == 2) {
+    as.vector(unlist(df[col.or.row.name.or.index, ]), ...)
+  }
 
   names(vecc) <- dimnames(df)[[WhichDimNames]]
   return(vecc)
 }
+
+
+
+# # _________________________________________________________________________________________________
+# #' @title as.named.vector.df
+# #'
+# #' @description Convert any column or row of a dataframe into a vector, keeping the
+# #' corresponding dimension name.
+# #'
+# #' @param df A dataframe.
+# #' @param col.or.row.name.or.index Which column or row to extract (numeric index).
+# #' @param verbose Print the columnname or rowname that is being used
+# #' @param WhichDimNames Shall we extract rows (1) or columns (2, default)?, Default: 1
+# #' @param ... Additional arguments passed to `as.vector()`.
+# #'
+# #' @export
+# as.named.vector.df <- function(
+    #     df, col.or.row.name.or.index = 1, verbose = TRUE,
+#     WhichDimNames = 2,
+#     ...) {
+#
+#   # name.selection <- dimnames(df)[[(3 - WhichDimNames)]][col.or.row.name.or.index] # Original not working properlu
+#
+#   if(verbose) {
+#     tag <- if(WhichDimNames == 1) "row" else "column"
+#     message("input df dimensions: ", kppc(idim(df)))
+#     if(is.numeric(col.or.row.name.or.index)) name.of.selection <- dimnames(df)[[WhichDimNames]][col.or.row.name.or.index]
+#     message("Selecting: ", tag, " ", col.or.row.name.or.index, ", called: ", name.selection)
+#   }
+#
+#   # Extract the column or row
+#   vecc <- if (WhichDimNames == 1) {
+#     as.vector(unlist(df[, col.or.row.name.or.index]), ...)
+#   } else if (WhichDimNames == 2) {
+#     as.vector(unlist(df[col.or.row.name.or.index, ]), ...)
+#   }
+#
+#   names(vecc) <- dimnames(df)[[WhichDimNames]]
+#   return(vecc)
+# }
 
 
 #' @title as.named.vector.2colDF
@@ -482,11 +543,12 @@ as.named.vector.2colDF <- function(DF = UMI_CBC_1to1, values = 1, names = 2, mak
 
 
 # _________________________________________________________________________________________________
-#' @title col2named.vector
+#' @title df.col.2.named.vector
+#'
 #' @description Convert a dataframe column into a vector, keeping the corresponding dimension name.
 #' @param df_col data frame column
 #' @export
-col2named.vector <- function(df_col) {
+df.col.2.named.vector <- function(df_col) {
   namez <- rownames(df_col)
   vecc <- as.vector(unlist(df_col))
   names(vecc) <- namez
@@ -496,11 +558,12 @@ col2named.vector <- function(df_col) {
 
 
 # _________________________________________________________________________________________________
-#' @title row2named.vector
+#' @title df.row.2.named.vector
+#'
 #' @description Convert a dataframe row into a vector, keeping the corresponding dimension name.
 #' @param df_row data frame row
 #' @export
-row2named.vector <- function(df_row) {
+df.row.2.named.vector <- function(df_row) {
   namez <- colnames(df_row)
   vecc <- as.vector(unlist(df_row))
   names(vecc) <- namez
