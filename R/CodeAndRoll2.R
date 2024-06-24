@@ -918,7 +918,9 @@ clip.at.fixed.value <- function(distribution, high = TRUE, thr = 3) {
 
 # _________________________________________________________________________________________________
 #' @title clip.outliers.at.percentile
-#' @description Signal clipping based on the input data's distribution. It clips values above or below the extreme N% of the distribution.
+#' @description Signal clipping based on the input data's distribution. It clips values above or
+#' below the extreme N% of the distribution.
+#'
 #' @param distribution A vector of numeric values.
 #' @param high Clip above threshold? Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
@@ -928,7 +930,10 @@ clip.at.fixed.value <- function(distribution, high = TRUE, thr = 3) {
 #' @export
 # #' @importFrom MarkdownReports whist
 
-clip.outliers.at.percentile <- function(distribution, high = TRUE, percentiles = c(.01, .99), na.rm = TRUE, showhist = FALSE, ...) {
+clip.outliers.at.percentile <- function(distribution, high = TRUE,
+                                        percentiles = c(.01, .99),
+                                        na.rm = TRUE, showhist = FALSE,
+                                        ...) {
   qnt <- quantile(distribution, probs = percentiles, na.rm = na.rm)
   if (showhist) {
     hist(unlist(distribution),
