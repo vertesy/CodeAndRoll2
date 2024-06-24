@@ -4,7 +4,7 @@
 \alias{intermingle2vec}
 \title{intermingle2vec}
 \usage{
-intermingle2vec(V1, V2, wNames = TRUE)
+intermingle2vec(V1, V2, wNames = TRUE, name_prefix = NULL)
 }
 \arguments{
 \item{V1}{A vector.}
@@ -12,6 +12,9 @@ intermingle2vec(V1, V2, wNames = TRUE)
 \item{V2}{A vector.}
 
 \item{wNames}{Logical. Whether to include the names of the vectors in the output vector.}
+
+\item{name_prefix}{A character vector of length 2. If provided, the names of the vectors will
+be prefixed with the corresponding element of \code{name_prefix}.}
 }
 \value{
 A vector that combines \code{V1} and \code{V2}, with the elements of \code{V1} alternating with the elements of \code{V2}.

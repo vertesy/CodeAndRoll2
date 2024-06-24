@@ -2844,6 +2844,8 @@ splititsnames_byValues <- function(namedVec) {
 #' @param V1 A vector.
 #' @param V2 A vector.
 #' @param wNames Logical. Whether to include the names of the vectors in the output vector.
+#' @param name_prefix A character vector of length 2. If provided, the names of the vectors will
+#' be prefixed with the corresponding element of `name_prefix`.
 #' @return A vector that combines `V1` and `V2`, with the elements of `V1` alternating with the elements of `V2`.
 #' @examples
 #' V1 <- c(1, 3, 5)
@@ -2851,9 +2853,19 @@ splititsnames_byValues <- function(namedVec) {
 #' intermingle2vec(V1, V2)
 #'
 #' @export
-intermingle2vec <- function(V1, V2, wNames = TRUE) {
-  stopifnot(length(V1) == length(V2))
+intermingle2vec <- function(V1, V2, wNames = TRUE, name_prefix = NULL) {
+  stopifnot(
+    length(V1) == length(V2),
+    is.null(name_prefix) | length(name_prefix) == 2
+    )
+
+  if(!is.null(name_prefix)) {
+    names(V1) <- paste0(names(V1), name_prefix[1])
+    names(V2) <- paste0(names(V2), name_prefix[2])
+  }
+
   Vout <- c(rbind(V1, V2))
+
   if (wNames) {
     names(Vout) <- c(rbind(names(V1), names(V2)))
   }
