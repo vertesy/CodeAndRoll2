@@ -7,12 +7,15 @@
 list2fullDF.byNames(
   your.list = list(set.1 = vec.fromNames(LETTERS[1:5], fill = 1), set.2 =
     vec.fromNames(LETTERS[3:9], fill = 2)),
+  as.df = TRUE,
   byRow = TRUE,
   FILL = NA
 )
 }
 \arguments{
 \item{your.list}{A list.}
+
+\item{as.df}{Logical. Whether the output should be a data frame (default) or a matrix.}
 
 \item{byRow}{Logical. Whether the resulting matrix should be arranged by row (default) or by column.}
 

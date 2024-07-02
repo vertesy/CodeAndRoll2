@@ -2735,6 +2735,7 @@ reverse.list.hierarchy <- function(list_of_lists) {
 #'
 #' @description Converts a list to a full matrix, with rows and columns named by the elements of the list.
 #' @param your.list A list.
+#' @param as.df Logical. Whether the output should be a data frame (default) or a matrix.
 #' @param byRow Logical. Whether the resulting matrix should be arranged by row (default) or by column.
 #' @param FILL A value to fill in missing entries.
 #' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.
@@ -2746,7 +2747,10 @@ reverse.list.hierarchy <- function(list_of_lists) {
 list2fullDF.byNames <- function(your.list = list(
                                   "set.1" = vec.fromNames(LETTERS[1:5], fill = 1), # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
                                   "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
-                                ), byRow = TRUE, FILL = NA) {
+                                ),
+                                as.df = TRUE,
+                                byRow = TRUE,
+                                FILL = NA) {
   # Get the lengths of the list elements
   length.list <- length(your.list)
   list.names <- names(your.list)
@@ -2763,6 +2767,7 @@ list2fullDF.byNames <- function(your.list = list(
   if (!byRow) {
     mat <- t(mat)
   }
+  if(as.df) mat <- as.data.frame(mat)
   return(mat)
 }
 
