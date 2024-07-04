@@ -731,25 +731,25 @@ as.character.wNames <- function(vec) {
 #' in theory, but it did not seem very robust regarding your input...'
 #'
 #' @param vec set of values where you want to replace
-#' @param oldvalues oldvalues (from)
-#' @param newvalues newvalues (to)
+#' @param from newvalues, a verctor of equl length to 'from'.
+#' @param to oldvalues, vector of values to be copied from.
 #' @examples A <- 1:3
-#' translate(vec = A, oldvalues = 2:3, newvalues = letters[1:2])
+#' translate(vec = A, to = 2:3, from = letters[1:2])
 #'
 #' @export
-translate <- function(vec, oldvalues, newvalues) {
-  Nr <- length(oldvalues)
-  if (Nr > length(newvalues)) {
-    if (length(newvalues) == 1) {
-      newvalues <- rep(newvalues, length(oldvalues))
-    } else if (length(newvalues) > 1) {
-      iprint("PROVIDE ONE NEWVALUE, OR THE SAME NUMEBR OF NEWVALUES AS OLDVALUES.")
+translate <- function(vec, from, to) {
+  Nr <- length(to)
+  if (Nr > length(from)) {
+    if (length(from) == 1) {
+      from <- rep(from, length(to))
+    } else if (length(from) > 1) {
+      warning("PROVIDE ONE NEW VALUE, OR THE SAME NUMBER OF NEW VALUES AS OLD VALUES!", immediate. = T)
     }
   }
   tmp <- vec
   for (i in 1:Nr) {
-    oldval <- oldvalues[i]
-    tmp[vec == oldval] <- newvalues[i]
+    oldval <- to[i]
+    tmp[vec == oldval] <- from[i]
     printEveryN(i = i, N = 1000)
   }
   return(tmp)
@@ -2735,7 +2735,6 @@ reverse.list.hierarchy <- function(list_of_lists) {
 #'
 #' @description Converts a list to a full matrix, with rows and columns named by the elements of the list.
 #' @param your.list A list.
-#' @param as.df Logical. Whether the output should be a data frame (default) or a matrix.
 #' @param byRow Logical. Whether the resulting matrix should be arranged by row (default) or by column.
 #' @param FILL A value to fill in missing entries.
 #' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.

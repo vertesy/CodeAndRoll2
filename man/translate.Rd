@@ -4,14 +4,14 @@
 \alias{translate}
 \title{Translate values to a new set using a dictionary}
 \usage{
-translate(vec, oldvalues, newvalues)
+translate(vec, from, to)
 }
 \arguments{
 \item{vec}{set of values where you want to replace}
 
-\item{oldvalues}{oldvalues (from)}
+\item{from}{newvalues, a verctor of equl length to 'from'.}
 
-\item{newvalues}{newvalues (to)}
+\item{to}{oldvalues, vector of values to be copied from.}
 }
 \description{
 Replaces a set of values in a vector with another set of values,
@@ -21,6 +21,6 @@ in theory, but it did not seem very robust regarding your input...'
 }
 \examples{
 A <- 1:3
-translate(vec = A, oldvalues = 2:3, newvalues = letters[1:2])
+translate(vec = A, to = 2:3, from = letters[1:2])
 
 }
