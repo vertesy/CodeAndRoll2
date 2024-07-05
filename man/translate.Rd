@@ -2,25 +2,24 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{translate}
 \alias{translate}
-\title{Translate values to a new set using a dictionary}
+\title{Translate a set of values to a new set using a dictionary}
 \usage{
-translate(vec, from, to)
+translate(vec, old, new)
 }
 \arguments{
 \item{vec}{set of values where you want to replace}
 
-\item{from}{newvalues, a verctor of equl length to 'from'.}
+\item{old}{oldvalues, a vector of values that occur in \code{vec} to be replaced.}
 
-\item{to}{oldvalues, vector of values to be copied from.}
+\item{new}{newvalues, a vector of equal length, to be copied from, corresponding 1-by-1 to old.}
 }
 \description{
-Replaces a set of values in a vector with another set of values,
+Replaces a set of values in a vector with another set of values, so
 it translates your vector. Oldvalues and newvalues have to be 1-to-1
-correspoding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
+corresponding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
 in theory, but it did not seem very robust regarding your input...'
 }
 \examples{
-A <- 1:3
-translate(vec = A, to = 2:3, from = letters[1:2])
+A <- 1:3; translate(vec = A, old = 2:3, new = letters[1:2])
 
 }

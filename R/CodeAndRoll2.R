@@ -723,36 +723,34 @@ as.character.wNames <- function(vec) {
 
 
 # _________________________________________________________________________________________________
-#' @title Translate values to a new set using a dictionary
+#' @title Translate a set of values to a new set using a dictionary
 #'
-#' @description Replaces a set of values in a vector with another set of values,
+#' @description Replaces a set of values in a vector with another set of values, so
 #' it translates your vector. Oldvalues and newvalues have to be 1-to-1
-#' correspoding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
+#' corresponding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
 #' in theory, but it did not seem very robust regarding your input...'
 #'
 #' @param vec set of values where you want to replace
-#' @param from newvalues, a verctor of equl length to 'from'.
-#' @param to oldvalues, vector of values to be copied from.
-#' @examples A <- 1:3
-#' translate(vec = A, to = 2:3, from = letters[1:2])
+#' @param old oldvalues, a vector of values that occur in `vec` to be replaced.
+#' @param new newvalues, a vector of equal length, to be copied from, corresponding 1-by-1 to old.
+#' @examples A <- 1:3; translate(vec = A, old = 2:3, new = letters[1:2])
 #'
 #' @export
-translate <- function(vec, from, to) {
-  Nr <- length(to)
-  if (Nr > length(from)) {
-    if (length(from) == 1) {
-      from <- rep(from, length(to))
-    } else if (length(from) > 1) {
-      warning("PROVIDE ONE NEW VALUE, OR THE SAME NUMBER OF NEW VALUES AS OLD VALUES!", immediate. = T)
-    }
+translate <- function(vec, old, new) {
+  stopifnot(length(old) == length(new) | length(new) == 1)
+  # "PROVIDE ONE NEW VALUE, OR THE SAME NUMBER OF NEW VALUES AS OLD VALUES!"
+
+  if (length(old) > length(new) & length(new) == 1) {
+    new <- rep(new, length(old))
   }
-  tmp <- vec
-  for (i in 1:Nr) {
-    oldval <- to[i]
-    tmp[vec == oldval] <- from[i]
+
+  vec_replaced <- vec
+  for (i in 1:length(old)) {
+    oldval <- old[i]
+    vec_replaced[vec == oldval] <- new[i]
     printEveryN(i = i, N = 1000)
   }
-  return(tmp)
+  return(vec_replaced)
 }
 
 
