@@ -5,7 +5,7 @@
 \title{clip.outliers.at.percentile}
 \usage{
 clip.outliers.at.percentile(
-  distribution,
+  x,
   high = TRUE,
   percentiles = c(0.01, 0.99),
   na.rm = TRUE,
@@ -14,7 +14,7 @@ clip.outliers.at.percentile(
 )
 }
 \arguments{
-\item{distribution}{A vector of numeric values.}
+\item{x}{A vector of numeric values.}
 
 \item{high}{Clip above threshold? Default: TRUE}
 
@@ -27,6 +27,6 @@ clip.outliers.at.percentile(
 \item{...}{Pass any other argument.}
 }
 \description{
-Signal clipping based on the input data's distribution. It clips values above or
-below the extreme N\% of the distribution.
+Signal clipping based on the input data's distribution. It clips values
+in a distribution above or below the extreme N\% of the distribution.
 }

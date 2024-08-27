@@ -935,28 +935,28 @@ pad.na <- function(x, len) {
 
 # _________________________________________________________________________________________________
 #' @title clip.at.fixed.value
-#' @description Signal clipping. Cut values above or below a threshold.
+#' @description Signal clipping. Cut values in a distribution, above or below a threshold.
 #' @param distribution A vector of numeric values.
 #' @param high Clip above threshold? Default: TRUE
 #' @param thr threshold values, Default: 3
 #' @export
 
-clip.at.fixed.value <- function(distribution, high = TRUE, thr = 3) {
+clip.at.fixed.value <- function(x, high = TRUE, thr = 3) {
   if (high) {
-    distribution[distribution > thr] <- thr
+    x[x > thr] <- thr
   } else {
-    distribution[distribution < thr] <- thr
+    x[x < thr] <- thr
   }
-  distribution
+  x
 }
 
 
 # _________________________________________________________________________________________________
 #' @title clip.outliers.at.percentile
-#' @description Signal clipping based on the input data's distribution. It clips values above or
-#' below the extreme N% of the distribution.
+#' @description Signal clipping based on the input data's distribution. It clips values
+#' in a distribution above or below the extreme N% of the distribution.
 #'
-#' @param distribution A vector of numeric values.
+#' @param x A vector of numeric values.
 #' @param high Clip above threshold? Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm Remove NA values for calculation? Default: TRUE
@@ -965,23 +965,23 @@ clip.at.fixed.value <- function(distribution, high = TRUE, thr = 3) {
 #' @export
 # #' @importFrom MarkdownReports whist
 
-clip.outliers.at.percentile <- function(distribution, high = TRUE,
+clip.outliers.at.percentile <- function(x, high = TRUE,
                                         percentiles = c(.01, .99),
                                         na.rm = TRUE, showhist = FALSE,
                                         ...) {
-  qnt <- quantile(distribution, probs = percentiles, na.rm = na.rm)
+  qnt <- quantile(x, probs = percentiles, na.rm = na.rm)
   if (showhist) {
-    hist(unlist(distribution),
+    hist(unlist(x),
       breaks = 50, main = "Distribution and cutoffs histogram",
       sub = paste("Percentile cutoffs at: ", paste(percentiles, collapse = " and ")),
       xlab = "Values"
     )
     abline(v = qnt, col = 2)
   }
-  # if (showhist) { MarkdownReports::whist(unlist(distribution), breaks = 50 ,vline = qnt, filtercol = -1)} #if
-  y <- distribution
-  y[distribution < qnt[1]] <- qnt[1]
-  y[distribution > qnt[2]] <- qnt[2]
+  # if (showhist) { MarkdownReports::whist(unlist(x), breaks = 50 ,vline = qnt, filtercol = -1)} #if
+  y <- x
+  y[x < qnt[1]] <- qnt[1]
+  y[x > qnt[2]] <- qnt[2]
   y
 }
 
