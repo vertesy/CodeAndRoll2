@@ -71,10 +71,10 @@ getProject <- function() {
 #' @importFrom rstudioapi getSourceEditorContext
 #' @examples
 #' \dontrun{
-#' save_command_history()
+#' savehistory_2()
 #' }
 
-savehistory <- function() {
+savehistory_2 <- function() {
   # Get the current working directory
   current_dir <- getwd()
 
