@@ -58,6 +58,43 @@ getProject <- function() {
   }
 }
 
+# _________________________________________________________________________________________________
+#' @title Save Command History to "command_history.date.scriptname.txt"
+#'
+#' @description
+#' This function saves the command history of the current R session to a text file. The file name
+#' includes the current date and, if available, the name of the current R script (when running in
+#' RStudio). The file is saved in the current working directory.
+#'
+#' @return Nothing is returned, but the file path is printed to the console.
+#'
+#' @importFrom rstudioapi getSourceEditorContext
+#' @examples
+#' \dontrun{
+#' save_command_history()
+#' }
+
+savehistory <- function() {
+  # Get the current working directory
+  current_dir <- getwd()
+
+  # Construct the file name using the current date and optionally the file name from RStudio
+  script_name <- try(basename(rstudioapi::getSourceEditorContext()$path), silent = TRUE)
+  if ("try-error" %in% is(script_name)) script_name <- ""
+
+  file_name <- ppp( "command_history",
+                    format(Sys.time(), format = "%Y.%m.%d"),
+                    script_name, "txt"
+  )
+
+  # Save the command history
+  savehistory(file = file_name)
+
+  # Print and return the file path
+  print(file.path(current_dir, file_name))
+
+}
+
 
 
 # _________________________________________________________________________________________________
