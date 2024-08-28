@@ -2540,13 +2540,15 @@ setdiff.ls <- function(ls, ...) {
 
 
 # _________________________________________________________________________________________________
-#' @title unlapply
-#' @description Lapply, then unlist.
+#' @title Like sapply, but with names preserved
+#' @description Do an lapply, then unlist, finally preserve names
 #' @param ... Pass any other argument.
 #' @export
-unlapply <- function(...) {
-  unlist(lapply(...))
-} # lapply, then unlist
+unlapply <- function(list, FUN, ...) {
+  x <- unlist(lapply(X = list, FUN = FUN, ...))
+  # names(x) <- names(list) # not needed
+  return(x)
+}
 
 
 

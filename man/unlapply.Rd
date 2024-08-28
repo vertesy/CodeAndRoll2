@@ -4,11 +4,11 @@
 \alias{unlapply}
 \title{unlapply}
 \usage{
-unlapply(...)
+unlapply(list, FUN, ...)
 }
 \arguments{
 \item{...}{Pass any other argument.}
 }
 \description{
-Lapply, then unlist.
+Do an lapply, then unlist, finally preserve names
 }
