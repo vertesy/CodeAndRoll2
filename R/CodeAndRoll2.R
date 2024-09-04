@@ -156,12 +156,12 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
 
 
 # _________________________________________________________________________________________________
-#' @title vec.from.vec
+#' @title vec.from.template
 #' @description Create a vector from a names of another vector / list / etc.
 #' @param x A vector of names, Default: LETTERS[1:5]
 #' @param fill The value to fill the new vector, Default: NA
 #' @export
-vec.from.vec <- function(x = table(LETTERS[1:5]), fill = NA) {
+vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
   stopifnot(is.list(x) | is.vector(x) | is.table(x))
   v <- rep(fill, length(x))
   names(v) <- names(x)
@@ -169,12 +169,12 @@ vec.from.vec <- function(x = table(LETTERS[1:5]), fill = NA) {
 }
 
 # _________________________________________________________________________________________________
-#' @title list.from.list
+#' @title list.from.template
 #' @description Create an empty list from a template list, copying names and filling values with NA.
 #' @param x A template list with names,.
 #' @param fill The value to fill the new list, Default: NA
 #' @export
-list.from.list <- function(x, fill = NA) {
+list.from.template <- function(x, fill = NA) {
   stopifnot(is(x)[1] == "list" | is.vector(x) | is.table(x))
   liszt <- as.list(rep(fill, length(x)))
   names(liszt) <- names(x)
