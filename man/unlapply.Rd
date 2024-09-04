@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{unlapply}
 \alias{unlapply}
-\title{unlapply}
+\title{Like sapply, but with names preserved}
 \usage{
 unlapply(list, FUN, ...)
 }

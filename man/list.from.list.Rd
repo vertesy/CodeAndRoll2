@@ -4,13 +4,13 @@
 \alias{list.from.list}
 \title{list.from.list}
 \usage{
-list.from.list(template, fill = NaN)
+list.from.list(x, fill = NA)
 }
 \arguments{
-\item{template}{A template list with names,.}
+\item{x}{A template list with names,.}
 
-\item{fill}{The value to fill the new vector, Default: NaN}
+\item{fill}{The value to fill the new list, Default: NA}
 }
 \description{
-create an empty list from named and structured as the template list.
+Create an empty list from a template list, copying names and filling values with NA.
 }
