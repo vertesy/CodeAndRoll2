@@ -199,6 +199,23 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
   return(mx)
 }
 
+# _________________________________________________________________________________________________
+#' @title data.frame.fromNames
+#' @description Create a data frame from 2 vectors defining the row- and column names of the
+#' data frame Default fill value: NA.
+#' @param rowname_vec A vector of names for rows, Default: 1:10
+#' @param colname_vec A vector of names for columns, Default: LETTERS[1:5]
+#' @param fill The value to fill the new vector, Default: NA
+#' @export
+data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) {
+  df <- matrix(
+    data = fill, nrow = length(rowname_vec), ncol = length(colname_vec),
+    dimnames = list(rowname_vec, colname_vec)
+  ) |> as.data.frame()
+  iprint("Dimensions:", dim(df))
+  return(df)
+}
+
 
 
 # _________________________________________________________________________________________________
