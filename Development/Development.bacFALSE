@@ -561,7 +561,7 @@ as.character.wNames <- function(vec) {
 #' @param oldvalues oldvalues (from)
 #' @param newvalues newvalues (to)
 #' @examples A <- 1:3
-#' translate(vec = A, oldvalues = 2:3, newvalues = letters[1:2])
+#' translate(vec = A, old = 2:3, new = letters[1:2])
 #'
 #' @export
 translate <- function(vec, oldvalues, newvalues) {

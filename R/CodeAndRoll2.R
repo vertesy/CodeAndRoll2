@@ -168,6 +168,7 @@ vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
   return(v)
 }
 
+
 # _________________________________________________________________________________________________
 #' @title list.from.template
 #' @description Create an empty list from a template list, copying names and filling values with NA.
@@ -180,7 +181,6 @@ list.from.template <- function(x, fill = NA) {
   names(liszt) <- names(x)
   return(liszt)
 }
-
 
 
 # _________________________________________________________________________________________________
