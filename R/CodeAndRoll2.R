@@ -600,9 +600,9 @@ as.named.vector.df <- function(
 #' @param names Index of column with names, Default: 2
 #' @param make.names make.names, Default: F
 #' @export
-as.named.vector.2colDF <- function(DF = UMI_CBC_1to1, values = 1, names = 2, make.names = F) {
-  vec <- DF[[values]]
-  names(vec) <- DF[[names]]
+as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = F) {
+  vec <- df[[values]]
+  names(vec) <- df[[names]]
   if (make.names) names(vec) <- make.names(names(vec))
   return(vec)
 }
@@ -612,15 +612,22 @@ as.named.vector.2colDF <- function(DF = UMI_CBC_1to1, values = 1, names = 2, mak
 #' @title df.col.2.named.vector
 #'
 #' @description Convert a dataframe column into a vector, keeping the corresponding dimension name.
-#' @param df_col data frame column
+#' @param df data frame
+#' @param col column index
+# #' @param df_col data frame column
 #' @export
-df.col.2.named.vector <- function(df_col) {
-  namez <- rownames(df_col)
-  vecc <- as.vector(unlist(df_col))
-  names(vecc) <- namez
-  return(vecc)
+df.col.2.named.vector <- function(df, col) {
+  vec <- df[ ,col]
+  names(vec) <- rownames(df)
+  return(vec)
 }
 
+# df.col.2.named.vector <- function(df_col) {
+#   namez <- rownames(df_col)
+#   vecc <- as.vector(unlist(df_col))
+#   names(vecc) <- namez
+#   return(vecc)
+# }
 
 
 # _________________________________________________________________________________________________
@@ -630,6 +637,7 @@ df.col.2.named.vector <- function(df_col) {
 #' @param df_row data frame row
 #' @export
 df.row.2.named.vector <- function(df_row) {
+  "Needs update see above"
   namez <- colnames(df_row)
   vecc <- as.vector(unlist(df_row))
   names(vecc) <- namez

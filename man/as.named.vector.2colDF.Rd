@@ -4,21 +4,16 @@
 \alias{as.named.vector.2colDF}
 \title{as.named.vector.2colDF}
 \usage{
-as.named.vector.2colDF(
-  DF = UMI_CBC_1to1,
-  values = 1,
-  names = 2,
-  make.names = F
-)
+as.named.vector.2colDF(df, values = 1, names = 2, make.names = F)
 }
 \arguments{
-\item{DF}{data frame}
-
 \item{values}{Index of column with values, Default: 1}
 
 \item{names}{Index of column with names, Default: 2}
 
 \item{make.names}{make.names, Default: F}
+
+\item{DF}{data frame}
 }
 \description{
 Convert a 2-column dataframe (value, name) into a named vector. Use for simple tibbles.
