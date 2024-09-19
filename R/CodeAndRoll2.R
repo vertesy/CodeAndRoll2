@@ -2411,7 +2411,7 @@ df.remove.empty.rows.and.columns <- function(
   }
 
   # Remove the empty rows and columns
-  df.filt <- df[rsx > 0, csx > 0]
+  df.filt <- df[rsx > 0, csx > 0, drop = F]
   idim(df.filt)
   return(df.filt)
 }
