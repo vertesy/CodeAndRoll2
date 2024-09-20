@@ -1306,10 +1306,11 @@ inf.omit <- function(vec) {
 #' @title zero.omit
 #' @description Omit zero values from a vector.
 #' @param vec input vector
+#' @param verbose Whether to print the range of the cleaned vector.
 #' @export
-zero.omit <- function(vec) {
+zero.omit <- function(vec, verbose = TRUE) {
   v2 <- vec[vec != 0]
-  iprint("range: ", range(v2))
+  if (verbose) iprint("range: ", range(v2))
   if (!is.null(names(vec))) {
     names(v2) <- names(vec)[vec != 0]
   }
@@ -2662,13 +2663,15 @@ list.wNames <- function(...) {
 #' @param na.omit Whether to omit rows with missing values.
 #' @param zero.omit Whether to omit rows with all-zero values.
 #' @param omit.empty Whether to omit rows with zero length.
+#' @param verbose Whether to print messages.
 #' @return A list.
 #' @examples
 #' dtf <- data.frame(x = c(1, 2, NA), y = c(3, 4, 0), z = c(5, 6, 7))
 #' as.list.df.by.row(dtf)
 #'
 #' @export as.list.df.by.row
-as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE) {
+as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE,
+                              verbose = TRUE) {
   outList <- as.list(as.data.frame(t(dtf)))
 
   # Omit rows with missing values, all-zero values, or zero length
@@ -2681,7 +2684,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
   if (omit.empty) {
     outList <- outList[(lapply(outList, length)) > 0]
   }
-  print(str(outList, vec.len = 2))
+  if (verbose) print(str(outList, vec.len = 2))
   return(outList)
 }
 

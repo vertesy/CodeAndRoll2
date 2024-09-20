@@ -4,7 +4,13 @@
 \alias{as.list.df.by.row}
 \title{as.list.df.by.row}
 \usage{
-\method{as.list}{df.by.row}(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty = FALSE)
+\method{as.list}{df.by.row}(
+  dtf,
+  na.omit = TRUE,
+  zero.omit = FALSE,
+  omit.empty = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{dtf}{A dataframe.}
@@ -14,6 +20,8 @@
 \item{zero.omit}{Whether to omit rows with all-zero values.}
 
 \item{omit.empty}{Whether to omit rows with zero length.}
+
+\item{verbose}{Whether to print messages.}
 }
 \value{
 A list.

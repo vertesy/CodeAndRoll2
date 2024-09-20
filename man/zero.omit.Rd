@@ -4,10 +4,12 @@
 \alias{zero.omit}
 \title{zero.omit}
 \usage{
-zero.omit(vec)
+zero.omit(vec, verbose = TRUE)
 }
 \arguments{
 \item{vec}{input vector}
+
+\item{verbose}{Whether to print the range of the cleaned vector.}
 }
 \description{
 Omit zero values from a vector.
