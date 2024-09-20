@@ -1861,8 +1861,21 @@ colQuantile <- function(x, na.rm = TRUE, ...) {
   apply(data.matrix(x), 2, quantile, ..., na.rm = na.rm)
 }
 
+# _________________________________________________________________________________________________
+#' @title Bind two named vectors by matching names
+#' @description Combines two named vectors into a data frame by matching their names.
+#' Missing values are filled with NA.
+#' @param vec1 First named vector.
+#' @param vec2 Second named vector.
+#' @return A data frame with columns for both vectors, matched by name.
+#' @export
 
-
+cbind_vectors_by_names <- function(vec1, vec2) {
+  all_names <- union(names(vec1), names(vec2))
+  df <- data.frame(vec1 = vec1[all_names], vec2 = vec2[all_names])
+  colnames(df) <- c(substitute(vec1), substitute(vec2))
+  df
+}
 
 
 # _________________________________________________________________________________________________
