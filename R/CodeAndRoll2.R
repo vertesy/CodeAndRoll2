@@ -1949,7 +1949,46 @@ rowsplit <- function(df, f = rownames(df)) {
   return(ListOfDFs)
 }
 
+# _________________________________________________________________________________________________
+#' @title Get the Column Name corresponding to the Maximum Value in each Row
+#'
+#' @description
+#' This function takes a numeric matrix as input and returns a named vector where each element
+#' corresponds to a row of the matrix. The names of the vector are the row names of the matrix,
+#' and the values are the column names where the maximum value of each row is found.
+#'
+#' @param mat A numeric matrix
+#' @param na.remove Logical. Should NA values be removed before finding the maximum value?
+#'
+#'
+#' @examples
+#' mat <- matrix(data = c(1, 2, 3, 9, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
+#' colnames(mat) <- c("UVI1", "UVI2", "UVI3")
+#' rownames(mat) <- c("Cell1", "Cell2")
+#' mat
+#' get_max_column_per_row(mat)
+#' mat[5] <- NA; mat[2] <- NaN
+#' mat
+#' get_max_column_per_row(mat)
+#'
+#' @export
+#'
+get_max_colname_per_row <- function(mat, na.remove = TRUE) {
 
+  # Remove NA values if specified
+  if(na.remove) mat[is.na(mat)] <- -Inf
+
+  # Find the index of the maximum value for each row
+  max_col_indices <- apply(mat, 1, which.max)
+
+  # Get the column names corresponding to these indices
+  max_col_names <- colnames(mat)[max_col_indices]
+
+  # Name the result with row names (cell names)
+  names(max_col_names) <- rownames(mat)
+
+  return(max_col_names)
+}
 
 # _________________________________________________________________________________________________
 #' @title select_rows_and_columns
