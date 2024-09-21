@@ -1979,8 +1979,10 @@ rowsplit <- function(df, f = rownames(df)) {
 #' Default: TRUE
 #' @param collapse Character. The character to use to collapse multiple column names into a single
 #' string. Default: "-"
+#' @param verbose Logical. Should messages be printed to the console? Default: TRUE
 #' @param multi_max_str Character. The string to use when multiple columns have the maximum value.
 #' Default: "multiple.maxima"
+#' @param suffix Character. The suffix to add to the `multi_max_str` string. Default: "rows have
 #'
 #'
 #' @examples
@@ -1995,7 +1997,8 @@ rowsplit <- function(df, f = rownames(df)) {
 #'
 #' @export
 
-get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", multi_max_str = "multiple.maxima") {
+get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", verbose = TRUE,
+                                    multi_max_str = "multiple.maxima", suffix = "rows have multiple maxima.") {
 
   # Remove NA values if specified
   if (na.remove) mat[is.na(mat)] <- -Inf
@@ -2012,6 +2015,11 @@ get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", multi
 
   # Name the result with row names (cell names)
   names(result) <- rownames(mat)
+
+  # stats
+  if(verbose) {
+    message(paste(sum(result == multi_max_str), "of", length(result), suffix))
+  }
 
   return(result)
 }

@@ -8,6 +8,7 @@ get_max_colname_per_row(
   mat,
   na.remove = TRUE,
   collapse = "-",
+  verbose = TRUE,
   multi_max_str = "multiple.maxima"
 )
 }
