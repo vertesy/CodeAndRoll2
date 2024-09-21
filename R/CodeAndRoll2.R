@@ -398,6 +398,13 @@ table_fixed_categories <- function(vec, categories_vec, strict = TRUE,
 
 
 
+
+table_decreasing <- function(vec, decreasing = TRUE, useNA = "ifany")) {
+  tbl <- table(vec, useNA = useNA)
+  if(decreasing) sort.decreasing(tbl) else sort(tbl)
+}
+
+
 # _________________________________________________________________________________________________
 #' @title getCategories
 #' @description Extract unique entries with a corresponding name.
