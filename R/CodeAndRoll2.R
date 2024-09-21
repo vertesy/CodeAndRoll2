@@ -398,8 +398,26 @@ table_fixed_categories <- function(vec, categories_vec, strict = TRUE,
 
 
 
-
-table_decreasing <- function(vec, decreasing = TRUE, useNA = "ifany")) {
+#' @title Frequency Table with Sorting Option
+#'
+#' @description
+#' This function generates a frequency table of the input vector `vec` and allows the option
+#' to sort the table in decreasing or increasing order. It handles NA values.
+#'
+#' @param vec A vector. The vector for which the frequency table is to be generated.
+#' @param decreasing Logical. Should the table be sorted in decreasing order? Default: `TRUE`.
+#' @param useNA A string. Specifies how to handle NA values. Can be "ifany", "always", or "no".
+#' Default: `"ifany"`.
+#'
+#' @return A frequency table sorted based on the `decreasing` argument.
+#' @examples
+#' vec <- c(1, 2, 2, NA, 3, 3, 3)
+#' table_decreasing(vec)
+#' table_decreasing(vec, decreasing = FALSE)
+#'
+#' @export
+table_decreasing <- function(vec, decreasing = TRUE, useNA = "ifany") {
+  stopifnot(useNA %in% c("ifany", "always", "no"))
   tbl <- table(vec, useNA = useNA)
   if(decreasing) sort.decreasing(tbl) else sort(tbl)
 }

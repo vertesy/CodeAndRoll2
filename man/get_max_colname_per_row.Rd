@@ -9,7 +9,8 @@ get_max_colname_per_row(
   na.remove = TRUE,
   collapse = "-",
   verbose = TRUE,
-  multi_max_str = "multiple.maxima"
+  multi_max_str = "multiple.maxima",
+  suffix = "rows have multiple maxima."
 )
 }
 \arguments{
@@ -21,8 +22,12 @@ Default: TRUE}
 \item{collapse}{Character. The character to use to collapse multiple column names into a single
 string. Default: "-"}
 
+\item{verbose}{Logical. Should messages be printed to the console? Default: TRUE}
+
 \item{multi_max_str}{Character. The string to use when multiple columns have the maximum value.
 Default: "multiple.maxima"}
+
+\item{suffix}{Character. The suffix to add to the \code{multi_max_str} string. Default: "rows have}
 }
 \description{
 This function takes a numeric matrix as input and returns a named vector where each element
