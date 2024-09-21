@@ -2,19 +2,34 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{get_max_colname_per_row}
 \alias{get_max_colname_per_row}
-\title{Get the Column Name corresponding to the Maximum Value in each Row}
+\title{Get the Column Name corresponding to the Maximum Value in each Row (handles ambiguous matches)}
 \usage{
-get_max_colname_per_row(mat, na.remove = TRUE)
+get_max_colname_per_row(
+  mat,
+  na.remove = TRUE,
+  collapse = "-",
+  multi_max_str = "multiple.maxima"
+)
 }
 \arguments{
 \item{mat}{A numeric matrix}
 
-\item{na.remove}{Logical. Should NA values be removed before finding the maximum value?}
+\item{na.remove}{Logical. Should NA values be removed before finding the maximum value?
+Default: TRUE}
+
+\item{collapse}{Character. The character to use to collapse multiple column names into a single
+string. Default: "-"}
+
+\item{multi_max_str}{Character. The string to use when multiple columns have the maximum value.
+Default: "multiple.maxima"}
 }
 \description{
 This function takes a numeric matrix as input and returns a named vector where each element
 corresponds to a row of the matrix. The names of the vector are the row names of the matrix,
-and the values are the column names where the maximum value of each row is found.
+and the values are the column names where the maximum value of each row is found. If there are
+multiple columns with the maximum value in a row, the value for that row will be set to
+\code{multi_max_str}. If \code{na.remove} is set to \code{TRUE}, NA values will be removed before finding the
+maximum value.
 }
 \examples{
 mat <- matrix(data = c(1, 2, 3, 9, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)

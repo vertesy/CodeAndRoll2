@@ -1964,15 +1964,23 @@ rowsplit <- function(df, f = rownames(df)) {
 }
 
 # _________________________________________________________________________________________________
-#' @title Get the Column Name corresponding to the Maximum Value in each Row
+#' @title Get the Column Name corresponding to the Maximum Value in each Row (handles ambiguous matches)
 #'
 #' @description
 #' This function takes a numeric matrix as input and returns a named vector where each element
 #' corresponds to a row of the matrix. The names of the vector are the row names of the matrix,
-#' and the values are the column names where the maximum value of each row is found.
+#' and the values are the column names where the maximum value of each row is found. If there are
+#' multiple columns with the maximum value in a row, the value for that row will be set to
+#' `multi_max_str`. If `na.remove` is set to `TRUE`, NA values will be removed before finding the
+#' maximum value.
 #'
 #' @param mat A numeric matrix
 #' @param na.remove Logical. Should NA values be removed before finding the maximum value?
+#' Default: TRUE
+#' @param collapse Character. The character to use to collapse multiple column names into a single
+#' string. Default: "-"
+#' @param multi_max_str Character. The string to use when multiple columns have the maximum value.
+#' Default: "multiple.maxima"
 #'
 #'
 #' @examples
@@ -1986,23 +1994,30 @@ rowsplit <- function(df, f = rownames(df)) {
 #' get_max_column_per_row(mat)
 #'
 #' @export
-#'
-get_max_colname_per_row <- function(mat, na.remove = TRUE) {
+
+get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", multi_max_str = "multiple.maxima") {
 
   # Remove NA values if specified
-  if(na.remove) mat[is.na(mat)] <- -Inf
+  if (na.remove) mat[is.na(mat)] <- -Inf
 
-  # Find the index of the maximum value for each row
-  max_col_indices <- apply(mat, 1, which.max)
+  # Function to find the maximum indices of values in a vector
+  which.max.multi <- function(x) which(x == max(x, na.rm = TRUE))
 
-  # Get the column names corresponding to these indices
-  max_col_names <- colnames(mat)[max_col_indices]
+  # Apply to each row and return appropriate result
+  result <- apply(mat, 1, function(row) {
+    max_indices <- which.max.multi(row)
+    if (length(max_indices) > 1) return(multi_max_str)
+    return(colnames(mat)[max_indices])
+  })
 
   # Name the result with row names (cell names)
-  names(max_col_names) <- rownames(mat)
+  names(result) <- rownames(mat)
 
-  return(max_col_names)
+  return(result)
 }
+
+
+
 
 # _________________________________________________________________________________________________
 #' @title select_rows_and_columns
