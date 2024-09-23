@@ -451,8 +451,10 @@ table_decreasing_hybrid <- function(vec, first_elements = FALSE, useNA = "ifany"
   if(isFALSE(first_elements)) {
       return(tbl_decr)
     } else {
-      stopifnot(all(first_elements %in% names(tbl_decr)))
-      c(tbl_decr[first_elements], tbl_decr[!names(tbl_decr) %in% first_elements])
+      if( !all(first_elements %in% names(tbl_decr))) warning("Not all elements are found in the table!", immediate. = T)
+      first_elements <- intersect(first_elements, names(tbl_decr))
+      tbl_decr <- c(tbl_decr[first_elements], tbl_decr[!names(tbl_decr) %in% first_elements])
+      return(tbl_decr)
   }
 }
 
