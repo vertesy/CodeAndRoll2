@@ -438,12 +438,12 @@ table_decreasing <- function(vec, decreasing = TRUE, useNA = "ifany") {
 #'
 #' @return A frequency table sorted.
 #' @examples
-# vec <- c(1, 2, 2, NA, 3, 3, 3)
-# table_decreasing_w_fix(vec)
-# table_decreasing_w_fix(vec, first_elements = '1')
+#' vec <- c(1, 2, 2, NA, 3, 3, 3)
+#' table_decreasing_hybrid(vec)
+#' table_decreasing_hybrid(vec, first_elements = '1')
 #'
 #' @export
-table_decreasing_w_fix <- function(vec, first_elements = FALSE, useNA = "ifany") {
+table_decreasing_hybrid <- function(vec, first_elements = FALSE, useNA = "ifany") {
   stopifnot(useNA %in% c("ifany", "always", "no"))
   tbl <- table(vec, useNA = useNA)
 
