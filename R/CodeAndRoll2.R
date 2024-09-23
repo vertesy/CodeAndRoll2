@@ -398,6 +398,7 @@ table_fixed_categories <- function(vec, categories_vec, strict = TRUE,
 
 
 
+# _________________________________________________________________________________________________
 #' @title Frequency Table with Sorting Option
 #'
 #' @description
@@ -422,6 +423,38 @@ table_decreasing <- function(vec, decreasing = TRUE, useNA = "ifany") {
   if(decreasing) sort.decreasing(tbl) else sort(tbl)
 }
 
+
+# _________________________________________________________________________________________________
+#' @title Frequency Table with Hyrid Sorting: you can sort by frequency and by specified value
+#'
+#' @description
+#' This function generates a frequency table of the input vector `vec` and displays the table
+#' sorted by frequency and by a set of specified values. It handles NA values.
+#'
+#' @param vec A vector. The vector for which the frequency table is to be generated.
+#' @param first_elements Logical. Should the table be sorted in decreasing order? Default: `TRUE`.
+#' @param useNA A string. Specifies how to handle NA values. Can be "ifany", "always", or "no".
+#' Default: `"ifany"`.
+#'
+#' @return A frequency table sorted.
+#' @examples
+# vec <- c(1, 2, 2, NA, 3, 3, 3)
+# table_decreasing_w_fix(vec)
+# table_decreasing_w_fix(vec, first_elements = '1')
+#'
+#' @export
+table_decreasing_w_fix <- function(vec, first_elements = FALSE, useNA = "ifany") {
+  stopifnot(useNA %in% c("ifany", "always", "no"))
+  tbl <- table(vec, useNA = useNA)
+
+  tbl_decr <- sort.decreasing(tbl)
+  if(isFALSE(first_elements)) {
+      return(tbl_decr)
+    } else {
+      stopifnot(all(first_elements %in% names(tbl_decr)))
+      c(tbl_decr[first_elements], tbl_decr[!names(tbl_decr) %in% first_elements])
+  }
+}
 
 # _________________________________________________________________________________________________
 #' @title getCategories
