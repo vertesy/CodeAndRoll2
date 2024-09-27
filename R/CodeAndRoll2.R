@@ -674,7 +674,6 @@ as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = F) {
 #' @description Convert a dataframe column into a vector, keeping the corresponding dimension name.
 #' @param df data frame
 #' @param col column index
-# #' @param df_col data frame column
 #' @export
 df.col.2.named.vector <- function(df, col) {
   vec <- df[ ,col]
