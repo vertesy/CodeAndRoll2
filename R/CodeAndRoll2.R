@@ -2084,10 +2084,10 @@ get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", verbo
 
   # stats
   if(verbose) {
-    message(paste(sum(result == multi_max_str), "of", length(result), suffix))
+    message(paste(sum(max_colname_per_row == multi_max_str), "of", length(max_colname_per_row), suffix))
   }
 
-  return(result)
+  return(max_colname_per_row)
 }
 
 

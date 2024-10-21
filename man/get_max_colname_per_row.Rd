@@ -42,9 +42,10 @@ mat <- matrix(data = c(1, 2, 3, 9, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
 colnames(mat) <- c("UVI1", "UVI2", "UVI3")
 rownames(mat) <- c("Cell1", "Cell2")
 mat
-get_max_column_per_row(mat)
+get_max_colname_per_row(mat)
 mat[5] <- NA; mat[2] <- NaN
+mat[1] <- 2
 mat
-get_max_column_per_row(mat)
+get_max_colname_per_row(mat)
 
 }
