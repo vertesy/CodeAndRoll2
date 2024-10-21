@@ -2049,31 +2049,38 @@ rowsplit <- function(df, f = rownames(df)) {
 #' colnames(mat) <- c("UVI1", "UVI2", "UVI3")
 #' rownames(mat) <- c("Cell1", "Cell2")
 #' mat
-#' get_max_column_per_row(mat)
+#' get_max_colname_per_row(mat)
 #' mat[5] <- NA; mat[2] <- NaN
+#' mat[1] <- 2
 #' mat
-#' get_max_column_per_row(mat)
+#' get_max_colname_per_row(mat)
 #'
 #' @export
 
-get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", verbose = TRUE,
-                                    multi_max_str = "multiple.maxima", suffix = "rows have multiple maxima.") {
+get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", verbose = TRUE
+                                    , multi_max_str = "multiple.maxima"
+                                    , suffix = "rows have multiple maxima.") {
 
   # Remove NA values if specified
   if (na.remove) mat[is.na(mat)] <- -Inf
 
-  # Function to find the maximum indices of values in a vector
+  # Function to find the maximum indices (1 or more ) of values in a vector
   which.max.multi <- function(x) which(x == max(x, na.rm = TRUE))
 
-  # Apply to each row and return appropriate result
-  result <- apply(mat, 1, function(row) {
+  # Apply function to find the maximum indices to each row and return appropriate result
+  max_colname_per_row <- apply(mat, 1, function(row) {
+
+    # One or more maximum values
     max_indices <- which.max.multi(row)
+
+    # If there are multiple maximum values, return the "multi_max_str"
     if (length(max_indices) > 1) return(multi_max_str)
+
     return(colnames(mat)[max_indices])
   })
 
   # Name the result with row names (cell names)
-  names(result) <- rownames(mat)
+  names(max_colname_per_row) <- rownames(mat)
 
   # stats
   if(verbose) {
