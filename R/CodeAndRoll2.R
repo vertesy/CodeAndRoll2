@@ -1978,13 +1978,13 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 #' @return A sorted version of the input matrix or data frame.
 #'
 #' @export
-sort_matrix_rows <- function(df, column, rownames = F, decrease = FALSE, na_last = TRUE
+sort_matrix_rows <- function(df, column = NULL, rownames = F, decrease = FALSE, na_last = TRUE
                              ) {
 
   stopifnot(
     is.data.frame(df) | is.matrix(df),
-    is.character(column) | is.numeric(column),
-    "cannot handle multi column sort" = length(column) == 1,
+    is.character(column) | is.numeric(column) | if (rownames) is.null(column),
+    "cannot handle multi column sort" = length(column) == 1  | if (rownames) is.null(column),
     is.logical(rownames), is.logical(decrease), is.logical(na_last),
     (if (isFALSE(rownames) & is.character(column) ) column %in% colnames(df) else TRUE)
   )
