@@ -496,7 +496,7 @@ rotate <- function(x, clockwise = TRUE) { # rotate a matrix 90 degrees.
 
 sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column of a numeric matrix / data frame.
 
-sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { # Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
+sort_matrix_rows <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) { # Sort a matrix. ALTERNATIVE: dd[with(dd, order(-z, b)), ]. Source: https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
   if (length(colname_in_df) > 1) { print("cannot handle multi column sort") }
   else {df[ order(df[, colname_in_df], decreasing = decrease, na.last = na_last), ]}
 }

@@ -1954,22 +1954,48 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 
 
 # _________________________________________________________________________________________________
-#' @title sort.mat
+#' @title Sort matrix or data frame by a column or row names
 #'
-#' @description Sorts a matrix by a given column. This function can only handle single column sort.
-#' An alternative is dd[with(dd, order(-z, b)), ] as found on StackOverflow (https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r).
-#' @param df Numeric input matrix to be sorted.
-#' @param colname_in_df Column name or index to sort by. The function can only handle single column sort. Default: 1
-#' @param decrease Logical indicating whether to sort in decreasing order. Default: FALSE
-#' @param na_last Logical indicating whether NA values should be placed last. Default: TRUE
-#' @return A sorted version of the input matrix.
-#' @export sort.mat
-sort.mat <- function(df, colname_in_df = 1, decrease = FALSE, na_last = TRUE) {
-  if (length(colname_in_df) > 1) {
-    print("cannot handle multi column sort")
-  } else {
-    df[order(df[, colname_in_df], decreasing = decrease, na.last = na_last), ]
-  }
+#' @description
+#' Sorts a numeric matrix or data frame by a specified column or by row names. The function can only
+#' handle sorting by a single column. It offers options to sort in increasing or decreasing order,
+#' and to control the placement of `NA` values.
+#'
+#' @param df A numeric matrix or data frame to be sorted. Default: none.
+#' @param column A column name or index by which to sort. The function can handle only single-column
+#'   sorting. Default: none.
+#' @param rownames Logical. If `TRUE`, row names will be used for sorting instead of a column.
+#'   Default: `FALSE`.
+#' @param decrease Logical. If `TRUE`, the data will be sorted in decreasing order. Default: `FALSE`.
+#' @param na_last Logical. If `TRUE`, `NA` values will be placed at the end. Default: `TRUE`.
+#'
+#' @examples
+#' df <- data.frame(AA = c(1, 2, 3), BB = c(3, 2, 1), row.names = letters[7:5])
+#' sort_matrix_rows(df, "AA")
+#' sort_matrix_rows(df, "AA", decrease = TRUE)
+#' sort_matrix_rows(df, "A", rownames = TRUE)
+#'
+#' @return A sorted version of the input matrix or data frame.
+#'
+#' @export
+sort_matrix_rows <- function(df, column, rownames = F, decrease = FALSE, na_last = TRUE
+                             ) {
+
+  stopifnot(
+    is.data.frame(df) | is.matrix(df),
+    is.character(column) | is.numeric(column),
+    "cannot handle multi column sort" = length(column) == 1,
+    is.logical(rownames), is.logical(decrease), is.logical(na_last),
+    (if (isFALSE(rownames) & is.character(column) ) column %in% colnames(df) else TRUE)
+  )
+
+  message("Sorting by ", if(rownames) "rownames" else paste(column, "column"), " in ", if(decrease) "Decreasing" else "Increasing", " order." )
+
+  ordering_vakues <- if(rownames) rownames(df) else df[, column]
+  sorted_order <- order(rownames(df), decreasing = decrease, na.last = na_last)
+
+  df[sorted_order, ]
+
 }
 
 
@@ -3502,3 +3528,16 @@ as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
   names(vecc) <- namez
   return(vecc)
 }
+
+
+# _________________________________________________________________________________________________
+# Deprecated ----
+# _________________________________________________________________________________________________
+#' @export sort.mat
+sort.mat <- function() .Deprecated("sort_matrix_rows()")
+
+
+
+#  ______________________________________________________________________________________
+
+
