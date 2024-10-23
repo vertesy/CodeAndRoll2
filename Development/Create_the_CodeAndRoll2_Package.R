@@ -4,6 +4,7 @@
 # source("~/GitHub/Packages/CodeAndRoll2/Development/Create_the_CodeAndRoll2_Package.R")
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = TRUE)
 
+
 # Functions ------------------------
 repository.dir <- "~/GitHub/Packages/CodeAndRoll2"
 config.path <- file.path(repository.dir, "Development/config.R")
@@ -59,7 +60,7 @@ PackageTools::extract_package_dependencies(repository.dir)
 devtools::load_all("~/GitHub/Packages/PackageTools/")
 if (F) {
   (excluded.packages <- unlist(strsplit(DESCRIPTION$'depends', split = ", ")))
-  (ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T))
+  (ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = .R$, pattern = .R$, pattern = .R$))
   for (scriptX in ls.scripts.full.path) {
     PackageTools::add_importFrom_statements(scriptX, exclude_packages = excluded.packages)
   }
