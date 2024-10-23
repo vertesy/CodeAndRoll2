@@ -7,11 +7,11 @@
 data.frame.fromNames(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA)
 }
 \arguments{
-\item{rowname_vec}{A vector of names for rows, Default: 1:10}
+\item{rowname_vec}{A vector of names for rows, Default: \code{1:10}}
 
-\item{colname_vec}{A vector of names for columns, Default: LETTERS\link{1:5}}
+\item{colname_vec}{A vector of names for columns, Default: \code{LETTERS[1:5]}}
 
-\item{fill}{The value to fill the new vector, Default: NA}
+\item{fill}{The value to fill the new vector, Default: \code{NA}}
 }
 \description{
 Create a data frame from 2 vectors defining the row- and column names of the

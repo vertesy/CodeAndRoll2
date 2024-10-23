@@ -7,7 +7,7 @@
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
 # source('~/.pack.R')
 
-
+# file.edit("~/GitHub/Packages/CodeAndRoll2/Development/Create_the_CodeAndRoll2_Package.R")
 
 ### CHAPTERS:
 
@@ -51,7 +51,7 @@ getScriptName <- function() {
 getProject <- function() {
   if (!requireNamespace("rstudioapi", quietly = TRUE)) {
     warning("rstudioapi package is not available. Please install it using install.packages('rstudioapi').",
-      immediate. = TRUE
+            immediate. = TRUE
     )
   } else {
     tryCatch(basename(rstudioapi::getActiveProject()), error = function(e) {})
@@ -73,7 +73,6 @@ getProject <- function() {
 #' \dontrun{
 #' savehistory_2()
 #' }
-
 savehistory_2 <- function() {
   # Get the current working directory
   current_dir <- getwd()
@@ -82,9 +81,10 @@ savehistory_2 <- function() {
   script_name <- try(basename(rstudioapi::getSourceEditorContext()$path), silent = TRUE)
   if ("try-error" %in% is(script_name)) script_name <- ""
 
-  file_name <- ppp( "command_history",
-                    format(Sys.time(), format = "%Y.%m.%d"),
-                    script_name, "txt"
+  file_name <- ppp(
+    "command_history",
+    format(Sys.time(), format = "%Y.%m.%d"),
+    script_name, "txt"
   )
 
   # Save the command history
@@ -92,7 +92,6 @@ savehistory_2 <- function() {
 
   # Print and return the file path
   print(file.path(current_dir, file_name))
-
 }
 
 
@@ -101,9 +100,10 @@ savehistory_2 <- function() {
 ## Create and check variables ____________________________________________________________ ----
 
 #' @title vec.fromNames
+#'
 #' @description Create a vector from a vector of names.
-#' @param name_vec A vector of names, Default: LETTERS[1:5]
-#' @param fill The value to fill the new vector, Default: NA
+#' @param name_vec A vector of names, Default: `LETTERS[1:5]`
+#' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
   v <- numeric(length(name_vec))
@@ -124,10 +124,11 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 #' element is named according to the character vector and filled with a specified value.
 #' @param x A character vector of names, with a default of the first five letters of the alphabet.
 #' @param fill The value used to fill the elements of the list, with a default of `NaN`.
+#' @param use.names Logical. If `TRUE`, the names of the input vector are used as names for the list.
 #'
 #' @return A named list with elements filled with the specified value.
 #' @examples
-#' list.fromNames() # Default behavior with LETTERS[1:5] and NaN
+#' list.fromNames() # Default behavior with `LETTERS[1:5]` and `NaN`
 #' @export
 list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
   liszt <- as.list(rep(fill, length(x)))
@@ -157,9 +158,10 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
 
 # _________________________________________________________________________________________________
 #' @title vec.from.template
+#'
 #' @description Create a vector from a names of another vector / list / etc.
-#' @param x A vector of names, Default: LETTERS[1:5]
-#' @param fill The value to fill the new vector, Default: NA
+#' @param x A vector of names, Default: `LETTERS[1:5]`
+#' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
   stopifnot(is.list(x) | is.vector(x) | is.table(x))
@@ -171,9 +173,11 @@ vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
 
 # _________________________________________________________________________________________________
 #' @title list.from.template
+#'
 #' @description Create an empty list from a template list, copying names and filling values with NA.
 #' @param x A template list with names,.
-#' @param fill The value to fill the new list, Default: NA
+#' @param fill The value to fill the new list, Default: `NA`
+#'
 #' @export
 list.from.template <- function(x, fill = NA) {
   stopifnot(is(x)[1] == "list" | is.vector(x) | is.table(x))
@@ -186,9 +190,9 @@ list.from.template <- function(x, fill = NA) {
 # _________________________________________________________________________________________________
 #' @title matrix.fromNames
 #' @description Create a matrix from 2 vectors defining the row- and column names of the matrix. Default fill value: NA.
-#' @param rowname_vec A vector of names for rows, Default: 1:10
-#' @param colname_vec A vector of names for columns, Default: LETTERS[1:5]
-#' @param fill The value to fill the new vector, Default: NA
+#' @param rowname_vec A vector of names for rows, Default: `1:10`
+#' @param colname_vec A vector of names for columns, Default: `LETTERS[1:5]`
+#' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) {
   mx <- matrix(
@@ -203,9 +207,9 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
 #' @title data.frame.fromNames
 #' @description Create a data frame from 2 vectors defining the row- and column names of the
 #' data frame Default fill value: NA.
-#' @param rowname_vec A vector of names for rows, Default: 1:10
-#' @param colname_vec A vector of names for columns, Default: LETTERS[1:5]
-#' @param fill The value to fill the new vector, Default: NA
+#' @param rowname_vec A vector of names for rows, Default: `1:10`
+#' @param colname_vec A vector of names for columns, Default: `LETTERS[1:5]`
+#' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) {
   df <- matrix(
@@ -220,10 +224,11 @@ data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5],
 
 # _________________________________________________________________________________________________
 #' @title matrix.fromVector
-#' @description Create a matrix from values in a vector repeated for each column / each row. Similar to rowNameMatrix and colNameMatrix.
-#' @param vector Input vector for rows (number of rows = length), Default: 1:5
-#' @param HowManyTimes Number of columns, Default: 3
-#' @param IsItARow Transpose? Swap rows an columns. Default: TRUE
+#' @description Create a matrix from values in a vector repeated for each column / each row.
+#' Similar to rowNameMatrix and colNameMatrix.
+#' @param vector Input vector for rows (number of rows = length), Default: `1:5`.
+#' @param HowManyTimes Number of columns, Default: `3`.
+#' @param IsItARow Transpose? Swap rows an columns. Default: `TRUE`
 #' @export
 matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
   matt <- matrix(vector, nrow = length(vector), ncol = HowManyTimes)
@@ -238,9 +243,9 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 # _________________________________________________________________________________________________
 #' @title array.fromNames
 #' @description Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
-#' @param rowname_vec A vector of names for rows, Default: 1:3
-#' @param colname_vec A vector of names for columns, Default: letters[1:2]
-#' @param z_name_vec A vector of names for Z dimension, Default: LETTERS[4:6]
+#' @param rowname_vec A vector of names for rows, Default: `1:3`
+#' @param colname_vec A vector of names for columns, Default: `letters[1:2]`
+#' @param z_name_vec A vector of names for Z dimension, Default: `LETTERS[4:6]`
 #' @param fill The value to fill the new vector, Default: NA
 #' @export
 array.fromNames <- function(
@@ -335,7 +340,7 @@ idimnames <- function(any_object, print_max = 25) {
 #' @title printEveryN
 #'
 #' @description Report iterator value at every e.g. 1000
-#' @param iterator Current iteration of the loop. Default: i.
+#' @param i Current iteration of the loop. Default: i.
 #' @param N  print Every N
 #' @param prefix Optional prefix to display alongside the progress.
 #'
@@ -384,14 +389,18 @@ table_fixed_categories <- function(vec, categories_vec, strict = TRUE,
 
   missing_from_category <- unique(vec) %!in% categories_vec
   if (any(missing_from_category)) {
-    txt1 <- pc_TRUE(logical_vector = missing_from_category, NumberAndPC = T,
-                    suffix = "values are NOT found in the categories vector!")
+    txt1 <- pc_TRUE(
+      logical_vector = missing_from_category, NumberAndPC = TRUE,
+      suffix = "values are NOT found in the categories vector!"
+    )
     if (strict) stop(txt1) else warning(txt1)
   }
 
-  txt2 <- pc_TRUE(logical_vector = categories_vec %in% vec, NumberAndPC = T,
-                  suffix = "categories are found in the vector")
-  if(v) print(txt2)
+  txt2 <- pc_TRUE(
+    logical_vector = categories_vec %in% vec, NumberAndPC = TRUE,
+    suffix = "categories are found in the vector"
+  )
+  if (v) print(txt2)
 
   table(factor(unlist(vec), levels = categories_vec))
 }
@@ -420,7 +429,7 @@ table_fixed_categories <- function(vec, categories_vec, strict = TRUE,
 table_decreasing <- function(vec, decreasing = TRUE, useNA = "ifany") {
   stopifnot(useNA %in% c("ifany", "always", "no"))
   tbl <- table(vec, useNA = useNA)
-  if(decreasing) sort.decreasing(tbl) else sort(tbl)
+  if (decreasing) sort.decreasing(tbl) else sort(tbl)
 }
 
 
@@ -440,7 +449,7 @@ table_decreasing <- function(vec, decreasing = TRUE, useNA = "ifany") {
 #' @examples
 #' vec <- c(1, 2, 2, NA, 3, 3, 3)
 #' table_decreasing_hybrid(vec)
-#' table_decreasing_hybrid(vec, first_elements = '1')
+#' table_decreasing_hybrid(vec, first_elements = "1")
 #'
 #' @export
 table_decreasing_hybrid <- function(vec, first_elements = FALSE, useNA = "ifany") {
@@ -448,13 +457,13 @@ table_decreasing_hybrid <- function(vec, first_elements = FALSE, useNA = "ifany"
   tbl <- table(vec, useNA = useNA)
 
   tbl_decr <- sort.decreasing(tbl)
-  if(isFALSE(first_elements)) {
-      return(tbl_decr)
-    } else {
-      if( !all(first_elements %in% names(tbl_decr))) warning("Not all elements are found in the table!", immediate. = T)
-      first_elements <- intersect(first_elements, names(tbl_decr))
-      tbl_decr <- c(tbl_decr[first_elements], tbl_decr[!names(tbl_decr) %in% first_elements])
-      return(tbl_decr)
+  if (isFALSE(first_elements)) {
+    return(tbl_decr)
+  } else {
+    if (!all(first_elements %in% names(tbl_decr))) warning("Not all elements are found in the table!", immediate. = TRUE)
+    first_elements <- intersect(first_elements, names(tbl_decr))
+    tbl_decr <- c(tbl_decr[first_elements], tbl_decr[!names(tbl_decr) %in% first_elements])
+    return(tbl_decr)
   }
 }
 
@@ -504,8 +513,8 @@ grepv <- function(
     pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
     fixed = FALSE, useBytes = FALSE, invert = FALSE, ...) {
   grep(pattern, x,
-    ignore.case = ignore.case, perl = perl, fixed = fixed,
-    useBytes = useBytes, invert = invert, ..., value = TRUE
+       ignore.case = ignore.case, perl = perl, fixed = fixed,
+       useBytes = useBytes, invert = invert, ..., value = TRUE
   )
 }
 
@@ -585,6 +594,7 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 #'
 #' @description Convert any column or row of a dataframe into a vector, keeping the
 #' corresponding dimension name.
+#' @param df A dataframe.
 #' @param col.or.row.name.or.index Which column or row to extract (numeric index).
 #' @param verbose Print the columnname or rowname that is being used
 #' @param WhichDimNames Shall we extract rows (2) or columns (1, default)?, Default: 1
@@ -595,9 +605,9 @@ as.named.vector.df <- function(
     df, col.or.row.name.or.index = 1, verbose = TRUE,
     WhichDimNames = 1,
     ...) {
-  .Deprecated(old = 'as.named.vector.df' ,new = "df.col.2.named.vector or df.row.2.named.vector")
+  .Deprecated(old = "as.named.vector.df", new = "df.col.2.named.vector or df.row.2.named.vector")
 
-  if(verbose) message("input df dimensions: ", kppc(idim(df)))
+  if (verbose) message("input df dimensions: ", kppc(idim(df)))
 
   name.selection <- dimnames(df)[[(3 - WhichDimNames)]][col.or.row.name.or.index]
   if (verbose) iprint("Variable used:", name.selection)
@@ -652,15 +662,17 @@ as.named.vector.df <- function(
 #   return(vecc)
 # }
 
-
+# _________________________________________________________________________________________________
 #' @title as.named.vector.2colDF
+#'
 #' @description Convert a 2-column dataframe (value, name) into a named vector. Use for simple tibbles.
-#' @param DF data frame
+#' @param df data frame
 #' @param values Index of column with values, Default: 1
 #' @param names Index of column with names, Default: 2
 #' @param make.names make.names, Default: F
+#'
 #' @export
-as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = F) {
+as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE) {
   vec <- df[[values]]
   names(vec) <- df[[names]]
   if (make.names) names(vec) <- make.names(names(vec))
@@ -676,7 +688,7 @@ as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = F) {
 #' @param col column index
 #' @export
 df.col.2.named.vector <- function(df, col) {
-  vec <- df[ ,col]
+  vec <- df[, col]
   names(vec) <- rownames(df)
   return(vec)
 }
@@ -708,7 +720,7 @@ df.row.2.named.vector <- function(df_row) {
 # _________________________________________________________________________________________________
 #' @title tibble_summary_to_namedVec
 #' @description Convert a key-value tibble into a named vector (as opposed to using rownames).
-#' @param tbl A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))
+#' @param tbl A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = TRUE), value = rnorm(20))
 #' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
@@ -717,7 +729,7 @@ df.row.2.named.vector <- function(df_row) {
 #'
 #' @export
 tibble_summary_to_namedVec <- function(
-    tbl = dplyr::tibble("key" = sample(x = 1:5, size = 20, replace = T), "value" = rnorm(20)),
+    tbl = dplyr::tibble("key" = sample(x = 1:5, size = 20, replace = TRUE), "value" = rnorm(20)),
     idx = c(key = 1, value = 2)) {
   iprint("The following name and value columns are taken:", colnames(tbl[idx]), "; with indices:", idx)
   tbl_2_col <- tbl[, idx]
@@ -737,7 +749,7 @@ tibble_summary_to_namedVec <- function(
 #' @importFrom dplyr bind_rows
 #'
 #' @export
-as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose = T) {
+as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose = TRUE) {
   stopifnot(!is.null(names(vec.w.names)))
   tbl <- dplyr::bind_rows(vec.w.names)
   if (transpose) t(tbl) else tbl
@@ -866,7 +878,8 @@ as.character.wNames <- function(vec) {
 #' @param vec set of values where you want to replace
 #' @param old oldvalues, a vector of values that occur in `vec` to be replaced.
 #' @param new newvalues, a vector of equal length, to be copied from, corresponding 1-by-1 to old.
-#' @examples A <- 1:3; translate(vec = A, old = 2:3, new = letters[1:2])
+#' @examples A <- 1:3
+#' translate(vec = A, old = 2:3, new = letters[1:2])
 #'
 #' @export
 translate <- function(vec, old, new) {
@@ -918,7 +931,7 @@ fractions <- function(vec, na_rm = TRUE) vec / sum(vec, na.rm = na_rm)
 #' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
 #' @param silent Suppress printing info? Default: FALSE
 #' @export
-flip_value2name <- function(namedVector, NumericNames = FALSE, silent = F) {
+flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
   if (!is.null(names(namedVector))) {
     newvec <- names(namedVector)
     if (NumericNames) {
@@ -1032,11 +1045,11 @@ pad.na <- function(x, len) {
 # _________________________________________________________________________________________________
 #' @title clip.at.fixed.value
 #' @description Signal clipping. Cut values in a distribution, above or below a threshold.
-#' @param distribution A vector of numeric values.
+#' @param x A vector of numeric values (distribution).
 #' @param high Clip above threshold? Default: TRUE
 #' @param thr threshold values, Default: 3
+#'
 #' @export
-
 clip.at.fixed.value <- function(x, high = TRUE, thr = 3) {
   if (high) {
     x[x > thr] <- thr
@@ -1068,9 +1081,9 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
   qnt <- quantile(x, probs = percentiles, na.rm = na.rm)
   if (showhist) {
     hist(unlist(x),
-      breaks = 50, main = "Distribution and cutoffs histogram",
-      sub = paste("Percentile cutoffs at: ", paste(percentiles, collapse = " and ")),
-      xlab = "Values"
+         breaks = 50, main = "Distribution and cutoffs histogram",
+         sub = paste("Percentile cutoffs at: ", paste(percentiles, collapse = " and ")),
+         xlab = "Values"
     )
     abline(v = qnt, col = 2)
   }
@@ -1114,7 +1127,7 @@ col2named.vec.tbl <- function(tbl.2col) {
 # _________________________________________________________________________________________________
 #' @title topN.dfCol
 #' @description Find the n highest values in a named vector.
-#' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
+#' @param df_col data frame column, Default: `as.named.vector(df[, 1, drop = FALSE])`
 #' @param n top N values, Default: 5
 #' @export
 topN.dfCol <- function(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5) {
@@ -1125,7 +1138,7 @@ topN.dfCol <- function(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5) {
 # _________________________________________________________________________________________________
 #' @title bottomN.dfCol
 #' @description Find the n lowest values in a named vector.
-#' @param df_col data frame column, Default: as.named.vector(df[, 1, drop = FALSE])
+#' @param df_col data frame column, Default: `as.named.vector(df[, 1, drop = FALSE])`
 #' @param n lowest N values, Default: 5
 #' @export
 bottomN.dfCol <- function(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5) {
@@ -1426,6 +1439,9 @@ pc_TRUE <- function(
 #' @param basis A character string specifying the basis for calculating the percentage overlap.
 #' Can be "x" for the length of `x`, "y" for the length of `y`, or "sum" for the sum
 #' of lengths of both `x` and `y`. Default is "x".
+#' @param prefix A prefix to add to the output string (default: NULL).
+#' @param suffix A suffix to add to the output string (default: NULL).
+#' @param ... Additional arguments to pass to `percentage_formatter()`.
 #'
 #' @return The percentage of overlap between `x` and `y` based on the specified basis.
 #' @examples x <- 1:5
@@ -1448,13 +1464,13 @@ pc_overlap <- function(x, y, basis = "x", prefix = NULL, suffix = NULL, ...) {
 
   # Calculate denominator based on the basis argument
   denominator <- switch(basis,
-    "x" = length(x),
-    "y" = length(y),
-    "sum" = length(x) + length(y)
+                        "x" = length(x),
+                        "y" = length(y),
+                        "sum" = length(x) + length(y)
   )
 
   # Calculate and return percent overlap
-  percent_overlap <- percentage_formatter(x = overlap / denominator)
+  percent_overlap <- percentage_formatter(x = overlap / denominator, ...)
   if (is.null(suffix)) suffix <- kppws("of", substitute(basis), "is found in both vectors.")
   text <- kppws(prefix, percent_overlap, suffix)
   message(text)
@@ -1978,24 +1994,21 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 #' @return A sorted version of the input matrix or data frame.
 #'
 #' @export
-sort_matrix_rows <- function(df, column = NULL, rownames = F, decrease = FALSE, na_last = TRUE
-                             ) {
-
+sort_matrix_rows <- function(df, column = NULL, rownames = FALSE, decrease = FALSE, na_last = TRUE) {
   stopifnot(
     is.data.frame(df) | is.matrix(df),
     is.character(column) | is.numeric(column) | if (rownames) is.null(column),
-    "cannot handle multi column sort" = length(column) == 1  | if (rownames) is.null(column),
+    "cannot handle multi column sort" = length(column) == 1 | if (rownames) is.null(column),
     is.logical(rownames), is.logical(decrease), is.logical(na_last),
-    (if (isFALSE(rownames) & is.character(column) ) column %in% colnames(df) else TRUE)
+    (if (isFALSE(rownames) & is.character(column)) column %in% colnames(df) else TRUE)
   )
 
-  message("Sorting by ", if(rownames) "rownames" else paste(column, "column"), " in ", if(decrease) "Decreasing" else "Increasing", " order." )
+  message("Sorting by ", if (rownames) "rownames" else paste(column, "column"), " in ", if (decrease) "Decreasing" else "Increasing", " order.")
 
-  ordering_vakues <- if(rownames) rownames(df) else df[, column]
+  ordering_vakues <- if (rownames) rownames(df) else df[, column]
   sorted_order <- order(rownames(df), decreasing = decrease, na.last = na_last)
 
   df[sorted_order, ]
-
 }
 
 
@@ -2076,17 +2089,18 @@ rowsplit <- function(df, f = rownames(df)) {
 #' rownames(mat) <- c("Cell1", "Cell2")
 #' mat
 #' get_max_colname_per_row(mat)
-#' mat[5] <- NA; mat[2] <- NaN
+#' mat[5] <- NA
+#' mat[2] <- NaN
 #' mat[1] <- 2
 #' mat
 #' get_max_colname_per_row(mat)
 #'
 #' @export
 
-get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", verbose = TRUE
-                                    , multi_max_str = "multiple.maxima"
-                                    , suffix = "rows have multiple maxima.") {
-
+get_max_colname_per_row <- function(
+    mat, na.remove = TRUE, collapse = "-", verbose = TRUE,
+    multi_max_str = "multiple.maxima",
+    suffix = "rows have multiple maxima.") {
   # Remove NA values if specified
   if (na.remove) mat[is.na(mat)] <- -Inf
 
@@ -2095,12 +2109,13 @@ get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", verbo
 
   # Apply function to find the maximum indices to each row and return appropriate result
   max_colname_per_row <- apply(mat, 1, function(row) {
-
     # One or more maximum values
     max_indices <- which.max.multi(row)
 
     # If there are multiple maximum values, return the "multi_max_str"
-    if (length(max_indices) > 1) return(multi_max_str)
+    if (length(max_indices) > 1) {
+      return(multi_max_str)
+    }
 
     return(colnames(mat)[max_indices])
   })
@@ -2109,7 +2124,7 @@ get_max_colname_per_row <- function(mat, na.remove = TRUE, collapse = "-", verbo
   names(max_colname_per_row) <- rownames(mat)
 
   # stats
-  if(verbose) {
+  if (verbose) {
     message(paste(sum(max_colname_per_row == multi_max_str), "of", length(max_colname_per_row), suffix))
   }
 
@@ -2369,7 +2384,7 @@ merge_ls_of_named_vec_as_df_cols <- function(
 #' @importFrom purrr map_chr
 #' @export
 
-get_col_types <- function(df, print_it = T) {
+get_col_types <- function(df, print_it = TRUE) {
   x <- purrr::map_chr(df, ~ class(.x)[1])
   if (print_it) {
     typetable <- t(t(x))
@@ -2546,7 +2561,7 @@ df.remove.empty.rows.and.columns <- function(
     rows = "rows",
     cols = "cols",
     thr.cell.empty = 0,
-    plot_stats = T,
+    plot_stats = TRUE,
     ...) {
   # Create a boolean vector that indicates whether each cell is non-empty
   df.boolean <- (df != thr.cell.empty)
@@ -2557,29 +2572,29 @@ df.remove.empty.rows.and.columns <- function(
   csx <- colSums(df.boolean)
 
   # Calculate the fraction of rows and columns that were removed
-  s1 <- pc_TRUE(csx == 0, suffix = paste0(cols, " are empty/removed."), NumberAndPC = T)
-  s2 <- pc_TRUE(rsx == 0, suffix = paste0(rows, " are empty/removed."), NumberAndPC = T)
+  s1 <- pc_TRUE(csx == 0, suffix = paste0(cols, " are empty/removed."), NumberAndPC = TRUE)
+  s2 <- pc_TRUE(rsx == 0, suffix = paste0(rows, " are empty/removed."), NumberAndPC = TRUE)
   print(s1)
   print(s2)
 
   # Plot the fraction of rows and columns that were removed, if requested
   if (plot_stats) {
     Removal.Dimensions <- c(
-      "rows" = pc_TRUE(rsx == 0, percentify = F),
-      "cols" = pc_TRUE(csx == 0, percentify = F)
+      "rows" = pc_TRUE(rsx == 0, percentify = FALSE),
+      "cols" = pc_TRUE(csx == 0, percentify = FALSE)
     )
     names(Removal.Dimensions) <- c(rows, cols)
     qbarplot(Removal.Dimensions,
-      label = percentage_formatter(Removal.Dimensions),
-      suffix = suffix,
-      xlab.angle = 45, xlab = "",
-      ylim = 0:1, ylab = "Fractions removed",
-      ...
+             label = percentage_formatter(Removal.Dimensions),
+             suffix = suffix,
+             xlab.angle = 45, xlab = "",
+             ylim = 0:1, ylab = "Fractions removed",
+             ...
     )
   }
 
   # Remove the empty rows and columns
-  df.filt <- df[rsx > 0, csx > 0, drop = F]
+  df.filt <- df[rsx > 0, csx > 0, drop = FALSE]
   idim(df.filt)
   return(df.filt)
 }
@@ -2722,7 +2737,7 @@ union.ls <- function(ls, ...) {
 #' @export
 symdiff.ls <- function(ls, ...) {
   res <- Reduce(symdiff, ls)
-  if(length(names(ls)) == length(ls)) {
+  if (length(names(ls)) == length(ls)) {
     names(res) <- names(ls)
   } else {
     message("No names in list / some names missing. Numeric names will be used.")
@@ -2745,9 +2760,13 @@ setdiff.ls <- function(ls, ...) {
 
 
 # _________________________________________________________________________________________________
-#' @title Like sapply, but with names preserved
-#' @description Do an lapply, then unlist, finally preserve names
+#' @title Like sapply, but with names preserved. Help in some other cases too.
+#'
+#' @description Do an `lapply()`, then `unlist()`, with preserving the list element names.
+#' @param list A list to apply the function to.
+#' @param FUN PARAM_DESCRIPTION
 #' @param ... Pass any other argument.
+#'
 #' @export
 unlapply <- function(list, FUN, ...) {
   x <- unlist(lapply(X = list, FUN = FUN, ...))
@@ -2867,12 +2886,12 @@ reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) {
 # _________________________________________________________________________________________________
 #' @title range.list
 #'
-#' @description Calculates the range of values in a list.
+#' @description Calculates the range of values in the entire a list.
 #' @param L A list.
 #' @return A vector of length 2, containing the minimum and maximum values in `L`.
 #'
 #' @export range.list
-range.list <- function(L, namesOrdered) {
+range.list <- function(L) {
   return(range(unlist(L), na.rm = TRUE))
 }
 
@@ -2979,6 +2998,7 @@ reverse.list.hierarchy <- function(list_of_lists) {
 #'
 #' @description Converts a list to a full matrix, with rows and columns named by the elements of the list.
 #' @param your.list A list.
+#' @param as.df Logical. Whether to return a data frame (default) or a matrix.
 #' @param byRow Logical. Whether the resulting matrix should be arranged by row (default) or by column.
 #' @param FILL A value to fill in missing entries.
 #' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.
@@ -2988,12 +3008,12 @@ reverse.list.hierarchy <- function(list_of_lists) {
 #'
 #' @export
 list2fullDF.byNames <- function(your.list = list(
-                                  "set.1" = vec.fromNames(LETTERS[1:5], fill = 1), # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
-                                  "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
-                                ),
-                                as.df = TRUE,
-                                byRow = TRUE,
-                                FILL = NA) {
+  "set.1" = vec.fromNames(LETTERS[1:5], fill = 1), # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
+  "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
+),
+as.df = TRUE,
+byRow = TRUE,
+FILL = NA) {
   # Get the lengths of the list elements
   length.list <- length(your.list)
   list.names <- names(your.list)
@@ -3010,7 +3030,7 @@ list2fullDF.byNames <- function(your.list = list(
   if (!byRow) {
     mat <- t(mat)
   }
-  if(as.df) mat <- as.data.frame(mat)
+  if (as.df) mat <- as.data.frame(mat)
   return(mat)
 }
 
@@ -3031,9 +3051,9 @@ list2fullDF.byNames <- function(your.list = list(
 #'
 #' @export
 list2fullDF.presence <- function(your.list = list(
-                                   "set.1" = LETTERS[1:5] # Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
-                                   , "set.2" = LETTERS[3:9]
-                                 ), byRow = TRUE, FILL = 0) {
+  "set.1" = LETTERS[1:5] # Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
+  , "set.2" = LETTERS[3:9]
+), byRow = TRUE, FILL = 0) {
   length.list <- length(your.list)
   list.names <- names(your.list)
   list.elements <- sort(Reduce(f = union, your.list))
@@ -3105,9 +3125,9 @@ intermingle2vec <- function(V1, V2, wNames = TRUE, name_prefix = NULL) {
   stopifnot(
     length(V1) == length(V2),
     is.null(name_prefix) | length(name_prefix) == 2
-    )
+  )
 
-  if(!is.null(name_prefix)) {
+  if (!is.null(name_prefix)) {
     names(V1) <- paste0(names(V1), name_prefix[1])
     names(V2) <- paste0(names(V2), name_prefix[2])
   }
@@ -3455,8 +3475,8 @@ dput_pretty <- pretty_dput <- function(vec) {
   cat("c(", sep = "")
   for (i in 1:length(vec)) {
     cat("\n`", vec[i], "` = \"", names(vec)[i], "\"",
-      ifelse(i != length(vec), ",", ""),
-      sep = ""
+        ifelse(i != length(vec), ",", ""),
+        sep = ""
     )
   }
   cat("\n)\n")
@@ -3533,11 +3553,10 @@ as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
 # _________________________________________________________________________________________________
 # Deprecated ----
 # _________________________________________________________________________________________________
+#' @title sort.mat
 #' @export sort.mat
 sort.mat <- function() .Deprecated("sort_matrix_rows()")
 
 
 
 #  ______________________________________________________________________________________
-
-

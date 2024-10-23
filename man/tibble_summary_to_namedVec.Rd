@@ -5,12 +5,13 @@
 \title{tibble_summary_to_namedVec}
 \usage{
 tibble_summary_to_namedVec(
-  tbl = dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20)),
+  tbl = dplyr::tibble(key = sample(x = 1:5, size = 20, replace = TRUE), value =
+    rnorm(20)),
   idx = c(key = 1, value = 2)
 )
 }
 \arguments{
-\item{tbl}{A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = T), value = rnorm(20))}
+\item{tbl}{A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = TRUE), value = rnorm(20))}
 
 \item{idx}{PARAM_DESCRIPTION, Default: c(key = 1, value = 2)}
 }

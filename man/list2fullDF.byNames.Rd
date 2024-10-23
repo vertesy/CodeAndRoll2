@@ -15,6 +15,8 @@ list2fullDF.byNames(
 \arguments{
 \item{your.list}{A list.}
 
+\item{as.df}{Logical. Whether to return a data frame (default) or a matrix.}
+
 \item{byRow}{Logical. Whether the resulting matrix should be arranged by row (default) or by column.}
 
 \item{FILL}{A value to fill in missing entries.}

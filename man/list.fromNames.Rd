@@ -10,6 +10,8 @@ list.fromNames(x = LETTERS[1:5], fill = NaN, use.names = FALSE)
 \item{x}{A character vector of names, with a default of the first five letters of the alphabet.}
 
 \item{fill}{The value used to fill the elements of the list, with a default of \code{NaN}.}
+
+\item{use.names}{Logical. If \code{TRUE}, the names of the input vector are used as names for the list.}
 }
 \value{
 A named list with elements filled with the specified value.
@@ -19,5 +21,5 @@ This function takes a character vector of names and creates a list where each
 element is named according to the character vector and filled with a specified value.
 }
 \examples{
-list.fromNames() # Default behavior with LETTERS[1:5] and NaN
+list.fromNames() # Default behavior with `LETTERS[1:5]` and `NaN`
 }

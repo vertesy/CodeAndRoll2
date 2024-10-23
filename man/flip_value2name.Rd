@@ -4,7 +4,7 @@
 \alias{flip_value2name}
 \title{flip_value2name}
 \usage{
-flip_value2name(namedVector, NumericNames = FALSE, silent = F)
+flip_value2name(namedVector, NumericNames = FALSE, silent = FALSE)
 }
 \arguments{
 \item{namedVector}{named vector}

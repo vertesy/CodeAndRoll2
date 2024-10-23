@@ -1,6 +1,6 @@
 Package: CodeAndRoll2
 Title: CodeAndRoll2 for vector, matrix and list manipulations
-Version: 2.6.0
+Version: 2.7.0
 Authors@R: 
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
@@ -17,13 +17,16 @@ Imports:
     gplots,
     gtools,
     plyr,
+    purrr,
     RColorBrewer,
+    rstudioapi,
     sessioninfo,
-    stringr
+    stringr,
+    tibble
 Suggests: 
     grDevices,
     sm
 Encoding: UTF-8
-Packaged: 2024-03-11 00:10:35.960104
+Packaged: 2024-10-23 18:26:44.582209
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

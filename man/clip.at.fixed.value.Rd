@@ -7,11 +7,11 @@
 clip.at.fixed.value(x, high = TRUE, thr = 3)
 }
 \arguments{
+\item{x}{A vector of numeric values (distribution).}
+
 \item{high}{Clip above threshold? Default: TRUE}
 
 \item{thr}{threshold values, Default: 3}
-
-\item{distribution}{A vector of numeric values.}
 }
 \description{
 Signal clipping. Cut values in a distribution, above or below a threshold.

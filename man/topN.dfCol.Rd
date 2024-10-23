@@ -7,7 +7,7 @@
 topN.dfCol(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5)
 }
 \arguments{
-\item{df_col}{data frame column, Default: as.named.vector(df\link{, 1, drop = FALSE})}
+\item{df_col}{data frame column, Default: \code{as.named.vector(df[, 1, drop = FALSE])}}
 
 \item{n}{top N values, Default: 5}
 }

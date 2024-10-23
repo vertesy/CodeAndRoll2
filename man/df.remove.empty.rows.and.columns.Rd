@@ -10,7 +10,7 @@ df.remove.empty.rows.and.columns(
   rows = "rows",
   cols = "cols",
   thr.cell.empty = 0,
-  plot_stats = T,
+  plot_stats = TRUE,
   ...
 )
 }

@@ -43,7 +43,8 @@ colnames(mat) <- c("UVI1", "UVI2", "UVI3")
 rownames(mat) <- c("Cell1", "Cell2")
 mat
 get_max_colname_per_row(mat)
-mat[5] <- NA; mat[2] <- NaN
+mat[5] <- NA
+mat[2] <- NaN
 mat[1] <- 2
 mat
 get_max_colname_per_row(mat)

@@ -4,7 +4,7 @@
 \alias{range.list}
 \title{range.list}
 \usage{
-\method{range}{list}(L, namesOrdered)
+\method{range}{list}(L)
 }
 \arguments{
 \item{L}{A list.}
@@ -13,5 +13,5 @@
 A vector of length 2, containing the minimum and maximum values in \code{L}.
 }
 \description{
-Calculates the range of values in a list.
+Calculates the range of values in the entire a list.
 }

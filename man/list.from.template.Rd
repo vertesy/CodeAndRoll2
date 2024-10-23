@@ -9,7 +9,7 @@ list.from.template(x, fill = NA)
 \arguments{
 \item{x}{A template list with names,.}
 
-\item{fill}{The value to fill the new list, Default: NA}
+\item{fill}{The value to fill the new list, Default: \code{NA}}
 }
 \description{
 Create an empty list from a template list, copying names and filling values with NA.

@@ -12,11 +12,11 @@ array.fromNames(
 )
 }
 \arguments{
-\item{rowname_vec}{A vector of names for rows, Default: 1:3}
+\item{rowname_vec}{A vector of names for rows, Default: \code{1:3}}
 
-\item{colname_vec}{A vector of names for columns, Default: letters\link{1:2}}
+\item{colname_vec}{A vector of names for columns, Default: \code{letters[1:2]}}
 
-\item{z_name_vec}{A vector of names for Z dimension, Default: LETTERS\link{4:6}}
+\item{z_name_vec}{A vector of names for Z dimension, Default: \code{LETTERS[4:6]}}
 
 \item{fill}{The value to fill the new vector, Default: NA}
 }

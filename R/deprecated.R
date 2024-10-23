@@ -10,7 +10,7 @@
 #' #'  \code{\link[stringr]{str_split}}
 #' #' @importFrom stringr str_split_fixed
 #' #' @export
-#' sstrsplit <- function(string, pattern = "_", n = F) {
+#' sstrsplit <- function(string, pattern = "_", n = FALSE) {
 #'   if (!n) n <- stringr::str_count(string = string, pattern = pattern)
 #'   stringr::str_split_fixed(string, pattern = pattern, n = n)
 #'   }

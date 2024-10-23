@@ -14,6 +14,12 @@ pc_overlap(x, y, basis = "x", prefix = NULL, suffix = NULL, ...)
 \item{basis}{A character string specifying the basis for calculating the percentage overlap.
 Can be "x" for the length of \code{x}, "y" for the length of \code{y}, or "sum" for the sum
 of lengths of both \code{x} and \code{y}. Default is "x".}
+
+\item{prefix}{A prefix to add to the output string (default: NULL).}
+
+\item{suffix}{A suffix to add to the output string (default: NULL).}
+
+\item{...}{Additional arguments to pass to \code{percentage_formatter()}.}
 }
 \value{
 The percentage of overlap between \code{x} and \code{y} based on the specified basis.

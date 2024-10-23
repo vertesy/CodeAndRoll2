@@ -4,7 +4,7 @@
 \alias{get_col_types}
 \title{Extract and Display Column Types of a Data Frame or Tibble}
 \usage{
-get_col_types(df, print_it = T)
+get_col_types(df, print_it = TRUE)
 }
 \arguments{
 \item{df}{A data frame or tibble whose column types are to be extracted.}

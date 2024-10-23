@@ -24,6 +24,6 @@ sorted by frequency and by a set of specified values. It handles NA values.
 \examples{
 vec <- c(1, 2, 2, NA, 3, 3, 3)
 table_decreasing_hybrid(vec)
-table_decreasing_hybrid(vec, first_elements = '1')
+table_decreasing_hybrid(vec, first_elements = "1")
 
 }

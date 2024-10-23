@@ -4,7 +4,13 @@
 \alias{sort_matrix_rows}
 \title{Sort matrix or data frame by a column or row names}
 \usage{
-sort_matrix_rows(df, column, rownames = F, decrease = FALSE, na_last = TRUE)
+sort_matrix_rows(
+  df,
+  column = NULL,
+  rownames = FALSE,
+  decrease = FALSE,
+  na_last = TRUE
+)
 }
 \arguments{
 \item{df}{A numeric matrix or data frame to be sorted. Default: none.}

@@ -20,6 +20,7 @@ corresponding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
 in theory, but it did not seem very robust regarding your input...'
 }
 \examples{
-A <- 1:3; translate(vec = A, old = 2:3, new = letters[1:2])
+A <- 1:3
+translate(vec = A, old = 2:3, new = letters[1:2])
 
 }

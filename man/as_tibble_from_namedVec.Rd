@@ -4,7 +4,7 @@
 \alias{as_tibble_from_namedVec}
 \title{as_tibble_from_namedVec}
 \usage{
-as_tibble_from_namedVec(vec.w.names = c(a = 1, b = 2), transpose = T)
+as_tibble_from_namedVec(vec.w.names = c(a = 1, b = 2), transpose = TRUE)
 }
 \arguments{
 \item{vec.w.names}{A vector with names, Default: c(a = 1, b = 2)}

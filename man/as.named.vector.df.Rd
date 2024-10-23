@@ -13,6 +13,8 @@ as.named.vector.df(
 )
 }
 \arguments{
+\item{df}{A dataframe.}
+
 \item{col.or.row.name.or.index}{Which column or row to extract (numeric index).}
 
 \item{verbose}{Print the columnname or rowname that is being used}

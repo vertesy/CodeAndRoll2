@@ -2,13 +2,17 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{unlapply}
 \alias{unlapply}
-\title{Like sapply, but with names preserved}
+\title{Like sapply, but with names preserved. Help in some other cases too.}
 \usage{
 unlapply(list, FUN, ...)
 }
 \arguments{
+\item{list}{A list to apply the function to.}
+
+\item{FUN}{PARAM_DESCRIPTION}
+
 \item{...}{Pass any other argument.}
 }
 \description{
-Do an lapply, then unlist, finally preserve names
+Do an \code{lapply()}, then \code{unlist()}, with preserving the list element names.
 }
