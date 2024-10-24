@@ -6,6 +6,10 @@
 
 
 # Functions ------------------------
+require(PackageTools)
+# devtools::load_all("~/GitHub/Packages/PackageTools")
+
+# Setup ------------------------
 repository.dir <- "~/GitHub/Packages/CodeAndRoll2"
 (package.name <- basename(repository.dir))
 config.path <- file.path(repository.dir, "Development/config.R")
@@ -35,6 +39,7 @@ pak::pkg_install(remote.path)
 # # remove.packages(DESCRIPTION$'package.name')
 
 # CMD CHECK ------------------------------------------------
+devtools::check_man(repository.dir)
 checkres <- devtools::check(repository.dir, cran = FALSE)
 
 
