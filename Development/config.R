@@ -1,4 +1,6 @@
 # Configuration for the Package
+# file.edit("~/GitHub/Packages/XXXXXXXXXX/Development/config.R")
+
 DESCRIPTION <- list(
   package.name = "CodeAndRoll2",
   version = "2.7.0",
