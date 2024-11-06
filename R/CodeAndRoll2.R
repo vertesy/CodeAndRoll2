@@ -98,6 +98,43 @@ savehistory_2 <- function() {
 }
 
 
+# _________________________________________________________________________________________________
+## Pipetools ____________________________________________________________ ----
+
+#' @title Print and Return an Object in a Pipe
+#'
+#' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
+#'
+#' @param x The object to print and return. Default: None.
+#'
+#' @return The input object `x`, unchanged.
+#'
+#' @examples
+#' results <- c(1, 2, 3) %>% pSee() %>% sqrt() %>% tail(2) ; results
+pSee <- function(x, max_elements = 100) {
+  if(max_elements) y <- head(x)
+  message(y)
+  return(x)
+}
+
+
+#' @title Print Length and Return an Object in a Pipe
+#'
+#' @description Prints the length of the input object and returns it, allowing you to verify
+#' length inside a pipe operation.
+#'
+#' @param x The object whose length to print and return. Default: None.
+#'
+#' @return The input object `x`, unchanged.
+#'
+#' @examples
+#' results <- c(9:1) %>% tail(4) %>% pLength() %>% sqrt() ; results
+pLength <- function(x) {
+  stopifnot(!missing(x), is.vector(x) || is.list(x), "Input 'x' must be a vector or list")
+  message("length: ",length(x))
+  return(x)
+}
+
 
 # _________________________________________________________________________________________________
 ## Create and check variables ____________________________________________________________ ----
