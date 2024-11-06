@@ -6,7 +6,7 @@
 \usage{
 df.remove.empty.rows.and.columns(
   df = UVI.assignment.filtered.3.HF,
-  suffix = substitute(df),
+  suffix = substitute_deparse(df),
   rows = "rows",
   cols = "cols",
   thr.cell.empty = 0,

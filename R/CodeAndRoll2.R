@@ -1027,25 +1027,6 @@ which.NA <- function(vec, verbose = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title pad.na
-#' @description This function fills up a vector to a given length by appending NA-values at the end.
-#'   If the input vector's length is less than the provided length, the function pads the vector
-#'   with NA. If the vector's length is already equal to or greater than the given length, no change
-#'   will be made.
-#' @param x A vector that needs to be padded with NA. This can be of any type (numeric, etc.)
-#' @param len The target length for the vector. If the provided length is less than the length of
-#'   the input vector, the function does not make any change to the input vector.
-#' @return Returns a vector of the same type as the input, but with its length adjusted to the
-#'   specified len, padding with NA values at the end if necessary.
-#'
-#' @export
-pad.na <- function(x, len) {
-  c(x, rep(NA, len - length(x)))
-}
-# See str_pad
-
-
-# _________________________________________________________________________________________________
 #' @title clip.at.fixed.value
 #' @description Signal clipping. Cut values in a distribution, above or below a threshold.
 #' @param x A vector of numeric values (distribution).
