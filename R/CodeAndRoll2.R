@@ -113,7 +113,7 @@ savehistory_2 <- function() {
 #' results <- c(1, 2, 3) %>% pSee() %>% sqrt() %>% tail(2) ; results
 pSee <- function(x, max_elements = 100) {
   if(max_elements) y <- head(x)
-  message(y)
+  message(kppc(y))
   return(x)
 }
 
@@ -130,7 +130,7 @@ pSee <- function(x, max_elements = 100) {
 #' @examples
 #' results <- c(9:1) %>% tail(4) %>% pLength() %>% sqrt() ; results
 pLength <- function(x) {
-  stopifnot(!missing(x), is.vector(x) || is.list(x), "Input 'x' must be a vector or list")
+  stopifnot(!missing(x), is.vector(x) || is.list(x))
   message("length: ",length(x))
   return(x)
 }
