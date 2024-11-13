@@ -3290,22 +3290,21 @@ symdiff <- function(x, y, z = NULL) {
 #'
 #' @export
 intersect.w.Names <- function(x, y, names = "x") {
+  # browser()
   stopifnot(
     is.vector(x), is.vector(y),
-    names %in% c("x", "y")
+    names %in% c("x", "y"),
+    if (names == "x") HasNames(x) else T,
+    if (names == "y") HasNames(y) else T
   )
 
   # Perform intersection with name preservation based on `names` argument
-  intersected_values <- intersect(x, y)
-
-  browser()
-  if (names == "x") {
-    result <- intersected_values[match(intersected_values, x)]
-    result <- setNames(result, names(x)[match(intersected_values, x)])
-  } else {
-    result <- intersected_values[match(intersected_values, y)]
-    result <- setNames(result, names(y)[match(intersected_values, y)])
-  }
+  result <-
+    if (names == "x") {
+      x[x %in% intersect(x, y)]
+    } else {
+      y[y %in% intersect(x, y)]
+    }
 
   return(result)
 }
