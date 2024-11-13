@@ -3274,6 +3274,44 @@ symdiff <- function(x, y, z = NULL) {
 }
 
 
+#' @title Intersect with Name Preservation
+#'
+#' @description Intersects two character vectors while preserving names from the specified vector.
+#'
+#' @param x A character vector.
+#' @param y A character vector.
+#' @param names Character. Specifies which vector's names to preserve in the output.
+#'   "x" preserves `x`'s names, "y" preserves `y`'s names. Default: "x".
+#'
+#' @return A character vector with names preserved from the specified vector (`x` or `y`).
+#'
+#' @examples
+#' intersect.w.Names(c(a = "gene1", b = "gene2"), c("gene2", "gene3"), names = "x")
+#'
+#' @export
+intersect.w.Names <- function(x, y, names = "x") {
+  stopifnot(
+    is.vector(x), is.vector(y),
+    names %in% c("x", "y")
+  )
+
+  # Perform intersection with name preservation based on `names` argument
+  intersected_values <- intersect(x, y)
+
+  browser()
+  if (names == "x") {
+    result <- intersected_values[match(intersected_values, x)]
+    result <- setNames(result, names(x)[match(intersected_values, x)])
+  } else {
+    result <- intersected_values[match(intersected_values, y)]
+    result <- setNames(result, names(y)[match(intersected_values, y)])
+  }
+
+  return(result)
+}
+
+
+
 
 # _________________________________________________________________________________________________
 ## Math & stats ____________________________________________________________ ----
