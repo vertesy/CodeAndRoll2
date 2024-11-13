@@ -3286,16 +3286,16 @@ symdiff <- function(x, y, z = NULL) {
 #' @return A character vector with names preserved from the specified vector (`x` or `y`).
 #'
 #' @examples
-#' intersect.w.Names(c(a = "gene1", b = "gene2"), c("gene2", "gene3"), names = "x")
+#' intersect.wNames(c(a = "gene1", b = "gene2"), c("gene2", "gene3"), names = "x")
 #'
-#' @export
-intersect.w.Names <- function(x, y, names = "x") {
+#' @export intersect.wNames
+intersect.wNames <- function(x, y, names = "x") {
   # browser()
   stopifnot(
     is.vector(x), is.vector(y),
     names %in% c("x", "y"),
-    if (names == "x") HasNames(x) else T,
-    if (names == "y") HasNames(y) else T
+    if (names == "x") Stringendo::HasNames(x) else T,
+    if (names == "y") Stringendo::HasNames(y) else T
   )
 
   # Perform intersection with name preservation based on `names` argument
@@ -3309,6 +3309,54 @@ intersect.w.Names <- function(x, y, names = "x") {
   return(result)
 }
 
+
+#' @title Union with Name Preservation
+#'
+#' @description Unites two character vectors while preserving names from the specified vector.
+#'   Gives a warning if there are conflicts in names between `x` and `y`.
+#'
+#' @param x A character vector.
+#' @param y A character vector.
+#' @param names Character. Specifies which vector's names to preserve in the output.
+#'   "x" preserves `x`'s names, "y" preserves `y`'s names. Default: "x".
+#'
+#' @return A character vector with names preserved from the specified vector (`x` or `y`).
+#'
+#' @examples
+#' union.wNames(x =c(a = "gene1", b = "gene2", c = "gene3")
+#' , y =c( c = "gene3", dada = "gene2", "gene4")
+#' , names = "x")
+#'
+#' @export union.wNames
+union.wNames <- function(x, y, names = "x") {
+  stopifnot(
+    is.vector(x), is.vector(y),
+    names %in% c("x", "y")
+  )
+  warnifnot(HasNames(x), HasNames(y) )
+
+  # Perform union
+  all_elements <- union(x, y)
+  common_elements <- intersect(x, y)
+
+  # Check if names agree
+  names_x <- names(sort(x[x %in% common_elements]))
+  names_y <- names(sort(y[y %in% common_elements]))
+
+  # Check for name conflicts: if names of common elements are different, issue a warning.
+  warnifnot("Names of intersecting elements is not the same in x & y!" =identical(names_x, names_y))
+
+  message("Names, for intersecting elements, inherited from: ", names)
+  result <-
+    if (names == "x") {
+       c(x, setdiff(y, x))
+    } else if (names == "y") {
+      c(y, setdiff(x, y))
+    }
+
+    message("Beware union(x, y) != union(y, x), only if you sort it.")
+    return(result)
+}
 
 
 
