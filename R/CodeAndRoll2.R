@@ -3330,10 +3330,22 @@ intersect.wNames <- function(x, y, names = "x") {
 #' @export union.wNames
 union.wNames <- function(x, y, names = "x") {
   stopifnot(
-    is.vector(x), is.vector(y),
+    is.vector(x) || is.null(x),
+    is.vector(y) || is.null(y),
+    is.vector(x) || is.vector(y),
     names %in% c("x", "y")
   )
   warnifnot(HasNames(x), HasNames(y) )
+
+  if(is.null(x)) {
+    message("x is NULL, returning y.")
+    return(y)
+  }
+
+  if(is.null(y)) {
+    message("y is NULL, returning x.")
+    return(x)
+  }
 
   # Perform union
   all_elements <- union(x, y)
@@ -3344,17 +3356,23 @@ union.wNames <- function(x, y, names = "x") {
   names_y <- names(sort(y[y %in% common_elements]))
 
   # Check for name conflicts: if names of common elements are different, issue a warning.
-  warnifnot("Names of intersecting elements is not the same in x & y!" =identical(names_x, names_y))
+  if ( !identical(names_x, names_y) ) {
+    warning("Names of intersecting elements is not the same in x & y!", immediate. = T)
+    iprint("names_x: ", head(names_x))
+    iprint("names_y: ", head(names_y))
 
-  message("Names, for intersecting elements, inherited from: ", names)
+    message("Names, for intersecting elements, inherited from: ", names)
+  }
+
+
   result <-
     if (names == "x") {
-       c(x, setdiff(y, x))
+      c(x, setdiff(y, x))
     } else if (names == "y") {
       c(y, setdiff(x, y))
     }
 
-    message("Beware union(x, y) != union(y, x), only if you sort it.")
+    message("Beware that: union(x, y) != union(y, x) - only if you sort the values.")
     return(result)
 }
 
