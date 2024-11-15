@@ -3292,11 +3292,13 @@ symdiff <- function(x, y, z = NULL) {
 intersect.wNames <- function(x, y, names = "x") {
   # browser()
   stopifnot(
-    is.vector(x), is.vector(y),
-    names %in% c("x", "y"),
-    if (names == "x") Stringendo::HasNames(x) else T,
-    if (names == "y") Stringendo::HasNames(y) else T
+    is.vector(x), is.vector(y), names %in% c("x", "y")
   )
+  warnif(
+    "x argument has no names!" =  (names == "x" & !Stringendo::HasNames(x) )
+    , "y argument has no names!" = (names == "y" & !Stringendo::HasNames(y) )
+  )
+
 
   # Perform intersection with name preservation based on `names` argument
   result <-
