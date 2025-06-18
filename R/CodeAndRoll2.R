@@ -662,6 +662,24 @@ as.named.vector.df <- function(
   return(vecc)
 }
 
+# _________________________________________________________________________________________________
+#' @title as.named.vector.table
+#' @description Convert a 1D table into a named vector.
+#' @param table A 1D table.
+#' @param verbose Print the name of the table that is being used
+#' @param ... Additional arguments passed to `as.vector()`.
+#' @export
+
+as.named.vector.table <- function(table, verbose = TRUE, ...) {
+  if (verbose) message("input table dimensions: ", kppc(idim(table)))
+
+  vecc <- as.vector(unlist(table), ...)
+  names(vecc) <- names(table)
+  stopifnot(length(vecc) == length(table))
+  return(vecc)
+}
+
+
 
 
 # # _________________________________________________________________________________________________
