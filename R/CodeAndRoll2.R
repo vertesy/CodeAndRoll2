@@ -23,21 +23,24 @@
 #' the RStudio editor. If the script name cannot be obtained or if the `rstudioapi` package is
 #' not available, it returns the basename of the directory specified by `OutDir`.
 #'
+#' @param OutDir Fallback directory whose basename is returned if the script name
+#'   cannot be determined. Defaults to the current working directory.
 #' @return A string containing the basename of the current script or the basename of `OutDir`
 #' if the script name is unavailable.
 #' @importFrom rstudioapi getSourceEditorContext
 #'
 #' @export
-getScriptName <- function() {
+getScriptName <- function(OutDir = getwd()) {
+  scriptName <- ""
   # Check if rstudioapi is available
-  if (!requireNamespace("rstudioapi", quietly = TRUE)) {
-    message("rstudioapi package is not available. Please install it using install.packages('rstudioapi').")
-  } else {
+  if (requireNamespace("rstudioapi", quietly = TRUE)) {
     scriptName <- basename(rstudioapi::getSourceEditorContext()$path)
+  } else {
+    message("rstudioapi package is not available. Please install it using install.packages('rstudioapi').")
   }
   # If scriptName is empty, return basename of OutDir
   # Can happen at an unsaved file, etc.
-  if (scriptName == "") scriptName <- basename(OutDir)
+  if (identical(scriptName, "")) scriptName <- basename(OutDir)
 
   return(scriptName)
 }
@@ -82,12 +85,13 @@ savehistory_2 <- function() {
 
   # Construct the file name using the current date and optionally the file name from RStudio
   script_name <- try(basename(rstudioapi::getSourceEditorContext()$path), silent = TRUE)
-  if ("try-error" %in% is(script_name)) script_name <- ""
+  if (inherits(script_name, "try-error")) script_name <- ""
 
-  file_name <- ppp(
-    "command_history",
+  file_name <- paste0(
+    "command_history.",
     format(Sys.time(), format = "%Y.%m.%d"),
-    script_name, "txt"
+    if (nzchar(script_name)) paste0(".", script_name) else "",
+    ".txt"
   )
 
   # Save the command history
@@ -106,14 +110,15 @@ savehistory_2 <- function() {
 #' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
 #'
 #' @param x The object to print and return. Default: None.
+#' @param max_elements Number of elements of `x` to print. Default: 100.
 #'
 #' @return The input object `x`, unchanged.
 #'
 #' @examples
 #' results <- c(1, 2, 3) %>% pSee() %>% sqrt() %>% tail(2) ; results
 pSee <- function(x, max_elements = 100) {
-  if(max_elements) y <- head(x)
-  message(kppc(y))
+  y <- utils::head(x, max_elements)
+  print(y)
   return(x)
 }
 
@@ -146,11 +151,12 @@ pLength <- function(x) {
 #' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
-  v <- numeric(length(name_vec))
   if (length(fill) == 1) {
     v <- rep(fill, length(name_vec))
-  } else if (length(fill == length(name_vec))) {
+  } else if (length(fill) == length(name_vec)) {
     v <- fill
+  } else {
+    stop("Length of 'fill' must be 1 or equal to length of 'name_vec'")
   }
   names(v) <- name_vec
   return(v)
