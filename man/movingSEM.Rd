@@ -12,7 +12,7 @@ movingSEM(x, oneSide = 5)
 \item{oneSide}{The size of the moving window, in terms of the number of elements on either side of the current element.}
 }
 \value{
-A vector of the same length as \code{x}, containing the SEMs for each element.
+A vector of the same length as \code{x}, containing the SEM for each element.
 }
 \description{
 Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.

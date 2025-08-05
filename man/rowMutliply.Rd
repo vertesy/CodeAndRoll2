@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{rowMutliply}
 \alias{rowMutliply}
-\title{rowMutliply}
+\title{Row-wise multiplication of a matrix by a vector}
 \usage{
 rowMutliply(mat, vec)
 }
@@ -12,5 +12,5 @@ rowMutliply(mat, vec)
 \item{vec}{Vector to multiply by.}
 }
 \description{
-Mutliply by row.
+Multiply each row of a matrix by the corresponding element of a vector.
 }

@@ -15,7 +15,7 @@
 ### CHAPTERS:
 
 # _________________________________________________________________________________________________
-## Rstudio based context retrieval ____________________________________________________________ ----
+## RStudio based context retrieval ____________________________________________________________ ----
 
 #' @title Get Current Script Name or Basename of Output Directory
 #'
@@ -45,8 +45,8 @@ getScriptName <- function() {
 # _________________________________________________________________________________________________
 #' @title getProject
 #'
-#' @description Try to get the project name you are wokring on in Rstudio.
-#' @returns The final subfolder of your project, or NULL, if you are not running one
+#' @description Try to get the project name you are working on in RStudio.
+#' @return The final subfolder of your project, or `NULL` if you are not running one
 #' @importFrom rstudioapi getActiveProject
 #' @examples getProject()
 #'
@@ -158,10 +158,10 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 
 
 # _________________________________________________________________________________________________
-#' @title Create a Named List from a Character Vector of Names, or a names of an object
+#' @title Create a Named List from a Character Vector or the Names of an Object
 #'
 #' @description This function takes a character vector of names and creates a list where each
-#' element is named according to the character vector and filled with a specified value.
+#' element is named according to that vector and filled with a specified value.
 #' @param x A character vector of names, with a default of the first five letters of the alphabet.
 #' @param fill The value used to fill the elements of the list, with a default of `NaN`.
 #' @param use.names Logical. If `TRUE`, the names of the input vector are used as names for the list.
@@ -199,9 +199,9 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
 # _________________________________________________________________________________________________
 #' @title vec.from.template
 #'
-#' @description Create a vector from a names of another vector / list / etc.
-#' @param x A vector of names, Default: `LETTERS[1:5]`
-#' @param fill The value to fill the new vector, Default: `NA`
+#' @description Create a vector using the names of another vector, list, or similar object.
+#' @param x An object with names. Default: `table(LETTERS[1:5])`
+#' @param fill The value to fill the new vector. Default: `NA`
 #' @export
 vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
   stopifnot(is.list(x) | is.vector(x) | is.table(x))
@@ -1372,7 +1372,7 @@ which_names_grep <- function(namedVec, pattern, ...) {
 #' @description Calls na.omit() and returns a clean vector.
 #' Omit NA values from a vector and return a clean vector without any spam.
 #' @param object Values to filter for NA
-#' @param silent Silence the data structure coversion warning: anything ->vector
+#' @param silent Silence the data structure conversion warning: anything -> vector
 #' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
 #'
@@ -1631,7 +1631,7 @@ rowSubtract <- function(mat = yy, vec = 5:1) {
 #'
 #' @description Each element of the matrix is divided by the corresponding element of the vector
 #' that matches the column of the matrix element. This is typically used to normalize data,
-#' for example, to scale values in each row by certain factors like totals or means. Soruce
+#' for example, to scale values in each row by factors such as totals or means. Source:
 #' \url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}.
 #'
 #' @param mat A numeric matrix where each row represents a distribution to be divided.
@@ -1650,8 +1650,8 @@ colDivide <- function(mat, vec = colSums(mat)) {
 
 
 # _________________________________________________________________________________________________
-#' @title colMutliply
-#' @description Multiply by column. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
+#' @title Column-wise multiplication of a matrix by a vector
+#' @description Multiply each column of a matrix by the corresponding element of a vector. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #' @export
@@ -1676,8 +1676,8 @@ rowDivide <- function(mat, vec) {
 
 
 # _________________________________________________________________________________________________
-#' @title rowMutliply
-#' @description Mutliply by row.
+#' @title Row-wise multiplication of a matrix by a vector
+#' @description Multiply each row of a matrix by the corresponding element of a vector.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #' @export
@@ -3090,8 +3090,10 @@ FILL = NA) {
 #'
 #' @export
 list2fullDF.presence <- function(your.list = list(
-  "set.1" = LETTERS[1:5] # Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
-  , "set.2" = LETTERS[3:9]
+  "set.1" = LETTERS[1:5],
+  # Convert a list to a full matrix. Designed for occurrence counting; think of table().
+  # Rows are all entries within your list, columns are names(your_list).
+  "set.2" = LETTERS[3:9]
 ), byRow = TRUE, FILL = 0) {
   length.list <- length(your.list)
   list.names <- names(your.list)
@@ -3563,7 +3565,7 @@ movingAve2 <- function(x, n = 5) {
 #' @description Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
 #' @param x A numeric vector.
 #' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
-#' @return A vector of the same length as `x`, containing the SEMs for each element.
+#' @return A vector of the same length as `x`, containing the SEM for each element.
 #' @export
 movingSEM <- function(x, oneSide = 5) {
   # Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
@@ -3579,10 +3581,10 @@ movingSEM <- function(x, oneSide = 5) {
 # _________________________________________________________________________________________________
 #' @title imovingSEM
 #'
-#' @description Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
+#' @description Calculates the moving / rolling standard error of the mean (SEM). It computes values up to the edges of the vector using incrementally smaller window sizes.
 #' @param x A numeric vector.
 #' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
-#' @return A vector of the same length as `x`, containing the SEMs for each element.
+#' @return A vector of the same length as `x`, containing the SEM for each element.
 #' @export
 imovingSEM <- function(x, oneSide = 5) {
   # Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.

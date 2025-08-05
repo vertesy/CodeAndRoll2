@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{colMutliply}
 \alias{colMutliply}
-\title{colMutliply}
+\title{Column-wise multiplication of a matrix by a vector}
 \usage{
 colMutliply(mat, vec)
 }
@@ -12,5 +12,5 @@ colMutliply(mat, vec)
 \item{vec}{Vector to multiply by.}
 }
 \description{
-Multiply by column. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
+Multiply each column of a matrix by the corresponding element of a vector. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 }

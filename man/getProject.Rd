@@ -7,10 +7,10 @@
 getProject()
 }
 \value{
-The final subfolder of your project, or NULL, if you are not running one
+The final subfolder of your project, or \code{NULL} if you are not running one
 }
 \description{
-Try to get the project name you are wokring on in Rstudio.
+Try to get the project name you are working on in RStudio.
 }
 \examples{
 getProject()
