@@ -29,15 +29,17 @@
 #'
 #' @export
 getScriptName <- function() {
-  # Check if rstudioapi is available
+  scriptName <- ""
+  # Initialize scriptName and check if rstudioapi is available to safely attempt retrieval
+  # of the active script name in RStudio.
   if (!requireNamespace("rstudioapi", quietly = TRUE)) {
     message("rstudioapi package is not available. Please install it using install.packages('rstudioapi').")
   } else {
     scriptName <- basename(rstudioapi::getSourceEditorContext()$path)
   }
-  # If scriptName is empty, return basename of OutDir
-  # Can happen at an unsaved file, etc.
-  if (scriptName == "") scriptName <- basename(OutDir)
+  # If scriptName is still empty (e.g., unsaved file or rstudioapi unavailable), fall back
+  # to the basename of the current working directory with basename(getwd()).
+  if (scriptName == "") scriptName <- basename(getwd())
 
   return(scriptName)
 }
