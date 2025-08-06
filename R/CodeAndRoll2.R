@@ -87,14 +87,20 @@ savehistory_2 <- function() {
   script_name <- try(basename(rstudioapi::getSourceEditorContext()$path), silent = TRUE)
   if (inherits(script_name, "try-error")) script_name <- ""
 
-  file_name <- ppp(
+  # Build file name while skipping empty components
+  parts <- c(
     "command_history",
     format(Sys.time(), format = "%Y.%m.%d"),
-    script_name, "txt"
+    script_name
   )
+  parts <- parts[parts != ""]
+  file_name <- paste0(paste(parts, collapse = "."), ".txt")
 
-  # Save the command history
-  savehistory(file = file_name)
+  # Save the command history if possible
+  tryCatch(
+    savehistory(file = file_name),
+    error = function(e) warning("Could not save command history: ", e$message)
+  )
 
   # Print and return the file path
   print(file.path(current_dir, file_name))
@@ -195,8 +201,11 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
     } else {
       x
     }
-
-  kollapse("List of", length(liszt), "| names:", head(names(liszt)), "...", collapseby = " ")
+  message(
+    "List of ", length(liszt),
+    " | names: ", paste(head(names(liszt)), collapse = " "),
+    " ..."
+  )
   return(liszt)
 }
 
