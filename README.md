@@ -2,7 +2,7 @@
 
 # CodeAndRoll2
 
-Packaged version of the core functionalities (vector, matrix and list manipulations; math) of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll).  A standalone set of more than 130 productivity functions.
+Packaged version of the core functionalities (vector, matrix and list manipulations; math) of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll). A standalone set of over 130 productivity functions.
 
 Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports), [ggExpress](https://github.com/vertesy/ggExpress), [Seurat.utils](https://github.com/vertesy/Seurat.utils).
 
@@ -43,7 +43,7 @@ devtools::install_github(repo = "vertesy/CodeAndRoll2", upgrade = F)
 require("CodeAndRoll2")
 ```
 
-Alternatively, you simply source it from the web. 
+Alternatively, you can simply source it from the web.
 *This way function help will not work, and you will have no local copy of the code on your hard drive.*
 ```r
 source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2/R/CodeAndRoll2.R")
