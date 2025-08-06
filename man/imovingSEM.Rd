@@ -12,8 +12,8 @@ imovingSEM(x, oneSide = 5)
 \item{oneSide}{The size of the moving window, in terms of the number of elements on either side of the current element.}
 }
 \value{
-A vector of the same length as \code{x}, containing the SEMs for each element.
+A vector of the same length as \code{x}, containing the SEM for each element.
 }
 \description{
-Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
+Calculates the moving / rolling standard error of the mean (SEM). It computes values up to the edges of the vector using incrementally smaller window sizes.
 }

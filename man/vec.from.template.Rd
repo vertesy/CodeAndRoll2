@@ -7,10 +7,10 @@
 vec.from.template(x = table(LETTERS[1:5]), fill = NA)
 }
 \arguments{
-\item{x}{A vector of names, Default: \code{LETTERS[1:5]}}
+\item{x}{An object with names. Default: \code{table(LETTERS[1:5])}}
 
-\item{fill}{The value to fill the new vector, Default: \code{NA}}
+\item{fill}{The value to fill the new vector. Default: \code{NA}}
 }
 \description{
-Create a vector from a names of another vector / list / etc.
+Create a vector using the names of another vector, list, or similar object.
 }
