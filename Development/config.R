@@ -5,7 +5,7 @@ DESCRIPTION <- list(
   package.name = "CodeAndRoll2",
   version = "2.7.0",
   title = "CodeAndRoll2 for vector, matrix and list manipulations",
-  description = "CodeAndRoll2 is a set of more than >130 productivity functions for vector, matrix
+  description = "CodeAndRoll2 is a set of more than 130 productivity functions for vector, matrix
   and list manipulations and math. Used by MarkdownReports, ggExpress, SeuratUtils, etc.",
 
   depends = "Stringendo",

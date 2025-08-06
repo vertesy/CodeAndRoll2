@@ -4,7 +4,8 @@ Version: 2.7.0
 Authors@R: 
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
-Description: CodeAndRoll2 is a set of more than >130 productivity
+Maintainer: Abel Vertesy <av@imba.oeaw.ac.at>
+Description: CodeAndRoll2 is a set of more than 130 productivity
     functions for vector, matrix and list manipulations and math. Used by
     MarkdownReports, ggExpress, SeuratUtils, etc.
 License: GPL-3 + file LICENSE

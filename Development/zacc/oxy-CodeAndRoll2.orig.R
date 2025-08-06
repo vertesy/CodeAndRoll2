@@ -1075,7 +1075,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) { # Per
   else {# if (is.vector(vec_or_table))
     if (NA_omit) {
       if (sum(is.na(vec_or_table))) { vec_or_table = na.omit(vec_or_table); iprint(sum(is.na(vec_or_table)), 'NA are omitted from the vec_or_table of:', length(vec_or_table))}
-      "Not wokring complelety : if NaN is stored as string, it does not detect it"
+      "Not working completely: if NaN is stored as string, it does not detect it"
       }
     sum(vec_or_table == category) /  length(vec_or_table)
   } # else: is vector
@@ -1538,9 +1538,9 @@ colDivide <- function(mat, vec) { # divide by column # See more: https://stackov
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @rdname colMutliply
+#' @rdname colMultiply
 #' @export 
-colMutliply <- function(mat, vec) { # Mutliply by column # See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
+colMultiply <- function(mat, vec) { # Multiply by column # See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r
   stopifnot(NCOL(mat) == length(vec))
   mat * vec[col(mat)] # fastest
 }
@@ -1577,9 +1577,9 @@ rowDivide <- function(mat, vec) { # divide by row
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @rdname rowMutliply
+#' @rdname rowMultiply
 #' @export 
-rowMutliply <- function(mat, vec) { # Mutliply by row
+rowMultiply <- function(mat, vec) { # Multiply by row
   stopifnot(NROW(mat) == length(vec))
   mat * vec[row(mat)] # fastest
 }
@@ -2468,8 +2468,8 @@ list2fullDF.byNames <- function(your.list = list(
 #' }
 #' @rdname list2fullDF.presence
 #' @export 
-list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]  # Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
-                                                , "set.2" = LETTERS[3:9]), byRow = TRUE, FILL = 0) {
+list2fullDF.presence <- function(your.list = list("set.1" = LETTERS[1:5]  # Convert a list to a full matrix.  Designed for occurrence counting, think of table(). Rows are all ENTRIES within your list, columns are names(your_list).
+                                               , "set.2" = LETTERS[3:9]), byRow = TRUE, FILL = 0) {
   length.list = length(your.list)
   list.names = names(your.list)
   list.elements = sort(Reduce(f = union, your.list))
