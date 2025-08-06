@@ -31,6 +31,7 @@
 #'
 #' @export
 getScriptName <- function(OutDir = getwd()) {
+  stopifnot(is.character(OutDir), length(OutDir) == 1, dir.exists(OutDir))
   scriptName <- ""
   # Check if rstudioapi is available
   if (requireNamespace("rstudioapi", quietly = TRUE)) {
@@ -156,6 +157,7 @@ pLength <- function(x) {
 #' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
+  stopifnot(is.vector(name_vec), length(name_vec) > 0)
   if (length(fill) == 1) {
     v <- rep(fill, length(name_vec))
   } else if (length(fill) == length(name_vec)) {
@@ -182,6 +184,8 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 #' list.fromNames() # Default behavior with `LETTERS[1:5]` and `NaN`
 #' @export
 list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
+  stopifnot(is.vector(x) || !is.null(names(x)),
+            is.logical(use.names), length(use.names) == 1)
   liszt <- as.list(rep(fill, length(x)))
 
   # names(liszt) <-
@@ -249,6 +253,7 @@ list.from.template <- function(x, fill = NA) {
 #' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) {
+  stopifnot(is.vector(rowname_vec), is.vector(colname_vec))
   mx <- matrix(
     data = fill, nrow = length(rowname_vec), ncol = length(colname_vec),
     dimnames = list(rowname_vec, colname_vec)
@@ -266,6 +271,7 @@ matrix.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fil
 #' @param fill The value to fill the new vector, Default: `NA`
 #' @export
 data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5], fill = NA) {
+  stopifnot(is.vector(rowname_vec), is.vector(colname_vec))
   df <- matrix(
     data = fill, nrow = length(rowname_vec), ncol = length(colname_vec),
     dimnames = list(rowname_vec, colname_vec)
@@ -285,6 +291,9 @@ data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5],
 #' @param IsItARow Transpose? Swap rows an columns. Default: `TRUE`
 #' @export
 matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
+  stopifnot(is.vector(vector), length(vector) > 0,
+            is.numeric(HowManyTimes), length(HowManyTimes) == 1, HowManyTimes > 0,
+            is.logical(IsItARow), length(IsItARow) == 1)
   matt <- matrix(vector, nrow = length(vector), ncol = HowManyTimes)
   if (!IsItARow) {
     matt <- t(matt)
@@ -305,6 +314,7 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 array.fromNames <- function(
     rowname_vec = 1:3, colname_vec = letters[1:2],
     z_name_vec = LETTERS[4:6], fill = NA) {
+  stopifnot(is.vector(rowname_vec), is.vector(colname_vec), is.vector(z_name_vec))
   DimNames <- list(rowname_vec, colname_vec, z_name_vec)
   Dimensions_ <- lapply(DimNames, length)
   mx <- array(data = fill, dim = Dimensions_, dimnames = DimNames)
@@ -415,6 +425,10 @@ printEveryN <- function(i = i, N = 1000, prefix = NULL) {
 #'
 #' @export
 printProgress <- function(i = i, total, message = "Progress", digits = 0) {
+  stopifnot(is.numeric(i), length(i) == 1,
+            is.numeric(total), length(total) == 1, total > 0,
+            is.character(message), length(message) == 1,
+            is.numeric(digits), length(digits) == 1)
   percentage <- formatC(100 * i / total, format = "f", digits = digits)
   cat(paste0(message, ": ", i, "/", total, " (", percentage, "%)\n"))
 }
@@ -610,6 +624,9 @@ count_occurrence_each_element <- function(vec) {
 #'
 #' @export
 top_indices <- function(x, n = 3, top = TRUE) {
+  stopifnot(is.vector(x),
+            is.numeric(n), length(n) == 1, n > 0,
+            is.logical(top), length(top) == 1)
   head(order(x, decreasing = top), n)
 }
 
