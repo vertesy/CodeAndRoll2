@@ -4,7 +4,10 @@
 \alias{getScriptName}
 \title{Get Current Script Name or Basename of Output Directory}
 \usage{
-getScriptName()
+getScriptName(OutDir = getwd())
+}
+\arguments{
+\item{OutDir}{Fallback directory whose basename is returned if the script name cannot be determined.}
 }
 \value{
 A string containing the basename of the current script or the basename of \code{OutDir}
