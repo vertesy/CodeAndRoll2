@@ -25,7 +25,7 @@ DESCRIPTION <- list(
   "Title" = "CodeAndRoll2 for vector, matrix and list manipulations",
   "Author" = person(given = "Abel", family = "Vertesy", email = "av@imba.oeaw.ac.at", role = c("aut", "cre")),
   "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "av@imba.oeaw.ac.at", role =  c("aut", "cre") )',
-  "Description" = "CodeAndRoll2 is a set of more than >130 productivity functions. Used by MarkdownReports, ggExpress, SeuratUtils.
+  "Description" = "CodeAndRoll2 is a set of more than 130 productivity functions. Used by MarkdownReports, ggExpress, SeuratUtils.
     Packaged version of the core functionalities  (vector, matrix and list manipulations; math) of the formerly used CodeAndRoll (v1).",
   "License" = "GPL-3 + file LICENSE",
   "Version" = package.version,

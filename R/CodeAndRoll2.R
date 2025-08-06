@@ -1556,7 +1556,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) {
         vec_or_table <- stats::na.omit(vec_or_table)
         iprint(sum(is.na(vec_or_table)), "NA are omitted from the vec_or_table of:", length(vec_or_table))
       }
-      "Not working complelety : if NaN is stored as string, it does not detect it"
+      "Not working completely: if NaN is stored as string, it does not detect it"
     }
 
     # Calculate the percentage
@@ -1670,7 +1670,7 @@ colDivide <- function(mat, vec = colSums(mat)) {
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #' @export
-colMutliply <- function(mat, vec) {
+colMultiply <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
   mat * vec[col(mat)] # fastest
 }
@@ -1696,7 +1696,7 @@ rowDivide <- function(mat, vec) {
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #' @export
-rowMutliply <- function(mat, vec) {
+rowMultiply <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
   mat * vec[row(mat)] # fastest
 }

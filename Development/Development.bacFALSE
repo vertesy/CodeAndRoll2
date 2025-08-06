@@ -555,7 +555,7 @@ as.character.wNames <- function(vec) {
 #' @title Translate values to a new set using a dictionary
 #' @description Replaces a set of values in a vector with another set of values,
 #' it translates your vector. Oldvalues and newvalues have to be 1-to-1
-#' correspoding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
+#' corresponding vectors.  'chartr("a-cX", "D-Fw", x) does the same as above
 #' in theory, but it did not seem very robust regarding your input...'
 #' @param vec set of values where you want to replace
 #' @param oldvalues oldvalues (from)
@@ -570,7 +570,7 @@ translate <- function(vec, oldvalues, newvalues) {
     if (length(newvalues) == 1) {
       newvalues <- rep(newvalues, length(oldvalues))
     } else if (length(newvalues) > 1) {
-      iprint("PROVIDE ONE NEWVALUE, OR THE SAME NUMEBR OF NEWVALUES AS OLDVALUES.")
+      iprint("PROVIDE ONE NEWVALUE, OR THE SAME NUMBER OF NEWVALUES AS OLDVALUES.")
     }
   }
   tmp <- vec
@@ -965,7 +965,7 @@ which_names_grep <- function(namedVec, pattern, ...) {
 #' @description Calls na.omit() and returns a clean vector.
 #' Omit NA values from a vector and return a clean vector without any spam.
 #' @param object Values to filter for NA
-#' @param silent Silence the data structure coversion warning: anything ->vector
+#' @param silent Silence the data structure conversion warning: anything ->vector
 #' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
 #'
@@ -1082,7 +1082,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) {
         vec_or_table <- stats::na.omit(vec_or_table)
         iprint(sum(is.na(vec_or_table)), "NA are omitted from the vec_or_table of:", length(vec_or_table))
       }
-      "Not working complelety : if NaN is stored as string, it does not detect it"
+      "Not working completely: if NaN is stored as string, it does not detect it"
     }
 
     # Calculate the percentage
@@ -1181,12 +1181,12 @@ colDivide <- function(mat, vec) {
 
 
 # _________________________________________________________________________________________________
-#' @title colMutliply
+#' @title colMultiply
 #' @description Multiply by column. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #' @export
-colMutliply <- function(mat, vec) {
+colMultiply <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
   mat * vec[col(mat)] # fastest
 }
@@ -1207,12 +1207,12 @@ rowDivide <- function(mat, vec) {
 
 
 # _________________________________________________________________________________________________
-#' @title rowMutliply
-#' @description Mutliply by row.
+#' @title rowMultiply
+#' @description Multiply by row.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #' @export
-rowMutliply <- function(mat, vec) {
+rowMultiply <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
   mat * vec[row(mat)] # fastest
 }
@@ -2462,7 +2462,7 @@ list2fullDF.byNames <- function(your.list = list(
 #'
 #' @export
 list2fullDF.presence <- function(your.list = list(
-                                   "set.1" = LETTERS[1:5] # Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
+                                   "set.1" = LETTERS[1:5] # Convert a list to a full matrix.  Designed for occurrence counting, think of table(). Rows = all ENTRIES of within your list, columns = names(your_list).
                                    , "set.2" = LETTERS[3:9]
                                  ), byRow = TRUE, FILL = 0) {
   length.list <- length(your.list)
