@@ -1286,9 +1286,10 @@ MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) {
 # _________________________________________________________________________________________________
 #' @title cumsubtract
 #' @description Cumulative subtraction, opposite of cumsum().
-#' @param numericVec PARAM_DESCRIPTION, Default: blanks
+#' @param numericVec Numeric vector to compute pairwise differences.
 #' @export
-cumsubtract <- function(numericVec = blanks) {
+cumsubtract <- function(numericVec) {
+  stopifnot(is.numeric(numericVec), length(numericVec) > 1)
   DiffZ <- numericVec[-1] - numericVec[-length(numericVec)]
   print(table(DiffZ))
   DiffZ
