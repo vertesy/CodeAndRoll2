@@ -123,7 +123,7 @@ Updated: 2024/10/23 18:22
 Get Current Script Name or Basename of Output Directory. This function attempts to retrieve the name of the currently opened script in  the RStudio editor. If the script name cannot be obtained or if the `rstudioapi` package is  not available, it returns the basename of the directory specified by `OutDir`.   @return A string containing the basename of the current script or the basename of `OutDir`  if the script name is unavailable.  @importFrom rstudioapi getSourceEditorContext 
 
 - #### 2 `getProject()`
-getProject. Try to get the project name you are wokring on in Rstudio.
+getProject. Try to get the project name you are working on in Rstudio.
 
 - #### 3 `()`
 Save Command History to "command_history.date.scriptname.txt".   This function saves the command history of the current R session to a text file. The file name  includes the current date and, if available, the name of the current R script (when running in  RStudio). The file is saved in the current working directory.   @return Nothing is returned, but the file path is printed to the console.   @importFrom rstudioapi getSourceEditorContext  @examples  \dontrun{  savehistory_2()  }
@@ -336,16 +336,16 @@ colSubtract. Subtract a vector (length = nr. columns) column by column from each
 rowSubtract. Subtract a vector (length = nr. rows) row by row from each value of the matrix
 
 - #### 73 `colDivide()`
-Row-wise division of a matrix by a column vector. Each element of the matrix is divided by the corresponding element of the vector  that matches the column of the matrix element. This is typically used to normalize data,  for example, to scale values in each row by certain factors like totals or means. Soruce  \url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}. 
+Row-wise division of a matrix by a column vector. Each element of the matrix is divided by the corresponding element of the vector  that matches the column of the matrix element. This is typically used to normalize data,  for example, to scale values in each row by certain factors like totals or means. Source  \url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}.
 
-- #### 74 `colMutliply()`
-colMutliply. Multiply by column. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
+- #### 74 `colMultiply()`
+colMultiply. Multiply each column by a vector. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 
 - #### 75 `rowDivide()`
 rowDivide. Divide by row.
 
-- #### 76 `rowMutliply()`
-rowMutliply. Mutliply by row.
+- #### 76 `rowMultiply()`
+rowMultiply. Multiply each row by a vector.
 
 - #### 77 `row.Zscore()`
 row.Zscore. Calculate Z-score over rows of data frame.

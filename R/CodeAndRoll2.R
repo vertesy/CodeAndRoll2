@@ -45,7 +45,7 @@ getScriptName <- function() {
 # _________________________________________________________________________________________________
 #' @title getProject
 #'
-#' @description Try to get the project name you are wokring on in Rstudio.
+#' @description Try to get the project name you are working on in Rstudio.
 #' @returns The final subfolder of your project, or NULL, if you are not running one
 #' @importFrom rstudioapi getActiveProject
 #' @examples getProject()
@@ -1372,7 +1372,7 @@ which_names_grep <- function(namedVec, pattern, ...) {
 #' @description Calls na.omit() and returns a clean vector.
 #' Omit NA values from a vector and return a clean vector without any spam.
 #' @param object Values to filter for NA
-#' @param silent Silence the data structure coversion warning: anything ->vector
+#' @param silent Silence the data structure conversion warning: anything ->vector
 #' @param ... Pass any other argument to na.omit()
 #' @importFrom stats na.omit
 #'
@@ -1631,7 +1631,7 @@ rowSubtract <- function(mat = yy, vec = 5:1) {
 #'
 #' @description Each element of the matrix is divided by the corresponding element of the vector
 #' that matches the column of the matrix element. This is typically used to normalize data,
-#' for example, to scale values in each row by certain factors like totals or means. Soruce
+#' for example, to scale values in each row by certain factors like totals or means. Source
 #' \url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}.
 #'
 #' @param mat A numeric matrix where each row represents a distribution to be divided.
@@ -1650,12 +1650,13 @@ colDivide <- function(mat, vec = colSums(mat)) {
 
 
 # _________________________________________________________________________________________________
-#' @title colMutliply
-#' @description Multiply by column. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
-#' @param mat Numeric input matrix with the distribution.
+#' @title colMultiply
+#' @description Multiply each column of a matrix by the corresponding element of a vector.
+#' See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
+#' @param mat Numeric input matrix.
 #' @param vec Vector to multiply by.
 #' @export
-colMutliply <- function(mat, vec) {
+colMultiply <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
   mat * vec[col(mat)] # fastest
 }
@@ -1676,12 +1677,12 @@ rowDivide <- function(mat, vec) {
 
 
 # _________________________________________________________________________________________________
-#' @title rowMutliply
-#' @description Mutliply by row.
-#' @param mat Numeric input matrix with the distribution.
+#' @title rowMultiply
+#' @description Multiply each row of a matrix by the corresponding element of a vector.
+#' @param mat Numeric input matrix.
 #' @param vec Vector to multiply by.
 #' @export
-rowMutliply <- function(mat, vec) {
+rowMultiply <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
   mat * vec[row(mat)] # fastest
 }
@@ -3090,7 +3091,7 @@ FILL = NA) {
 #'
 #' @export
 list2fullDF.presence <- function(your.list = list(
-  "set.1" = LETTERS[1:5] # Convert a list to a full matrix.  Designed for occurence counting, think tof table(). Rows = all ENTRIES of within your list, columns = names(your_list).
+  "set.1" = LETTERS[1:5] # Convert a list to a full matrix.  Designed for occurrence counting, think of table(). Rows = all ENTRIES of within your list, columns = names(your_list).
   , "set.2" = LETTERS[3:9]
 ), byRow = TRUE, FILL = 0) {
   length.list <- length(your.list)

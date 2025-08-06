@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{Values to filter for NA}
 
-\item{silent}{Silence the data structure coversion warning: anything ->vector}
+\item{silent}{Silence the data structure conversion warning: anything ->vector}
 
 \item{...}{Pass any other argument to na.omit()}
 }

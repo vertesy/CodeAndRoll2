@@ -20,6 +20,6 @@ has been divided by the corresponding element in the vector.
 \description{
 Each element of the matrix is divided by the corresponding element of the vector
 that matches the column of the matrix element. This is typically used to normalize data,
-for example, to scale values in each row by certain factors like totals or means. Soruce
+for example, to scale values in each row by certain factors like totals or means. Source
 \url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}.
 }
