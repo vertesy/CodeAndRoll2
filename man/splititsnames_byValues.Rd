@@ -13,7 +13,7 @@ splititsnames_byValues(namedVec)
 A list of vectors, each of which contains the elements of \code{namedVec} that have the corresponding value.
 }
 \description{
-Split the names of a list by its its values.
+Split the names of a list by its values.
 }
 \examples{
 namedVec <- c("A", "B", "C", "A", "B", "D")

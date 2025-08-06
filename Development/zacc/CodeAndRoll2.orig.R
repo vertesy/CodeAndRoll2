@@ -275,7 +275,7 @@ zigzagger <- function(vec = 1:9) { # mix entries so that they differ
   intermingle2vec(vec, rev(vec))[1:length(vec)]
 }
 
-numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log10( max(abs(x), abs(y)) ) ) + 1) { # numerate from x to y with additonal zeropadding
+numerate <- function(x = 1, y = 100, zeropadding = TRUE, pad_length = floor( log10( max(abs(x), abs(y)) ) ) + 1) { # numerate from x to y with additional zeropadding
   z = x:y
   if (zeropadding) { z = stringr::str_pad(z, pad = 0, width = pad_length)   }
   return(z)
