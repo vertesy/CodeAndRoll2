@@ -9,7 +9,7 @@ as_tibble_from_namedVec(vec.w.names = c(a = 1, b = 2), transpose = TRUE)
 \arguments{
 \item{vec.w.names}{A vector with names, Default: c(a = 1, b = 2)}
 
-\item{transpose}{Transpose? Default: T}
+\item{transpose}{Transpose? Default: TRUE}
 }
 \description{
 Convert a vector with names into a tibble, keeping the names as rownames.

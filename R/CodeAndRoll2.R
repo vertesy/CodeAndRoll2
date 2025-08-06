@@ -196,7 +196,7 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
   #   }
 
   names(liszt) <-
-    if (!is.null(names(x)) & use.names) {
+    if (!is.null(names(x)) && use.names) {
       names(x)
     } else {
       x
@@ -218,7 +218,7 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
 #' @param fill The value to fill the new vector. Default: `NA`
 #' @export
 vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
-  stopifnot(is.list(x) | is.vector(x) | is.table(x))
+  stopifnot(is.list(x) || is.vector(x) || is.table(x))
   v <- rep(fill, length(x))
   names(v) <- names(x)
   return(v)
@@ -234,7 +234,7 @@ vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
 #'
 #' @export
 list.from.template <- function(x, fill = NA) {
-  stopifnot(is(x)[1] == "list" | is.vector(x) | is.table(x))
+  stopifnot(is(x)[1] == "list" || is.vector(x) || is.table(x))
   liszt <- as.list(rep(fill, length(x)))
   names(liszt) <- names(x)
   return(liszt)
@@ -741,7 +741,7 @@ as.named.vector.table <- function(table, verbose = TRUE, ...) {
 #' @param df data frame
 #' @param values Index of column with values, Default: 1
 #' @param names Index of column with names, Default: 2
-#' @param make.names make.names, Default: F
+#' @param make.names make.names, Default: FALSE
 #'
 #' @export
 as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE) {
@@ -816,7 +816,7 @@ tibble_summary_to_namedVec <- function(
 #' @title as_tibble_from_namedVec
 #' @description Convert a vector with names into a tibble, keeping the names as rownames.
 #' @param vec.w.names A vector with names, Default: c(a = 1, b = 2)
-#' @param transpose Transpose? Default: T
+#' @param transpose Transpose? Default: TRUE
 #' @examples as_tibble_from_namedVec()
 #' @importFrom dplyr bind_rows
 #'
@@ -863,7 +863,7 @@ unique.wNames <- function(x) {
 as.numeric.wNames.character <- function(
     vec, verbose = TRUE,
     factor.to.character = TRUE, ...) {
-  if (is.character(vec) | is.logical(vec)) {
+  if (is.character(vec) || is.logical(vec)) {
     numerified_vec <- as.numeric(vec, ...)
   } else {
     if (verbose) print("Input vector is not 'character' or 'logical'.")
@@ -955,10 +955,10 @@ as.character.wNames <- function(vec) {
 #'
 #' @export
 translate <- function(vec, old, new) {
-  stopifnot(length(old) == length(new) | length(new) == 1)
+  stopifnot(length(old) == length(new) || length(new) == 1)
   # "PROVIDE ONE NEW VALUE, OR THE SAME NUMBER OF NEW VALUES AS OLD VALUES!"
 
-  if (length(old) > length(new) & length(new) == 1) {
+  if (length(old) > length(new) && length(new) == 1) {
     new <- rep(new, length(old))
   }
 
@@ -1053,7 +1053,7 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
 #' @export any.duplicated
 any.duplicated <- function(vec, summarize = TRUE, max.shown = 25) {
   y <- sum(duplicated(vec))
-  if (summarize & y) {
+  if (summarize && y > 0) {
     x <- table(vec)
     x <- sort.decreasing(x[x > 1])
 
@@ -1396,7 +1396,7 @@ which_names_grep <- function(namedVec, pattern, ...) {
 #' @examples # CodeAndRoll2::na.omit.strip(c(1, 2, 3, NA, NaN, 2))
 na.omit.strip <- function(object, silent = FALSE, ...) {
   if (is.data.frame(object)) {
-    if (min(dim(object)) > 1 & silent == FALSE) {
+    if (min(dim(object)) > 1 && silent == FALSE) {
       iprint(dim(object), "dimensional array is converted to a vector.")
     }
     object <- unlist(object)
@@ -2050,11 +2050,11 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 #' @export
 sort_matrix_rows <- function(df, column = NULL, rownames = FALSE, decrease = FALSE, na_last = TRUE) {
   stopifnot(
-    is.data.frame(df) | is.matrix(df),
-    is.character(column) | is.numeric(column) | if (rownames) is.null(column),
-    "cannot handle multi column sort" = length(column) == 1 | if (rownames) is.null(column),
+    is.data.frame(df) || is.matrix(df),
+    is.character(column) || is.numeric(column) || if (rownames) is.null(column),
+    "cannot handle multi column sort" = length(column) == 1 || if (rownames) is.null(column),
     is.logical(rownames), is.logical(decrease), is.logical(na_last),
-    (if (isFALSE(rownames) & is.character(column)) column %in% colnames(df) else TRUE)
+    (if (isFALSE(rownames) && is.character(column)) column %in% colnames(df) else TRUE)
   )
 
   message("Sorting by ", if (rownames) "rownames" else paste(column, "column"), " in ", if (decrease) "Decreasing" else "Increasing", " order.")
@@ -3180,7 +3180,7 @@ splititsnames_byValues <- function(namedVec) {
 intermingle2vec <- function(V1, V2, wNames = TRUE, name_prefix = NULL) {
   stopifnot(
     length(V1) == length(V2),
-    is.null(name_prefix) | length(name_prefix) == 2
+    is.null(name_prefix) || length(name_prefix) == 2
   )
 
   if (!is.null(name_prefix)) {
@@ -3222,7 +3222,7 @@ intermingle.cbind <- function(df1, df2) {
   }
 
   # Create New column names
-  if (length(colnames(df1)) == ncol(df1) & length(colnames(df2)) == ncol(df2)) {
+  if (length(colnames(df1)) == ncol(df1) && length(colnames(df2)) == ncol(df2)) {
     NewColNames <- intermingle2vec(paste0("df1.", colnames(df1)), paste0("df2.", colnames(df2)))
   } else {
     NewColNames <- intermingle2vec(paste0("df1.", 1:ncol(df1)), paste0("df2.", 1:ncol(df2)))
@@ -3330,8 +3330,8 @@ intersect.wNames <- function(x, y, names = "x") {
     is.vector(x), is.vector(y), names %in% c("x", "y")
   )
   warnif(
-    "x argument has no names!" =  (names == "x" & !Stringendo::HasNames(x) )
-    , "y argument has no names!" = (names == "y" & !Stringendo::HasNames(y) )
+    "x argument has no names!" =  (names == "x" && !Stringendo::HasNames(x) )
+    , "y argument has no names!" = (names == "y" && !Stringendo::HasNames(y) )
   )
 
 
@@ -3394,7 +3394,7 @@ union.wNames <- function(x, y, names = "x") {
 
   # Check for name conflicts: if names of common elements are different, issue a warning.
   if ( !identical(names_x, names_y) ) {
-    warning("Names of intersecting elements is not the same in x & y!", immediate. = T)
+    warning("Names of intersecting elements is not the same in x & y!", immediate. = TRUE)
     iprint("names_x: ", head(names_x))
     iprint("names_y: ", head(names_y))
 
@@ -3532,7 +3532,7 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 
   negs <- sum(x < 0)
   zeros <- sum(x == 0)
-  if (negs | zeros) {
+  if (negs || zeros) {
     iprint("The input vector has", negs, "negative values and", zeros, "zeros.")
   }
   mean(log(x, base = k), na.rm = na.rm)
@@ -3680,7 +3680,7 @@ as.factor.numeric <- function(vec, rename = FALSE, ...) {
   .Deprecated("as.numeric.wNames.factor")
 
   vec2 <- as.numeric(as.factor(vec, ...))
-  names(vec2) <- if (!rename & !is.null(names(vec))) {
+  names(vec2) <- if (!rename && !is.null(names(vec))) {
     names(vec)
   } else {
     vec
@@ -3702,7 +3702,7 @@ as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
   # use RowNames: WhichDimNames = 1 , 2: use ColNames
   # !!! might require drop = FALSE in subsetting!!! eg: df_col[, 3, drop = FALSE]
   # df_col[which(unlist(lapply(df_col, is.null)))] = "NULL" # replace NULLs - they would fall out of vectors - DOES not work yet
-  if (is.list(df_col) & !is.data.frame(df_col)) {
+  if (is.list(df_col) && !is.data.frame(df_col)) {
     namez <- names(df_col)
   }
   vecc <- as.vector(unlist(df_col))
