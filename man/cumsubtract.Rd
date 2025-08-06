@@ -4,10 +4,10 @@
 \alias{cumsubtract}
 \title{cumsubtract}
 \usage{
-cumsubtract(numericVec = blanks)
+cumsubtract(numericVec)
 }
 \arguments{
-\item{numericVec}{PARAM_DESCRIPTION, Default: blanks}
+\item{numericVec}{Numeric vector to compute pairwise differences.}
 }
 \description{
 Cumulative subtraction, opposite of cumsum().
