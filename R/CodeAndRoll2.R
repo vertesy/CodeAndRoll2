@@ -87,20 +87,11 @@ savehistory_2 <- function() {
   script_name <- try(basename(rstudioapi::getSourceEditorContext()$path), silent = TRUE)
   if (inherits(script_name, "try-error")) script_name <- ""
 
-  file_name <- if (nzchar(script_name)) {
-    ppp(
-      "command_history",
-      format(Sys.time(), format = "%Y.%m.%d"),
-      script_name,
-      "txt"
-    )
-  } else {
-    ppp(
-      "command_history",
-      format(Sys.time(), format = "%Y.%m.%d"),
-      "txt"
-    )
-  }
+  file_name <- ppp(
+    "command_history",
+    format(Sys.time(), format = "%Y.%m.%d"),
+    script_name, "txt"
+  )
 
   # Save the command history
   savehistory(file = file_name)
