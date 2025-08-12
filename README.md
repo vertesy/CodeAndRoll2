@@ -225,10 +225,10 @@ as_tibble_from_namedVec. Convert a vector with names into a tibble, keeping the 
 Unique elements. Get the unique elements of a vector, keep their names
 
 - #### 36 `as.numeric.wNames.character()`
-as.numeric.wNames.character. Converts (1) a 'character' v. into a numeric v., or  a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.  The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via facotr in any case. Code saved at the end.
+as.numeric.wNames.character. Converts (1) a 'character' v. into a numeric v., or a 'factor' v. via as.numeric(as.character(vec)) and preserves the original names. The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via factor in any case. Code saved at the end.
 
 - #### 37 `as.numeric.wNames.factor()`
-as.numeric.wNames.factor. Turn any vector into numeric categories as.numeric(as.factor(vec))  Forerly as.factor.numeric
+as.numeric.wNames.factor. Turn any vector into numeric categories as.numeric(as.factor(vec)). Formerly as.factor.numeric
 
 - #### 38 `as.character.wNames()`
 as.character.wNames. Converts your input vector into a character vector, and puts the original  character values into the names of the new vector, unless it already has names.
@@ -537,10 +537,10 @@ as.list.df.by.col. Split a dataframe into a list by its rows.
 reorder.list. Reorder elements of lists in your custom order of names / indices.
 
 - #### 140 `range.list()`
-range.list. Calculates the range of values in the entire a list.
+range.list. Calculates the range of values in the entire list.
 
 - #### 141 `intermingle2lists()`
-intermingle2lists. Combine 2 lists (of the same length) so that form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
+intermingle2lists. Combine 2 lists (of the same length) so that they form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 
 - #### 142 `as.listalike()`
 as.listalike. Converts a vector to a list with the same dimensions as a given list.
@@ -558,13 +558,13 @@ list2fullDF.presence. Converts a list to a full matrix, with rows and columns na
 splitbyitsnames. Split a list by its names.
 
 - #### 147 `splititsnames_byValues()`
-Split the names of list by its values.. Split the names of a list by its its values.
+Split the names of a list by its values.
 
 - #### 148 `intermingle2vec()`
-intermingle2vec. Combine 2 vectors (of the same length) so that form every odd and every even element of a unified vector.
+intermingle2vec. Combine 2 vectors (of the same length) so that they form every odd and every even element of a unified vector.
 
 - #### 149 `intermingle.cbind()`
-intermingle.cbind. Combine 2 data frames (of the same length) so that form every odd and every even  element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
+intermingle.cbind. Combine 2 data frames (of the same length) so that they form every odd and every even element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 
 - #### 150 `ls2categvec()`
 ls2categvec. Converts a list to a vector repeating list-element names, while vector names are the list elements.

@@ -13,7 +13,7 @@ as.named.vector.2colDF(df, values = 1, names = 2, make.names = FALSE)
 
 \item{names}{Index of column with names, Default: 2}
 
-\item{make.names}{make.names, Default: F}
+\item{make.names}{make.names, Default: FALSE}
 }
 \description{
 Convert a 2-column dataframe (value, name) into a named vector. Use for simple tibbles.
