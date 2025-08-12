@@ -7,7 +7,8 @@
 getScriptName(OutDir = getwd())
 }
 \arguments{
-\item{OutDir}{Fallback directory whose basename is returned if the script name cannot be determined.}
+\item{OutDir}{Fallback directory whose basename is returned if the script name
+cannot be determined. Defaults to the current working directory.}
 }
 \value{
 A string containing the basename of the current script or the basename of \code{OutDir}

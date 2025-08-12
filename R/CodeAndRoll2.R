@@ -3161,7 +3161,7 @@ splitbyitsnames <- function(namedVec) {
 
 # _________________________________________________________________________________________________
 #' @title Split the names of list by its values.
-#' @description Split the names of a list by its its values.
+#' @description Split the names of a list by its values.
 #' @param namedVec A vector with names.
 #'
 #' @return A list of vectors, each of which contains the elements of `namedVec` that have the corresponding value.

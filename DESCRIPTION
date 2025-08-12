@@ -1,10 +1,11 @@
 Package: CodeAndRoll2
 Title: CodeAndRoll2 for vector, matrix and list manipulations
-Version: 2.7.0
-Author: Abel Vertesy [aut, cre]
-Maintainer: Abel Vertesy <av@imba.oeaw.ac.at>
-Description: CodeAndRoll2 is a set of over 130 productivity
-    functions for vector, matrix and list manipulations and math. Used by
+Version: 2.8.0
+Authors@R: 
+    person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
+Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
+Description: CodeAndRoll2 is a set of more than 130 productivity functions
+    for vector, matrix and list manipulations and math. Used by
     MarkdownReports, ggExpress, SeuratUtils, etc.
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/CodeAndRoll2/issues
@@ -26,6 +27,6 @@ Suggests:
     grDevices,
     sm
 Encoding: UTF-8
-Packaged: 2024-10-23 18:26:44.582209
+Packaged: 2025-08-12 16:44:43.201713
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
