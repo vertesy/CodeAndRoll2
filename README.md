@@ -30,11 +30,11 @@ Install directly from **GitHub** via **devtools** with one R command:
 require("devtools")
 
 # Install dependencies
-devtools::install_github(repo = "vertesy/Stringendo", upgrade = F)
-devtools::install_github(repo = "vertesy/ReadWriter", upgrade = F)
+devtools::install_github(repo = "vertesy/Stringendo", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/ReadWriter", ref = "main", upgrade = F)
 
 # Install CodeAndRoll2
-devtools::install_github(repo = "vertesy/CodeAndRoll2", upgrade = F)
+devtools::install_github(repo = "vertesy/CodeAndRoll2", ref = "main", upgrade = F)
 
 ```
 ...then simply load the package:
