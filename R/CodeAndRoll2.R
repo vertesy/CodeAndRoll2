@@ -1698,9 +1698,9 @@ apply2 <- function(X, MARGIN, FUN, ...) {
 #' @param mat Numeric input matrix.
 #' @param vec Vector to subtract. Length = nr. columns.
 #' @export
-colSubtract <- function(mat = xx, vec = 5:1) {
+colSubtract <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
-  t(apply(mat, 1, function(x) x - vec))
+  t(apply(mat, 1, function(x) x - vec)) # t() fixes apply(x,1,...) transpose quirk
 }
 
 
@@ -1710,7 +1710,7 @@ colSubtract <- function(mat = xx, vec = 5:1) {
 #' @param mat Numeric input matrix.
 #' @param vec Vector to subtract. Length = nr. rows.
 #' @export
-rowSubtract <- function(mat = yy, vec = 5:1) {
+rowSubtract <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
   apply(mat, 2, function(x) x - vec)
 }
@@ -1733,6 +1733,7 @@ rowSubtract <- function(mat = yy, vec = 5:1) {
 #' @return A matrix with the same dimensions as the input where each element in the original matrix
 #' has been divided by the corresponding element in the vector.
 #'
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); colDivide(m)
 #' @export
 colDivide <- function(mat, vec = colSums(mat)) {
   stopifnot(ncol(mat) == length(vec), is.numeric(vec))
@@ -1745,6 +1746,8 @@ colDivide <- function(mat, vec = colSums(mat)) {
 #' @description Multiply each column of a matrix by the corresponding element of a vector. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
+#'
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); colMultiply(colDivide(m), colSums(m))
 #' @export
 colMultiply <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
@@ -1758,6 +1761,8 @@ colMultiply <- function(mat, vec) {
 #' @description Divide by row.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to divide by.
+#'
+#' @examples rowDivide(rowMultiply(m, 1:3),  1:3)
 #' @export
 rowDivide <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
@@ -1771,6 +1776,8 @@ rowDivide <- function(mat, vec) {
 #' @description Multiply each row of a matrix by the corresponding element of a vector.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
+#'
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); rowMultiply(rowDivide(m, 1:4), 1:4)
 #' @export
 rowMultiply <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
@@ -2592,14 +2599,13 @@ fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by
 #' @return A numeric matrix rotated 90 degrees in the specified direction.
 #'
 #' @examples
-#' # Define a 3x3 matrix
-#' matrix_original <- matrix(1:9, nrow = 3)
+#' m <- matrix(1:8, nrow = 4, byrow = TRUE)
 #'
 #' # Rotate the matrix clockwise
-#' rotated_clockwise <- rotate(matrix_original, TRUE)
+#' rotated_clockwise <- rotate_matrix(m, TRUE)
 #'
 #' # Rotate the matrix counterclockwise
-#' rotated_counterclockwise <- rotate(matrix_original, FALSE)
+#' rotated_counterclockwise <- rotate_matrix(m, FALSE)
 #'
 #' @export
 rotate_matrix <- function(x, clockwise = TRUE) {

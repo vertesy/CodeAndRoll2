@@ -14,3 +14,6 @@ colMultiply(mat, vec)
 \description{
 Multiply each column of a matrix by the corresponding element of a vector. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 }
+\examples{
+m <- matrix(1:8, nrow = 4, byrow = TRUE); colMultiply(colDivide(m), colSums(m))
+}

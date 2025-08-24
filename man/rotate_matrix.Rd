@@ -19,13 +19,12 @@ Rotates a given numeric matrix 90 degrees in a specified direction. The rotation
 can be either clockwise or counterclockwise, determined by the \code{clockwise} parameter.
 }
 \examples{
-# Define a 3x3 matrix
-matrix_original <- matrix(1:9, nrow = 3)
+m <- matrix(1:8, nrow = 4, byrow = TRUE)
 
 # Rotate the matrix clockwise
-rotated_clockwise <- rotate(matrix_original, TRUE)
+rotated_clockwise <- rotate_matrix(m, TRUE)
 
 # Rotate the matrix counterclockwise
-rotated_counterclockwise <- rotate(matrix_original, FALSE)
+rotated_counterclockwise <- rotate_matrix(m, FALSE)
 
 }

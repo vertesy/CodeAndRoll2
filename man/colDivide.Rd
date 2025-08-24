@@ -23,3 +23,6 @@ that matches the column of the matrix element. This is typically used to normali
 for example, to scale values in each row by factors such as totals or means. Source:
 \url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}.
 }
+\examples{
+m <- matrix(1:8, nrow = 4, byrow = TRUE); colDivide(m)
+}

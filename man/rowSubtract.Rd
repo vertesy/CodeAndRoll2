@@ -4,7 +4,7 @@
 \alias{rowSubtract}
 \title{rowSubtract}
 \usage{
-rowSubtract(mat = yy, vec = 5:1)
+rowSubtract(mat, vec)
 }
 \arguments{
 \item{mat}{Numeric input matrix.}
