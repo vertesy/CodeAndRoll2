@@ -1632,6 +1632,65 @@ simplify_categories <- function(category_vec, replaceit, to) {
 ### Matrix calculations ____________________________________________________________ ----
 
 
+# _________________________________________________________________________________________________
+#' @title Apply Function Without Transposition Quirk (Row-Wise Apply Fix)
+#'
+#' @description
+#' A drop-in replacement for `apply()` that automatically corrects the common transposition quirk
+#' when applying functions row-wise (`MARGIN = 1`) to a 2D matrix. For `MARGIN = 1`, the result
+#' is transposed back to match the expected orientation. For higher-dimensional arrays or
+#' `MARGIN != 1`, it behaves identically to `apply()`.
+#'
+#' @param X A matrix or array. Must be an object of class `array`. If `MARGIN = 1`, must be a
+#'   matrix. No default.
+#' @param MARGIN A numeric vector giving the subscripts which the function will be applied over.
+#'   For a matrix: 1 indicates rows, 2 indicates columns. Default: no default; must be provided.
+#' @param FUN The function to be applied. Default: no default; must be a valid function.
+#' @param ... Optional additional arguments passed to `FUN`.
+#'
+#' @return The result of applying `FUN` to `X` over the given `MARGIN`, with row-wise results
+#'   automatically transposed back into the expected orientation. The shape and type match
+#'   `apply()`, except when `MARGIN = 1` and the result is matrix-like, in which case the
+#'   transposition is corrected.
+#'
+#' @examples
+#' m <- matrix(1:9, nrow = 3, byrow = TRUE)
+#' apply(m, 1, function(x) x + 1)        # Produces transposed output
+#' apply2(m, 1, function(x) x + 1)       # Produces expected row-wise output
+#'
+#' @export
+apply2 <- function(X, MARGIN, FUN, ...) {
+  # Input assertions
+  stopifnot(
+    is.array(X),                      # X must be an array or matrix
+    is.numeric(MARGIN),              # MARGIN must be numeric
+    all(MARGIN >= 1),                # MARGIN values must be >= 1
+    max(MARGIN) <= length(dim(X)),   # MARGIN must refer to valid dimensions
+    is.function(FUN)                 # FUN must be a valid function
+  )
+
+  # Apply function using base R
+  result <- apply(X, MARGIN, FUN, ...)
+
+  # Correct transposed result only when:
+  # - input is a 2D matrix
+  # - applying across rows (MARGIN = 1)
+  # - and result is a matrix (i.e., all FUN outputs same-length vector)
+  if (
+    is.matrix(X) &&
+    length(dim(X)) == 2 &&
+    identical(MARGIN, 1) &&
+    is.matrix(result)
+  ) {
+    result <- t(result)
+  }
+
+  # Output assertions (safe-guards, optional)
+  stopifnot(!is.null(result))  # Ensure result exists
+
+  return(result)
+}
+
 
 # _________________________________________________________________________________________________
 #' @title colSubtract
