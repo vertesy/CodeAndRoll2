@@ -552,6 +552,45 @@ getCategories <- function(named_categ_vec) {
 ## Vector operations ____________________________________________________________ ----
 
 
+#' @title Vector Filtering Helper for piping
+#'
+#' @description
+#' A universal vector filtering function that applies an inline logical condition
+#' to a vector, similar to `dplyr::filter()`. The vector is passed as `.`, so
+#' users can write conditions like `. > 5`, `. %in% c("a","b")`, or `. == 1`.
+#'
+#' @param x A vector of any type (numeric, character, logical, etc.).
+#' @param cond An expression evaluated with `.` representing the input vector.
+#'   Must return a logical vector of the same length as `x`. Default: none.
+#'
+#' @return A subset of `x` that satisfies the condition. The output type matches
+#' the input type of `x`.
+#'
+#' @examples
+#' vfilter(1:10, . > 5)
+#' vfilter(letters, . %in% c("a", "f", "z"))
+#' vfilter(1:10, . %% 2 == 0)
+#'
+#' @export
+vfilter <- function(x, cond) {
+  # Input assertions
+  stopifnot(
+    "Input `x` must be a vector." = is.vector(x) || is.factor(x),
+    "Argument `cond` must be provided." = !missing(cond)
+  )
+
+  # Capture condition expression
+  cond_expr <- substitute(cond)
+
+  # Evaluate condition with `.` bound to x
+  mask <- eval(cond_expr, envir = list(. = x), enclos = parent.frame())
+
+
+  x[mask]
+}
+
+
+
 #' @title Count the number of unique values
 #'
 #' @description Count the number of unique values
