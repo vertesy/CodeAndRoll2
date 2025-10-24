@@ -10,5 +10,6 @@
 \item{vec}{input vector}
 }
 \description{
-Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+Converts any vector into a numeric vector, and puts the original character values
+into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 }

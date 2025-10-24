@@ -385,6 +385,23 @@ what <- function(x, printme = 0) {
   head(x)
 }
 
+# _________________________________________________________________________________________________
+#' @title Test if object is a list
+#' @description The 'is.list()' function "fails: on tibbles and data frames: it returns TRUE,
+#' as if it were a list. This distinguishes and identifies simple lists. That's why we need this function.
+#' @param object Object to test.
+#' @param warn_nested Warn if nested lists are detected? Default: TRUE
+#' @export
+#' @examples is.list.simple(list())
+#' is.list.simple(dplyr::tibble())
+is.list.simple <- function(object, warn_nested = TRUE) {
+  # Warning if it’s nested
+  if (warn_nested && any(vapply(object, is.list, logical(1)))) { warning("  >>  Nested lists detected!") } # , call. = FALSE
+
+  #  is.list(x) && !is.data.frame(x) # An alternative, that would work identical
+  "list" %in% class(object)
+}
+
 
 
 # _________________________________________________________________________________________________
@@ -403,17 +420,6 @@ idim <- function(any_object) {
   }
 }
 
-
-# _________________________________________________________________________________________________
-#' @title Test if object is a list
-#' @description The 'is.list()' function fails on tibbles: it returns TRUE, as if it were a list. This distiguishes. Thaat's why we need this function.
-#' @param object Object to test.
-#' @export
-#' @examples is.list2(list())
-#' is.list2(dplyr::tibble())
-is.list2 <- function(object) {
-  "list" %in% class(object)
-}
 
 
 
@@ -3777,7 +3783,8 @@ dput_pretty <- pretty_dput <- function(vec) {
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.deprecated
 #'
-#' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+#' @description Converts any vector into a numeric vector, and puts the original character values
+#' into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @param vec input vector
 #'
 #' @export as.numeric.wNames.deprecated
@@ -3823,9 +3830,11 @@ as.factor.numeric <- function(vec, rename = FALSE, ...) {
 #' @export as.named.vector.deprecated
 as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
   namez <- dimnames(df_col)[[WhichDimNames]]
+
   # use RowNames: WhichDimNames = 1 , 2: use ColNames
   # !!! might require drop = FALSE in subsetting!!! eg: df_col[, 3, drop = FALSE]
   # df_col[which(unlist(lapply(df_col, is.null)))] = "NULL" # replace NULLs - they would fall out of vectors - DOES not work yet
+
   if (is.list(df_col) && !is.data.frame(df_col)) {
     namez <- names(df_col)
   }
@@ -3841,6 +3850,11 @@ as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
 #' @title sort.mat
 #' @export sort.mat
 sort.mat <- function() .Deprecated("sort_matrix_rows()")
+
+
+#' @title is.list2
+#' @export is.list2
+is.list2 <- function() .Deprecated("is.list.simple()")
 
 
 
