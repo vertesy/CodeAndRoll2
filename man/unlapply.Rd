@@ -9,7 +9,7 @@ unlapply(list, FUN, ...)
 \arguments{
 \item{list}{A list to apply the function to.}
 
-\item{FUN}{PARAM_DESCRIPTION}
+\item{FUN}{Function to apply to each element of the list.}
 
 \item{...}{Pass any other argument.}
 }

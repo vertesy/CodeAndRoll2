@@ -858,7 +858,7 @@ df.row.2.named.vector <- function(df_row) {
 #' @title tibble_summary_to_namedVec
 #' @description Convert a key-value tibble into a named vector (as opposed to using rownames).
 #' @param tbl A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = TRUE), value = rnorm(20))
-#' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
+#' @param idx Indices of the key and value columns, Default: c(key = 1, value = 2)
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
 #' @examples tibble_summary_to_namedVec()
@@ -1065,7 +1065,7 @@ fractions <- function(vec, na_rm = TRUE) vec / sum(vec, na.rm = na_rm)
 #' @title flip_value2name
 #' @description Flip the values and the names of a vector with names.
 #' @param namedVector named vector
-#' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
+#' @param NumericNames Convert the names to numeric? Default: FALSE
 #' @param silent Suppress printing info? Default: FALSE
 #' @export
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
@@ -1187,11 +1187,9 @@ clip.at.fixed.value <- function(x, high = TRUE, thr = 3) {
 #' @param high Clip above threshold? Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm Remove NA values for calculation? Default: TRUE
-#' @param showhist PARAM_DESCRIPTION, Default: FALSE
+#' @param showhist Show histogram with cutoffs? Default: FALSE
 #' @param ... Pass any other argument.
 #' @export
-# #' @importFrom MarkdownReports whist
-
 clip.outliers.at.percentile <- function(x, high = TRUE,
                                         percentiles = c(.01, .99),
                                         na.rm = TRUE, showhist = FALSE,
@@ -1205,7 +1203,7 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
     )
     abline(v = qnt, col = 2)
   }
-  # if (showhist) { MarkdownReports::whist(unlist(x), breaks = 50 ,vline = qnt, filtercol = -1)} #if
+
   y <- x
   y[x < qnt[1]] <- qnt[1]
   y[x > qnt[2]] <- qnt[2]
@@ -1334,17 +1332,17 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE,
 
 
 # _________________________________________________________________________________________________
-#' @title MaxN
-#' @description Find second (third…) highest/lowest value in vector.
+#' @title Find second (third…) highest/lowest value in vector.
+#' @description Source: "https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column"
 #' @param vec input vector, Default: rpois(4, lambda = 3)
-#' @param topN PARAM_DESCRIPTION, Default: 2
+#' @param topN Which highest value to return? Default: 2
 #' @export
 MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) {
   topN <- topN - 1
   n <- length(vec)
   sort(vec, partial = n - topN)[n - topN]
 }
-# https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column
+
 
 
 
@@ -1365,7 +1363,7 @@ cumsubtract <- function(numericVec) {
 # _________________________________________________________________________________________________
 #' @title sumBySameName
 #' @description Sum up vector elements with the same name.
-#' @param namedVec PARAM_DESCRIPTION
+#' @param namedVec A named numeric vector.
 #' @export
 sumBySameName <- function(namedVec) {
   # unlapply(splitbyitsnames(namedVec), sum)
@@ -1423,7 +1421,7 @@ checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = T
 
 #' @title which_names
 #' @description Return the names where the input vector is TRUE. The input vector is converted to logical.
-#' @param namedVec PARAM_DESCRIPTION
+#' @param namedVec A vector of named elements.
 #' @export
 which_names <- function(namedVec) {
   return(names(which(as.logical.wNames(namedVec))))
@@ -1846,7 +1844,7 @@ row.Zscore <- function(x) t(scale(t(x)))
 #' @title TPM_normalize
 #' @description Normalize each column to 1 million.
 #' @param mat Numeric input matrix with the distribution.
-#' @param SUM PARAM_DESCRIPTION, Default: 1e+06
+#' @param SUM Normalization factor. Default: 1e6
 #' @export
 TPM_normalize <- function(mat, SUM = 1e6) {
   cs <- colSums(mat, na.rm = TRUE)
@@ -2429,7 +2427,7 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
 # _________________________________________________________________________________________________
 #' @title merge_dfs_by_rn
 #' @description Merge any data frames by rownames. Required plyr package.
-#' @param list_of_dfs PARAM_DESCRIPTION
+#' @param list_of_dfs list of data frames to merge
 #' @seealso
 #'  \code{\link[plyr]{join_all}}
 #' @export
@@ -2611,10 +2609,9 @@ fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by
     is.logical(print_full), is.character(collapse_by)
   )
 
-  if (verbose) {
-    cat("Before conversion:\n")
-    coltypes <- get_col_types(df, print_it = print_full)
-  }
+  cat("Before conversion:\n")
+  coltypes <- get_col_types(df, print_it = print_full)
+
 
   list_cols <- which(coltypes %in% "list") # Identify list columns
 
@@ -2699,8 +2696,8 @@ na.omit.mat <- function(mat, any = TRUE) {
 # _________________________________________________________________________________________________
 #' @title remove.na.rows
 #' @description Cols have to be a vector of numbers corresponding to columns.
-#' @param mat In put matrix.
-#' @param cols PARAM_DESCRIPTION, Default: 1:NCOL(mat)
+#' @param mat  Input matrix.
+#' @param cols Cols to check for NAs, Default: 1:NCOL(mat)
 #' @export
 remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
   mat2 <- mat[, cols]
@@ -2852,7 +2849,7 @@ mdlapply <- function(list_2D, ...) {
 # _________________________________________________________________________________________________
 #' @title arr.of.lists.2.df
 #' @description Simplify 2D-list-array to a DF.
-#' @param two.dim.arr.of.lists PARAM_DESCRIPTION
+#' @param two.dim.arr.of.lists A 2D array of lists.
 #' @export
 arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
   list.1D <- unlist(two.dim.arr.of.lists)
@@ -2866,7 +2863,7 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
 # _________________________________________________________________________________________________
 #' @title mdlapply2df
 #' @description Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
-#' @param list_2D PARAM_DESCRIPTION
+#' @param list_2D A multidimensional array.
 #' @param ... Pass any other argument.
 #' @export
 mdlapply2df <- function(list_2D, ...) {
@@ -2948,7 +2945,7 @@ setdiff.ls <- function(ls, ...) {
 #'
 #' @description Do an `lapply()`, then `unlist()`, with preserving the list element names.
 #' @param list A list to apply the function to.
-#' @param FUN PARAM_DESCRIPTION
+#' @param FUN Function to apply to each element of the list.
 #' @param ... Pass any other argument.
 #'
 #' @export
