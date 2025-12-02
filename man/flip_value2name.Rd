@@ -9,7 +9,7 @@ flip_value2name(namedVector, NumericNames = FALSE, silent = FALSE)
 \arguments{
 \item{namedVector}{named vector}
 
-\item{NumericNames}{PARAM_DESCRIPTION, Default: FALSE}
+\item{NumericNames}{Convert the names to numeric? Default: FALSE}
 
 \item{silent}{Suppress printing info? Default: FALSE}
 }

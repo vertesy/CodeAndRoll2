@@ -14,3 +14,6 @@ rowMultiply(mat, vec)
 \description{
 Multiply each row of a matrix by the corresponding element of a vector.
 }
+\examples{
+m <- matrix(1:8, nrow = 4, byrow = TRUE); rowMultiply(rowDivide(m, 1:4), 1:4)
+}

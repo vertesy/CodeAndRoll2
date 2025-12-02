@@ -7,7 +7,7 @@
 merge_dfs_by_rn(list_of_dfs)
 }
 \arguments{
-\item{list_of_dfs}{PARAM_DESCRIPTION}
+\item{list_of_dfs}{list of data frames to merge}
 }
 \description{
 Merge any data frames by rownames. Required plyr package.

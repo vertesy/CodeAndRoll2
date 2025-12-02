@@ -14,3 +14,6 @@ rowDivide(mat, vec)
 \description{
 Divide by row.
 }
+\examples{
+rowDivide(rowMultiply(m, 1:3),  1:3)
+}

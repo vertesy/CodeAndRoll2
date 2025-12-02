@@ -4,7 +4,7 @@
 \alias{colSubtract}
 \title{colSubtract}
 \usage{
-colSubtract(mat = xx, vec = 5:1)
+colSubtract(mat, vec)
 }
 \arguments{
 \item{mat}{Numeric input matrix.}

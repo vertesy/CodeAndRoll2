@@ -111,6 +111,45 @@ savehistory_2 <- function() {
 # _________________________________________________________________________________________________
 ## Pipetools ____________________________________________________________ ----
 
+
+#' @title Vector Filtering Helper for piping
+#'
+#' @description
+#' A universal vector filtering function that applies an inline logical condition
+#' to a vector, similar to `dplyr::filter()`. The vector is passed as `.`, so
+#' users can write conditions like `. > 5`, `. %in% c("a","b")`, or `. == 1`.
+#'
+#' @param x A vector of any type (numeric, character, logical, etc.).
+#' @param cond An expression evaluated with `.` representing the input vector.
+#'   Must return a logical vector of the same length as `x`. Default: none.
+#'
+#' @return A subset of `x` that satisfies the condition. The output type matches
+#' the input type of `x`.
+#'
+#' @examples
+#' pFilter(1:10, . > 5)
+#' pFilter(letters, . %in% c("a", "f", "z"))
+#' pFilter(1:10, . %% 2 == 0)
+#'
+#' @export
+pFilter <- function(x, cond) {
+  # Input assertions
+  stopifnot(
+    "Input `x` must be a vector." = is.vector(x) || is.factor(x),
+    "Argument `cond` must be provided." = !missing(cond)
+  )
+
+  # Capture condition expression
+  cond_expr <- substitute(cond)
+
+  # Evaluate condition with `.` bound to x
+  mask <- eval(cond_expr, envir = list(. = x), enclos = parent.frame())
+
+
+  x[mask]
+}
+
+
 #' @title Print and Return an Object in a Pipe
 #'
 #' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
@@ -187,17 +226,6 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
   stopifnot(is.vector(x) || !is.null(names(x)),
             is.logical(use.names), length(use.names) == 1)
   named_list <- as.list(rep(fill, length(x)))
-
-  # names(named_list) <-
-  #   if (is.character(x) | ) {
-  #     x
-  #   } else {
-  #     if (!is.null(names(x))) {
-  #       names(x)
-  #     } else {
-  #       stop("Input is nor a chacter vector, nor an object with names")
-  #     }
-  #   }
 
   names(named_list) <-
     if (!is.null(names(x)) && use.names) {
@@ -346,6 +374,23 @@ what <- function(x, printme = 0) {
   head(x)
 }
 
+# _________________________________________________________________________________________________
+#' @title Test if object is a list
+#' @description The 'is.list()' function "fails: on tibbles and data frames: it returns TRUE,
+#' as if it were a list. This distinguishes and identifies simple lists. That's why we need this function.
+#' @param object Object to test.
+#' @param warn_nested Warn if nested lists are detected? Default: TRUE
+#' @export
+#' @examples is.list.simple(list())
+#' is.list.simple(dplyr::tibble())
+is.list.simple <- function(object, warn_nested = TRUE) {
+  # Warning if it’s nested
+  if (warn_nested && any(vapply(object, is.list, logical(1)))) { warning("  >>  Nested lists detected!") } # , call. = FALSE
+
+  #  is.list(x) && !is.data.frame(x) # An alternative, that would work identical
+  "list" %in% class(object)
+}
+
 
 
 # _________________________________________________________________________________________________
@@ -364,17 +409,6 @@ idim <- function(any_object) {
   }
 }
 
-
-# _________________________________________________________________________________________________
-#' @title Test if object is a list
-#' @description The 'is.list()' function fails on tibbles: it returns TRUE, as if it were a list. This distiguishes. Thaat's why we need this function.
-#' @param object Object to test.
-#' @export
-#' @examples is.list2(list())
-#' is.list2(dplyr::tibble())
-is.list2 <- function(object) {
-  "list" %in% class(object)
-}
 
 
 
@@ -550,6 +584,9 @@ getCategories <- function(named_categ_vec) {
 
 # _________________________________________________________________________________________________
 ## Vector operations ____________________________________________________________ ----
+
+
+
 
 
 #' @title Count the number of unique values
@@ -810,7 +847,7 @@ df.row.2.named.vector <- function(df_row) {
 #' @title tibble_summary_to_namedVec
 #' @description Convert a key-value tibble into a named vector (as opposed to using rownames).
 #' @param tbl A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = TRUE), value = rnorm(20))
-#' @param idx PARAM_DESCRIPTION, Default: c(key = 1, value = 2)
+#' @param idx Indices of the key and value columns, Default: c(key = 1, value = 2)
 #' @seealso
 #'  \code{\link[dplyr]{reexports}}
 #' @examples tibble_summary_to_namedVec()
@@ -1017,7 +1054,7 @@ fractions <- function(vec, na_rm = TRUE) vec / sum(vec, na.rm = na_rm)
 #' @title flip_value2name
 #' @description Flip the values and the names of a vector with names.
 #' @param namedVector named vector
-#' @param NumericNames PARAM_DESCRIPTION, Default: FALSE
+#' @param NumericNames Convert the names to numeric? Default: FALSE
 #' @param silent Suppress printing info? Default: FALSE
 #' @export
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
@@ -1139,11 +1176,9 @@ clip.at.fixed.value <- function(x, high = TRUE, thr = 3) {
 #' @param high Clip above threshold? Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm Remove NA values for calculation? Default: TRUE
-#' @param showhist PARAM_DESCRIPTION, Default: FALSE
+#' @param showhist Show histogram with cutoffs? Default: FALSE
 #' @param ... Pass any other argument.
 #' @export
-# #' @importFrom MarkdownReports whist
-
 clip.outliers.at.percentile <- function(x, high = TRUE,
                                         percentiles = c(.01, .99),
                                         na.rm = TRUE, showhist = FALSE,
@@ -1157,7 +1192,7 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
     )
     abline(v = qnt, col = 2)
   }
-  # if (showhist) { MarkdownReports::whist(unlist(x), breaks = 50 ,vline = qnt, filtercol = -1)} #if
+
   y <- x
   y[x < qnt[1]] <- qnt[1]
   y[x > qnt[2]] <- qnt[2]
@@ -1221,7 +1256,7 @@ bottomN.dfCol <- function(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5
 #' @title Split a Vector into a List by Every N-th Element
 #' @description This function divides a given vector into chunks of size `by` (default is 9).
 #' The resulting list contains vectors of the specified chunk size or smaller.
-#' @param vec A numeric or character vector to be split.
+#' @param vec A numeric oggr character vector to be split.
 #' @param by Integer value specifying the chunk size. Default is 9.
 #' @return A list where each element is a vector containing up to `by` elements from `vec`.
 #' @export
@@ -1246,9 +1281,10 @@ zigzagger <- function(vec = 1:9) {
 
 
 # _________________________________________________________________________________________________
-#' @title Formats a Sequence of Numbers with Zero Padding
+#' @title numerate
 #'
-#' @description This function generates a sequence of numbers between two specified values,
+#' @description Formats a Sequence of Numbers with Zero Padding.
+#' This function generates a sequence of numbers between two specified values,
 #' optionally padding them with leading zeros to a specified length. It is useful
 #' for creating numeric sequences with consistent character lengths.
 #' @param x The starting number of the sequence. Default: 1.
@@ -1288,15 +1324,16 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE,
 # _________________________________________________________________________________________________
 #' @title MaxN
 #' @description Find second (third…) highest/lowest value in vector.
+#' Source: "https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column"
 #' @param vec input vector, Default: rpois(4, lambda = 3)
-#' @param topN PARAM_DESCRIPTION, Default: 2
+#' @param topN Which highest value to return? Default: 2
 #' @export
 MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) {
   topN <- topN - 1
   n <- length(vec)
   sort(vec, partial = n - topN)[n - topN]
 }
-# https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column
+
 
 
 
@@ -1317,7 +1354,7 @@ cumsubtract <- function(numericVec) {
 # _________________________________________________________________________________________________
 #' @title sumBySameName
 #' @description Sum up vector elements with the same name.
-#' @param namedVec PARAM_DESCRIPTION
+#' @param namedVec A named numeric vector.
 #' @export
 sumBySameName <- function(namedVec) {
   # unlapply(splitbyitsnames(namedVec), sum)
@@ -1375,7 +1412,7 @@ checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = T
 
 #' @title which_names
 #' @description Return the names where the input vector is TRUE. The input vector is converted to logical.
-#' @param namedVec PARAM_DESCRIPTION
+#' @param namedVec A vector of named elements.
 #' @export
 which_names <- function(namedVec) {
   return(names(which(as.logical.wNames(namedVec))))
@@ -1632,6 +1669,65 @@ simplify_categories <- function(category_vec, replaceit, to) {
 ### Matrix calculations ____________________________________________________________ ----
 
 
+# _________________________________________________________________________________________________
+#' @title Apply Function Without Transposition Quirk (Row-Wise Apply Fix)
+#'
+#' @description
+#' A drop-in replacement for `apply()` that automatically corrects the common transposition quirk
+#' when applying functions row-wise (`MARGIN = 1`) to a 2D matrix. For `MARGIN = 1`, the result
+#' is transposed back to match the expected orientation. For higher-dimensional arrays or
+#' `MARGIN != 1`, it behaves identically to `apply()`.
+#'
+#' @param X A matrix or array. Must be an object of class `array`. If `MARGIN = 1`, must be a
+#'   matrix. No default.
+#' @param MARGIN A numeric vector giving the subscripts which the function will be applied over.
+#'   For a matrix: 1 indicates rows, 2 indicates columns. Default: no default; must be provided.
+#' @param FUN The function to be applied. Default: no default; must be a valid function.
+#' @param ... Optional additional arguments passed to `FUN`.
+#'
+#' @return The result of applying `FUN` to `X` over the given `MARGIN`, with row-wise results
+#'   automatically transposed back into the expected orientation. The shape and type match
+#'   `apply()`, except when `MARGIN = 1` and the result is matrix-like, in which case the
+#'   transposition is corrected.
+#'
+#' @examples
+#' m <- matrix(1:9, nrow = 3, byrow = TRUE)
+#' apply(m, 1, function(x) x + 1)        # Produces transposed output
+#' apply2(m, 1, function(x) x + 1)       # Produces expected row-wise output
+#'
+#' @export
+apply2 <- function(X, MARGIN, FUN, ...) {
+  # Input assertions
+  stopifnot(
+    is.array(X),                      # X must be an array or matrix
+    is.numeric(MARGIN),              # MARGIN must be numeric
+    all(MARGIN >= 1),                # MARGIN values must be >= 1
+    max(MARGIN) <= length(dim(X)),   # MARGIN must refer to valid dimensions
+    is.function(FUN)                 # FUN must be a valid function
+  )
+
+  # Apply function using base R
+  result <- apply(X, MARGIN, FUN, ...)
+
+  # Correct transposed result only when:
+  # - input is a 2D matrix
+  # - applying across rows (MARGIN = 1)
+  # - and result is a matrix (i.e., all FUN outputs same-length vector)
+  if (
+    is.matrix(X) &&
+    length(dim(X)) == 2 &&
+    identical(MARGIN, 1) &&
+    is.matrix(result)
+  ) {
+    result <- t(result)
+  }
+
+  # Output assertions (safe-guards, optional)
+  stopifnot(!is.null(result))  # Ensure result exists
+
+  return(result)
+}
+
 
 # _________________________________________________________________________________________________
 #' @title colSubtract
@@ -1639,9 +1735,9 @@ simplify_categories <- function(category_vec, replaceit, to) {
 #' @param mat Numeric input matrix.
 #' @param vec Vector to subtract. Length = nr. columns.
 #' @export
-colSubtract <- function(mat = xx, vec = 5:1) {
+colSubtract <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
-  t(apply(mat, 1, function(x) x - vec))
+  t(apply(mat, 1, function(x) x - vec)) # t() fixes apply(x,1,...) transpose quirk
 }
 
 
@@ -1651,7 +1747,7 @@ colSubtract <- function(mat = xx, vec = 5:1) {
 #' @param mat Numeric input matrix.
 #' @param vec Vector to subtract. Length = nr. rows.
 #' @export
-rowSubtract <- function(mat = yy, vec = 5:1) {
+rowSubtract <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
   apply(mat, 2, function(x) x - vec)
 }
@@ -1674,6 +1770,7 @@ rowSubtract <- function(mat = yy, vec = 5:1) {
 #' @return A matrix with the same dimensions as the input where each element in the original matrix
 #' has been divided by the corresponding element in the vector.
 #'
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); colDivide(m)
 #' @export
 colDivide <- function(mat, vec = colSums(mat)) {
   stopifnot(ncol(mat) == length(vec), is.numeric(vec))
@@ -1686,6 +1783,8 @@ colDivide <- function(mat, vec = colSums(mat)) {
 #' @description Multiply each column of a matrix by the corresponding element of a vector. See more: https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
+#'
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); colMultiply(colDivide(m), colSums(m))
 #' @export
 colMultiply <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
@@ -1699,6 +1798,8 @@ colMultiply <- function(mat, vec) {
 #' @description Divide by row.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to divide by.
+#'
+#' @examples rowDivide(rowMultiply(m, 1:3),  1:3)
 #' @export
 rowDivide <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
@@ -1712,6 +1813,8 @@ rowDivide <- function(mat, vec) {
 #' @description Multiply each row of a matrix by the corresponding element of a vector.
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
+#'
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); rowMultiply(rowDivide(m, 1:4), 1:4)
 #' @export
 rowMultiply <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
@@ -1732,7 +1835,7 @@ row.Zscore <- function(x) t(scale(t(x)))
 #' @title TPM_normalize
 #' @description Normalize each column to 1 million.
 #' @param mat Numeric input matrix with the distribution.
-#' @param SUM PARAM_DESCRIPTION, Default: 1e+06
+#' @param SUM Normalization factor. Default: 1e6
 #' @export
 TPM_normalize <- function(mat, SUM = 1e6) {
   cs <- colSums(mat, na.rm = TRUE)
@@ -2315,7 +2418,7 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
 # _________________________________________________________________________________________________
 #' @title merge_dfs_by_rn
 #' @description Merge any data frames by rownames. Required plyr package.
-#' @param list_of_dfs PARAM_DESCRIPTION
+#' @param list_of_dfs list of data frames to merge
 #' @seealso
 #'  \code{\link[plyr]{join_all}}
 #' @export
@@ -2497,10 +2600,9 @@ fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by
     is.logical(print_full), is.character(collapse_by)
   )
 
-  if (verbose) {
-    cat("Before conversion:\n")
-    coltypes <- get_col_types(df, print_it = print_full)
-  }
+  cat("Before conversion:\n")
+  coltypes <- get_col_types(df, print_it = print_full)
+
 
   list_cols <- which(coltypes %in% "list") # Identify list columns
 
@@ -2533,14 +2635,13 @@ fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by
 #' @return A numeric matrix rotated 90 degrees in the specified direction.
 #'
 #' @examples
-#' # Define a 3x3 matrix
-#' matrix_original <- matrix(1:9, nrow = 3)
+#' m <- matrix(1:8, nrow = 4, byrow = TRUE)
 #'
 #' # Rotate the matrix clockwise
-#' rotated_clockwise <- rotate(matrix_original, TRUE)
+#' rotated_clockwise <- rotate_matrix(m, TRUE)
 #'
 #' # Rotate the matrix counterclockwise
-#' rotated_counterclockwise <- rotate(matrix_original, FALSE)
+#' rotated_counterclockwise <- rotate_matrix(m, FALSE)
 #'
 #' @export
 rotate_matrix <- function(x, clockwise = TRUE) {
@@ -2586,8 +2687,8 @@ na.omit.mat <- function(mat, any = TRUE) {
 # _________________________________________________________________________________________________
 #' @title remove.na.rows
 #' @description Cols have to be a vector of numbers corresponding to columns.
-#' @param mat In put matrix.
-#' @param cols PARAM_DESCRIPTION, Default: 1:NCOL(mat)
+#' @param mat  Input matrix.
+#' @param cols Cols to check for NAs, Default: 1:NCOL(mat)
 #' @export
 remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
   mat2 <- mat[, cols]
@@ -2739,7 +2840,7 @@ mdlapply <- function(list_2D, ...) {
 # _________________________________________________________________________________________________
 #' @title arr.of.lists.2.df
 #' @description Simplify 2D-list-array to a DF.
-#' @param two.dim.arr.of.lists PARAM_DESCRIPTION
+#' @param two.dim.arr.of.lists A 2D array of lists.
 #' @export
 arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
   list.1D <- unlist(two.dim.arr.of.lists)
@@ -2753,7 +2854,7 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
 # _________________________________________________________________________________________________
 #' @title mdlapply2df
 #' @description Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
-#' @param list_2D PARAM_DESCRIPTION
+#' @param list_2D A multidimensional array.
 #' @param ... Pass any other argument.
 #' @export
 mdlapply2df <- function(list_2D, ...) {
@@ -2835,7 +2936,7 @@ setdiff.ls <- function(ls, ...) {
 #'
 #' @description Do an `lapply()`, then `unlist()`, with preserving the list element names.
 #' @param list A list to apply the function to.
-#' @param FUN PARAM_DESCRIPTION
+#' @param FUN Function to apply to each element of the list.
 #' @param ... Pass any other argument.
 #'
 #' @export
@@ -3161,7 +3262,7 @@ splitbyitsnames <- function(namedVec) {
 
 # _________________________________________________________________________________________________
 #' @title Split the names of list by its values.
-#' @description Split the names of a list by its its values.
+#' @description Split the names of a list by its values.
 #' @param namedVec A vector with names.
 #'
 #' @return A list of vectors, each of which contains the elements of `namedVec` that have the corresponding value.
@@ -3670,7 +3771,8 @@ dput_pretty <- pretty_dput <- function(vec) {
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.deprecated
 #'
-#' @description Converts any vector into a numeric vector, and puts the original character values into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
+#' @description Converts any vector into a numeric vector, and puts the original character values
+#' into the names of the new vector, unless it already has names. Useful for coloring a plot by categories, name-tags, etc.
 #' @param vec input vector
 #'
 #' @export as.numeric.wNames.deprecated
@@ -3716,6 +3818,7 @@ as.factor.numeric <- function(vec, rename = FALSE, ...) {
 #' @export as.named.vector.deprecated
 as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
   namez <- dimnames(df_col)[[WhichDimNames]]
+
   # use RowNames: WhichDimNames = 1 , 2: use ColNames
   # !!! might require drop = FALSE in subsetting!!! eg: df_col[, 3, drop = FALSE]
   # df_col[which(unlist(lapply(df_col, is.null)))] = "NULL" # replace NULLs - they would fall out of vectors - DOES not work yet
@@ -3734,6 +3837,11 @@ as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
 #' @title sort.mat
 #' @export sort.mat
 sort.mat <- function() .Deprecated("sort_matrix_rows()")
+
+
+#' @title is.list2
+#' @export is.list2
+is.list2 <- function() .Deprecated("is.list.simple()")
 
 
 
