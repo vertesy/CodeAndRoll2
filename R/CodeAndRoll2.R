@@ -1267,7 +1267,7 @@ bottomN.dfCol <- function(df_col = as.named.vector(df[, 1, drop = FALSE]), n = 5
 #' @title Split a Vector into a List by Every N-th Element
 #' @description This function divides a given vector into chunks of size `by` (default is 9).
 #' The resulting list contains vectors of the specified chunk size or smaller.
-#' @param vec A numeric or character vector to be split.
+#' @param vec A numeric oggr character vector to be split.
 #' @param by Integer value specifying the chunk size. Default is 9.
 #' @return A list where each element is a vector containing up to `by` elements from `vec`.
 #' @export
@@ -1292,9 +1292,10 @@ zigzagger <- function(vec = 1:9) {
 
 
 # _________________________________________________________________________________________________
-#' @title Formats a Sequence of Numbers with Zero Padding
+#' @title numerate
 #'
-#' @description This function generates a sequence of numbers between two specified values,
+#' @description Formats a Sequence of Numbers with Zero Padding.
+#' This function generates a sequence of numbers between two specified values,
 #' optionally padding them with leading zeros to a specified length. It is useful
 #' for creating numeric sequences with consistent character lengths.
 #' @param x The starting number of the sequence. Default: 1.
@@ -1332,8 +1333,9 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE,
 
 
 # _________________________________________________________________________________________________
-#' @title Find second (third…) highest/lowest value in vector.
-#' @description Source: "https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column"
+#' @title MaxN
+#' @description Find second (third…) highest/lowest value in vector.
+#' Source: "https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column"
 #' @param vec input vector, Default: rpois(4, lambda = 3)
 #' @param topN Which highest value to return? Default: 2
 #' @export
