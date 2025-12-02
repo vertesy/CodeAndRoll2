@@ -186,9 +186,9 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
   stopifnot(is.vector(x) || !is.null(names(x)),
             is.logical(use.names), length(use.names) == 1)
-  liszt <- as.list(rep(fill, length(x)))
+  named_list <- as.list(rep(fill, length(x)))
 
-  # names(liszt) <-
+  # names(named_list) <-
   #   if (is.character(x) | ) {
   #     x
   #   } else {
@@ -199,18 +199,18 @@ list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
   #     }
   #   }
 
-  names(liszt) <-
+  names(named_list) <-
     if (!is.null(names(x)) && use.names) {
       names(x)
     } else {
       x
     }
   message(
-    "List of ", length(liszt),
-    " | names: ", paste(head(names(liszt)), collapse = " "),
+    "List of ", length(named_list),
+    " | names: ", paste(head(names(named_list)), collapse = " "),
     " ..."
   )
-  return(liszt)
+  return(named_list)
 }
 
 
@@ -239,9 +239,9 @@ vec.from.template <- function(x = table(LETTERS[1:5]), fill = NA) {
 #' @export
 list.from.template <- function(x, fill = NA) {
   stopifnot(is(x)[1] == "list" || is.vector(x) || is.table(x))
-  liszt <- as.list(rep(fill, length(x)))
-  names(liszt) <- names(x)
-  return(liszt)
+  named_list <- as.list(rep(fill, length(x)))
+  names(named_list) <- names(x)
+  return(named_list)
 }
 
 
