@@ -1116,7 +1116,8 @@ which.NA <- function(vec, verbose = TRUE) {
 #' @title clip.at.fixed.value
 #' @description Signal clipping. Cut values in a distribution, above or below a threshold.
 #' @param x A vector of numeric values (distribution).
-#' @param high Clip above threshold? Default: TRUE
+#' @param high Clip above the upper threshold (`TRUE`) or below the lower threshold (`FALSE`).
+#'   Default: TRUE
 #' @param thr threshold values, Default: 3
 #'
 #' @export
@@ -1136,7 +1137,8 @@ clip.at.fixed.value <- function(x, high = TRUE, thr = 3) {
 #' in a distribution above or below the extreme N% of the distribution.
 #'
 #' @param x A vector of numeric values.
-#' @param high Clip above threshold? Default: TRUE
+#' @param high Clip above the upper threshold (`TRUE`) or below the lower threshold (`FALSE`).
+#'   Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @param showhist PARAM_DESCRIPTION, Default: FALSE
@@ -1148,6 +1150,8 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
                                         percentiles = c(.01, .99),
                                         na.rm = TRUE, showhist = FALSE,
                                         ...) {
+  stopifnot(is.logical(high), length(high) == 1)
+
   qnt <- quantile(x, probs = percentiles, na.rm = na.rm)
   if (showhist) {
     hist(unlist(x),
@@ -1159,8 +1163,11 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
   }
   # if (showhist) { MarkdownReports::whist(unlist(x), breaks = 50 ,vline = qnt, filtercol = -1)} #if
   y <- x
-  y[x < qnt[1]] <- qnt[1]
-  y[x > qnt[2]] <- qnt[2]
+  if (isTRUE(high)) {
+    y[x > qnt[2]] <- qnt[2]
+  } else {
+    y[x < qnt[1]] <- qnt[1]
+  }
   y
 }
 
@@ -2147,12 +2154,13 @@ rowsplit <- function(df, f = rownames(df)) {
 #' @param na.remove Logical. Should NA values be removed before finding the maximum value?
 #' Default: TRUE
 #' @param collapse Character. The character to use to collapse multiple column names into a single
-#' string. Default: "-"
+#' string when a row has several maxima. Set to `NULL` or `NA` to use `multi_max_str` instead.
+#' Default: "-"
 #' @param verbose Logical. Should messages be printed to the console? Default: TRUE
-#' @param multi_max_str Character. The string to use when multiple columns have the maximum value.
-#' Default: "multiple.maxima"
-#' @param suffix Character. The suffix to add to the `multi_max_str` string. Default: "rows have
-#'
+#' @param multi_max_str Character. The string to use when multiple columns have the maximum value
+#' and `collapse` is `NULL` or `NA`. Default: "multiple.maxima"
+#' @param suffix Character. The suffix used in the verbose message reporting how many rows have
+#' multiple maxima. Default: "rows have multiple maxima."
 #'
 #' @examples
 #' mat <- matrix(data = c(1, 2, 3, 9, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
@@ -2179,24 +2187,26 @@ get_max_colname_per_row <- function(
   which.max.multi <- function(x) which(x == max(x, na.rm = TRUE))
 
   # Apply function to find the maximum indices to each row and return appropriate result
-  max_colname_per_row <- apply(mat, 1, function(row) {
-    # One or more maximum values
-    max_indices <- which.max.multi(row)
+  max_indices_per_row <- apply(mat, 1, which.max.multi)
 
-    # If there are multiple maximum values, return the "multi_max_str"
+  max_colname_per_row <- vapply(max_indices_per_row, function(max_indices) {
     if (length(max_indices) > 1) {
-      return(multi_max_str)
+      if (is.null(collapse) || is.na(collapse)) {
+        return(multi_max_str)
+      }
+      return(paste(colnames(mat)[max_indices], collapse = collapse))
     }
 
     return(colnames(mat)[max_indices])
-  })
+  }, character(1))
 
   # Name the result with row names (cell names)
   names(max_colname_per_row) <- rownames(mat)
 
   # stats
   if (verbose) {
-    message(paste(sum(max_colname_per_row == multi_max_str), "of", length(max_colname_per_row), suffix))
+    multi_max_count <- sum(vapply(max_indices_per_row, length, integer(1)) > 1)
+    message(paste(multi_max_count, "of", length(max_colname_per_row), suffix))
   }
 
   return(max_colname_per_row)
@@ -2461,9 +2471,10 @@ get_col_types <- function(df, print_it = TRUE) {
     typetable <- t(t(x))
     colnames(typetable) <- "Type"
     print(typetable)
+
+    print("Summary")
+    print(table(x))
   }
-  print("Summary")
-  print(table(x))
   return(x)
 }
 
@@ -2497,10 +2508,8 @@ fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by
     is.logical(print_full), is.character(collapse_by)
   )
 
-  if (verbose) {
-    cat("Before conversion:\n")
-    coltypes <- get_col_types(df, print_it = print_full)
-  }
+  if (verbose) cat("Before conversion:\n")
+  coltypes <- get_col_types(df, print_it = if (verbose) print_full else FALSE)
 
   list_cols <- which(coltypes %in% "list") # Identify list columns
 

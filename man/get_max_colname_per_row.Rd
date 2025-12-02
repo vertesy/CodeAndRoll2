@@ -27,8 +27,8 @@ string. Default: "-"}
 \item{multi_max_str}{Character. The string to use when multiple columns have the maximum value.
 Default: "multiple.maxima"}
 
-\item{suffix}{Character. The suffix to add to the \code{multi_max_str} string. Default: "rows have}
-}
+\item{suffix}{Character. The suffix used in the verbose message reporting how many rows have
+multiple maxima. Default: "rows have multiple maxima."}
 \description{
 This function takes a numeric matrix as input and returns a named vector where each element
 corresponds to a row of the matrix. The names of the vector are the row names of the matrix,
