@@ -58,7 +58,7 @@ getScriptName <- function(OutDir = getwd()) {
 getProject <- function() {
   if (!requireNamespace("rstudioapi", quietly = TRUE)) {
     warning("rstudioapi package is not available. Please install it using install.packages('rstudioapi').",
-            immediate. = TRUE
+      immediate. = TRUE
     )
   } else {
     tryCatch(basename(rstudioapi::getActiveProject()), error = function(e) {})
@@ -160,7 +160,11 @@ pFilter <- function(x, cond) {
 #' @return The input object `x`, unchanged.
 #'
 #' @examples
-#' results <- c(1, 2, 3) %>% pSee() %>% sqrt() %>% tail(2) ; results
+#' results <- c(1, 2, 3) %>%
+#'   pSee() %>%
+#'   sqrt() %>%
+#'   tail(2)
+#' results
 pSee <- function(x, max_elements = 100) {
   y <- utils::head(x, max_elements)
   print(y)
@@ -178,10 +182,14 @@ pSee <- function(x, max_elements = 100) {
 #' @return The input object `x`, unchanged.
 #'
 #' @examples
-#' results <- c(9:1) %>% tail(4) %>% pLength() %>% sqrt() ; results
+#' results <- c(9:1) %>%
+#'   tail(4) %>%
+#'   pLength() %>%
+#'   sqrt()
+#' results
 pLength <- function(x) {
   stopifnot(!missing(x), is.vector(x) || is.list(x))
-  message("length: ",length(x))
+  message("length: ", length(x))
   return(x)
 }
 
@@ -223,8 +231,10 @@ vec.fromNames <- function(name_vec = LETTERS[1:5], fill = NA) {
 #' list.fromNames() # Default behavior with `LETTERS[1:5]` and `NaN`
 #' @export
 list.fromNames <- function(x = LETTERS[1:5], fill = NaN, use.names = FALSE) {
-  stopifnot(is.vector(x) || !is.null(names(x)),
-            is.logical(use.names), length(use.names) == 1)
+  stopifnot(
+    is.vector(x) || !is.null(names(x)),
+    is.logical(use.names), length(use.names) == 1
+  )
   named_list <- as.list(rep(fill, length(x)))
 
   names(named_list) <-
@@ -319,9 +329,11 @@ data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5],
 #' @param IsItARow Transpose? Swap rows an columns. Default: `TRUE`
 #' @export
 matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
-  stopifnot(is.vector(vector), length(vector) > 0,
-            is.numeric(HowManyTimes), length(HowManyTimes) == 1, HowManyTimes > 0,
-            is.logical(IsItARow), length(IsItARow) == 1)
+  stopifnot(
+    is.vector(vector), length(vector) > 0,
+    is.numeric(HowManyTimes), length(HowManyTimes) == 1, HowManyTimes > 0,
+    is.logical(IsItARow), length(IsItARow) == 1
+  )
   matt <- matrix(vector, nrow = length(vector), ncol = HowManyTimes)
   if (!IsItARow) {
     matt <- t(matt)
@@ -385,7 +397,9 @@ what <- function(x, printme = 0) {
 #' is.list.simple(dplyr::tibble())
 is.list.simple <- function(object, warn_nested = TRUE) {
   # Warning if it’s nested
-  if (warn_nested && any(vapply(object, is.list, logical(1)))) { warning("  >>  Nested lists detected!") } # , call. = FALSE
+  if (warn_nested && any(vapply(object, is.list, logical(1)))) {
+    warning("  >>  Nested lists detected!")
+  } # , call. = FALSE
 
   #  is.list(x) && !is.data.frame(x) # An alternative, that would work identical
   "list" %in% class(object)
@@ -459,10 +473,12 @@ printEveryN <- function(i = i, N = 1000, prefix = NULL) {
 #'
 #' @export
 printProgress <- function(i = i, total, message = "Progress", digits = 0) {
-  stopifnot(is.numeric(i), length(i) == 1,
-            is.numeric(total), length(total) == 1, total > 0,
-            is.character(message), length(message) == 1,
-            is.numeric(digits), length(digits) == 1)
+  stopifnot(
+    is.numeric(i), length(i) == 1,
+    is.numeric(total), length(total) == 1, total > 0,
+    is.character(message), length(message) == 1,
+    is.numeric(digits), length(digits) == 1
+  )
   percentage <- formatC(100 * i / total, format = "f", digits = digits)
   cat(paste0(message, ": ", i, "/", total, " (", percentage, "%)\n"))
 }
@@ -618,8 +634,8 @@ grepv <- function(
     pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
     fixed = FALSE, useBytes = FALSE, invert = FALSE, ...) {
   grep(pattern, x,
-       ignore.case = ignore.case, perl = perl, fixed = fixed,
-       useBytes = useBytes, invert = invert, ..., value = TRUE
+    ignore.case = ignore.case, perl = perl, fixed = fixed,
+    useBytes = useBytes, invert = invert, ..., value = TRUE
   )
 }
 
@@ -661,9 +677,11 @@ count_occurrence_each_element <- function(vec) {
 #'
 #' @export
 top_indices <- function(x, n = 3, top = TRUE) {
-  stopifnot(is.vector(x),
-            is.numeric(n), length(n) == 1, n > 0,
-            is.logical(top), length(top) == 1)
+  stopifnot(
+    is.vector(x),
+    is.numeric(n), length(n) == 1, n > 0,
+    is.logical(top), length(top) == 1
+  )
   head(order(x, decreasing = top), n)
 }
 
@@ -764,7 +782,7 @@ as.named.vector.table <- function(table, verbose = TRUE, ...) {
 # #'
 # #' @export
 # as.named.vector.df <- function(
-    #     df, col.or.row.name.or.index = 1, verbose = TRUE,
+#     df, col.or.row.name.or.index = 1, verbose = TRUE,
 #     WhichDimNames = 2,
 #     ...) {
 #
@@ -1186,9 +1204,9 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
   qnt <- quantile(x, probs = percentiles, na.rm = na.rm)
   if (showhist) {
     hist(unlist(x),
-         breaks = 50, main = "Distribution and cutoffs histogram",
-         sub = paste("Percentile cutoffs at: ", paste(percentiles, collapse = " and ")),
-         xlab = "Values"
+      breaks = 50, main = "Distribution and cutoffs histogram",
+      sub = paste("Percentile cutoffs at: ", paste(percentiles, collapse = " and ")),
+      xlab = "Values"
     )
     abline(v = qnt, col = 2)
   }
@@ -1572,9 +1590,9 @@ pc_overlap <- function(x, y, basis = "x", prefix = NULL, suffix = NULL, ...) {
 
   # Calculate denominator based on the basis argument
   denominator <- switch(basis,
-                        "x" = length(x),
-                        "y" = length(y),
-                        "sum" = length(x) + length(y)
+    "x" = length(x),
+    "y" = length(y),
+    "sum" = length(x) + length(y)
   )
 
   # Calculate and return percent overlap
@@ -1692,18 +1710,18 @@ simplify_categories <- function(category_vec, replaceit, to) {
 #'
 #' @examples
 #' m <- matrix(1:9, nrow = 3, byrow = TRUE)
-#' apply(m, 1, function(x) x + 1)        # Produces transposed output
-#' apply2(m, 1, function(x) x + 1)       # Produces expected row-wise output
+#' apply(m, 1, function(x) x + 1) # Produces transposed output
+#' apply2(m, 1, function(x) x + 1) # Produces expected row-wise output
 #'
 #' @export
 apply2 <- function(X, MARGIN, FUN, ...) {
   # Input assertions
   stopifnot(
-    is.array(X),                      # X must be an array or matrix
-    is.numeric(MARGIN),              # MARGIN must be numeric
-    all(MARGIN >= 1),                # MARGIN values must be >= 1
-    max(MARGIN) <= length(dim(X)),   # MARGIN must refer to valid dimensions
-    is.function(FUN)                 # FUN must be a valid function
+    is.array(X), # X must be an array or matrix
+    is.numeric(MARGIN), # MARGIN must be numeric
+    all(MARGIN >= 1), # MARGIN values must be >= 1
+    max(MARGIN) <= length(dim(X)), # MARGIN must refer to valid dimensions
+    is.function(FUN) # FUN must be a valid function
   )
 
   # Apply function using base R
@@ -1715,15 +1733,15 @@ apply2 <- function(X, MARGIN, FUN, ...) {
   # - and result is a matrix (i.e., all FUN outputs same-length vector)
   if (
     is.matrix(X) &&
-    length(dim(X)) == 2 &&
-    identical(MARGIN, 1) &&
-    is.matrix(result)
+      length(dim(X)) == 2 &&
+      identical(MARGIN, 1) &&
+      is.matrix(result)
   ) {
     result <- t(result)
   }
 
   # Output assertions (safe-guards, optional)
-  stopifnot(!is.null(result))  # Ensure result exists
+  stopifnot(!is.null(result)) # Ensure result exists
 
   return(result)
 }
@@ -1770,7 +1788,8 @@ rowSubtract <- function(mat, vec) {
 #' @return A matrix with the same dimensions as the input where each element in the original matrix
 #' has been divided by the corresponding element in the vector.
 #'
-#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); colDivide(m)
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE)
+#' colDivide(m)
 #' @export
 colDivide <- function(mat, vec = colSums(mat)) {
   stopifnot(ncol(mat) == length(vec), is.numeric(vec))
@@ -1784,7 +1803,8 @@ colDivide <- function(mat, vec = colSums(mat)) {
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #'
-#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); colMultiply(colDivide(m), colSums(m))
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE)
+#' colMultiply(colDivide(m), colSums(m))
 #' @export
 colMultiply <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
@@ -1799,7 +1819,7 @@ colMultiply <- function(mat, vec) {
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to divide by.
 #'
-#' @examples rowDivide(rowMultiply(m, 1:3),  1:3)
+#' @examples rowDivide(rowMultiply(m, 1:3), 1:3)
 #' @export
 rowDivide <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
@@ -1814,7 +1834,8 @@ rowDivide <- function(mat, vec) {
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to multiply by.
 #'
-#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE); rowMultiply(rowDivide(m, 1:4), 1:4)
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE)
+#' rowMultiply(rowDivide(m, 1:4), 1:4)
 #' @export
 rowMultiply <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
@@ -2729,7 +2750,7 @@ remove.na.cols <- function(mat) {
 
 df.remove.empty.rows.and.columns <- function(
     df = UVI.assignment.filtered.3.HF,
-    suffix =  substitute_deparse(df),
+    suffix = substitute_deparse(df),
     rows = "rows",
     cols = "cols",
     thr.cell.empty = 0,
@@ -2757,11 +2778,11 @@ df.remove.empty.rows.and.columns <- function(
     )
     names(Removal.Dimensions) <- c(rows, cols)
     qbarplot(Removal.Dimensions,
-             label = percentage_formatter(Removal.Dimensions),
-             suffix = suffix,
-             xlab.angle = 45, xlab = "",
-             ylim = 0:1, ylab = "Fractions removed",
-             ...
+      label = percentage_formatter(Removal.Dimensions),
+      suffix = suffix,
+      xlab.angle = 45, xlab = "",
+      ylim = 0:1, ylab = "Fractions removed",
+      ...
     )
   }
 
@@ -3179,13 +3200,14 @@ reverse.list.hierarchy <- function(list_of_lists) {
 #' list2fullDF.byNames(your.list)
 #'
 #' @export
-list2fullDF.byNames <- function(your.list = list(
-  "set.1" = vec.fromNames(LETTERS[1:5], fill = 1), # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
-  "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
-),
-as.df = TRUE,
-byRow = TRUE,
-FILL = NA) {
+list2fullDF.byNames <- function(
+    your.list = list(
+      "set.1" = vec.fromNames(LETTERS[1:5], fill = 1), # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
+      "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
+    ),
+    as.df = TRUE,
+    byRow = TRUE,
+    FILL = NA) {
   # Get the lengths of the list elements
   length.list <- length(your.list)
   list.names <- names(your.list)
@@ -3223,11 +3245,11 @@ FILL = NA) {
 #'
 #' @export
 list2fullDF.presence <- function(your.list = list(
-  "set.1" = LETTERS[1:5],
-  # Convert a list to a full matrix. Designed for occurrence counting; think of table().
-  # Rows are all entries within your list, columns are names(your_list).
-  "set.2" = LETTERS[3:9]
-), byRow = TRUE, FILL = 0) {
+                                   "set.1" = LETTERS[1:5],
+                                   # Convert a list to a full matrix. Designed for occurrence counting; think of table().
+                                   # Rows are all entries within your list, columns are names(your_list).
+                                   "set.2" = LETTERS[3:9]
+                                 ), byRow = TRUE, FILL = 0) {
   length.list <- length(your.list)
   list.names <- names(your.list)
   list.elements <- sort(Reduce(f = union, your.list))
@@ -3448,8 +3470,8 @@ intersect.wNames <- function(x, y, names = "x") {
     is.vector(x), is.vector(y), names %in% c("x", "y")
   )
   warnif(
-    "x argument has no names!" =  (names == "x" && !Stringendo::HasNames(x) )
-    , "y argument has no names!" = (names == "y" && !Stringendo::HasNames(y) )
+    "x argument has no names!" = (names == "x" && !Stringendo::HasNames(x)),
+    "y argument has no names!" = (names == "y" && !Stringendo::HasNames(y))
   )
 
 
@@ -3478,9 +3500,11 @@ intersect.wNames <- function(x, y, names = "x") {
 #' @return A character vector with names preserved from the specified vector (`x` or `y`).
 #'
 #' @examples
-#' union.wNames(x =c(a = "gene1", b = "gene2", c = "gene3")
-#' , y =c( c = "gene3", dada = "gene2", "gene4")
-#' , names = "x")
+#' union.wNames(
+#'   x = c(a = "gene1", b = "gene2", c = "gene3"),
+#'   y = c(c = "gene3", dada = "gene2", "gene4"),
+#'   names = "x"
+#' )
 #'
 #' @export union.wNames
 union.wNames <- function(x, y, names = "x") {
@@ -3490,14 +3514,14 @@ union.wNames <- function(x, y, names = "x") {
     is.vector(x) || is.vector(y),
     names %in% c("x", "y")
   )
-  warnifnot(HasNames(x), HasNames(y) )
+  warnifnot(HasNames(x), HasNames(y))
 
-  if(is.null(x)) {
+  if (is.null(x)) {
     message("x is NULL, returning y.")
     return(y)
   }
 
-  if(is.null(y)) {
+  if (is.null(y)) {
     message("y is NULL, returning x.")
     return(x)
   }
@@ -3511,7 +3535,7 @@ union.wNames <- function(x, y, names = "x") {
   names_y <- names(sort(y[y %in% common_elements]))
 
   # Check for name conflicts: if names of common elements are different, issue a warning.
-  if ( !identical(names_x, names_y) ) {
+  if (!identical(names_x, names_y)) {
     warning("Names of intersecting elements is not the same in x & y!", immediate. = TRUE)
     iprint("names_x: ", head(names_x))
     iprint("names_y: ", head(names_y))
@@ -3527,8 +3551,8 @@ union.wNames <- function(x, y, names = "x") {
       c(y, setdiff(x, y))
     }
 
-    message("Beware that: union(x, y) != union(y, x) - only if you sort the values.")
-    return(result)
+  message("Beware that: union(x, y) != union(y, x) - only if you sort the values.")
+  return(result)
 }
 
 
@@ -3754,8 +3778,8 @@ dput_pretty <- pretty_dput <- function(vec) {
   cat("c(", sep = "")
   for (i in 1:length(vec)) {
     cat("\n`", vec[i], "` = \"", names(vec)[i], "\"",
-        ifelse(i != length(vec), ",", ""),
-        sep = ""
+      ifelse(i != length(vec), ",", ""),
+      sep = ""
     )
   }
   cat("\n)\n")

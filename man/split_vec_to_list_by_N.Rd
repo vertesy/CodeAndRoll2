@@ -7,7 +7,7 @@
 split_vec_to_list_by_N(vec = 1:27, by = 9)
 }
 \arguments{
-\item{vec}{A numeric or character vector to be split.}
+\item{vec}{A numeric oggr character vector to be split.}
 
 \item{by}{Integer value specifying the chunk size. Default is 9.}
 }
