@@ -4,10 +4,14 @@
 \alias{df.row.2.named.vector}
 \title{df.row.2.named.vector}
 \usage{
-df.row.2.named.vector(df_row)
+df.row.2.named.vector(df, row, names = NULL)
 }
 \arguments{
-\item{df_row}{data frame row}
+\item{df}{data frame or tibble}
+
+\item{row}{row index or name for values.}
+
+\item{names}{optional column index for names, Default: NULL (then colnames are used)}
 }
 \description{
 Convert a dataframe row into a vector, keeping the corresponding dimension name.

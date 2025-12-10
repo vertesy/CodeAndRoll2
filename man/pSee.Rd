@@ -18,5 +18,9 @@ The input object \code{x}, unchanged.
 Prints the input object and returns it, enabling you to inspect values inside a pipe.
 }
 \examples{
-results <- c(1, 2, 3) \%>\% pSee() \%>\% sqrt() \%>\% tail(2) ; results
+results <- c(1, 2, 3) \%>\%
+  pSee() \%>\%
+  sqrt() \%>\%
+  tail(2)
+results
 }

@@ -22,8 +22,10 @@ Unites two character vectors while preserving names from the specified vector.
 Gives a warning if there are conflicts in names between \code{x} and \code{y}.
 }
 \examples{
-union.wNames(x =c(a = "gene1", b = "gene2", c = "gene3")
-, y =c( c = "gene3", dada = "gene2", "gene4")
-, names = "x")
+union.wNames(
+  x = c(a = "gene1", b = "gene2", c = "gene3"),
+  y = c(c = "gene3", dada = "gene2", "gene4"),
+  names = "x"
+)
 
 }

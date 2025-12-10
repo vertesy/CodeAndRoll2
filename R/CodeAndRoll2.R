@@ -828,36 +828,32 @@ as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE
 #' @title df.col.2.named.vector
 #'
 #' @description Convert a dataframe column into a vector, keeping the corresponding dimension name.
-#' @param df data frame
-#' @param col column index
+#' @param df data frame or tibble
+#' @param col column index or name for values.
+#' @param names optional column index for names, Default: NULL (then rownames are used)
 #' @export
-df.col.2.named.vector <- function(df, col) {
-  vec <- df[, col]
-  names(vec) <- rownames(df)
+df.col.2.named.vector <- function(df, col, names = NULL) {
+  vec <- df[[col]]
+  names(vec) <- if (is.null(names)) rownames(df) else df[[names]]
   return(vec)
 }
-
-# df.col.2.named.vector <- function(df_col) {
-#   namez <- rownames(df_col)
-#   vecc <- as.vector(unlist(df_col))
-#   names(vecc) <- namez
-#   return(vecc)
-# }
 
 
 # _________________________________________________________________________________________________
 #' @title df.row.2.named.vector
 #'
 #' @description Convert a dataframe row into a vector, keeping the corresponding dimension name.
-#' @param df_row data frame row
+#' @param df data frame or tibble
+#' @param row row index or name for values.
+#' @param names optional column index for names, Default: NULL (then colnames are used)
 #' @export
-df.row.2.named.vector <- function(df_row) {
-  "Needs update see above"
-  namez <- colnames(df_row)
-  vecc <- as.vector(unlist(df_row))
-  names(vecc) <- namez
-  return(vecc)
+df.row.2.named.vector <- function(df, row, names = NULL) {
+  vec <- as.vector(unlist(df[row, ]))
+  names(vec) <- if (is.null(names)) colnames(df) else as.vector(unlist(df[names]))
+  return(vec)
 }
+
+
 
 
 

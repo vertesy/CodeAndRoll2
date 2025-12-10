@@ -31,7 +31,7 @@ is transposed back to match the expected orientation. For higher-dimensional arr
 }
 \examples{
 m <- matrix(1:9, nrow = 3, byrow = TRUE)
-apply(m, 1, function(x) x + 1)        # Produces transposed output
-apply2(m, 1, function(x) x + 1)       # Produces expected row-wise output
+apply(m, 1, function(x) x + 1) # Produces transposed output
+apply2(m, 1, function(x) x + 1) # Produces expected row-wise output
 
 }
