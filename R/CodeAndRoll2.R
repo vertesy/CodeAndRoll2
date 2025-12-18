@@ -1168,12 +1168,12 @@ which.NA <- function(vec, verbose = TRUE) {
 #' @description Signal clipping. Cut values in a distribution, above or below a threshold.
 #' @param x A vector of numeric values (distribution).
 #' @param thr threshold values.
-#' @param high Clip above threshold, or below? Default: TRUE (above)
+#' @param above Clip above threshold, or below? Default: TRUE (= low pass filter).
 #'
 #' @export
-clip.at.fixed.value <- function(x, thr, high = TRUE) {
-  stopifnot(is.numeric(x), is.numeric(thr), length(thr) == 1, is.logical(high), length(high) == 1)
-  if (high) {
+clip.at.fixed.value <- function(x, thr, above = TRUE) {
+  stopifnot(is.numeric(x), is.numeric(thr), length(thr) == 1, is.logical(above), length(above) == 1)
+  if (above) {
     x[x > thr] <- thr
   } else {
     x[x < thr] <- thr

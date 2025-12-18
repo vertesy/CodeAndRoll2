@@ -4,14 +4,14 @@
 \alias{clip.at.fixed.value}
 \title{clip.at.fixed.value}
 \usage{
-clip.at.fixed.value(x, thr, high = TRUE)
+clip.at.fixed.value(x, thr, above = TRUE)
 }
 \arguments{
 \item{x}{A vector of numeric values (distribution).}
 
 \item{thr}{threshold values.}
 
-\item{high}{Clip above threshold, or below? Default: TRUE (above)}
+\item{above}{Clip above threshold, or below? Default: TRUE (= low pass filter).}
 }
 \description{
 Signal clipping. Cut values in a distribution, above or below a threshold.
