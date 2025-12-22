@@ -3,12 +3,18 @@
 ##################################################################### _
 # source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.R')
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRoll2.R')
-# source('~/.pack.R')
+# CodeAndRoll2 Less used functions
+# source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.less.used.R')
 
+# source('~/.pack.R')
 # devtools::check_man("~/GitHub/Packages/CodeAndRoll2")
 # devtools::load_all("~/GitHub/Packages/CodeAndRoll2")
 # devtools::document("~/GitHub/Packages/CodeAndRoll2")
 # file.edit("~/GitHub/Packages/CodeAndRoll2/Development/Create_the_CodeAndRoll2_Package.R")
+
+
+# CodeAndRoll2 Less used functions
+# source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.less.used.R')
 
 
 
