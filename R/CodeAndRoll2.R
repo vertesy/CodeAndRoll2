@@ -133,9 +133,10 @@ savehistory_2 <- function() {
 #' the input type of `x`.
 #'
 #' @examples
-#' pFilter(1:10, . > 5)
+#' x <- 1:10
+#' x |> pFilter(. > 5)
+#' x |> pFilter(. %% 2 == 0)
 #' pFilter(letters, . %in% c("a", "f", "z"))
-#' pFilter(1:10, . %% 2 == 0)
 #'
 #' @export
 pFilter <- function(x, cond) {
