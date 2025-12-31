@@ -3698,7 +3698,10 @@ fano <- function(x, na.rm = TRUE, USE = "na.or.complete") {
 #'
 #' @export
 geomean <- function(x, na.rm = TRUE) {
-  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
+  # very long standing bug was:
+  # exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
+  x <- x[x > 0]
+  exp(mean(log(x), na.rm = na.rm))
 }
 
 
