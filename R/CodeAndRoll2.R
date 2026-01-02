@@ -824,6 +824,16 @@ as.named.vector.table <- function(table, verbose = TRUE, ...) {
 #'
 #' @export
 as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE) {
+
+  stopifnot(
+    "Invalid values column" =
+      (is.numeric(values) && values >= 1 && values <= ncol(df)) ||
+      (is.character(values) && values %in% colnames(df)),
+    "Invalid names column" =
+      (is.numeric(names) && names >= 1 && names <= ncol(df)) ||
+      (is.character(names) && names %in% colnames(df))
+  )
+
   vec <- df[[values]]
   names(vec) <- df[[names]]
   if (make.names) names(vec) <- make.names(names(vec))
@@ -840,6 +850,9 @@ as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE
 #' @param names optional column index for names, Default: NULL (then rownames are used)
 #' @export
 df.col.2.named.vector <- function(df, col, names = NULL) {
+  stopifnot(length(col) == 1)
+  if (inherits(df, "tbl_df") && is.null(names)) warning("Tibbles have no rownames. Synthetic row indices detected.", immediate. = TRUE)
+
   vec <- df[[col]]
   names(vec) <- if (is.null(names)) rownames(df) else df[[names]]
   return(vec)
@@ -855,7 +868,9 @@ df.col.2.named.vector <- function(df, col, names = NULL) {
 #' @param names optional column index for names, Default: NULL (then colnames are used)
 #' @export
 df.row.2.named.vector <- function(df, row, names = NULL) {
-  vec <- as.vector(unlist(df[row, ]))
+  stopifnot(length(row) == 1)
+
+  vec <- as.vector(df[row, , drop = TRUE])
   names(vec) <- if (is.null(names)) colnames(df) else as.vector(unlist(df[names]))
   return(vec)
 }
@@ -3889,6 +3904,10 @@ as.factor.numeric <- function(vec, rename = FALSE, ...) {
 #'
 #' @export as.named.vector.deprecated
 as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
+  stopifnot(
+    "Input must be one-dimensional (vector or single column)" =
+      is.null(dim(df_col)) || ncol(df_col) == 1
+  )
   namez <- dimnames(df_col)[[WhichDimNames]]
 
   # use RowNames: WhichDimNames = 1 , 2: use ColNames
