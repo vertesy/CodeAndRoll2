@@ -3894,9 +3894,10 @@ as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
   # use RowNames: WhichDimNames = 1 , 2: use ColNames
   # !!! might require drop = FALSE in subsetting!!! eg: df_col[, 3, drop = FALSE]
   # df_col[which(unlist(lapply(df_col, is.null)))] = "NULL" # replace NULLs - they would fall out of vectors - DOES not work yet
-  if (is.list(df_col) && !is.data.frame(df_col)) {
-    namez <- names(df_col)
-  }
+  if (is.list(df_col) && !is.data.frame(df_col)) namez <- names(df_col)
+
+  if (inherits(df_col, "tbl_df")) warning("Tibbles have now rownames. Synthetic row indices detected.", immediate. = TRUE)
+
   vecc <- as.vector(unlist(df_col))
   names(vecc) <- namez
   return(vecc)
