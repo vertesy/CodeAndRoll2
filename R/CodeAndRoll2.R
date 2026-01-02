@@ -763,10 +763,12 @@ as.named.vector.df <- function(
 #' @param ... Additional arguments passed to `as.vector()`.
 #' @export
 
-as.named.vector.table <- function(table, verbose = TRUE, ...) {
+as.named.vector.table <- function(table, verbose = TRUE,
+                                  ...) {
+  stopifnot("table must be 1D" = length(dim(table)) <= 1)
   if (verbose) message("input table dimensions: ", kppc(idim(table)))
 
-  vecc <- as.vector(unlist(table), ...)
+  vecc <- as.vector(table, ...)
   names(vecc) <- names(table)
   stopifnot(length(vecc) == length(table))
   return(vecc)
@@ -892,7 +894,13 @@ df.row.2.named.vector <- function(df, row, names = NULL) {
 #' @export
 tibble_summary_to_namedVec <- function(
     tbl = dplyr::tibble("key" = sample(x = 1:5, size = 20, replace = TRUE), "value" = rnorm(20)),
-    idx = c(key = 1, value = 2)) {
+    idx = c(key = 1, value = 2)
+    ) {
+  stopifnot(
+    "idx must select exactly 2 columns" = length(idx) == 2,
+    "Selected columns must be atomic vectors" =
+      all(vapply(tbl[idx], is.atomic, logical(1)))
+  )
   iprint("The following name and value columns are taken:", colnames(tbl[idx]), "; with indices:", idx)
   tbl_2_col <- tbl[, idx]
   named.vec <- tbl_2_col[[2]]
@@ -913,8 +921,16 @@ tibble_summary_to_namedVec <- function(
 #' @export
 as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose = TRUE) {
   stopifnot(!is.null(names(vec.w.names)))
-  tbl <- dplyr::bind_rows(vec.w.names)
-  if (transpose) t(tbl) else tbl
+  # tbl <- dplyr::bind_rows(vec.w.names)
+  # if (transpose) t(tbl) else tbl
+
+  tbl <- tibble::tibble(
+    name = names(vec.w.names),
+    value = unname(vec.w.names)
+  )
+
+  if (transpose) t(as.matrix(tbl)) else tbl
+
 }
 
 
