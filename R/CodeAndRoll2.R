@@ -195,7 +195,7 @@ pSee <- function(x, max_elements = 100) {
 #'   sqrt()
 #' results
 pLength <- function(x) {
-  stopifnot(!missing(x), is.vector(x) || is.list(x))
+  stopifnot(!missing(x), is.atomic(x) || is.list(x))
   message("length: ", length(x))
   return(x)
 }
