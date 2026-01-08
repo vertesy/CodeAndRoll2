@@ -17,9 +17,9 @@ Prints the length of the input object and returns it, allowing you to verify
 length inside a pipe operation.
 }
 \examples{
-results <- c(9:1) \%>\%
-  tail(4) \%>\%
-  pLength() \%>\%
+results <- c(9:1) |>
+  tail(4)  |>
+  pLength() |>
   sqrt()
 results
 }

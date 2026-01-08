@@ -189,9 +189,9 @@ pSee <- function(x, max_elements = 100) {
 #' @return The input object `x`, unchanged.
 #'
 #' @examples
-#' results <- c(9:1) %>%
-#'   tail(4) %>%
-#'   pLength() %>%
+#' results <- c(9:1) |>
+#'   tail(4)  |>
+#'   pLength() |>
 #'   sqrt()
 #' results
 pLength <- function(x) {
@@ -199,6 +199,28 @@ pLength <- function(x) {
   message("length: ", length(x))
   return(x)
 }
+
+
+#' @title Print the (Number of) Unique Elements and Return an Object in a Pipe
+#'
+#'  @description Prints the unique elements of the input object and returns it, enabling you to inspect
+#'  unique values inside a pipe.
+#'  @param x The object whose unique elements to print and return. Default: None.
+#'  @return The input object `x`, unchanged.
+#'  @examples
+#'  results <- c(1, 2, 2, 3, 3, 3)  |>
+#'  pU()  |>
+#'  sqrt() |>
+#'  pSee()
+
+pU <- function(x, head_n = 20) {
+  stopifnot(!missing(x), is.atomic(x) || is.list(x))
+  sfx <- if (length(unique(x)) > head_n) " ..." else NULL
+  imessage(length(unique(x)), "unique elements:", head(unique(x), head_n), sfx)
+  return(x)
+}
+
+
 
 
 # _________________________________________________________________________________________________
