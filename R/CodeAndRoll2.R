@@ -226,6 +226,44 @@ pU <- function(x, head_n = 20) {
 # _________________________________________________________________________________________________
 ## Create and check variables ____________________________________________________________ ----
 
+
+#' @title Set object if not defined
+#'
+#' @description
+#' Checks whether a symbol exists in the calling environment. If it does not,
+#' the expression provided as the second argument is evaluated, assigned to
+#' that symbol, and returned to the global env. If it already exists, the existing object is
+#' returned unchanged.
+#'
+#' @param obj Unquoted symbol to check / define.
+#' @param value_expr Expression evaluated only if `obj` is missing.
+#'
+#' @return The existing or newly created object.
+#'
+#' @examples
+#' rm(list = "x", inherits = FALSE)
+#' setIfNotDefined(x, 22)
+#' x <- 33
+#' setIfNotDefined(x, { stop("must not run") }); x
+#'
+#' @export
+setIfNotDefined <- function(obj, value_expr) {
+  nm  <- deparse(substitute(obj))
+  env <- parent.frame()
+
+  pfx <- if (exists(nm, envir = env, inherits = FALSE)) {
+    "Object already defined: "
+  } else {
+    assign(nm, eval(substitute(value_expr), env), env)
+    "Defining object: "
+  }
+  message(pfx, nm)
+
+  invisible(NULL)
+}
+
+
+
 #' @title vec.fromNames
 #'
 #' @description Create a vector from a vector of names.

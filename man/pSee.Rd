@@ -4,12 +4,12 @@
 \alias{pSee}
 \title{Print and Return an Object in a Pipe}
 \usage{
-pSee(x, max_elements = 100)
+pSee(x, head_4 = 100)
 }
 \arguments{
 \item{x}{The object to print and return. Default: None.}
 
-\item{max_elements}{Number of elements of \code{x} to print. Default: 100.}
+\item{head_4}{Number of elements of \code{x} to print. Default: 100.}
 }
 \value{
 The input object \code{x}, unchanged.
