@@ -2,28 +2,21 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{pU}
 \alias{pU}
-\title{Print the (Number of) Unique Elements and Return an Object in a Pipe
-
-@description Prints the unique elements of the input object and returns it, enabling you to inspect
-unique values inside a pipe.
-@param x The object whose unique elements to print and return. Default: None.
-@return The input object \code{x}, unchanged.
-@examples
-results <- c(1, 2, 2, 3, 3, 3)  |>
-pU()  |>
-sqrt() |>
-pSee()}
+\title{Print the (Number of) Unique Elements and Return an Object in a Pipe}
 \usage{
 pU(x, head_n = 20)
 }
+\arguments{
+\item{x}{The object whose unique elements to print and return. Default: None.}
+}
+\value{
+The input object \code{x}, unchanged.
+}
 \description{
-Print the (Number of) Unique Elements and Return an Object in a Pipe
-
-@description Prints the unique elements of the input object and returns it, enabling you to inspect
+Prints the unique elements of the input object and returns it, enabling you to inspect
 unique values inside a pipe.
-@param x The object whose unique elements to print and return. Default: None.
-@return The input object \code{x}, unchanged.
-@examples
+}
+\examples{
 results <- c(1, 2, 2, 3, 3, 3)  |>
 pU()  |>
 sqrt() |>

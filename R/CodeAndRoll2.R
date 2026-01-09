@@ -162,7 +162,7 @@ pFilter <- function(x, cond) {
 #' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
 #'
 #' @param x The object to print and return. Default: None.
-#' @param max_elements Number of elements of `x` to print. Default: 100.
+#' @param head_4 Number of elements of `x` to print. Default: 100.
 #'
 #' @return The input object `x`, unchanged.
 #'
@@ -172,8 +172,8 @@ pFilter <- function(x, cond) {
 #'   sqrt() %>%
 #'   tail(2)
 #' results
-pSee <- function(x, max_elements = 100) {
-  y <- utils::head(x, max_elements)
+pSee <- function(x, head_4 = 100) {
+  y <- utils::head(x, head_4)
   print(y)
   return(x)
 }
@@ -203,15 +203,15 @@ pLength <- function(x) {
 
 #' @title Print the (Number of) Unique Elements and Return an Object in a Pipe
 #'
-#'  @description Prints the unique elements of the input object and returns it, enabling you to inspect
-#'  unique values inside a pipe.
-#'  @param x The object whose unique elements to print and return. Default: None.
-#'  @return The input object `x`, unchanged.
-#'  @examples
-#'  results <- c(1, 2, 2, 3, 3, 3)  |>
-#'  pU()  |>
-#'  sqrt() |>
-#'  pSee()
+#' @description Prints the unique elements of the input object and returns it, enabling you to inspect
+#' unique values inside a pipe.
+#' @param x The object whose unique elements to print and return. Default: None.
+#' @return The input object `x`, unchanged.
+#' @examples
+#' results <- c(1, 2, 2, 3, 3, 3)  |>
+#' pU()  |>
+#' sqrt() |>
+#' pSee()
 
 pU <- function(x, head_n = 20) {
   stopifnot(!missing(x), is.atomic(x) || is.list(x))
