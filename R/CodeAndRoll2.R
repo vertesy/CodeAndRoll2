@@ -793,13 +793,17 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 
 as.named.vector.table <- function(table, verbose = TRUE,
                                   ...) {
+  if (!inherits(table, "table")) message("Input is: ", paste(class(table), "\nValues: ", head(table))) # Report class
   stopifnot("table must be 1D" = length(dim(table)) <= 1)
-  if (verbose) message("input table dimensions: ", kppc(idim(table)))
+  stopifnot(HasNames(table))
 
-  vecc <- as.vector(table, ...)
-  names(vecc) <- names(table)
-  stopifnot(length(vecc) == length(table))
-  return(vecc)
+  v <- as.vector(unclass(table)); attributes(v) <- NULL; # Atomic vector with names
+  names(v) <- dimnames(table)[[1]]
+  # Even after unclass(), the dim attribute remains, and is.vector() only returns TRUE if
+  # an object has no attributes other than names.
+
+  stopifnot(length(v) == length(table))
+  return(v)
 }
 
 
