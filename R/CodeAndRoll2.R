@@ -173,8 +173,8 @@ pFilter <- function(x, cond) {
 #'   tail(2)
 #' results
 pSee <- function(x, head_n = 100) {
-  y <- tryCatch( head(x, head_n), error = function(e) x)
-  print(y)
+  x_head <- tryCatch( head(x, head_n), error = function(e) x)
+  print(x_head)
   return(x)
 }
 
