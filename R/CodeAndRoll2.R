@@ -162,7 +162,7 @@ pFilter <- function(x, cond) {
 #' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
 #'
 #' @param x The object to print and return. Default: None.
-#' @param head_4 Number of elements of `x` to print. Default: 100.
+#' @param head_n Number of elements of `x` to print. Default: 100.
 #'
 #' @return The input object `x`, unchanged.
 #'
@@ -172,8 +172,8 @@ pFilter <- function(x, cond) {
 #'   sqrt() %>%
 #'   tail(2)
 #' results
-pSee <- function(x, head_4 = 100) {
-  y <- utils::head(x, head_4)
+pSee <- function(x, head_n = 100) {
+  y <- tryCatch( head(x, head_n), error = function(e) x)
   print(y)
   return(x)
 }
