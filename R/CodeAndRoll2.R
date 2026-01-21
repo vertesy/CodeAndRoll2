@@ -71,6 +71,92 @@ getProject <- function() {
   }
 }
 
+
+# _________________________________________________________________________________________________
+#' @title Export RStudio Command History with Timestamps
+#'
+#' @description
+#' Exports the full RStudio console command history from RStudio's internal
+#' history database to a human-readable text file. Each command is annotated
+#' with a timestamp (year-month-day hour:minute). Multi-line commands are
+#' preserved and grouped correctly. This does not rely on `.Rhistory` or
+#' `savehistory()`, instead directly reading RStudio's history database.
+#'
+#' The output file is named
+#' `command_history.YYYY.MM.DD[.scriptname].txt` and is written to the current
+#' working directory.
+#'
+#' @return
+#' Invisibly returns the path to the written history file.
+#'
+#' @details
+#' The history source is RStudio’s internal history log
+#' (`~/.local/share/rstudio/history_database` on Linux). The log stores commands
+#' as timestamped lines using milliseconds since the Unix epoch. These
+#' timestamps are converted to local time during export.
+#'
+#' This function is read-only and safe to run while RStudio is open.
+#'
+#' @importFrom rstudioapi getSourceEditorContext
+#'
+#' @examples
+#' \dontrun{
+#' savehistory_2rstudio()
+#' }
+
+
+savehistory_2rstudio <- function(
+    history_file = "~/.local/share/rstudio/history_database"
+) {
+  history_file <- path.expand(history_file)
+
+  if (!file.exists(history_file)) {
+    stop("RStudio history file not found: ", history_file)
+  }
+
+  current_dir <- getwd()
+
+  script_name <- try(
+    basename(rstudioapi::getSourceEditorContext()$path),
+    silent = TRUE
+  )
+  if (inherits(script_name, "try-error")) script_name <- ""
+
+  parts <- c(
+    "command_history",
+    format(Sys.time(), "%Y.%m.%d"),
+    script_name
+  )
+  parts <- parts[parts != ""]
+  out_file <- paste0(paste(parts, collapse = "."), ".txt")
+
+  lines <- readLines(history_file, warn = FALSE)
+
+  ts  <- sub(":.*$", "", lines)
+  cmd <- sub("^[0-9]+:", "", lines)
+
+  time <- format(
+    as.POSIXct(as.numeric(ts) / 1000, origin = "1970-01-01", tz = "local"),
+    "%Y-%m-%d %H:%M"
+  )
+
+  new_block <- c(TRUE, ts[-1] != ts[-length(ts)])
+
+  out <- ifelse(
+    new_block,
+    paste0("\n", time, " | ", cmd),
+    paste0(time, " | ", cmd)
+  )
+
+  writeLines(out, out_file)
+
+  message('file.edit("', file.path(current_dir, out_file), '")')
+  invisible(out_file)
+}
+
+
+
+
 # _________________________________________________________________________________________________
 #' @title Save Command History to "command_history.date.scriptname.txt"
 #'
@@ -86,7 +172,7 @@ getProject <- function() {
 #' \dontrun{
 #' savehistory_2()
 #' }
-savehistory_2 <- function() {
+savehistory_Rhist <- function() {
   # Get the current working directory
   current_dir <- getwd()
 
@@ -110,7 +196,7 @@ savehistory_2 <- function() {
   )
 
   # Print and return the file path
-  print(file.path(current_dir, file_name))
+  message('file.edit("', file.path(current_dir, file_name), '")')
 }
 
 
