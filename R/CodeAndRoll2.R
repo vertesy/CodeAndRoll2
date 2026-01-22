@@ -2660,6 +2660,7 @@ merge_2_named_vec_as_df <- function(x, y, as.tibble =F) {
   COMBINED <- dplyr::full_join(x = stack(x), y = stack(y), by = "ind")[, c(2, 1, 3)]
   # colnames(COMBINED) <- c("names",substitute(x), substitute(y))
   colnames(COMBINED) <- c("names", deparse(substitute(x)), deparse(substitute(y)))
+  COMBINED$names <- as.character(COMBINED$names)
 
   if (!as.tibble) COMBINED <- as.data.frame(COMBINED, row.names = as.character(COMBINED$names))[,-1]
   return(COMBINED)
