@@ -2652,17 +2652,19 @@ merge_numeric_df_by_rn <- function(x, y) {
 #' @description Merge two named vectors by names, into a dataframe with 2 columns.
 #' @param x A vector with named elements.
 #' @param y Another vector with named elements.
+#' @param as.tibble Logical; if TRUE, returns a tibble instead of a data frame. Default: FALSE
 #' @examples # a <- 1:5; names(a) <- letters[a]; b <- 9:3; names(b) <- letters[b]; merge_2_named_vec_as_df(a,b)
 #' @export
 
-merge_2_named_vec_as_df <- function(x, y) {
-  COMBINED <-
-    full_join(x = stack(x), y = stack(y), by = "ind")[, c(2, 1, 3)] %>%
-    FirstCol2RowNames.as.df()
+merge_2_named_vec_as_df <- function(x, y, as.tibble =F) {
+  COMBINED <- dplyr::full_join(x = stack(x), y = stack(y), by = "ind")[, c(2, 1, 3)]
+  # colnames(COMBINED) <- c("names",substitute(x), substitute(y))
+  colnames(COMBINED) <- c("names", deparse(substitute(x)), deparse(substitute(y)))
 
-  colnames(COMBINED) <- c(substitute(x), substitute(y))
+  if (!as.tibble) COMBINED <- as.data.frame(COMBINED, row.names = as.character(COMBINED$names))[,-1]
   return(COMBINED)
 }
+
 
 
 # _________________________________________________________________________________________________

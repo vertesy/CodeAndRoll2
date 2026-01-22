@@ -4,12 +4,14 @@
 \alias{merge_2_named_vec_as_df}
 \title{merge_2_named_vec_as_df}
 \usage{
-merge_2_named_vec_as_df(x, y)
+merge_2_named_vec_as_df(x, y, as.tibble = F)
 }
 \arguments{
 \item{x}{A vector with named elements.}
 
 \item{y}{Another vector with named elements.}
+
+\item{as.tibble}{Logical; if TRUE, returns a tibble instead of a data frame. Default: FALSE}
 }
 \description{
 Merge two named vectors by names, into a dataframe with 2 columns.
