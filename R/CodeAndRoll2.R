@@ -243,26 +243,61 @@ pFilter <- function(x, cond) {
 }
 
 
+
+# pSee v2 ----------------------------------------------------------------------------------
 #' @title Print and Return an Object in a Pipe
 #'
-#' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
+#' @description Prints the input object and returns it, enabling you to inspect values inside a
+#'   pipe operation. It detects complex objects like ggplot, plotly, or Seurat to ensure
+#'   they are displayed correctly instead of showing their internal list structure.
 #'
-#' @param x The object to print and return. Default: None.
-#' @param head_n Number of elements of `x` to print. Default: 100.
+#' @param x The object to print and return. No default.
+#' @param head_n Number of elements of `x` to print (for standard vectors/frames). Default: 100.
 #'
 #' @return The input object `x`, unchanged.
 #'
 #' @examples
-#' results <- c(1, 2, 3) %>%
-#'   pSee() %>%
-#'   sqrt() %>%
-#'   tail(2)
-#' results
+#' results <- c(1:1000) |>
+#'   pSee(head_n = 5) |>
+#'   sum()
+#'
+#' @export
 pSee <- function(x, head_n = 100) {
-  x_head <- tryCatch( head(x, head_n), error = function(e) x)
-  print(x_head)
-  return(x)
+  stopifnot(is.numeric(head_n) && length(head_n) == 1)
+
+  # Check if object is complex (e.g., plot or S4) to avoid internal list printing ------------------
+  # ggplot, plotly, and Heatmaps are S3 lists; Seurat objects are S4.
+  is_complex <- inherits(x, c("ggplot", "plotly", "Heatmap", "HeatmapList")) || isS4(x)
+
+  if (is_complex) {
+    print(x)                                                               # Display plot/summary
+  } else {
+    print(tryCatch(utils::head(x, n = head_n), error = function(e) x))     # Safe subset print
+  }
+  return(x)                                                                # Return value to the pipe
 }
+
+#' #' @title Print and Return an Object in a Pipe
+#' #'
+#' #' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
+#' #'
+#' #' @param x The object to print and return. Default: None.
+#' #' @param head_n Number of elements of `x` to print. Default: 100.
+#' #'
+#' #' @return The input object `x`, unchanged.
+#' #'
+#' #' @examples
+#' #' results <- c(1, 2, 3) %>%
+#' #'   pSee() %>%
+#' #'   sqrt() %>%
+#' #'   tail(2)
+#' #' results
+#' pSee <- function(x, head_n = 100) {
+#'   x_head <- tryCatch( head(x, head_n), error = function(e) x)
+#'   print(x_head)
+#'   return(x)
+#' }
+
 
 
 #' @title Print Length and Return an Object in a Pipe

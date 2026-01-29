@@ -16,6 +16,28 @@ The input object \code{x}, unchanged.
 Prints the length of the input object and returns it, allowing you to verify
 length inside a pipe operation.
 }
+\details{
+#' @title Print and Return an Object in a Pipe
+#'
+#' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
+#'
+#' @param x The object to print and return. Default: None.
+#' @param head_n Number of elements of \code{x} to print. Default: 100.
+#'
+#' @return The input object \code{x}, unchanged.
+#'
+#' @examples
+#' results <- c(1, 2, 3) \%>\%
+#'   pSee() \%>\%
+#'   sqrt() \%>\%
+#'   tail(2)
+#' results
+pSee <- function(x, head_n = 100) {
+x_head <- tryCatch( head(x, head_n), error = function(e) x)
+print(x_head)
+return(x)
+}
+}
 \examples{
 results <- c(9:1) |>
   tail(4)  |>

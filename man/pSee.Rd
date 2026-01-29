@@ -7,20 +7,21 @@
 pSee(x, head_n = 100)
 }
 \arguments{
-\item{x}{The object to print and return. Default: None.}
+\item{x}{The object to print and return. No default.}
 
-\item{head_n}{Number of elements of \code{x} to print. Default: 100.}
+\item{head_n}{Number of elements of \code{x} to print (for standard vectors/frames). Default: 100.}
 }
 \value{
 The input object \code{x}, unchanged.
 }
 \description{
-Prints the input object and returns it, enabling you to inspect values inside a pipe.
+Prints the input object and returns it, enabling you to inspect values inside a
+pipe operation. It detects complex objects like ggplot, plotly, or Seurat to ensure
+they are displayed correctly instead of showing their internal list structure.
 }
 \examples{
-results <- c(1, 2, 3) \%>\%
-  pSee() \%>\%
-  sqrt() \%>\%
-  tail(2)
-results
+results <- c(1:1000) |>
+  pSee(head_n = 5) |>
+  sum()
+
 }
