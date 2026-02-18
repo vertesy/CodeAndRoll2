@@ -272,9 +272,9 @@ pSee <- function(x, head_n = 100) {
   if (is_complex) {
     print(x)                                                               # Display plot/summary
   } else {
-    msg1 <- if (length(x) > head_n) paste0("head (1:", head_n, "):") else "" #
+    msg1 <- if (length(x) > head_n) paste0(" | head (1:", head_n, "):") else ""
     msg2 <- tryCatch(utils::head(x, n = head_n), error = function(e) x)
-    message("length: ", length(x), " | ", msg1)
+    message("length: ", length(x),  msg1)
     print(msg2)
   }
   return(x)                                                                # Return value to the pipe
