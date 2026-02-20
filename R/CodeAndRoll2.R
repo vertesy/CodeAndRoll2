@@ -225,7 +225,7 @@ savehistory_Rhist <- function() {
 #' pFilter(letters, . %in% c("a", "f", "z"))
 #'
 #' @export
-pFilter <- function(x, cond) {
+pFilter <- function(x, cond, v = T) {
   # Input assertions
   stopifnot(
     "Input `x` must be a vector." = is.vector(x) || is.factor(x),
@@ -238,6 +238,8 @@ pFilter <- function(x, cond) {
   # Evaluate condition with `.` bound to x
   mask <- eval(cond_expr, envir = list(. = x), enclos = parent.frame())
 
+  if(v) message("Pass: ", percentage_formatter(sum(mask)/ length(x)), " or " ,
+                sum(mask), "/", length(x), " | Condition: ", deparse(cond_expr))
 
   x[mask]
 }
@@ -917,12 +919,14 @@ sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasi
 
 as.named.vector.table <- function(table, verbose = TRUE,
                                   ...) {
+  .Deprecated("simply use c()")
+
   if (!inherits(table, "table")) message("Input is: ", paste(class(table), "\nValues: ", head(table))) # Report class
   stopifnot("table must be 1D" = length(dim(table)) <= 1)
   stopifnot(HasNames(table))
 
-  v <- as.vector(unclass(table)); attributes(v) <- NULL; # Atomic vector with names
-  names(v) <- dimnames(table)[[1]]
+  # v <- as.vector(unclass(table)); attributes(v) <- NULL; # Atomic vector with names
+  # names(v) <- dimnames(table)[[1]]
   # Even after unclass(), the dim attribute remains, and is.vector() only returns TRUE if
   # an object has no attributes other than names.
 
@@ -930,8 +934,20 @@ as.named.vector.table <- function(table, verbose = TRUE,
   return(v)
 }
 
-
-
+# _________________________________________________________________________________________________
+#' @title vtable
+#' @description A version of table() that returns a named vector instead of a table object.
+#' It can handle vectors and factors, and has the same useNA argument as table().
+#' @param x A vector or factor to be tabulated.
+#' @param useNA A string specifying how to handle NA values. Can be "no", "ifany", or "always". Default: "ifany".
+#' @param ... Additional arguments passed to `table()`.
+#'
+#' @return A named vector containing the counts of each unique value in `x`, with names corresponding to the unique values.
+#'
+vtable <- function(x, useNA = c("no", "ifany", "always")[2], ...) {
+  stopifnot(is.vector(x) || is.factor(x))
+  c(table(x))
+}
 
 # _________________________________________________________________________________________________
 #' @title as.named.vector.2colDF
