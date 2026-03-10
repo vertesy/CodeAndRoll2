@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: vertesy/CodeAndRoll2: CodeAndRoll2 for vector, matrix and list manipulations.
+title: An R package of over 170 productivity functions, including vector, matrix and list manipulations; math; flow logic; etc.
 version: v2.7.6
 message: >-
   If you use this software, please cite it using these metadata.
