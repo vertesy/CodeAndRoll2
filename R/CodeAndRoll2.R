@@ -246,63 +246,54 @@ pFilter <- function(x, cond, v = T) {
 
 
 
-# pSee v2 ----------------------------------------------------------------------------------
+# ________________________________________________________________________________________________
 #' @title Print and Return an Object in a Pipe
 #'
 #' @description Prints the input object and returns it, enabling you to inspect values inside a
 #'   pipe operation. It detects complex objects like ggplot, plotly, or Seurat to ensure
 #'   they are displayed correctly instead of showing their internal list structure.
+#'   For non-complex objects, it dynamically reports dimensions (if > 1D) or length (if 1D).
 #'
 #' @param x The object to print and return. No default.
-#' @param head_n Number of elements of `x` to print (for standard vectors/frames). Default: 100.
+#' @param head_n Number of elements/rows of `x` to print (for standard vectors/frames). Default: 100.
 #'
 #' @return The input object `x`, unchanged.
 #'
 #' @examples
-#' results <- c(1:1000) |>
-#'   pSee(head_n = 5) |>
-#'   sum()
+#' results <- c(1:1000) |> pSee(head_n = 5) |> sum()
+#' mtcars |> pSee(head_n = 3) |> summary()
 #'
 #' @export
 pSee <- function(x, head_n = 100) {
-  stopifnot(is.numeric(head_n) && length(head_n) == 1)
+  stopifnot("Argument `head_n` must be a single number." = is.numeric(head_n) && length(head_n) == 1)
 
-  # Check if object is complex (e.g., plot or S4) to avoid internal list printing ------------------
+  # Check if object is complex (e.g., plot or S4) to avoid internal list printing
   # ggplot, plotly, and Heatmaps are S3 lists; Seurat objects are S4.
   is_complex <- inherits(x, c("ggplot", "plotly", "Heatmap", "HeatmapList")) || isS4(x)
 
   if (is_complex) {
     print(x)                                                               # Display plot/summary
   } else {
-    msg1 <- if (length(x) > head_n) paste0(" | head (1:", head_n, "):") else ""
+    d <- dim(x)
+
+    # Decide whether to display dimensions (matrix/df) or length (vector/list)
+    if (is.null(d)) {
+      size_msg <- paste0("length: ", length(x))
+      is_truncated <- length(x) > head_n
+    } else {
+      size_msg <- paste0("dim: ", paste(d, collapse = " x "))
+      is_truncated <- d[1] > head_n                                        # head() restricts rows
+    }
+
+    msg1 <- if (is_truncated) paste0(" | head (1:", head_n, "):") else ""
     msg2 <- tryCatch(utils::head(x, n = head_n), error = function(e) x)
-    message("length: ", length(x),  msg1)
+
+    message(size_msg, msg1)
     print(msg2)
   }
+
   return(x)                                                                # Return value to the pipe
 }
-
-#' #' @title Print and Return an Object in a Pipe
-#' #'
-#' #' @description Prints the input object and returns it, enabling you to inspect values inside a pipe.
-#' #'
-#' #' @param x The object to print and return. Default: None.
-#' #' @param head_n Number of elements of `x` to print. Default: 100.
-#' #'
-#' #' @return The input object `x`, unchanged.
-#' #'
-#' #' @examples
-#' #' results <- c(1, 2, 3) %>%
-#' #'   pSee() %>%
-#' #'   sqrt() %>%
-#' #'   tail(2)
-#' #' results
-#' pSee <- function(x, head_n = 100) {
-#'   x_head <- tryCatch( head(x, head_n), error = function(e) x)
-#'   print(x_head)
-#'   return(x)
-#' }
-
 
 
 #' @title Print Length and Return an Object in a Pipe
@@ -347,6 +338,42 @@ pU <- function(x, head_n = 20) {
 }
 
 
+#' @title Apply Any Function and Return the Original Object in a Pipe
+#'
+#' @description
+#' Evaluates a specified function on the input object, prints the result to the console,
+#' and returns the original input object unmodified. This is highly useful for inspecting
+#' intermediate transformations (e.g., `rowMeans`, `dim`, `summary`) without breaking
+#' the pipeline chain.
+#'
+#' @param x The input object to be passed into `.f` and subsequently returned.
+#' @param .f A function or a function name (character) to apply to `x`.
+#' @param ... Additional arguments passed to the function `.f`.
+#'
+#' @return The input object `x`, unchanged.
+#'
+#' @examples
+#' mat <- matrix(1:12, nrow = 3)
+#' mat |>
+#'   pAny(rowMeans, na.rm = TRUE) |>
+#'   pAny(dim) |>
+#'   sqrt()
+#'
+#' @export
+pAny <- function(x, .f, ...) {
+  stopifnot(
+    "Input `x` must be provided." = !missing(x),
+    "Argument `.f` must be a function or character string." = is.function(.f) || is.character(.f)
+  )
+
+  fun <- match.fun(.f)      # Resolve the function from the environment
+  res <- fun(x, ...)        # Apply the function with any additional arguments
+  message(substitute(.f), ":")
+  message(paste(res, "\n") )                # Print the result to the console
+  flush.console()
+
+  return(x)
+}
 
 
 # _________________________________________________________________________________________________
