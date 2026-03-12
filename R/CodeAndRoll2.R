@@ -282,7 +282,7 @@ pSee <- function(x, head_n = 100) {
       is_truncated <- length(x) > head_n
     } else {
       size_msg <- paste0("dim: ", paste(d, collapse = " x "))
-      is_truncated <- d[1] > head_n                                        # head() restricts rows
+      is_truncated <- F
     }
 
     msg1 <- if (is_truncated) paste0(" | head (1:", head_n, "):") else ""
@@ -291,7 +291,6 @@ pSee <- function(x, head_n = 100) {
     message(size_msg, msg1)
     print(msg2)
   }
-
   return(x)                                                                # Return value to the pipe
 }
 
