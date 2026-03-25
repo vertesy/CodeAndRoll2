@@ -255,7 +255,8 @@ pFilter <- function(x, cond, v = T) {
 #'   For non-complex objects, it dynamically reports dimensions (if > 1D) or length (if 1D).
 #'
 #' @param x The object to print and return. No default.
-#' @param head_n Number of elements/rows of `x` to print (for standard vectors/frames). Default: 100.
+#' @param head_vec Number of elements to print if `x` is a vector. Default: 100.
+#' @param head_df Number of rows to print if `x` is a data frame or matrix. Default: 10.
 #'
 #' @return The input object `x`, unchanged.
 #'
@@ -264,8 +265,7 @@ pFilter <- function(x, cond, v = T) {
 #' mtcars |> pSee(head_n = 3) |> summary()
 #'
 #' @export
-pSee <- function(x, head_n = 100) {
-  stopifnot("Argument `head_n` must be a single number." = is.numeric(head_n) && length(head_n) == 1)
+pSee <- function(x, head_vec = 100, head_df = 10) {
 
   # Check if object is complex (e.g., plot or S4) to avoid internal list printing
   # ggplot, plotly, and Heatmaps are S3 lists; Seurat objects are S4.
@@ -279,10 +279,12 @@ pSee <- function(x, head_n = 100) {
     # Decide whether to display dimensions (matrix/df) or length (vector/list)
     if (is.null(d)) {
       size_msg <- paste0("length: ", length(x))
-      is_truncated <- length(x) > head_n
+      is_truncated <- length(x) > head_vec
+      head_n <- head_vec
     } else {
       size_msg <- paste0("dim: ", paste(d, collapse = " x "))
       is_truncated <- F
+      head_n <- head_df
     }
 
     msg1 <- if (is_truncated) paste0(" | head (1:", head_n, "):") else ""
