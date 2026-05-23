@@ -1014,7 +1014,8 @@ as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE
 #' @param names optional column index for names, Default: NULL (then rownames are used)
 #' @export
 df.col.2.named.vector <- function(df, col, names = NULL) {
-  stopifnot(length(col) == 1)
+  stopifnot((is.data.frame(df) | is.tibble(df)),
+            length(col) == 1)
   if (inherits(df, "tbl_df") && is.null(names)) warning("Tibbles have no rownames. Synthetic row indices detected.", immediate. = TRUE)
 
   vec <- df[[col]]

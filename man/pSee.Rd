@@ -4,12 +4,14 @@
 \alias{pSee}
 \title{Print and Return an Object in a Pipe}
 \usage{
-pSee(x, head_n = 100)
+pSee(x, head_vec = 100, head_df = 10)
 }
 \arguments{
 \item{x}{The object to print and return. No default.}
 
-\item{head_n}{Number of elements/rows of \code{x} to print (for standard vectors/frames). Default: 100.}
+\item{head_vec}{Number of elements to print if \code{x} is a vector. Default: 100.}
+
+\item{head_df}{Number of rows to print if \code{x} is a data frame or matrix. Default: 10.}
 }
 \value{
 The input object \code{x}, unchanged.
