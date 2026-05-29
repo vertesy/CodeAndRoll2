@@ -1098,7 +1098,7 @@ as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose
 
 
 # _________________________________________________________________________________________________
-#' @title Unique elements
+#' @title Unique elements with names preserved
 #' @description Get the unique elements of a vector, keep their names
 #' @param x A vector with names
 #' @export unique.wNames
@@ -1107,6 +1107,24 @@ unique.wNames <- function(x) {
 }
 
 
+
+# _________________________________________________________________________________________________
+#' @title Range elements with names preserved
+#' @description Get the range of a numeric vector, keep the names of the min and max values
+#' @param x A numeric vector with names
+#' @examples vec <- c(a = 1, b = 5, c = 3); range.wNames(vec)
+#' @export range.wNames
+range.wNames <- function(x) {
+  stopifnot(is.numeric(x))
+  warnifnot("Not all elements have a name" = sum(nzchar(names(x))) == length(x))
+  if (!is.numeric(x)) stop("Input must be a numeric vector.")
+  if (is.null(names(x))) warning("Input vector must have names.")
+  range_values <- range(x, na.rm = TRUE)
+  min_max_names <- names(c(which.min(x),which.max(x)))
+  warnifnot(sum(nzchar(min_max_names)) == 2)
+  names(range_values) <- min_max_names
+  return(range_values)
+}
 
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.character
