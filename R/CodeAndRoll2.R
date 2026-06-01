@@ -1997,7 +1997,7 @@ colDivide <- function(mat, vec = colSums(mat)) {
 #' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE)
 #' colMultiply(colDivide(m), colSums(m))
 #' @export
-colMultiply <- function(mat, vec)) {
+colMultiply <- function(mat, vec) {
   stopifnot(NCOL(mat) == length(vec))
   mat * vec[col(mat)] # fastest
 }
