@@ -1974,9 +1974,7 @@ rowSubtract <- function(mat, vec) {
 #' \url{https://stackoverflow.com/questions/20596433/how-to-divide-each-row-of-a-matrix-by-elements-of-a-vector-in-r}.
 #'
 #' @param mat A numeric matrix where each row represents a distribution to be divided.
-#' @param vec A numeric vector whose elements are the divisors for each column of the matrix.
-#' The length of the vector must match the number of columns in the matrix. If not supplied,
-#' the default is to use the column sums of the matrix as divisors.
+#' @param vec A numeric vector with a length equal to the number of columns in `mat`. Default: column sums of the matrix.
 #'
 #' @return A matrix with the same dimensions as the input where each element in the original matrix
 #' has been divided by the corresponding element in the vector.
@@ -1999,7 +1997,7 @@ colDivide <- function(mat, vec = colSums(mat)) {
 #' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE)
 #' colMultiply(colDivide(m), colSums(m))
 #' @export
-colMultiply <- function(mat, vec) {
+colMultiply <- function(mat, vec)) {
   stopifnot(NCOL(mat) == length(vec))
   mat * vec[col(mat)] # fastest
 }
@@ -2010,11 +2008,11 @@ colMultiply <- function(mat, vec) {
 #' @title rowDivide
 #' @description Divide by row.
 #' @param mat Numeric input matrix with the distribution.
-#' @param vec Vector to divide by.
+#' @param vec Vector to divide by. Default: row sums of the matrix.
 #'
 #' @examples rowDivide(rowMultiply(m, 1:3), 1:3)
 #' @export
-rowDivide <- function(mat, vec) {
+rowDivide <- function(mat, vec = rowSums(mat)) {
   stopifnot(NROW(mat) == length(vec))
   mat / vec[row(mat)] # fastest
 }
