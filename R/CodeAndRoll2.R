@@ -218,7 +218,7 @@ savehistory_Rhist <- function() { current_dir <- getwd()
 #' pFilter(letters, . %in% c("a", "f", "z"))
 #'
 #' @export
-pFilter <- function(x, cond, v = T) {
+pFilter <- function(x, cond, v = TRUE) {
   # Input assertions
   stopifnot(
     "Input `x` must be a vector." = is.vector(x) || is.factor(x),
@@ -2685,7 +2685,7 @@ merge_numeric_df_by_rn <- function(x, y) {
 #' @examples # a <- 1:5; names(a) <- letters[a]; b <- 9:3; names(b) <- letters[b]; merge_2_named_vec_as_df(a,b)
 #' @export
 
-merge_2_named_vec_as_df <- function(x, y, as.tibble = F) {
+merge_2_named_vec_as_df <- function(x, y, as.tibble = FALSE) {
   COMBINED <- dplyr::full_join(x = stack(x), y = stack(y), by = "ind")[, c(2, 1, 3)]
   # colnames(COMBINED) <- c("names",substitute(x), substitute(y))
   colnames(COMBINED) <- c("names", deparse(substitute(x)), deparse(substitute(y)))
