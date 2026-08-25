@@ -17,7 +17,6 @@
 # file.edit('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.less.used.R')
 
 
-
 ### CHAPTERS:
 
 # _________________________________________________________________________________________________
@@ -104,10 +103,7 @@ getProject <- function() {
 #' savehistory_2rstudio()
 #' }
 
-
-savehistory_2rstudio <- function(
-    history_file = "~/.local/share/rstudio/history_database"
-) {
+savehistory_2rstudio <- function(history_file = "~/.local/share/rstudio/history_database") {
   history_file <- path.expand(history_file)
 
   if (!file.exists(history_file)) {
@@ -132,7 +128,7 @@ savehistory_2rstudio <- function(
 
   lines <- readLines(history_file, warn = FALSE)
 
-  ts  <- sub(":.*$", "", lines)
+  ts <- sub(":.*$", "", lines)
   cmd <- sub("^[0-9]+:", "", lines)
 
   time <- format(
@@ -155,8 +151,6 @@ savehistory_2rstudio <- function(
 }
 
 
-
-
 # _________________________________________________________________________________________________
 #' @title Save Command History to "command_history.date.scriptname.txt"
 #'
@@ -172,9 +166,8 @@ savehistory_2rstudio <- function(
 #' \dontrun{
 #' savehistory_2()
 #' }
-savehistory_Rhist <- function() {
-  # Get the current working directory
-  current_dir <- getwd()
+#'
+savehistory_Rhist <- function() { current_dir <- getwd()
 
   # Construct the file name using the current date and optionally the file name from RStudio
   script_name <- try(basename(rstudioapi::getSourceEditorContext()$path), silent = TRUE)
@@ -238,12 +231,15 @@ pFilter <- function(x, cond, v = T) {
   # Evaluate condition with `.` bound to x
   mask <- eval(cond_expr, envir = list(. = x), enclos = parent.frame())
 
-  if(v) message("Pass: ", percentage_formatter(sum(mask)/ length(x)), " or " ,
-                sum(mask), "/", length(x), " | Condition: ", deparse(cond_expr))
+  if (v) {
+    message(
+      "Pass: ", percentage_formatter(sum(mask) / length(x)), " or ",
+      sum(mask), "/", length(x), " | Condition: ", deparse(cond_expr)
+    )
+  }
 
   x[mask]
 }
-
 
 
 # ________________________________________________________________________________________________
@@ -261,18 +257,21 @@ pFilter <- function(x, cond, v = T) {
 #' @return The input object `x`, unchanged.
 #'
 #' @examples
-#' results <- c(1:1000) |> pSee(head_n = 5) |> sum()
-#' mtcars |> pSee(head_n = 3) |> summary()
+#' results <- c(1:1000) |>
+#'   pSee(head_n = 5) |>
+#'   sum()
+#' mtcars |>
+#'   pSee(head_n = 3) |>
+#'   summary()
 #'
 #' @export
 pSee <- function(x, head_vec = 100, head_df = 10) {
-
   # Check if object is complex (e.g., plot or S4) to avoid internal list printing
   # ggplot, plotly, and Heatmaps are S3 lists; Seurat objects are S4.
   is_complex <- inherits(x, c("ggplot", "plotly", "Heatmap", "HeatmapList")) || isS4(x)
 
   if (is_complex) {
-    print(x)                                                               # Display plot/summary
+    print(x) # Display plot/summary
   } else {
     d <- dim(x)
 
@@ -293,7 +292,7 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
     message(size_msg, msg1)
     print(msg2)
   }
-  return(x)                                                                # Return value to the pipe
+  return(x) # Return value to the pipe
 }
 
 
@@ -308,7 +307,7 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
 #'
 #' @examples
 #' results <- c(9:1) |>
-#'   tail(4)  |>
+#'   tail(4) |>
 #'   pLength() |>
 #'   sqrt()
 #' results
@@ -326,11 +325,10 @@ pLength <- function(x) {
 #' @param x The object whose unique elements to print and return. Default: None.
 #' @return The input object `x`, unchanged.
 #' @examples
-#' results <- c(1, 2, 2, 3, 3, 3)  |>
-#' pU()  |>
-#' sqrt() |>
-#' pSee()
-
+#' results <- c(1, 2, 2, 3, 3, 3) |>
+#'   pU() |>
+#'   sqrt() |>
+#'   pSee()
 pU <- function(x, head_n = 20) {
   stopifnot(!missing(x), is.atomic(x) || is.list(x))
   sfx <- if (length(unique(x)) > head_n) " ..." else NULL
@@ -367,10 +365,10 @@ pAny <- function(x, .f, ...) {
     "Argument `.f` must be a function or character string." = is.function(.f) || is.character(.f)
   )
 
-  fun <- match.fun(.f)      # Resolve the function from the environment
-  res <- fun(x, ...)        # Apply the function with any additional arguments
+  fun <- match.fun(.f) # Resolve the function from the environment
+  res <- fun(x, ...) # Apply the function with any additional arguments
   message(substitute(.f), ":")
-  message(paste(res, "\n") )                # Print the result to the console
+  message(paste(res, "\n")) # Print the result to the console
   flush.console()
 
   return(x)
@@ -398,11 +396,14 @@ pAny <- function(x, .f, ...) {
 #' rm(list = "x", inherits = FALSE)
 #' setIfNotDefined(x, 22)
 #' x <- 33
-#' setIfNotDefined(x, { stop("must not run") }); x
+#' setIfNotDefined(x, {
+#'   stop("must not run")
+#' })
+#' x
 #'
 #' @export
 setIfNotDefined <- function(obj, value_expr) {
-  nm  <- deparse(substitute(obj))
+  nm <- deparse(substitute(obj))
   env <- parent.frame()
 
   pfx <- if (exists(nm, envir = env, inherits = FALSE)) {
@@ -415,7 +416,6 @@ setIfNotDefined <- function(obj, value_expr) {
 
   invisible(NULL)
 }
-
 
 
 #' @title vec.fromNames
@@ -540,7 +540,6 @@ data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5],
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title matrix.fromVector
 #' @description Create a matrix from values in a vector repeated for each column / each row.
@@ -563,7 +562,6 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title array.fromNames
 #' @description Create an N-dimensional array from N vectors defining the row-, column, etc names of the array.
@@ -573,8 +571,9 @@ matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
 #' @param fill The value to fill the new vector, Default: NA
 #' @export
 array.fromNames <- function(
-    rowname_vec = 1:3, colname_vec = letters[1:2],
-    z_name_vec = LETTERS[4:6], fill = NA) {
+  rowname_vec = 1:3, colname_vec = letters[1:2],
+  z_name_vec = LETTERS[4:6], fill = NA
+) {
   stopifnot(is.vector(rowname_vec), is.vector(colname_vec), is.vector(z_name_vec))
   DimNames <- list(rowname_vec, colname_vec, z_name_vec)
   Dimensions_ <- lapply(DimNames, length)
@@ -582,7 +581,6 @@ array.fromNames <- function(
   iprint("Dimensions:", dim(mx))
   return(mx)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -627,7 +625,6 @@ is.list.simple <- function(object, warn_nested = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title idim
 #' @description A dim() function that can handle if you pass on a vector: then, it gives the length.
@@ -643,8 +640,6 @@ idim <- function(any_object) {
     print(dim(any_object))
   }
 }
-
-
 
 
 # _________________________________________________________________________________________________
@@ -745,7 +740,6 @@ table_fixed_categories <- function(vec, categories_vec, strict = TRUE,
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title Frequency Table with Sorting Option
 #'
@@ -818,12 +812,8 @@ getCategories <- function(named_categ_vec) {
 }
 
 
-
 # _________________________________________________________________________________________________
 ## Vector operations ____________________________________________________________ ----
-
-
-
 
 
 #' @title Count the number of unique values
@@ -835,7 +825,6 @@ nr.unique <- function(x) {
   if (is.data.frame(x)) x <- x[[1]]
   length(unique(x))
 }
-
 
 
 #' @title grep that returns the value of the match.
@@ -852,14 +841,14 @@ nr.unique <- function(x) {
 #' @param ... Pass any other argument.
 #' @export
 grepv <- function(
-    pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
-    fixed = FALSE, useBytes = FALSE, invert = FALSE, ...) {
+  pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
+  fixed = FALSE, useBytes = FALSE, invert = FALSE, ...
+) {
   grep(pattern, x,
     ignore.case = ignore.case, perl = perl, fixed = fixed,
     useBytes = useBytes, invert = invert, ..., value = TRUE
   )
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -884,8 +873,6 @@ count_occurrence_each_element <- function(vec) {
 }
 
 
-
-
 # _________________________________________________________________________________________________
 #' @title top_indices
 #'
@@ -907,7 +894,6 @@ top_indices <- function(x, n = 3, top = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title trail
 #'
@@ -923,7 +909,6 @@ top_indices <- function(x, n = 3, top = TRUE) {
 trail <- function(vec, N = 10) unique(c(head(vec, n = N), tail(vec, n = N)))
 
 
-
 # _________________________________________________________________________________________________
 #' @title sort.decreasing
 #'
@@ -934,7 +919,6 @@ trail <- function(vec, N = 10) unique(c(head(vec, n = N), tail(vec, n = N)))
 #'
 #' @export sort.decreasing
 sort.decreasing <- function(vec) sort(vec, decreasing = TRUE) # Sort in decreasing order.
-
 
 
 # _________________________________________________________________________________________________
@@ -988,14 +972,13 @@ vtable <- function(x, useNA = c("no", "ifany", "always")[2], ...) {
 #'
 #' @export
 as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE) {
-
   stopifnot(
     "Invalid values column" =
       (is.numeric(values) && values >= 1 && values <= ncol(df)) ||
-      (is.character(values) && values %in% colnames(df)),
+        (is.character(values) && values %in% colnames(df)),
     "Invalid names column" =
       (is.numeric(names) && names >= 1 && names <= ncol(df)) ||
-      (is.character(names) && names %in% colnames(df))
+        (is.character(names) && names %in% colnames(df))
   )
 
   vec <- df[[values]]
@@ -1014,8 +997,10 @@ as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE
 #' @param names optional column index for names, Default: NULL (then rownames are used)
 #' @export
 df.col.2.named.vector <- function(df, col, names = NULL) {
-  stopifnot((is.data.frame(df) | is.tibble(df)),
-            length(col) == 1)
+  stopifnot(
+    (is.data.frame(df) | is.tibble(df)),
+    length(col) == 1
+  )
   if (inherits(df, "tbl_df") && is.null(names)) warning("Tibbles have no rownames. Synthetic row indices detected.", immediate. = TRUE)
 
   vec <- df[[col]]
@@ -1041,9 +1026,6 @@ df.row.2.named.vector <- function(df, row, names = NULL) {
 }
 
 
-
-
-
 # _________________________________________________________________________________________________
 #' @title tibble_summary_to_namedVec
 #' @description Convert a key-value tibble into a named vector (as opposed to using rownames).
@@ -1056,9 +1038,9 @@ df.row.2.named.vector <- function(df, row, names = NULL) {
 #'
 #' @export
 tibble_summary_to_namedVec <- function(
-    tbl = dplyr::tibble("key" = sample(x = 1:5, size = 20, replace = TRUE), "value" = rnorm(20)),
-    idx = c(key = 1, value = 2)
-    ) {
+  tbl = dplyr::tibble("key" = sample(x = 1:5, size = 20, replace = TRUE), "value" = rnorm(20)),
+  idx = c(key = 1, value = 2)
+) {
   stopifnot(
     "idx must select exactly 2 columns" = length(idx) == 2,
     "Selected columns must be atomic vectors" =
@@ -1070,7 +1052,6 @@ tibble_summary_to_namedVec <- function(
   names(named.vec) <- tbl_2_col[[1]]
   return(named.vec)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1093,7 +1074,6 @@ as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose
   )
 
   if (transpose) t(as.matrix(tbl)) else tbl
-
 }
 
 
@@ -1107,12 +1087,12 @@ unique.wNames <- function(x) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title Range elements with names preserved
 #' @description Get the range of a numeric vector, keep the names of the min and max values
 #' @param x A numeric vector with names
-#' @examples vec <- c(a = 1, b = 5, c = 3); range.wNames(vec)
+#' @examples vec <- c(a = 1, b = 5, c = 3)
+#' range.wNames(vec)
 #' @export range.wNames
 range.wNames <- function(x) {
   stopifnot(is.numeric(x))
@@ -1120,7 +1100,7 @@ range.wNames <- function(x) {
   if (!is.numeric(x)) stop("Input must be a numeric vector.")
   if (is.null(names(x))) warning("Input vector must have names.")
   range_values <- range(x, na.rm = TRUE)
-  min_max_names <- names(c(which.min(x),which.max(x)))
+  min_max_names <- names(c(which.min(x), which.max(x)))
   warnifnot(sum(nzchar(min_max_names)) == 2)
   names(range_values) <- min_max_names
   return(range_values)
@@ -1148,8 +1128,9 @@ range.wNames <- function(x) {
 #'
 #' @export as.numeric.wNames.character
 as.numeric.wNames.character <- function(
-    vec, verbose = TRUE,
-    factor.to.character = TRUE, ...) {
+  vec, verbose = TRUE,
+  factor.to.character = TRUE, ...
+) {
   if (is.character(vec) || is.logical(vec)) {
     numerified_vec <- as.numeric(vec, ...)
   } else {
@@ -1181,7 +1162,6 @@ as.numeric.wNames.character <- function(
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title as.numeric.wNames.factor
 #'
@@ -1207,7 +1187,6 @@ as.numeric.wNames.factor <- function(vec, ...) {
 
   return(numerified_vec)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1330,7 +1309,6 @@ sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title any.duplicated
 #' @description How many entries are duplicated?.
@@ -1351,7 +1329,6 @@ any.duplicated <- function(vec, summarize = TRUE, max.shown = 25) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title which.duplicated
 #' @description Which values are duplicated?.
@@ -1363,7 +1340,6 @@ which.duplicated <- function(vec, verbose = TRUE) {
   if (verbose) iprint(length(DPL), "Duplicated entries (1-5): ", head(DPL), "...")
   return(DPL)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1379,7 +1355,6 @@ which.NA <- function(vec, verbose = TRUE) {
   if (verbose) iprint(length(NAs), "NA entries: ", NAs, "(only NA-s are returned)")
   return(NAs)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1434,7 +1409,6 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title as.logical.wNames
 #' @description Converts your input vector into a logical vector, and puts the original character values into the names of the new vector, unless it already has names.
@@ -1460,7 +1434,6 @@ col2named.vec.tbl <- function(tbl.2col) {
   names(nvec) <- tbl.2col[[1]]
   nvec
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1530,8 +1503,6 @@ numerate <- function(x = 1, y = 100, zeropadding = TRUE,
 }
 
 
-
-
 # _________________________________________________________________________________________________
 #' @title MaxN
 #' @description Find second (third…) highest/lowest value in vector.
@@ -1546,8 +1517,6 @@ MaxN <- function(vec = rpois(4, lambda = 3), topN = 2) {
 }
 
 
-
-
 # _________________________________________________________________________________________________
 #' @title cumsubtract
 #' @description Cumulative subtraction, opposite of cumsum().
@@ -1559,7 +1528,6 @@ cumsubtract <- function(numericVec) {
   print(table(DiffZ))
   DiffZ
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1617,7 +1585,6 @@ checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = T
 }
 
 
-
 # _________________________________________________________________________________________________
 ### Vector filtering ____________________________________________________________ ----
 
@@ -1628,7 +1595,6 @@ checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = T
 which_names <- function(namedVec) {
   return(names(which(as.logical.wNames(namedVec))))
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1643,7 +1609,6 @@ which_names_grep <- function(namedVec, pattern, ...) {
   idx <- grepv(x = names(namedVec), pattern = pattern, ...)
   return(namedVec[idx])
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1672,7 +1637,6 @@ na.omit.strip <- function(object, silent = FALSE, ...) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title inf.omit
 #' @description Omit infinite values from a vector.
@@ -1690,7 +1654,6 @@ inf.omit <- function(vec) {
   # attributes(clean)$na.action <- NULL
   return(clean)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1726,8 +1689,9 @@ zero.omit <- function(vec, verbose = TRUE) {
 #'
 #' @export
 pc_TRUE <- function(
-    logical_vector, percentify = TRUE, NumberAndPC = FALSE,
-    NArm = TRUE, prefix = NULL, suffix = NULL, digitz = 3, ...) {
+  logical_vector, percentify = TRUE, NumberAndPC = FALSE,
+  NArm = TRUE, prefix = NULL, suffix = NULL, digitz = 3, ...
+) {
   # Calculate the percentage of true values
   SUM <- sum(logical_vector, na.rm = NArm)
   LEN <- length(logical_vector)
@@ -1745,7 +1709,6 @@ pc_TRUE <- function(
 
   return(out)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1796,8 +1759,6 @@ pc_overlap <- function(x, y, basis = "x", prefix = NULL, suffix = NULL, ...) {
 
   return(overlap / denominator)
 }
-
-
 
 
 # _________________________________________________________________________________________________
@@ -1964,7 +1925,6 @@ rowSubtract <- function(mat, vec) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title Row-wise division of a matrix by a column vector
 #'
@@ -2003,7 +1963,6 @@ colMultiply <- function(mat, vec) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title rowDivide
 #' @description Divide by row.
@@ -2016,7 +1975,6 @@ rowDivide <- function(mat, vec = rowSums(mat)) {
   stopifnot(NROW(mat) == length(vec))
   mat / vec[row(mat)] # fastest
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2032,7 +1990,6 @@ rowMultiply <- function(mat, vec) {
   stopifnot(NROW(mat) == length(vec))
   mat * vec[row(mat)] # fastest
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2056,7 +2013,6 @@ TPM_normalize <- function(mat, SUM = 1e6) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title median_normalize
 #' @description Normalize each column to the median of all the column-sums.
@@ -2070,7 +2026,6 @@ median_normalize <- function(mat) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title mean_normalize
 #' @description Normalize each column to the median of the columns.
@@ -2082,7 +2037,6 @@ mean_normalize <- function(mat) {
   iprint("colMeans: ", head(signif(colMeans(norm_mat))))
   return(norm_mat)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2111,7 +2065,6 @@ colMin <- function(x, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title rowMax
 #' @description Calculates the maximum of each row of a numeric matrix / data frame.
@@ -2132,7 +2085,6 @@ rowMax <- function(x, na.rm = TRUE) {
 colMax <- function(x, na.rm = TRUE) {
   apply(data.matrix(x), 2, max, na.rm = na.rm)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2160,7 +2112,6 @@ colMedians <- function(x, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title rowGeoMeans
 #' @description Calculates the median of each row of a numeric matrix / data frame.
@@ -2181,7 +2132,6 @@ rowGeoMeans <- function(x, na.rm = TRUE) {
 colGeoMeans <- function(x, na.rm = TRUE) {
   apply(data.matrix(x), 2, geomean, na.rm = na.rm)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2206,7 +2156,6 @@ colCV <- function(x, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title rowVariance
 #' @description Calculates the CV of each ROW of a numeric matrix / data frame.
@@ -2227,8 +2176,6 @@ rowVariance <- function(x, na.rm = TRUE) {
 colVariance <- function(x, na.rm = TRUE) {
   apply(data.matrix(x), 2, var, na.rm = na.rm)
 }
-
-
 
 
 # _________________________________________________________________________________________________
@@ -2253,7 +2200,6 @@ colSEM <- function(x, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title rowSD
 #' @description Calculates the SEM of each row of a numeric matrix / data frame.
@@ -2276,7 +2222,6 @@ colSD <- function(x, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title rowIQR
 #' @description Calculates the IQR of each row of a numeric matrix / data frame.
@@ -2297,7 +2242,6 @@ rowIQR <- function(x, na.rm = TRUE) {
 colIQR <- function(x, na.rm = TRUE) {
   apply(data.matrix(x), 2, IQR, na.rm = na.rm)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2344,7 +2288,6 @@ cbind_vectors_by_names <- function(vec1, vec2) {
 ## Matrix manipulations ____________________________________________________________ ----
 
 
-
 # _________________________________________________________________________________________________
 #' @title sortEachColumn
 #' @description Sort each column of a numeric matrix / data frame.
@@ -2352,7 +2295,6 @@ cbind_vectors_by_names <- function(vec1, vec2) {
 #' @param ... Pass any other argument.
 #' @export
 sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column of a numeric matrix / data frame.
-
 
 
 # _________________________________________________________________________________________________
@@ -2398,9 +2340,6 @@ sort_matrix_rows <- function(df, column = NULL, rownames = FALSE, decrease = FAL
 }
 
 
-
-
-
 # _________________________________________________________________________________________________
 #' @title rownames.trimws
 #' @description Trim whitespaces from the rownames.
@@ -2421,7 +2360,6 @@ rownames.trimws <- function(matrix1) {
 #' @param k The number of rows to print from the matrices with the most missing values.
 #'
 #' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
-#' @importFrom CodeAndRoll2 symdiff
 #' @importFrom Stringendo percentage_formatter
 #'
 #' @export
@@ -2437,7 +2375,7 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
   idx <- intersect(rn1, rn2)
   llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
   merged <- cbind(matrix1[idx, ], matrix2[idx, ])
-  diffz <- CodeAndRoll2::symdiff(rn1, rn2)
+  diffz <- symdiff(rn1, rn2)
   print("Missing Rows 1, 2")
   x1 <- rowSums(matrix1[diffz[[1]], ])
   x2 <- rowSums(matrix2[diffz[[2]], ])
@@ -2450,7 +2388,6 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
   iprint("dim:", dim(merged))
   return(merged)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2468,7 +2405,6 @@ colsplit <- function(df, f = colnames(df)) {
   names(ListOfDFs) <- levelz
   return(ListOfDFs)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2524,9 +2460,10 @@ rowsplit <- function(df, f = rownames(df)) {
 #' @export
 
 get_max_colname_per_row <- function(
-    mat, na.remove = TRUE, collapse = "-", verbose = TRUE,
-    multi_max_str = "multiple.maxima",
-    suffix = "rows have multiple maxima.") {
+  mat, na.remove = TRUE, collapse = "-", verbose = TRUE,
+  multi_max_str = "multiple.maxima",
+  suffix = "rows have multiple maxima."
+) {
   # Remove NA values if specified
   if (na.remove) mat[is.na(mat)] <- -Inf
 
@@ -2556,8 +2493,6 @@ get_max_colname_per_row <- function(
 
   return(max_colname_per_row)
 }
-
-
 
 
 # _________________________________________________________________________________________________
@@ -2593,7 +2528,6 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title getRows
 #'
@@ -2618,7 +2552,6 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
   }
   mat[idx, ]
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2648,7 +2581,6 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title get.oddoreven
 #'
@@ -2664,7 +2596,6 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
   df_out <- if (rows) df_[IDX, ] else df_[, IDX]
   return(df_out)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2715,7 +2646,6 @@ merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE = 1) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title merge_numeric_df_by_rn
 #' @description Merge 2 numeric data frames by rownames.
@@ -2755,16 +2685,15 @@ merge_numeric_df_by_rn <- function(x, y) {
 #' @examples # a <- 1:5; names(a) <- letters[a]; b <- 9:3; names(b) <- letters[b]; merge_2_named_vec_as_df(a,b)
 #' @export
 
-merge_2_named_vec_as_df <- function(x, y, as.tibble =F) {
+merge_2_named_vec_as_df <- function(x, y, as.tibble = F) {
   COMBINED <- dplyr::full_join(x = stack(x), y = stack(y), by = "ind")[, c(2, 1, 3)]
   # colnames(COMBINED) <- c("names",substitute(x), substitute(y))
   colnames(COMBINED) <- c("names", deparse(substitute(x)), deparse(substitute(y)))
   COMBINED$names <- as.character(COMBINED$names)
 
-  if (!as.tibble) COMBINED <- as.data.frame(COMBINED, row.names = as.character(COMBINED$names))[,-1]
+  if (!as.tibble) COMBINED <- as.data.frame(COMBINED, row.names = as.character(COMBINED$names))[, -1]
   return(COMBINED)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -2776,13 +2705,14 @@ merge_2_named_vec_as_df <- function(x, y, as.tibble =F) {
 #' @export
 
 merge_ls_of_named_vec_as_df_cols <- function(
-    named_list = list(
-      vec1 = c(A = 1, B = 2, C = 3),
-      vec2 = c(B = 4, D = 5),
-      vec3 = c(A = 6, C = 7, D = 8),
-      vec4 = c(B = 9, C = 10, D = 11, E = 12)
-    ),
-    missing_values = NaN) {
+  named_list = list(
+    vec1 = c(A = 1, B = 2, C = 3),
+    vec2 = c(B = 4, D = 5),
+    vec3 = c(A = 6, C = 7, D = 8),
+    vec4 = c(B = 9, C = 10, D = 11, E = 12)
+  ),
+  missing_values = NaN
+) {
   stopifnot(length(names(named_list)) == length(named_list)) # stop if names are missing
   stopifnot(all(unlapply(lapply(named_list, names), length) > 0)) # stop if there are empty vectors
 
@@ -2824,9 +2754,6 @@ get_col_types <- function(df, print_it = TRUE) {
   print(table(x))
   return(x)
 }
-
-
-
 
 
 # _________________________________________________________________________________________________
@@ -2952,7 +2879,6 @@ remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title remove.na.cols
 #' @description Cols have to be a vector of numbers corresponding to columns.
@@ -2962,8 +2888,6 @@ remove.na.cols <- function(mat) {
   idxOK <- !is.na(colSums(mat))
   return(mat[, idxOK])
 }
-
-
 
 
 # _________________________________________________________________________________________________
@@ -2983,13 +2907,14 @@ remove.na.cols <- function(mat) {
 #' @export
 
 df.remove.empty.rows.and.columns <- function(
-    df = UVI.assignment.filtered.3.HF,
-    suffix = substitute_deparse(df),
-    rows = "rows",
-    cols = "cols",
-    thr.cell.empty = 0,
-    plot_stats = TRUE,
-    ...) {
+  df = UVI.assignment.filtered.3.HF,
+  suffix = substitute_deparse(df),
+  rows = "rows",
+  cols = "cols",
+  thr.cell.empty = 0,
+  plot_stats = TRUE,
+  ...
+) {
   # Create a boolean vector that indicates whether each cell is non-empty
   df.boolean <- (df != thr.cell.empty)
   # view.head(df.boolean)
@@ -3027,7 +2952,6 @@ df.remove.empty.rows.and.columns <- function(
 }
 
 
-
 # _________________________________________________________________________________________________
 ## Create Special Matrices ____________________________________________________________ ----
 
@@ -3043,7 +2967,6 @@ rowNameMatrix <- function(mat_w_dimnames) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title colNameMatrix
 #' @description Create a copy of your matrix, where every entry is replaced by the corresponding
@@ -3055,9 +2978,6 @@ colNameMatrix <- function(mat_w_dimnames) {
   x <- rep(colnames(mat_w_dimnames), nrow(mat_w_dimnames))
   t(matrix(x, nrow = ncol(mat_w_dimnames), ncol = nrow(mat_w_dimnames)))
 }
-
-
-
 
 
 # _________________________________________________________________________________________________
@@ -3106,7 +3026,6 @@ arr.of.lists.2.df <- function(two.dim.arr.of.lists) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title mdlapply2df
 #' @description Multi dimensional lapply + arr.of.lists.2.df (simplify 2D-list-array to a DF).
@@ -3118,7 +3037,6 @@ mdlapply2df <- function(list_2D, ...) {
   z <- copy.dimension.and.dimnames(x, list_2D)
   arr.of.lists.2.df(z)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3133,7 +3051,6 @@ mdlapply2df <- function(list_2D, ...) {
 any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # Check if there are any duplocated rownames in a list of dataframes.
 
 
-
 # _________________________________________________________________________________________________
 #' @title intersect.ls
 #' @description Intersect any number of lists.
@@ -3144,7 +3061,6 @@ any.duplicated.rownames.ls.of.df <- function(ls) any.duplicated(rownames(ls)) # 
 intersect.ls <- function(ls, ...) {
   Reduce(intersect, ls)
 } # Intersect any number of lists.
-
 
 
 # _________________________________________________________________________________________________
@@ -3203,7 +3119,6 @@ unlapply <- function(list, FUN, ...) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title list.wNames
 #' @description Create a list with names from ALL variables you pass on to the function.
@@ -3214,7 +3129,6 @@ list.wNames <- function(...) {
   names(lst) <- as.character(match.call()[-1])
   return(lst)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3251,7 +3165,6 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title as.list.df.by.col
 #'
@@ -3282,7 +3195,6 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title reorder.list
 #'
@@ -3310,7 +3222,6 @@ reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title range.list
 #'
@@ -3322,7 +3233,6 @@ reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) {
 range.list <- function(L) {
   return(range(unlist(L), na.rm = TRUE))
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3349,7 +3259,6 @@ intermingle2lists <- function(L1, L2) {
   } # for
   return(Lout)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3379,7 +3288,6 @@ as.listalike <- function(vec, list_wannabe) {
   } # for
   return(list_return)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3419,8 +3327,6 @@ reverse.list.hierarchy <- function(list_of_lists) {
 }
 
 
-
-
 # _________________________________________________________________________________________________
 #' @title list2fullDF.byNames
 #'
@@ -3436,13 +3342,14 @@ reverse.list.hierarchy <- function(list_of_lists) {
 #'
 #' @export
 list2fullDF.byNames <- function(
-    your.list = list(
-      "set.1" = vec.fromNames(LETTERS[1:5], fill = 1), # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
-      "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
-    ),
-    as.df = TRUE,
-    byRow = TRUE,
-    FILL = NA) {
+  your.list = list(
+    "set.1" = vec.fromNames(LETTERS[1:5], fill = 1), # Convert a list to a full matrix. Rows = names(union.ls(your_list)) or all names of within list elements, columns = names(your_list).
+    "set.2" = vec.fromNames(LETTERS[3:9], fill = 2)
+  ),
+  as.df = TRUE,
+  byRow = TRUE,
+  FILL = NA
+) {
   # Get the lengths of the list elements
   length.list <- length(your.list)
   list.names <- names(your.list)
@@ -3462,7 +3369,6 @@ list2fullDF.byNames <- function(
   if (as.df) mat <- as.data.frame(mat)
   return(mat)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3504,7 +3410,6 @@ list2fullDF.presence <- function(your.list = list(
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title splitbyitsnames
 #' @description Split a list by its names.
@@ -3514,7 +3419,6 @@ splitbyitsnames <- function(namedVec) {
   stopifnot(!is.null(names(namedVec)))
   split(namedVec, f = names(namedVec))
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3533,7 +3437,6 @@ splititsnames_byValues <- function(namedVec) {
   stopifnot(!is.null(names(namedVec)))
   split(names(namedVec), f = namedVec)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3570,7 +3473,6 @@ intermingle2vec <- function(V1, V2, wNames = TRUE, name_prefix = NULL) {
   }
   return(Vout)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3615,7 +3517,6 @@ intermingle.cbind <- function(df1, df2) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title ls2categvec
 #'
@@ -3629,7 +3530,6 @@ ls2categvec <- function(your_list) {
   names(VEC) <- unlist(your_list, use.names = TRUE)
   return(VEC)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3791,10 +3691,8 @@ union.wNames <- function(x, y, names = "x") {
 }
 
 
-
 # _________________________________________________________________________________________________
 ## Math & stats ____________________________________________________________ ----
-
 
 
 #' @title iround
@@ -3807,7 +3705,6 @@ union.wNames <- function(x, y, names = "x") {
 iround <- function(x, digitz = 3) {
   signif(x, digits = digitz)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -3828,7 +3725,6 @@ modus <- function(x) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title cv
 #'
@@ -3844,7 +3740,6 @@ cv <- function(x, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title sem
 #'
@@ -3858,8 +3753,6 @@ cv <- function(x, na.rm = TRUE) {
 sem <- function(x, na.rm = TRUE) {
   sd(unlist(x), na.rm = na.rm) / sqrt(length(na.omit.strip(as.numeric(x)))) # Calculates the standard error of the mean (SEM) for a numeric vector (it excludes NA-s by default)
 }
-
-
 
 
 # _________________________________________________________________________________________________
@@ -3895,7 +3788,6 @@ geomean <- function(x, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title mean_of_log
 #'
@@ -3919,7 +3811,6 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title Moving / rolling average
 #'
@@ -3939,7 +3830,6 @@ movingAve <- function(x, oneSide = 5) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title Moving / rolling average (v2, filter)
 #' @description Calculates the moving / rolling average of a numeric vector, using `filter()`.
@@ -3952,7 +3842,6 @@ movingAve <- function(x, oneSide = 5) {
 movingAve2 <- function(x, n = 5) {
   filter(x, rep(1 / n, n), sides = 2)
 } # Calculates the moving / rolling average of a numeric vector, using filter().
-
 
 
 # _________________________________________________________________________________________________
@@ -3970,7 +3859,6 @@ movingSEM <- function(x, oneSide = 5) {
   }
   return(y)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -4022,9 +3910,6 @@ dput_pretty <- pretty_dput <- function(vec) {
   }
   cat("\n)\n")
 }
-
-
-
 
 
 #  ______________________________________________________________________________________

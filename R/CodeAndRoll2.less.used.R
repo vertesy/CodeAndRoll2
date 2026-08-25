@@ -4,7 +4,6 @@
 # source('~/GitHub/Packages/CodeAndRoll2/R/CodeAndRoll2.less.used.R')
 
 
-
 # _________________________________________________________________________________________________
 # Deprecated ----
 # _________________________________________________________________________________________________
@@ -27,7 +26,6 @@ as.numeric.wNames.deprecated <- function(vec) {
   }
   return(numerified_vec)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -57,7 +55,6 @@ as.named.vector.deprecated <- function(df_col, WhichDimNames = 1) {
   names(vecc) <- namez
   return(vecc)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -97,9 +94,10 @@ as.factor.numeric <- function(vec, rename = FALSE, ...) {
 #'
 #' @export
 as.named.vector.df <- function(
-    df, col.or.row.name.or.index = 1, verbose = TRUE,
-    WhichDimNames = 1,
-    ...) {
+  df, col.or.row.name.or.index = 1, verbose = TRUE,
+  WhichDimNames = 1,
+  ...
+) {
   .Deprecated(old = "as.named.vector.df", new = "df.col.2.named.vector or df.row.2.named.vector")
 
   if (verbose) message("input df dimensions: ", kppc(idim(df)))
@@ -132,7 +130,7 @@ as.named.vector.df <- function(
 # #'
 # #' @export
 # as.named.vector.df <- function(
-    #     df, col.or.row.name.or.index = 1, verbose = TRUE,
+#     df, col.or.row.name.or.index = 1, verbose = TRUE,
 #     WhichDimNames = 2,
 #     ...) {
 #
@@ -157,7 +155,6 @@ as.named.vector.df <- function(
 # }
 
 
-
 # # _________________________________________________________________________________________________
 # #' @title topN.dfCol
 # #' @description Find the n highest values in a named vector.
@@ -180,7 +177,6 @@ as.named.vector.df <- function(
 #   .Deprecated()
 #   head(sort(df_col, decreasing = FALSE), n = n)
 # } # Find the n lowest values in a named vector
-
 
 
 # #' @title sort.mat
