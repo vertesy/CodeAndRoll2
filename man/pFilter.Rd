@@ -4,7 +4,7 @@
 \alias{pFilter}
 \title{Vector Filtering Helper for piping}
 \usage{
-pFilter(x, cond)
+pFilter(x, cond, v = T)
 }
 \arguments{
 \item{x}{A vector of any type (numeric, character, logical, etc.).}
@@ -22,8 +22,9 @@ to a vector, similar to \code{dplyr::filter()}. The vector is passed as \code{.}
 users can write conditions like \code{. > 5}, \code{. \%in\% c("a","b")}, or \code{. == 1}.
 }
 \examples{
-pFilter(1:10, . > 5)
+x <- 1:10
+x |> pFilter(. > 5)
+x |> pFilter(. \%\% 2 == 0)
 pFilter(letters, . \%in\% c("a", "f", "z"))
-pFilter(1:10, . \%\% 2 == 0)
 
 }

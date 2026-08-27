@@ -4,16 +4,16 @@
 \alias{rowDivide}
 \title{rowDivide}
 \usage{
-rowDivide(mat, vec)
+rowDivide(mat, vec = rowSums(mat))
 }
 \arguments{
 \item{mat}{Numeric input matrix with the distribution.}
 
-\item{vec}{Vector to divide by.}
+\item{vec}{Vector to divide by. Default: row sums of the matrix.}
 }
 \description{
 Divide by row.
 }
 \examples{
-rowDivide(rowMultiply(m, 1:3),  1:3)
+rowDivide(rowMultiply(m, 1:3), 1:3)
 }

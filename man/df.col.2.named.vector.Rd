@@ -4,12 +4,14 @@
 \alias{df.col.2.named.vector}
 \title{df.col.2.named.vector}
 \usage{
-df.col.2.named.vector(df, col)
+df.col.2.named.vector(df, col, names = NULL)
 }
 \arguments{
-\item{df}{data frame}
+\item{df}{data frame or tibble}
 
-\item{col}{column index}
+\item{col}{column index or name for values.}
+
+\item{names}{optional column index for names, Default: NULL (then rownames are used)}
 }
 \description{
 Convert a dataframe column into a vector, keeping the corresponding dimension name.

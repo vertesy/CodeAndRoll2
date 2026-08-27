@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{MaxN}
 \alias{MaxN}
-\title{Find second (third…) highest/lowest value in vector.}
+\title{MaxN}
 \usage{
 MaxN(vec = rpois(4, lambda = 3), topN = 2)
 }
@@ -12,5 +12,6 @@ MaxN(vec = rpois(4, lambda = 3), topN = 2)
 \item{topN}{Which highest value to return? Default: 2}
 }
 \description{
+Find second (third…) highest/lowest value in vector.
 Source: "https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column"
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{numerate}
 \alias{numerate}
-\title{Formats a Sequence of Numbers with Zero Padding}
+\title{numerate}
 \usage{
 numerate(
   x = 1,
@@ -25,6 +25,7 @@ floor(log10(max(abs(x), abs(y)))) + 1.}
 A vector of formatted numbers, with or without zero padding.
 }
 \description{
+Formats a Sequence of Numbers with Zero Padding.
 This function generates a sequence of numbers between two specified values,
 optionally padding them with leading zeros to a specified length. It is useful
 for creating numeric sequences with consistent character lengths.

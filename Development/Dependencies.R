@@ -1,43 +1,89 @@
-Dependency file generated on Mon Nov 27 16:52:49 2023 
+Dependency file generated on Tue Aug 25 16:10:31 2026 
 
+#################################################################################################### 
+CodeAndRoll2.less.used.R
+#################################################################################################### 
+$`package:base`
+ [1] ".Deprecated"   "as.factor"     "as.numeric"    "as.vector"     "dim"          
+ [6] "dimnames"      "inherits"      "is.data.frame" "is.list"       "is.null"      
+[11] "message"       "names"         "ncol"          "return"        "stopifnot"    
+[16] "unlist"        "warning"      
+
+$`package:CodeAndRoll2`
+[1] "idim"
+
+$`package:Stringendo`
+[1] "iprint" "kppc"  
+
+base
+CodeAndRoll2
+Stringendo
 #################################################################################################### 
 CodeAndRoll2.R
 #################################################################################################### 
+$`c("package:CodeAndRoll2", "package:base")`
+[1] "grepv"
+
+$`c("package:CodeAndRoll2", "package:stats")`
+ [1] "filter"     "median"     "na.exclude" "na.omit"    "quantile"   "rnorm"      "rpois"     
+ [8] "sd"         "setNames"   "var"       
+
+$`c("package:CodeAndRoll2", "package:Stringendo")`
+[1] "percentage_formatter"
+
 $`character(0)`
- [1] "as.named.vector"         "bind_rows"               "FirstCol2RowNames"       "FirstCol2RowNames.as.df"
- [5] "full_join"               "join_all"                "map"                     "map_chr"                
- [9] "mixedsort"               "qbarplot"                "str_pad"                 "tibble"                 
+[1] "FirstCol2RowNames" "full_join"         "fun"               "is.tibble"        
+[5] "llprint"           "map"               "qbarplot"          "which.max.multi"  
 
 $`package:base`
-  [1] ".Deprecated"      "abs"              "all"              "any"              "apply"           
-  [6] "array"            "as.character"     "as.data.frame"    "as.factor"        "as.list"         
- [11] "as.logical"       "as.matrix"        "as.numeric"       "as.vector"        "attributes"      
- [16] "c"                "cat"              "ceiling"          "class"            "col"             
- [21] "colMeans"         "colnames"         "colSums"          "data.frame"       "data.matrix"     
- [26] "dim"              "dimnames"         "do.call"          "duplicated"       "exp"             
- [31] "factor"           "floor"            "gl"               "grep"             "ifelse"          
- [36] "intersect"        "is.character"     "is.data.frame"    "is.factor"        "is.finite"       
- [41] "is.list"          "is.logical"       "is.na"            "is.null"          "is.numeric"      
- [46] "is.table"         "is.vector"        "lapply"           "length"           "list"            
- [51] "log"              "log10"            "make.names"       "match"            "match.call"      
- [56] "matrix"           "max"              "mean"             "merge"            "min"             
- [61] "names"            "ncol"             "NCOL"             "nrow"             "NROW"            
- [66] "numeric"          "order"            "paste"            "paste0"           "print"           
- [71] "range"            "rbind"            "Reduce"           "rep"              "return"          
- [76] "rev"              "round"            "row"              "row.names"        "rownames"        
- [81] "rowSums"          "sample"           "sapply"           "scale"            "seq"             
- [86] "setdiff"          "signif"           "sort"             "split"            "sqrt"            
- [91] "stop"             "stopifnot"        "substitute"       "sum"              "suppressWarnings"
- [96] "t"                "table"            "tabulate"         "tapply"           "trimws"          
-[101] "unique"           "unlist"           "warning"          "which"           
+  [1] ".Deprecated"      "abs"              "all"              "any"             
+  [5] "apply"            "array"            "as.character"     "as.data.frame"   
+  [9] "as.factor"        "as.list"          "as.logical"       "as.matrix"       
+ [13] "as.numeric"       "as.POSIXct"       "as.vector"        "assign"          
+ [17] "attributes"       "basename"         "c"                "cat"             
+ [21] "cbind"            "ceiling"          "class"            "col"             
+ [25] "colMeans"         "colnames"         "colSums"          "data.frame"      
+ [29] "data.matrix"      "deparse"          "dim"              "dimnames"        
+ [33] "dir.exists"       "do.call"          "duplicated"       "eval"            
+ [37] "exists"           "exp"              "factor"           "file.exists"     
+ [41] "file.path"        "Filter"           "floor"            "format"          
+ [45] "formatC"          "getwd"            "gl"               "grep"            
+ [49] "identical"        "ifelse"           "inherits"         "intersect"       
+ [53] "invisible"        "is.array"         "is.atomic"        "is.character"    
+ [57] "is.data.frame"    "is.factor"        "is.finite"        "is.function"     
+ [61] "is.list"          "is.logical"       "is.matrix"        "is.na"           
+ [65] "is.null"          "is.numeric"       "is.table"         "is.vector"       
+ [69] "isFALSE"          "isS4"             "lapply"           "length"          
+ [73] "list"             "log"              "log10"            "logical"         
+ [77] "make.names"       "match"            "match.call"       "match.fun"       
+ [81] "matrix"           "max"              "mean"             "merge"           
+ [85] "message"          "min"              "missing"          "names"           
+ [89] "ncol"             "NCOL"             "nrow"             "NROW"            
+ [93] "nzchar"           "order"            "parent.frame"     "paste"           
+ [97] "paste0"           "path.expand"      "print"            "range"           
+[101] "rbind"            "readLines"        "Reduce"           "rep"             
+[105] "requireNamespace" "return"           "rev"              "round"           
+[109] "row"              "row.names"        "rownames"         "rowSums"         
+[113] "sample"           "sapply"           "scale"            "seq"             
+[117] "setdiff"          "signif"           "sort"             "split"           
+[121] "sqrt"             "stop"             "stopifnot"        "sub"             
+[125] "substitute"       "sum"              "suppressWarnings" "switch"          
+[129] "Sys.time"         "t"                "table"            "tabulate"        
+[133] "tapply"           "trimws"           "try"              "tryCatch"        
+[137] "union"            "unique"           "unlist"           "unname"          
+[141] "vapply"           "warning"          "which"            "which.max"       
+[145] "which.min"        "writeLines"      
 
 $`package:CodeAndRoll2`
  [1] "any.duplicated"              "arr.of.lists.2.df"           "as.logical.wNames"          
  [4] "colMedians"                  "copy.dimension.and.dimnames" "get_col_types"              
- [7] "grepv"                       "idim"                        "intermingle2vec"            
-[10] "matrix.fromNames"            "na.omit.strip"               "pc_TRUE"                    
-[13] "sem"                         "symdiff"                     "union.ls"                   
-[16] "unlapply"                    "vec.fromNames"               "which_names"                
+ [7] "getActiveProject"            "getSourceEditorContext"      "idim"                       
+[10] "intermingle2vec"             "join_all"                    "map_chr"                    
+[13] "matrix.fromNames"            "mixedsort"                   "na.omit.strip"              
+[16] "pc_TRUE"                     "printEveryN"                 "sem"                        
+[19] "sort.decreasing"             "str_pad"                     "symdiff"                    
+[22] "tibble"                      "union.ls"                    "unlapply"                   
+[25] "vec.fromNames"               "which_names"                
 
 $`package:graphics`
 [1] "abline" "hist"  
@@ -45,22 +91,22 @@ $`package:graphics`
 $`package:methods`
 [1] "is"
 
-$`package:stats`
- [1] "filter"     "median"     "na.exclude" "na.omit"    "quantile"   "rnorm"      "rpois"      "sd"        
- [9] "setNames"   "var"       
-
 $`package:Stringendo`
-[1] "iprint"               "percentage_formatter"
+[1] "HasNames"           "imessage"           "iprint"             "kppws"             
+[5] "substitute_deparse" "warnif"             "warnifnot"         
 
 $`package:utils`
-[1] "head"  "stack" "str"   "tail" 
+[1] "flush.console" "head"          "savehistory"   "stack"         "str"          
+[6] "tail"         
 
+c("CodeAndRoll2", "base")
+c("CodeAndRoll2", "stats")
+c("CodeAndRoll2", "Stringendo")
 character(0)
 base
 CodeAndRoll2
 graphics
 methods
-stats
 Stringendo
 utils
 #################################################################################################### 
