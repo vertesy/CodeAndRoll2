@@ -1,0 +1,56 @@
+# CI for CodeAndRoll2: builds the package and runs `R CMD check` on a
+# clean Ubuntu + R-release runner.
+#
+# STATUS: auto-run DISABLED. This package hasn't been triaged for R CMD
+# check yet, so automatic push/PR runs are commented out below to avoid
+# noise while other repos are still being fixed. Run it manually via the
+# repo's Actions tab -> "R-CMD-check" -> "Run workflow" to see current
+# status any time. To turn on automatic runs, uncomment the `push` and
+# `pull_request` blocks under `on:`.
+#
+# CodeAndRoll2's only GitHub-only dependency is Stringendo (Depends).
+# Everything else in DESCRIPTION is on CRAN.
+#
+# Based on the standard r-lib/actions check-standard workflow:
+# https://github.com/r-lib/actions/tree/v2-branch/examples#standard-ci-workflow
+
+on:
+  workflow_dispatch: {}
+  # push:
+  #   branches: [main, dev]
+  # pull_request:
+  #   branches: [main, dev]
+
+name: R-CMD-check
+
+permissions:
+  contents: read
+
+jobs:
+  R-CMD-check:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          needs: check
+          extra-packages: |
+            any::rcmdcheck
+            vertesy/Stringendo
+
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
