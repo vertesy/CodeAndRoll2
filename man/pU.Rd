@@ -17,8 +17,8 @@ Prints the unique elements of the input object and returns it, enabling you to i
 unique values inside a pipe.
 }
 \examples{
-results <- c(1, 2, 2, 3, 3, 3)  |>
-pU()  |>
-sqrt() |>
-pSee()
+results <- c(1, 2, 2, 3, 3, 3) |>
+  pU() |>
+  sqrt() |>
+  pSee()
 }
