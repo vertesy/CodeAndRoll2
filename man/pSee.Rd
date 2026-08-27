@@ -29,5 +29,4 @@ results <- c(1:1000) |>
 mtcars |>
   pSee(head_df = 3) |>
   summary()
-
 }
