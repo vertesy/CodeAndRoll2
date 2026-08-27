@@ -105,6 +105,13 @@ getProject <- function() {
 #'
 #' @export
 savehistory_2rstudio <- function(history_file = "~/.local/share/rstudio/history_database") {
+  stopifnot(
+    is.character(history_file),
+    length(history_file) == 1,
+    !is.na(history_file),
+    nzchar(history_file)
+  )
+
   history_file <- path.expand(history_file)
 
   if (!file.exists(history_file)) {
@@ -260,10 +267,10 @@ pFilter <- function(x, cond, v = TRUE) {
 #'
 #' @examples
 #' results <- c(1:1000) |>
-#'   pSee(head_n = 5) |>
+#'   pSee(head_vec = 5) |>
 #'   sum()
 #' mtcars |>
-#'   pSee(head_n = 3) |>
+#'   pSee(head_df = 3) |>
 #'   summary()
 #'
 #' @export

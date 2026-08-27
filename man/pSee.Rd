@@ -24,10 +24,10 @@ For non-complex objects, it dynamically reports dimensions (if > 1D) or length (
 }
 \examples{
 results <- c(1:1000) |>
-  pSee(head_n = 5) |>
+  pSee(head_vec = 5) |>
   sum()
 mtcars |>
-  pSee(head_n = 3) |>
+  pSee(head_df = 3) |>
   summary()
 
 }
