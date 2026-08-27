@@ -2381,10 +2381,10 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
   x2 <- rowSums(matrix2[diffz[[2]], ])
   print("")
   iprint("Values lost 1: ", round(sum(x1)), "or", Stringendo::percentage_formatter(sum(x1) / sum(merged)))
-  print(tail(sort(x1), n = 10))
+  print(tail(sort(x1), n = k))
   print("")
   iprint("Values lost 2: ", round(sum(x2)), "or", Stringendo::percentage_formatter(sum(x2) / sum(merged)))
-  print(tail(sort(x2), n = 10))
+  print(tail(sort(x2), n = k))
   iprint("dim:", dim(merged))
   return(merged)
 }
