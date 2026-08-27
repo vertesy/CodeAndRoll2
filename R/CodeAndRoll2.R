@@ -2452,20 +2452,21 @@ rowsplit <- function(df, f = rownames(df)) {
 #' This function takes a numeric matrix as input and returns a named vector where each element
 #' corresponds to a row of the matrix. The names of the vector are the row names of the matrix,
 #' and the values are the column names where the maximum value of each row is found. If there are
-#' multiple columns with the maximum value in a row, the value for that row will be set to
-#' `multi_max_str`. If `na.remove` is set to `TRUE`, NA values will be removed before finding the
-#' maximum value.
+#' multiple columns with the maximum value in a row, their names are joined with `collapse` (by
+#' default `"-"`); set `collapse` to `NULL` or `NA` to return `multi_max_str` instead. If
+#' `na.remove` is set to `TRUE`, NA values will be removed before finding the maximum value.
 #'
 #' @param mat A numeric matrix
 #' @param na.remove Logical. Should NA values be removed before finding the maximum value?
 #' Default: TRUE
 #' @param collapse Character. The character to use to collapse multiple column names into a single
-#' string. Default: "-"
+#' string when a row has several maxima. Set to `NULL` or `NA` to use `multi_max_str` instead.
+#' Default: "-"
 #' @param verbose Logical. Should messages be printed to the console? Default: TRUE
-#' @param multi_max_str Character. The string to use when multiple columns have the maximum value.
-#' Default: "multiple.maxima"
-#' @param suffix Character. The suffix to add to the `multi_max_str` string. Default: "rows have
-#'
+#' @param multi_max_str Character. The string to use when multiple columns have the maximum value
+#' and `collapse` is `NULL` or `NA`. Default: "multiple.maxima"
+#' @param suffix Character. The suffix used in the verbose message reporting how many rows have
+#' multiple maxima. Default: "rows have multiple maxima."
 #'
 #' @examples
 #' mat <- matrix(data = c(1, 2, 3, 9, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
@@ -2493,24 +2494,26 @@ get_max_colname_per_row <- function(
   which.max.multi <- function(x) which(x == max(x, na.rm = TRUE))
 
   # Apply function to find the maximum indices to each row and return appropriate result
-  max_colname_per_row <- apply(mat, 1, function(row) {
-    # One or more maximum values
-    max_indices <- which.max.multi(row)
+  max_indices_per_row <- lapply(seq_len(nrow(mat)), function(i) which.max.multi(mat[i, ]))
 
-    # If there are multiple maximum values, return the "multi_max_str"
+  max_colname_per_row <- vapply(max_indices_per_row, function(max_indices) {
     if (length(max_indices) > 1) {
-      return(multi_max_str)
+      if (is.null(collapse) || is.na(collapse)) {
+        return(multi_max_str)
+      }
+      return(paste(colnames(mat)[max_indices], collapse = collapse))
     }
 
     return(colnames(mat)[max_indices])
-  })
+  }, character(1))
 
   # Name the result with row names (cell names)
   names(max_colname_per_row) <- rownames(mat)
 
   # stats
   if (verbose) {
-    message(paste(sum(max_colname_per_row == multi_max_str), "of", length(max_colname_per_row), suffix))
+    multi_max_count <- sum(vapply(max_indices_per_row, length, integer(1)) > 1)
+    message(paste(multi_max_count, "of", length(max_colname_per_row), suffix))
   }
 
   return(max_colname_per_row)
@@ -2790,9 +2793,10 @@ get_col_types <- function(df, print_it = TRUE) {
     typetable <- t(t(x))
     colnames(typetable) <- "Type"
     print(typetable)
+
+    print("Summary")
+    print(table(x))
   }
-  print("Summary")
-  print(table(x))
   return(x)
 }
 
@@ -2823,9 +2827,8 @@ fix_tibble_lists <- function(df, verbose = TRUE, print_full = FALSE, collapse_by
     is.logical(print_full), is.character(collapse_by)
   )
 
-  cat("Before conversion:\n")
-  coltypes <- get_col_types(df, print_it = print_full)
-
+  if (verbose) cat("Before conversion:\n")
+  coltypes <- get_col_types(df, print_it = if (verbose) print_full else FALSE)
 
   list_cols <- which(coltypes %in% "list") # Identify list columns
 

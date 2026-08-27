@@ -20,22 +20,23 @@ get_max_colname_per_row(
 Default: TRUE}
 
 \item{collapse}{Character. The character to use to collapse multiple column names into a single
-string. Default: "-"}
+string when a row has several maxima. Set to \code{NULL} or \code{NA} to use \code{multi_max_str} instead.
+Default: "-"}
 
 \item{verbose}{Logical. Should messages be printed to the console? Default: TRUE}
 
-\item{multi_max_str}{Character. The string to use when multiple columns have the maximum value.
-Default: "multiple.maxima"}
+\item{multi_max_str}{Character. The string to use when multiple columns have the maximum value
+and \code{collapse} is \code{NULL} or \code{NA}. Default: "multiple.maxima"}
 
-\item{suffix}{Character. The suffix to add to the \code{multi_max_str} string. Default: "rows have}
-}
+\item{suffix}{Character. The suffix used in the verbose message reporting how many rows have
+multiple maxima. Default: "rows have multiple maxima."}
 \description{
 This function takes a numeric matrix as input and returns a named vector where each element
 corresponds to a row of the matrix. The names of the vector are the row names of the matrix,
 and the values are the column names where the maximum value of each row is found. If there are
-multiple columns with the maximum value in a row, the value for that row will be set to
-\code{multi_max_str}. If \code{na.remove} is set to \code{TRUE}, NA values will be removed before finding the
-maximum value.
+multiple columns with the maximum value in a row, their names are joined with \code{collapse} (by
+default \code{"-"}); set \code{collapse} to \code{NULL} or \code{NA} to return \code{multi_max_str} instead. If
+\code{na.remove} is set to \code{TRUE}, NA values will be removed before finding the maximum value.
 }
 \examples{
 mat <- matrix(data = c(1, 2, 3, 9, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)

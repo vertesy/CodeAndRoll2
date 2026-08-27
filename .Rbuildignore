@@ -1,2 +1,7 @@
 ^CodeAndRoll2\.Rproj$
 ^\.Rproj\.user$
+^\.github$
+^Development$
+^AGENTS\.md$
+^CITATION\.cff$
+^Apply\.Quirk\.in\.R\.transposed\.results\.md$
