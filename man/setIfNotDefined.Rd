@@ -24,6 +24,9 @@ returned unchanged.
 rm(list = "x", inherits = FALSE)
 setIfNotDefined(x, 22)
 x <- 33
-setIfNotDefined(x, { stop("must not run") }); x
+setIfNotDefined(x, {
+  stop("must not run")
+})
+x
 
 }

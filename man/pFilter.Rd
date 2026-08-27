@@ -4,7 +4,7 @@
 \alias{pFilter}
 \title{Vector Filtering Helper for piping}
 \usage{
-pFilter(x, cond, v = T)
+pFilter(x, cond, v = TRUE)
 }
 \arguments{
 \item{x}{A vector of any type (numeric, character, logical, etc.).}
