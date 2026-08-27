@@ -4,7 +4,7 @@
 \alias{merge_2_named_vec_as_df}
 \title{merge_2_named_vec_as_df}
 \usage{
-merge_2_named_vec_as_df(x, y, as.tibble = F)
+merge_2_named_vec_as_df(x, y, as.tibble = FALSE)
 }
 \arguments{
 \item{x}{A vector with named elements.}

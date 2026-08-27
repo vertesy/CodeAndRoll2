@@ -32,4 +32,5 @@ This function is read-only and safe to run while RStudio is open.
 \dontrun{
 savehistory_2rstudio()
 }
+
 }

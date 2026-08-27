@@ -61,7 +61,7 @@ source("https://raw.githubusercontent.com/vertesy/CodeAndRoll2/master/CodeAndRol
 ----------------------------------------------------------------------------------------------------
 
 ## List of Functions in CodeAndRoll2.R (173) 
-Updated: 2026/08/25 16:15
+Updated: 2026/08/27 16:25
 - #### 1 `getScriptName()`
 Get Current Script Name or Basename of Output Directory. This function attempts to retrieve the name of the currently opened script in  the RStudio editor. If the script name cannot be obtained or if the `rstudioapi` package is  not available, it returns the basename of the directory specified by `OutDir`. 
 
@@ -69,12 +69,10 @@ Get Current Script Name or Basename of Output Directory. This function attempts 
 getProject. Try to get the project name you are working on in RStudio.  @return The final subfolder of your project, or `NULL` if you are not running one  @importFrom rstudioapi getActiveProject  @examples getProject() 
 
 - #### 3 `savehistory_2rstudio()`
-
-  Export RStudio Command History with Timestamps.   Exports the full RStudio console command history from RStudio's internal  history database to a human-readable text file. Each command is annotated  with a timestamp (year-month-day hour:minute). Multi-line commands are  preserved and grouped correctly. This does not rely on `.Rhistory` or  `savehistory()`, instead directly reading RStudio's history database.   The output file is named  `command_history.YYYY.MM.DD[.scriptname].txt` and is written to the current  working directory.   @return  Invisibly returns the path to the written history file.   @details  The history source is RStudio’s internal history log  (`~/.local/share/rstudio/history_database` on Linux). The log stores commands  as timestamped lines using milliseconds since the Unix epoch. These  timestamps are converted to local time during export.   This function is read-only and safe to run while RStudio is open.   @importFrom rstudioapi getSourceEditorContext   @examples  \dontrun{  savehistory_2rstudio()  }
+Export RStudio Command History with Timestamps.   Exports the full RStudio console command history from RStudio's internal  history database to a human-readable text file. Each command is annotated  with a timestamp (year-month-day hour:minute). Multi-line commands are  preserved and grouped correctly. This does not rely on `.Rhistory` or  `savehistory()`, instead directly reading RStudio's history database.   The output file is named  `command_history.YYYY.MM.DD[.scriptname].txt` and is written to the current  working directory.   @return  Invisibly returns the path to the written history file.   @details  The history source is RStudio’s internal history log  (`~/.local/share/rstudio/history_database` on Linux). The log stores commands  as timestamped lines using milliseconds since the Unix epoch. These  timestamps are converted to local time during export.   This function is read-only and safe to run while RStudio is open.   @importFrom rstudioapi getSourceEditorContext   @examples  \dontrun{  savehistory_2rstudio()  }
 
 - #### 4 `savehistory_Rhist()`
-
-  Save Command History to "command_history.date.scriptname.txt".   This function saves the command history of the current R session to a text file. The file name  includes the current date and, if available, the name of the current R script (when running in  RStudio). The file is saved in the current working directory.   @return Nothing is returned, but the file path is printed to the console.   @importFrom rstudioapi getSourceEditorContext  @examples  \dontrun{  savehistory_2()  } 
+Save Command History to "command_history.date.scriptname.txt".   This function saves the command history of the current R session to a text file. The file name  includes the current date and, if available, the name of the current R script (when running in  RStudio). The file is saved in the current working directory.   @return Nothing is returned, but the file path is printed to the console.   @importFrom rstudioapi getSourceEditorContext  @examples  \dontrun{  savehistory_Rhist()  }
 
 - #### 5 `pFilter()`
 Vector Filtering Helper for piping.   A universal vector filtering function that applies an inline logical condition  to a vector, similar to `dplyr::filter()`. The vector is passed as `.`, so  users can write conditions like `. > 5`, `. %in% c("a","b")`, or `. == 1`. 
@@ -197,7 +195,7 @@ Unique elements with names preserved. Get the unique elements of a vector, keep 
 Range elements with names preserved. Get the range of a numeric vector, keep the names of the min and max values
 
 - #### 45 `as.numeric.wNames.character()`
-as.numeric.wNames.character. Converts (1) a 'character' v. into a numeric v., or  a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.  The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via  factor in any case. Code saved at the end.
+as.numeric.wNames.character. Converts (1) a 'character' v. into a numeric v., or  a 'factor' v. via as.numeric(as.character(vec)) and preserves the original names.  The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via  factor in any case. Code saved at the end.
 
 - #### 46 `as.numeric.wNames.factor()`
 as.numeric.wNames.factor. Turn any vector into numeric categories as.numeric(as.factor(vec))  Forerly as.factor.numeric
@@ -582,7 +580,6 @@ movingSEM. Calculates the moving / rolling standard error of the mean (SEM) on a
 
 - #### 173 `imovingSEM()`
 imovingSEM. Calculates the moving / rolling standard error of the mean (SEM). It computes values up to the edges of the vector using incrementally smaller window sizes.
-
 
 
 ----------------------------------------------------------------------------------------------------
