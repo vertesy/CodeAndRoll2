@@ -2471,7 +2471,7 @@ get_max_colname_per_row <- function(
   which.max.multi <- function(x) which(x == max(x, na.rm = TRUE))
 
   # Apply function to find the maximum indices to each row and return appropriate result
-  max_indices_per_row <- apply(mat, 1, which.max.multi)
+  max_indices_per_row <- lapply(seq_len(nrow(mat)), function(i) which.max.multi(mat[i, ]))
 
   max_colname_per_row <- vapply(max_indices_per_row, function(max_indices) {
     if (length(max_indices) > 1) {
