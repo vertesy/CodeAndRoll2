@@ -7,9 +7,9 @@
 remove.na.rows(mat, cols = 1:NCOL(mat))
 }
 \arguments{
-\item{mat}{In put matrix.}
+\item{mat}{Input matrix.}
 
-\item{cols}{PARAM_DESCRIPTION, Default: 1:NCOL(mat)}
+\item{cols}{Cols to check for NAs, Default: 1:NCOL(mat)}
 }
 \description{
 Cols have to be a vector of numbers corresponding to columns.

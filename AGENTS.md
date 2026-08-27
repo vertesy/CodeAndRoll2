@@ -1,36 +1,53 @@
-# AGENTS
+# Guidance for Agents
 
-## Overview
-This repository contains the **CodeAndRoll2** R package, a collection of utility functions for vector, matrix, and list manipulations.
+Version: 2026.08.27-00:00
 
-### Structure
-- `R/` – core package functions.
-  - `CodeAndRoll2.R` exposes the main utilities.
-  - `deprecated.R` lists legacy helpers that should not be used in new code.
-- `man/` – roxygen2-generated documentation.
-- `DESCRIPTION` & `NAMESPACE` – package metadata.
-- `Development/` – auxiliary scripts used for building and maintenance; not required for package use.
-- `README.md` – package description, installation instructions, and an extensive function catalogue.
+## I: Generic (all @vertesy repos)
 
-## Development Workflow
-1. Use R (>= 4.0).
-2. After editing code in `R/`, keep roxygen2-style comments and regenerate documentation with:
-   ```r
-   devtools::document()
-   ```
-3. Run checks before committing:
-   ```sh
-   R CMD build .
-   R CMD check CodeAndRoll2_*.tar.gz
-   ```
-   (or in R: `devtools::check()`).
-4. Delete the generated `CodeAndRoll2_*.tar.gz` archive and `CodeAndRoll2.Rcheck` directory after the check.
-5. Commit only when checks complete without errors or warnings.
+### 3. General rules 
 
-## Getting Started for New Contributors
-- Read `README.md` for a package overview and list of available functions.
-- Explore `R/CodeAndRoll2.R` to see implementation style and naming conventions.
-- Review `DESCRIPTION` to understand package dependencies (e.g., Stringendo, ReadWriter).
-- Check `deprecated.R` to avoid relying on obsolete functions.
-- Suggested next steps: learn roxygen2 for documentation, devtools for package development, and review dependent packages (MarkdownReports, ggExpress, Seurat.utils) to see CodeAndRoll2 in action.
+1. Write condense and very cleary understandable code and text.
+2. ALWAYS understand the larger goal and the full context first: read the whole file, grep all call sites, check the roxygen block.
+3. Use short inline comments to explain the code: separate lines before a larger block for the higher-level intent, and/or short trailing comments after a line for that specific step.
 
+- Every function starts with a COMPACT input-argument assertion for key inputs, using combined `stopifnot()` statements. For per-element checks across a vector/list, use `vapply()` inside `stopifnot()` with a named, static error message (not pasted/dynamic), e.g. `stopifnot("some of the X is not ..." = vapply(...))`.
+
+### 2. Code Review Rules
+
+Make every finding easy to scan and understand.
+
+- Use simple, direct English.
+- Use short sentences and bullet points.
+- Avoid compiler jargon, dense technical language, and noun stacking.
+- Name files, functions, variables, and arguments explicitly.
+- Never use vague references such as "the new formal" or "subsequent values".
+
+For each finding, state:
+
+- **Problem:** What is wrong or will break?
+- **Trigger:** When does it happen?
+- **Fix:** What should be changed?
+
+Keep only findings that can be explained clearly and concisely.
+Do not flag formatting, line length, or missing tests.
+
+### 3. Update the Source, Not Just the Documentation
+
+Documentation is generated from upstream sources: `.Rd` files from roxygen annotations and `DESCRIPTION` from `Development/Dependencies.R` via `config.R`.
+
+Package rebuilds overwrite these files, so always update the upstream source first, then regenerate the documentation.
+
+## II: Repos of R function libraries
+
+- New arguments go at the end, just before `...`. Never insert in the middle.
+- Do not use tests.
+- Whenever you are implementing a larger change (a bug fix, a substantial code change), you shoud increase the version number in `Development/config.R` by 0.0.1.
+
+## III: CodeAndRoll2 specific
+
+**CodeAndRoll2** — utility functions for vector, matrix, and list manipulations. Foundational dependency for most other @vertesy packages (MarkdownReports, ggExpress, Seurat.utils, ...).
+
+- `R/CodeAndRoll2.R`: main utilities.
+- `R/deprecated.R`: legacy helpers — do not use in new code, do not extend.
+- After `R CMD build .` / `R CMD check`, delete the generated `CodeAndRoll2_*.tar.gz` and `CodeAndRoll2.Rcheck/` before committing.
+- Depends on @vertesy `Stringendo`, `ReadWriter`.

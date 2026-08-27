@@ -13,7 +13,7 @@ tibble_summary_to_namedVec(
 \arguments{
 \item{tbl}{A tibble, Default: dplyr::tibble(key = sample(x = 1:5, size = 20, replace = TRUE), value = rnorm(20))}
 
-\item{idx}{PARAM_DESCRIPTION, Default: c(key = 1, value = 2)}
+\item{idx}{Indices of the key and value columns, Default: c(key = 1, value = 2)}
 }
 \description{
 Convert a key-value tibble into a named vector (as opposed to using rownames).

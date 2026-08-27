@@ -4,18 +4,26 @@
 \alias{pSee}
 \title{Print and Return an Object in a Pipe}
 \usage{
-pSee(x, max_elements = 100)
+pSee(x, head_vec = 100, head_df = 10)
 }
 \arguments{
-\item{x}{The object to print and return. Default: None.}
-\item{max_elements}{Number of elements of \code{x} to print. Default: 100.}
+\item{x}{The object to print and return. No default.}
+
+\item{head_vec}{Number of elements to print if \code{x} is a vector. Default: 100.}
+
+\item{head_df}{Number of rows to print if \code{x} is a data frame or matrix. Default: 10.}
 }
 \value{
 The input object \code{x}, unchanged.
 }
 \description{
-Prints the input object and returns it, enabling you to inspect values inside a pipe.
+Prints the input object and returns it, enabling you to inspect values inside a
+pipe operation. It detects complex objects like ggplot, plotly, or Seurat to ensure
+they are displayed correctly instead of showing their internal list structure.
+For non-complex objects, it dynamically reports dimensions (if > 1D) or length (if 1D).
 }
 \examples{
-results <- c(1, 2, 3) \%>\% pSee() \%>\% sqrt() \%>\% tail(2) ; results
+results <- c(1:1000) |> pSee(head_n = 5) |> sum()
+mtcars |> pSee(head_n = 3) |> summary()
+
 }

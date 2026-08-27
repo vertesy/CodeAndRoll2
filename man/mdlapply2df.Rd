@@ -7,7 +7,7 @@
 mdlapply2df(list_2D, ...)
 }
 \arguments{
-\item{list_2D}{PARAM_DESCRIPTION}
+\item{list_2D}{A multidimensional array.}
 
 \item{...}{Pass any other argument.}
 }

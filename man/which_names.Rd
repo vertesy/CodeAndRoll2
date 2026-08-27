@@ -7,7 +7,7 @@
 which_names(namedVec)
 }
 \arguments{
-\item{namedVec}{PARAM_DESCRIPTION}
+\item{namedVec}{A vector of named elements.}
 }
 \description{
 Return the names where the input vector is TRUE. The input vector is converted to logical.

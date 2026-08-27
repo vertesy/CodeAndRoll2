@@ -22,7 +22,7 @@ clip.outliers.at.percentile(
 
 \item{na.rm}{Remove NA values for calculation? Default: TRUE}
 
-\item{showhist}{PARAM_DESCRIPTION, Default: FALSE}
+\item{showhist}{Show histogram with cutoffs? Default: FALSE}
 
 \item{...}{Pass any other argument.}
 }

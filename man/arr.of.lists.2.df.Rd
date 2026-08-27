@@ -7,7 +7,7 @@
 arr.of.lists.2.df(two.dim.arr.of.lists)
 }
 \arguments{
-\item{two.dim.arr.of.lists}{PARAM_DESCRIPTION}
+\item{two.dim.arr.of.lists}{A 2D array of lists.}
 }
 \description{
 Simplify 2D-list-array to a DF.

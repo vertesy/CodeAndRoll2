@@ -7,7 +7,7 @@
 sumBySameName(namedVec)
 }
 \arguments{
-\item{namedVec}{PARAM_DESCRIPTION}
+\item{namedVec}{A named numeric vector.}
 }
 \description{
 Sum up vector elements with the same name.

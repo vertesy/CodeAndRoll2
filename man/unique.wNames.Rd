@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{unique.wNames}
 \alias{unique.wNames}
-\title{Unique elements}
+\title{Unique elements with names preserved}
 \usage{
 \method{unique}{wNames}(x)
 }
