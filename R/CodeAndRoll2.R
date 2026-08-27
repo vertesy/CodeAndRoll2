@@ -957,7 +957,7 @@ as.named.vector.table <- function(table, verbose = TRUE,
 #'
 vtable <- function(x, useNA = c("no", "ifany", "always")[2], ...) {
   stopifnot(is.vector(x) || is.factor(x))
-  c(table(x))
+  c(table(x, useNA = useNA, ...))
 }
 
 # _________________________________________________________________________________________________
