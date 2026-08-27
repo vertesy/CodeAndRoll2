@@ -2540,12 +2540,13 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
 #' @export
 getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE) {
   stopifnot(
-    is.matrix(mat) || is.data.frame(mat), !is.null(rownames(mat)),
+    is.matrix(mat) || is.data.frame(mat) || methods::is(mat, "Matrix"), !is.null(rownames(mat)),
     is.character(rownamez), is.logical(silent), length(silent) == 1L, !is.na(silent),
     is.logical(removeNAonly), length(removeNAonly) == 1L, !is.na(removeNAonly),
     is.logical(remove0only), length(remove0only) == 1L, !is.na(remove0only)
   )
   idx <- intersect(rownamez, row.names(mat))
+  n_matched <- length(idx)
   if (removeNAonly) {
     selected_mat <- mat[idx, , drop = FALSE]
     idx <- idx[rowSums(!is.na(selected_mat), na.rm = TRUE) > 0]
@@ -2556,7 +2557,7 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
   }
   if (!silent) {
     missing_rows <- setdiff(rownamez, row.names(mat))
-    iprint(length(idx), "/", length(rownamez), "are found. Missing: ", length(missing_rows))
+    iprint(n_matched, "/", length(rownamez), "are found. Retained: ", length(idx), ". Missing: ", length(missing_rows))
   }
   mat[idx, , drop = FALSE]
 }
@@ -2575,12 +2576,13 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
 #' @export
 getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE) {
   stopifnot(
-    is.matrix(mat) || is.data.frame(mat), !is.null(colnames(mat)),
+    is.matrix(mat) || is.data.frame(mat) || methods::is(mat, "Matrix"), !is.null(colnames(mat)),
     is.character(colnamez), is.logical(silent), length(silent) == 1L, !is.na(silent),
     is.logical(removeNAonly), length(removeNAonly) == 1L, !is.na(removeNAonly),
     is.logical(remove0only), length(remove0only) == 1L, !is.na(remove0only)
   )
   idx <- intersect(colnamez, colnames(mat))
+  n_matched <- length(idx)
   if (removeNAonly) {
     selected_mat <- mat[, idx, drop = FALSE]
     idx <- idx[colSums(!is.na(selected_mat), na.rm = TRUE) > 0]
@@ -2591,7 +2593,7 @@ getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0
   }
   if (!silent) {
     missing_cols <- setdiff(colnamez, colnames(mat))
-    iprint(length(idx), "/", length(colnamez), "are found. Missing: ", length(missing_cols))
+    iprint(n_matched, "/", length(colnamez), "are found. Retained: ", length(idx), ". Missing: ", length(missing_cols))
   }
   mat[, idx, drop = FALSE]
 }
