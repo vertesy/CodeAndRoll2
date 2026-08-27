@@ -1381,8 +1381,7 @@ clip.at.fixed.value <- function(x, thr, above = TRUE) {
 #' in a distribution above or below the extreme N% of the distribution.
 #'
 #' @param x A vector of numeric values.
-#' @param high Clip above the upper threshold (`TRUE`) or below the lower threshold (`FALSE`).
-#'   Default: TRUE
+#' @param high Clip above threshold? Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @param showhist Show histogram with cutoffs? Default: FALSE
@@ -1392,8 +1391,6 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
                                         percentiles = c(.01, .99),
                                         na.rm = TRUE, showhist = FALSE,
                                         ...) {
-  stopifnot(is.logical(high), length(high) == 1, !is.na(high))
-
   qnt <- quantile(x, probs = percentiles, na.rm = na.rm)
   if (showhist) {
     hist(unlist(x),
@@ -1405,11 +1402,8 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
   }
 
   y <- x
-  if (isTRUE(high)) {
-    y[x > qnt[2]] <- qnt[2]
-  } else {
-    y[x < qnt[1]] <- qnt[1]
-  }
+  y[x < qnt[1]] <- qnt[1]
+  y[x > qnt[2]] <- qnt[2]
   y
 }
 
