@@ -1392,7 +1392,7 @@ clip.outliers.at.percentile <- function(x, high = TRUE,
                                         percentiles = c(.01, .99),
                                         na.rm = TRUE, showhist = FALSE,
                                         ...) {
-  stopifnot(is.logical(high), length(high) == 1)
+  stopifnot(is.logical(high), length(high) == 1, !is.na(high))
 
   qnt <- quantile(x, probs = percentiles, na.rm = na.rm)
   if (showhist) {
