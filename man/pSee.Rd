@@ -23,7 +23,11 @@ they are displayed correctly instead of showing their internal list structure.
 For non-complex objects, it dynamically reports dimensions (if > 1D) or length (if 1D).
 }
 \examples{
-results <- c(1:1000) |> pSee(head_n = 5) |> sum()
-mtcars |> pSee(head_n = 3) |> summary()
+results <- c(1:1000) |>
+  pSee(head_n = 5) |>
+  sum()
+mtcars |>
+  pSee(head_n = 3) |>
+  summary()
 
 }

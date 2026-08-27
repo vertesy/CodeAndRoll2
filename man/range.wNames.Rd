@@ -13,5 +13,6 @@
 Get the range of a numeric vector, keep the names of the min and max values
 }
 \examples{
-vec <- c(a = 1, b = 5, c = 3); range.wNames(vec)
+vec <- c(a = 1, b = 5, c = 3)
+range.wNames(vec)
 }

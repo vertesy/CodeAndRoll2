@@ -102,7 +102,8 @@ getProject <- function() {
 #' \dontrun{
 #' savehistory_2rstudio()
 #' }
-
+#'
+#' @export
 savehistory_2rstudio <- function(history_file = "~/.local/share/rstudio/history_database") {
   history_file <- path.expand(history_file)
 
@@ -164,9 +165,10 @@ savehistory_2rstudio <- function(history_file = "~/.local/share/rstudio/history_
 #' @importFrom rstudioapi getSourceEditorContext
 #' @examples
 #' \dontrun{
-#' savehistory_2()
+#' savehistory_Rhist()
 #' }
 #'
+#' @export
 savehistory_Rhist <- function() { current_dir <- getwd()
 
   # Construct the file name using the current date and optionally the file name from RStudio
@@ -284,6 +286,7 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
       size_msg <- paste0("dim: ", paste(d, collapse = " x "))
       is_truncated <- FALSE
       head_n <- head_df
+    }
 
     msg1 <- if (is_truncated) paste0(" | head (1:", head_n, "):") else ""
     msg2 <- tryCatch(utils::head(x, n = head_n), error = function(e) x)
@@ -310,6 +313,8 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
 #'   pLength() |>
 #'   sqrt()
 #' results
+#'
+#' @export
 pLength <- function(x) {
   stopifnot(!missing(x), is.atomic(x) || is.list(x))
   message("length: ", length(x))
@@ -955,6 +960,7 @@ as.named.vector.table <- function(table, verbose = TRUE,
 #'
 #' @return A named vector containing the counts of each unique value in `x`, with names corresponding to the unique values.
 #'
+#' @export
 vtable <- function(x, useNA = c("no", "ifany", "always")[2], ...) {
   stopifnot(is.vector(x) || is.factor(x))
   c(table(x, useNA = useNA, ...))

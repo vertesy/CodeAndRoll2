@@ -16,6 +16,7 @@ RStudio). The file is saved in the current working directory.
 }
 \examples{
 \dontrun{
-savehistory_2()
+savehistory_Rhist()
 }
+
 }
