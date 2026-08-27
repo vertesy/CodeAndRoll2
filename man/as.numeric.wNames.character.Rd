@@ -17,7 +17,7 @@
 }
 \description{
 Converts (1) a 'character' v. into a numeric v., or
-a 'factor' v. as as.numeric(as.character(vec)) and preserves the original names.
+a 'factor' v. via as.numeric(as.character(vec)) and preserves the original names.
 The old 'as.numeric.wNames()' is deprecated as it was not clearly documented that it converts via
 factor in any case. Code saved at the end.
 }
