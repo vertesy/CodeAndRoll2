@@ -282,9 +282,8 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
       head_n <- head_vec
     } else {
       size_msg <- paste0("dim: ", paste(d, collapse = " x "))
-      is_truncated <- F
+      is_truncated <- FALSE
       head_n <- head_df
-    }
 
     msg1 <- if (is_truncated) paste0(" | head (1:", head_n, "):") else ""
     msg2 <- tryCatch(utils::head(x, n = head_n), error = function(e) x)
