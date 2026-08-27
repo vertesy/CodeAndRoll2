@@ -2429,9 +2429,9 @@ rowsplit <- function(df, f = rownames(df)) {
 #' This function takes a numeric matrix as input and returns a named vector where each element
 #' corresponds to a row of the matrix. The names of the vector are the row names of the matrix,
 #' and the values are the column names where the maximum value of each row is found. If there are
-#' multiple columns with the maximum value in a row, the value for that row will be set to
-#' `multi_max_str`. If `na.remove` is set to `TRUE`, NA values will be removed before finding the
-#' maximum value.
+#' multiple columns with the maximum value in a row, their names are joined with `collapse` (by
+#' default `"-"`); set `collapse` to `NULL` or `NA` to return `multi_max_str` instead. If
+#' `na.remove` is set to `TRUE`, NA values will be removed before finding the maximum value.
 #'
 #' @param mat A numeric matrix
 #' @param na.remove Logical. Should NA values be removed before finding the maximum value?
