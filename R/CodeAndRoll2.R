@@ -997,7 +997,7 @@ as.named.vector.2colDF <- function(df, values = 1, names = 2, make.names = FALSE
 #' @export
 df.col.2.named.vector <- function(df, col, names = NULL) {
   stopifnot(
-    (is.data.frame(df) | is.tibble(df)),
+    is.data.frame(df) || inherits(df, "tbl_df"),
     length(col) == 1
   )
   if (inherits(df, "tbl_df") && is.null(names)) warning("Tibbles have no rownames. Synthetic row indices detected.", immediate. = TRUE)
