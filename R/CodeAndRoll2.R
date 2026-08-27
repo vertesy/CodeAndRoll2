@@ -258,14 +258,24 @@ pFilter <- function(x, cond, v = TRUE) {
 #'
 #' @examples
 #' results <- c(1:1000) |>
-#'   pSee(head_n = 5) |>
+#'   pSee(head_vec = 5) |>
 #'   sum()
 #' mtcars |>
-#'   pSee(head_n = 3) |>
+#'   pSee(head_df = 3) |>
 #'   summary()
 #'
 #' @export
 pSee <- function(x, head_vec = 100, head_df = 10) {
+  stopifnot(
+    "Input `x` must be supplied." = !missing(x),
+    "Argument `head_vec` must be a positive whole-number numeric scalar." =
+      length(head_vec) == 1L && is.numeric(head_vec) && is.finite(head_vec) &&
+        head_vec > 0 && head_vec == floor(head_vec),
+    "Argument `head_df` must be a positive whole-number numeric scalar." =
+      length(head_df) == 1L && is.numeric(head_df) && is.finite(head_df) &&
+        head_df > 0 && head_df == floor(head_df)
+  )
+
   # Check if object is complex (e.g., plot or S4) to avoid internal list printing
   # ggplot, plotly, and Heatmaps are S3 lists; Seurat objects are S4.
   is_complex <- inherits(x, c("ggplot", "plotly", "Heatmap", "HeatmapList")) || isS4(x)
@@ -284,6 +294,7 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
       size_msg <- paste0("dim: ", paste(d, collapse = " x "))
       is_truncated <- FALSE
       head_n <- head_df
+    }
 
     msg1 <- if (is_truncated) paste0(" | head (1:", head_n, "):") else ""
     msg2 <- tryCatch(utils::head(x, n = head_n), error = function(e) x)
