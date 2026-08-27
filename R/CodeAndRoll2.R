@@ -258,10 +258,10 @@ pFilter <- function(x, cond, v = TRUE) {
 #'
 #' @examples
 #' results <- c(1:1000) |>
-#'   pSee(head_n = 5) |>
+#'   pSee(head_vec = 5) |>
 #'   sum()
 #' mtcars |>
-#'   pSee(head_n = 3) |>
+#'   pSee(head_df = 3) |>
 #'   summary()
 #'
 #' @export
