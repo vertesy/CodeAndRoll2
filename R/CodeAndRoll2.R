@@ -2539,17 +2539,27 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
 #' @return A matrix that is a subset of the input matrix.
 #' @export
 getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE) {
+  stopifnot(
+    is.matrix(mat) || is.data.frame(mat) || methods::is(mat, "Matrix"), !is.null(rownames(mat)),
+    is.character(rownamez), is.logical(silent), length(silent) == 1L, !is.na(silent),
+    is.logical(removeNAonly), length(removeNAonly) == 1L, !is.na(removeNAonly),
+    is.logical(remove0only), length(remove0only) == 1L, !is.na(remove0only)
+  )
   idx <- intersect(rownamez, row.names(mat))
+  n_matched <- length(idx)
   if (removeNAonly) {
-    idx <- which_names(rowSums(!is.na(mat[idx, ]), na.rm = TRUE) > 0)
+    selected_mat <- mat[idx, , drop = FALSE]
+    idx <- idx[rowSums(!is.na(selected_mat), na.rm = TRUE) > 0]
   }
   if (remove0only) {
-    idx <- which_names(rowSums(mx != 0, na.rm = TRUE) > 0)
+    selected_mat <- mat[idx, , drop = FALSE]
+    idx <- idx[rowSums(selected_mat != 0, na.rm = TRUE) > 0]
   }
   if (!silent) {
-    iprint(length(idx), "/", length(rownamez), "are found. Missing: ", length(setdiff(row.names(mat), rownamez)))
+    missing_rows <- setdiff(rownamez, row.names(mat))
+    iprint(n_matched, "/", length(rownamez), "are found. Retained: ", length(idx), ". Missing: ", length(missing_rows))
   }
-  mat[idx, ]
+  mat[idx, , drop = FALSE]
 }
 
 
@@ -2565,18 +2575,27 @@ getRows <- function(mat, rownamez, silent = FALSE, removeNAonly = FALSE, remove0
 #' @return A matrix that is a subset of the input matrix.
 #' @export
 getCols <- function(mat, colnamez, silent = FALSE, removeNAonly = FALSE, remove0only = FALSE) {
+  stopifnot(
+    is.matrix(mat) || is.data.frame(mat) || methods::is(mat, "Matrix"), !is.null(colnames(mat)),
+    is.character(colnamez), is.logical(silent), length(silent) == 1L, !is.na(silent),
+    is.logical(removeNAonly), length(removeNAonly) == 1L, !is.na(removeNAonly),
+    is.logical(remove0only), length(remove0only) == 1L, !is.na(remove0only)
+  )
   idx <- intersect(colnamez, colnames(mat))
-  print(symdiff(colnamez, colnames(mat)))
+  n_matched <- length(idx)
   if (removeNAonly) {
-    idx <- which_names(colSums(!is.na(mat[, idx]), na.rm = TRUE) > 0)
+    selected_mat <- mat[, idx, drop = FALSE]
+    idx <- idx[colSums(!is.na(selected_mat), na.rm = TRUE) > 0]
   }
   if (remove0only) {
-    idx <- which_names(colSums(mx != 0, na.rm = TRUE) > 0)
+    selected_mat <- mat[, idx, drop = FALSE]
+    idx <- idx[colSums(selected_mat != 0, na.rm = TRUE) > 0]
   }
   if (!silent) {
-    iprint(length(idx), "/", length(colnamez), "are found. Missing: ", length(setdiff(colnames(mat), colnamez)))
+    missing_cols <- setdiff(colnamez, colnames(mat))
+    iprint(n_matched, "/", length(colnamez), "are found. Retained: ", length(idx), ". Missing: ", length(missing_cols))
   }
-  mat[, idx]
+  mat[, idx, drop = FALSE]
 }
 
 
