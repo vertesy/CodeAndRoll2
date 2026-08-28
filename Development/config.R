@@ -18,3 +18,4 @@ DESCRIPTION <- list(
   github.user = "vertesy",
   license = "GPL-3 + file LICENSE"
 )
+
