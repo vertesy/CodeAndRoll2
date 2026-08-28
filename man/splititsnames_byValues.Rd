@@ -16,7 +16,7 @@ A list of vectors, each of which contains the elements of \code{namedVec} that h
 Split the names of a list by its values.
 }
 \examples{
-namedVec <- c("A", "B", "C", "A", "B", "D")
+namedVec <- c(a = "A", b = "B", c = "C", d = "A", e = "B", f = "D")
 splititsnames_byValues(namedVec)
 
 }

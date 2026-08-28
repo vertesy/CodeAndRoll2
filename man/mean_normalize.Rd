@@ -10,5 +10,5 @@ mean_normalize(mat)
 \item{mat}{Numeric input matrix.}
 }
 \description{
-Normalize each column to the median of the columns.
+Normalize each column to the mean of the columns.
 }

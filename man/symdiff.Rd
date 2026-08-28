@@ -15,7 +15,8 @@ symdiff(x, y, z = NULL)
 }
 \value{
 A list of vectors, each of which contains the elements that are only present in that
-vector and not in any of the other vectors.
+vector and not in any of the other vectors. Note: not mathematically correct for more than
+2 vectors (though still logically meaningful) \url{https://en.wikipedia.org/wiki/Symmetric_difference#Properties}.
 }
 \description{
 Quasi symmetric difference of any number of vectors.

@@ -3,7 +3,7 @@ Title: CodeAndRoll2 for vector, matrix and list manipulations
 Version: 2.8.5
 Authors@R: 
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
-Description: CodeAndRoll2 is a set of more than 130 productivity functions
+Description: CodeAndRoll2 is a set of more than 170 productivity functions
     for vector, matrix and list manipulations and math. Used by
     MarkdownReports, ggExpress, SeuratUtils, etc.
 License: GPL-3 + file LICENSE

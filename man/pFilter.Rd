@@ -11,6 +11,8 @@ pFilter(x, cond, v = TRUE)
 
 \item{cond}{An expression evaluated with \code{.} representing the input vector.
 Must return a logical vector of the same length as \code{x}. Default: none.}
+
+\item{v}{Verbose? Report how many elements passed the filter. Default: TRUE}
 }
 \value{
 A subset of \code{x} that satisfies the condition. The output type matches

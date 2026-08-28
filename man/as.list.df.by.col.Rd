@@ -19,7 +19,7 @@
 A list.
 }
 \description{
-Split a dataframe into a list by its rows.
+Split a dataframe into a list by its columns.
 }
 \examples{
 dtf <- data.frame(x = c(1, 2, NA), y = c(3, 4, 0), z = c(5, 6, 7))

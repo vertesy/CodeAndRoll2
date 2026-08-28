@@ -11,7 +11,7 @@ matrix.fromVector(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE)
 
 \item{HowManyTimes}{Number of columns, Default: \code{3}.}
 
-\item{IsItARow}{Transpose? Swap rows an columns. Default: \code{TRUE}}
+\item{IsItARow}{Transpose? Swap rows and columns. Default: \code{TRUE}}
 }
 \description{
 Create a matrix from values in a vector repeated for each column / each row.
