@@ -3255,7 +3255,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #'  \code{\link[gtools]{mixedsort}}
 #' @importFrom gtools mixedsort
 reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) {
-  Lout <- list(NA)
+  Lout <- list()
   for (x in seq_along(namesOrdered)) {
     Lout[[x]] <- L[[namesOrdered[x]]]
   }
@@ -3289,7 +3289,7 @@ range.list <- function(L) {
 #' @export
 intermingle2lists <- function(L1, L2) {
   stopifnot(length(L1) == length(L2))
-  Lout <- list(NA)
+  Lout <- list()
 
   # Create a new list with the combined elements of `L1` and `L2`
   for (x in seq_len(2L * length(L1))) {
