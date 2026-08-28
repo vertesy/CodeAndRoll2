@@ -10,7 +10,7 @@ DESCRIPTION <- list(
 
   depends = "Stringendo",
   imports = "dplyr, tibble, stringr, purrr, plyr, gplots, gtools, colorRamps, RColorBrewer, sessioninfo, rstudioapi", # graphics,
-  suggests = "sm, grDevices",
+  suggests = "sm, grDevices, ggExpress",
 
   author.given = "Abel",
   author.family = "Vertesy",

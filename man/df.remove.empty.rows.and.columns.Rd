@@ -25,9 +25,11 @@ df.remove.empty.rows.and.columns(
 
 \item{thr.cell.empty}{The threshold value below a cell is considered "empty".}
 
-\item{plot_stats}{Whether to plot the fraction of rows and columns that were removed.}
+\item{plot_stats}{Whether to plot the fraction of rows and columns that were removed.
+Requires the (Suggested, not required) \code{ggExpress} package; if it is not installed, the
+plot is skipped with an informative message instead of erroring.}
 
-\item{...}{Additional arguments to pass to \code{qbarplot}.}
+\item{...}{Additional arguments to pass to \code{ggExpress::qbarplot}.}
 }
 \value{
 A data frame with the empty rows and columns removed.

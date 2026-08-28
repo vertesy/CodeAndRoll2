@@ -2963,7 +2963,9 @@ remove.na.cols <- function(mat) {
 #' @param cols The name of the variable that will store the fraction of columns that were removed.
 #' @param thr.cell.empty The threshold value below a cell is considered "empty".
 #' @param plot_stats Whether to plot the fraction of rows and columns that were removed.
-#' @param ... Additional arguments to pass to `qbarplot`.
+#'   Requires the (Suggested, not required) `ggExpress` package; if it is not installed, the
+#'   plot is skipped with an informative message instead of erroring.
+#' @param ... Additional arguments to pass to `ggExpress::qbarplot`.
 #'
 #' @return A data frame with the empty rows and columns removed.
 #' @export
@@ -2997,13 +2999,21 @@ df.remove.empty.rows.and.columns <- function(
       "cols" = pc_TRUE(csx == 0, percentify = FALSE)
     )
     names(Removal.Dimensions) <- c(rows, cols)
-    qbarplot(Removal.Dimensions,
-      label = percentage_formatter(Removal.Dimensions),
-      suffix = suffix,
-      xlab.angle = 45, xlab = "",
-      ylim = 0:1, ylab = "Fractions removed",
-      ...
-    )
+    if (requireNamespace("ggExpress", quietly = TRUE)) {
+      ggExpress::qbarplot(Removal.Dimensions,
+        label = percentage_formatter(Removal.Dimensions),
+        suffix = suffix,
+        xlab.angle = 45, xlab = "",
+        ylim = 0:1, ylab = "Fractions removed",
+        ...
+      )
+    } else {
+      message(
+        "Package 'ggExpress' is not installed; skipping the removal-fraction plot ",
+        "(plot_stats = TRUE). Install it with remotes::install_github('vertesy/ggExpress') ",
+        "to enable this plot."
+      )
+    }
   }
 
   # Remove the empty rows and columns
