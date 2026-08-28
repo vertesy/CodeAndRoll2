@@ -22,7 +22,8 @@ Imports:
     sessioninfo,
     stringr,
     tibble
-Suggests: 
+Suggests:
+    ggExpress,
     grDevices,
     sm
 Encoding: UTF-8
