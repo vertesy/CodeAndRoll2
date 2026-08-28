@@ -4,7 +4,7 @@
 \alias{list.2.replicated.name.vec}
 \title{list.2.replicated.name.vec}
 \usage{
-list.2.replicated.name.vec(ListWithNames = Sections.ls.Final)
+list.2.replicated.name.vec(ListWithNames)
 }
 \arguments{
 \item{ListWithNames}{A list.}
