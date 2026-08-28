@@ -30,6 +30,7 @@ and \code{collapse} is \code{NULL} or \code{NA}. Default: "multiple.maxima"}
 
 \item{suffix}{Character. The suffix used in the verbose message reporting how many rows have
 multiple maxima. Default: "rows have multiple maxima."}
+}
 \description{
 This function takes a numeric matrix as input and returns a named vector where each element
 corresponds to a row of the matrix. The names of the vector are the row names of the matrix,

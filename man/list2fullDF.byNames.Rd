@@ -28,7 +28,7 @@ A matrix with the same elements as \code{your.list}, but with rows and columns n
 Converts a list to a full matrix, with rows and columns named by the elements of the list.
 }
 \examples{
-your.list <- list(set.1 = LETTERS[1:5], set.2 = LETTERS[3:9])
+your.list <- list(set.1 = vec.fromNames(LETTERS[1:5], fill = 1), set.2 = vec.fromNames(LETTERS[3:9], fill = 2))
 list2fullDF.byNames(your.list)
 
 }
