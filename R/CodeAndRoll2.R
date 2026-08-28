@@ -3490,7 +3490,7 @@ intermingle.cbind <- function(df1, df2) {
     (is.data.frame(df1) || is.matrix(df1)), (is.data.frame(df2) || is.matrix(df2)),
     !is.null(rownames(df1)), !is.null(rownames(df2)), ncol(df1) == ncol(df2)
   )
-  if (nrow(df1) != nrow(df2)) { # not equal rows: subset
+  if (nrow(df1) != nrow(df2) || !setequal(rownames(df1), rownames(df2))) { # not equal rows or names: subset
     print(symdiff(rownames(df2), rownames(df1)))
     CommonGenes <- intersect(rownames(df2), rownames(df1))
     print(length(CommonGenes))
