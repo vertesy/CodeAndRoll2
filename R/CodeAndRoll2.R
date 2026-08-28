@@ -2767,7 +2767,10 @@ merge_ls_of_named_vec_as_df_cols <- function(
   colnames(COMBINED)[-1] <- names(named_list)
   COMBINED[is.na(COMBINED)] <- missing_values
 
-  return(FirstCol2RowNames(COMBINED))
+  # Move the merge-key column ("ind") into row names, then drop it
+  rownames(COMBINED) <- as.character(COMBINED[[1]])
+  COMBINED[[1]] <- NULL
+  return(COMBINED)
 }
 
 
