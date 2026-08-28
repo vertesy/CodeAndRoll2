@@ -17,5 +17,7 @@ merge_1col_dfs_by_rn(list_of_dfs, FILLwith = 0, columnUSE = 1)
 A function that merges single-column data frames based on rownames.
 }
 \examples{
-merge_1col_dfs_by_rn()
+df1 <- data.frame(val = c(1, 2, 3), row.names = c("a", "b", "c"))
+df2 <- data.frame(val = c(4, 5), row.names = c("b", "d"))
+merge_1col_dfs_by_rn(list(A = df1, B = df2))
 }

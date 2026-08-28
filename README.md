@@ -404,7 +404,7 @@ colsplit. Split a data frame by a factor corresponding to columns.
 - #### 114 `rowsplit()`
 rowsplit. Split a data frame by a factor corresponding to columns.
 
-- #### 115 `  which.max.multi()`
+- #### 115 `get_max_colname_per_row()`
 Get the Column Name corresponding to the Maximum Value in each Row (handles ambiguous matches).   This function takes a numeric matrix as input and returns a named vector where each element  corresponds to a row of the matrix. The names of the vector are the row names of the matrix,  and the values are the column names where the maximum value of each row is found. If there are  multiple columns with the maximum value in a row, the value for that row will be set to  `multi_max_str`. If `na.remove` is set to `TRUE`, NA values will be removed before finding the  maximum value. 
 
 - #### 116 `select_rows_and_columns()`

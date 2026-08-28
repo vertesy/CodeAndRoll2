@@ -6,6 +6,10 @@
 \usage{
 savehistory_2rstudio(history_file = "~/.local/share/rstudio/history_database")
 }
+\arguments{
+\item{history_file}{Path to RStudio's internal history log. Default:
+\verb{~/.local/share/rstudio/history_database}}
+}
 \value{
 Invisibly returns the path to the written history file.
 }

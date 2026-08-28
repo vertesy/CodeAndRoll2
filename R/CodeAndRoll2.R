@@ -96,6 +96,9 @@ getProject <- function() {
 #'
 #' This function is read-only and safe to run while RStudio is open.
 #'
+#' @param history_file Path to RStudio's internal history log. Default:
+#'   `~/.local/share/rstudio/history_database`
+#'
 #' @importFrom rstudioapi getSourceEditorContext
 #'
 #' @examples
@@ -216,6 +219,7 @@ savehistory_Rhist <- function() { current_dir <- getwd()
 #' @param x A vector of any type (numeric, character, logical, etc.).
 #' @param cond An expression evaluated with `.` representing the input vector.
 #'   Must return a logical vector of the same length as `x`. Default: none.
+#' @param v Verbose? Report how many elements passed the filter. Default: TRUE
 #'
 #' @return A subset of `x` that satisfies the condition. The output type matches
 #' the input type of `x`.
@@ -344,6 +348,7 @@ pLength <- function(x) {
 #' @description Prints the unique elements of the input object and returns it, enabling you to inspect
 #' unique values inside a pipe.
 #' @param x The object whose unique elements to print and return. Default: None.
+#' @param head_n Max number of unique elements to print. Default: 20
 #' @return The input object `x`, unchanged.
 #' @examples
 #' results <- c(1, 2, 2, 3, 3, 3) |>
@@ -567,7 +572,7 @@ data.frame.fromNames <- function(rowname_vec = 1:10, colname_vec = LETTERS[1:5],
 #' Similar to rowNameMatrix and colNameMatrix.
 #' @param vector Input vector for rows (number of rows = length), Default: `1:5`.
 #' @param HowManyTimes Number of columns, Default: `3`.
-#' @param IsItARow Transpose? Swap rows an columns. Default: `TRUE`
+#' @param IsItARow Transpose? Swap rows and columns. Default: `TRUE`
 #' @export
 matrix.fromVector <- function(vector = 1:5, HowManyTimes = 3, IsItARow = TRUE) {
   stopifnot(
@@ -1082,7 +1087,6 @@ tibble_summary_to_namedVec <- function(
 #' @param vec.w.names A vector with names, Default: c(a = 1, b = 2)
 #' @param transpose Transpose? Default: TRUE
 #' @examples as_tibble_from_namedVec()
-#' @importFrom dplyr bind_rows
 #'
 #' @export
 as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose = TRUE) {
@@ -1251,7 +1255,7 @@ translate <- function(vec, old, new) {
   }
 
   vec_replaced <- vec
-  for (i in 1:length(old)) {
+  for (i in seq_along(old)) {
     oldval <- old[i]
     vec_replaced[vec == oldval] <- new[i]
     printEveryN(i = i, N = 1000)
@@ -1325,7 +1329,7 @@ flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
 #' @export
 sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
   xx <- names(vec_or_list)
-  names(xx) <- 1:length(vec_or_list)
+  names(xx) <- seq_along(vec_or_list)
   order <- as.numeric(names(gtools::mixedsort(xx, decreasing = decreasing, ...)))
   vec_or_list[order]
 }
@@ -1404,7 +1408,8 @@ clip.at.fixed.value <- function(x, thr, above = TRUE) {
 #' in a distribution above or below the extreme N% of the distribution.
 #'
 #' @param x A vector of numeric values.
-#' @param high Clip above threshold? Default: TRUE
+#' @param high Currently unused (reserved). Both tails are always clipped regardless of this
+#'   value. Default: TRUE
 #' @param percentiles At which percentiles to cut off?, Default: c(0.01, 0.99)
 #' @param na.rm Remove NA values for calculation? Default: TRUE
 #' @param showhist Show histogram with cutoffs? Default: FALSE
@@ -1462,7 +1467,7 @@ col2named.vec.tbl <- function(tbl.2col) {
 #' @title Split a Vector into a List by Every N-th Element
 #' @description This function divides a given vector into chunks of size `by` (default is 9).
 #' The resulting list contains vectors of the specified chunk size or smaller.
-#' @param vec A numeric oggr character vector to be split.
+#' @param vec A numeric or character vector to be split.
 #' @param by Integer value specifying the chunk size. Default is 9.
 #' @return A list where each element is a vector containing up to `by` elements from `vec`.
 #' @export
@@ -1470,7 +1475,7 @@ split_vec_to_list_by_N <- function(vec = 1:27, by = 9) {
   n_groups <- ceiling(length(vec) / by)
   assignment <- gl(n_groups, by, length = length(vec))
   lsX <- split(x = vec, f = assignment)
-  names(lsX) <- paste0("v", 1:length(lsX))
+  names(lsX) <- paste0("v", seq_along(lsX))
   lsX
 }
 # FORMERLY / aka: iterBy.over()
@@ -1482,7 +1487,7 @@ split_vec_to_list_by_N <- function(vec = 1:27, by = 9) {
 #' @param vec input vector, Default: 1:9
 #' @export
 zigzagger <- function(vec = 1:9) {
-  intermingle2vec(vec, rev(vec))[1:length(vec)]
+  intermingle2vec(vec, rev(vec))[seq_along(vec)]
 }
 
 
@@ -1991,7 +1996,8 @@ colMultiply <- function(mat, vec) {
 #' @param mat Numeric input matrix with the distribution.
 #' @param vec Vector to divide by. Default: row sums of the matrix.
 #'
-#' @examples rowDivide(rowMultiply(m, 1:3), 1:3)
+#' @examples m <- matrix(1:8, nrow = 4, byrow = TRUE)
+#' rowDivide(rowMultiply(m, 1:4), 1:4)
 #' @export
 rowDivide <- function(mat, vec = rowSums(mat)) {
   stopifnot(NROW(mat) == length(vec))
@@ -2050,7 +2056,7 @@ median_normalize <- function(mat) {
 
 # _________________________________________________________________________________________________
 #' @title mean_normalize
-#' @description Normalize each column to the median of the columns.
+#' @description Normalize each column to the mean of the columns.
 #' @param mat Numeric input matrix.
 #' @export
 mean_normalize <- function(mat) {
@@ -2421,7 +2427,7 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
 colsplit <- function(df, f = colnames(df)) {
   ListOfDFs <- NULL
   levelz <- unique(f)
-  for (i in 1:length(levelz)) {
+  for (i in seq_along(levelz)) {
     ListOfDFs[[i]] <- df[, which(f == levelz[i])]
   }
   names(ListOfDFs) <- levelz
@@ -2438,7 +2444,7 @@ colsplit <- function(df, f = colnames(df)) {
 rowsplit <- function(df, f = rownames(df)) {
   ListOfDFs <- NULL
   levelz <- unique(f)
-  for (i in 1:length(levelz)) {
+  for (i in seq_along(levelz)) {
     ListOfDFs[[i]] <- df[which(f == levelz[i]), ]
   }
   names(ListOfDFs) <- levelz
@@ -2652,7 +2658,7 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
 #' @importFrom plyr join_all
 merge_dfs_by_rn <- function(list_of_dfs) {
   if (length(names(list_of_dfs)) != length(list_of_dfs)) {
-    names(list_of_dfs) <- 1:length(list_of_dfs)
+    names(list_of_dfs) <- seq_along(list_of_dfs)
   }
 
   for (i in names(list_of_dfs)) {
@@ -2675,13 +2681,16 @@ merge_dfs_by_rn <- function(list_of_dfs) {
 #' @param FILLwith 0 by def
 #' @param columnUSE column index in both. 1 by default.
 #' @export
-#' @examples merge_1col_dfs_by_rn()
+#' @examples
+#' df1 <- data.frame(val = c(1, 2, 3), row.names = c("a", "b", "c"))
+#' df2 <- data.frame(val = c(4, 5), row.names = c("b", "d"))
+#' merge_1col_dfs_by_rn(list(A = df1, B = df2))
 merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE = 1) {
   all.rn <- sort(union.ls(lapply(list_of_dfs, rownames)))
   iprint("n rownames:", length(all.rn))
   df_new <- data.frame(matrix(data = FILLwith, nrow = length(all.rn), ncol = length(list_of_dfs)), row.names = all.rn)
   colnames(df_new) <- names(list_of_dfs)
-  for (i in 1:length(list_of_dfs)) {
+  for (i in seq_along(list_of_dfs)) {
     print(i)
     indf <- list_of_dfs[[i]]
     df_new[rownames(indf), i] <- indf[, columnUSE]
@@ -2895,8 +2904,9 @@ rotate_matrix <- function(x, clockwise = TRUE) {
 #'
 #' @examples
 #' mat <- matrix(c(1, NA, 3, 4, 5, NA, NA, NA, 9), ncol = 3)
-#' na.omit.mat(mat) # Default, any = TRUE
-#' na.omit.mat(mat, any = FALSE)
+#' class(mat) <- c("mat", class(mat)) # dispatch via the na.omit() S3 generic
+#' na.omit(mat) # Default, any = TRUE
+#' na.omit(mat, any = FALSE)
 #'
 #' @export
 na.omit.mat <- function(mat, any = TRUE) {
@@ -2951,7 +2961,7 @@ remove.na.cols <- function(mat) {
 #' @export
 
 df.remove.empty.rows.and.columns <- function(
-  df = UVI.assignment.filtered.3.HF,
+  df,
   suffix = substitute_deparse(df),
   rows = "rows",
   cols = "cols",
@@ -2961,7 +2971,6 @@ df.remove.empty.rows.and.columns <- function(
 ) {
   # Create a boolean vector that indicates whether each cell is non-empty
   df.boolean <- (df != thr.cell.empty)
-  # view.head(df.boolean)
 
   # Calculate the number of non-empty rows and columns
   rsx <- rowSums(df.boolean)
@@ -3129,7 +3138,7 @@ symdiff.ls <- function(ls, ...) {
     names(res) <- names(ls)
   } else {
     message("No names in list / some names missing. Numeric names will be used.")
-    names(res) <- 1:length(res)
+    names(res) <- seq_along(res)
   }
 
   return(res)
@@ -3178,7 +3187,7 @@ list.wNames <- function(...) {
 # _________________________________________________________________________________________________
 #' @title as.list.df.by.row
 #'
-#' @description Split a dataframe into a list by its columns.
+#' @description Split a dataframe into a list by its rows.
 #' @param dtf A dataframe.
 #' @param na.omit Whether to omit rows with missing values.
 #' @param zero.omit Whether to omit rows with all-zero values.
@@ -3212,7 +3221,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 # _________________________________________________________________________________________________
 #' @title as.list.df.by.col
 #'
-#' @description Split a dataframe into a list by its rows.
+#' @description Split a dataframe into a list by its columns.
 #' @param dtf A dataframe.
 #' @param na.omit Whether to omit rows with missing values.
 #' @param zero.omit Whether to omit rows with all-zero values.
@@ -3255,8 +3264,8 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #'  \code{\link[gtools]{mixedsort}}
 #' @importFrom gtools mixedsort
 reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) {
-  Lout <- list(NA)
-  for (x in 1:length(namesOrdered)) {
+  Lout <- list()
+  for (x in seq_along(namesOrdered)) {
     Lout[[x]] <- L[[namesOrdered[x]]]
   }
   if (length(names(L))) {
@@ -3289,10 +3298,10 @@ range.list <- function(L) {
 #' @export
 intermingle2lists <- function(L1, L2) {
   stopifnot(length(L1) == length(L2))
-  Lout <- list(NA)
+  Lout <- list()
 
   # Create a new list with the combined elements of `L1` and `L2`
-  for (x in 1:(2 * length(L1))) {
+  for (x in seq_len(2L * length(L1))) {
     if (x %% 2) {
       Lout[[x]] <- L1[[((x + 1) / 2)]]
       names(Lout)[x] <- names(L1)[((x + 1) / 2)]
@@ -3325,7 +3334,7 @@ as.listalike <- function(vec, list_wannabe) {
   past <- 0
 
   # Iterate over the list, and fill in the elements with the corresponding elements from the vectorfor (v in 1:length(list_wannabe)) {
-  for (v in 1:length(list_wannabe)) {
+  for (v in seq_along(list_wannabe)) {
     lv <- length(list_wannabe[[v]])
     list_return[[v]] <- vec[(past + 1):(past + lv)]
     past <- past + lv
@@ -3381,7 +3390,7 @@ reverse.list.hierarchy <- function(list_of_lists) {
 #' @param FILL A value to fill in missing entries.
 #' @return A matrix with the same elements as `your.list`, but with rows and columns named by the elements of the list.
 #' @examples
-#' your.list <- list(set.1 = LETTERS[1:5], set.2 = LETTERS[3:9])
+#' your.list <- list(set.1 = vec.fromNames(LETTERS[1:5], fill = 1), set.2 = vec.fromNames(LETTERS[3:9], fill = 2))
 #' list2fullDF.byNames(your.list)
 #'
 #' @export
@@ -3473,7 +3482,7 @@ splitbyitsnames <- function(namedVec) {
 #' @return A list of vectors, each of which contains the elements of `namedVec` that have the corresponding value.
 #'
 #' @examples
-#' namedVec <- c("A", "B", "C", "A", "B", "D")
+#' namedVec <- c(a = "A", b = "B", c = "C", d = "A", e = "B", f = "D")
 #' splititsnames_byValues(namedVec)
 #'
 #' @export
@@ -3586,7 +3595,7 @@ ls2categvec <- function(your_list) {
 #' ListWithNames <- list(a = 1, b = 2, c = 3)
 #' list.2.replicated.name.vec(ListWithNames)
 #' @export
-list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
+list.2.replicated.name.vec <- function(ListWithNames) {
   NZ <- names(ListWithNames)
   LZ <- unlapply(ListWithNames, length)
   replicated.name.vec <- rep(NZ, LZ)
@@ -3605,7 +3614,8 @@ list.2.replicated.name.vec <- function(ListWithNames = Sections.ls.Final) {
 #' @param y A vector.
 #' @param z A vector.
 #' @return A list of vectors, each of which contains the elements that are only present in that
-#' vector and not in any of the other vectors.
+#' vector and not in any of the other vectors. Note: not mathematically correct for more than
+#' 2 vectors (though still logically meaningful) \url{https://en.wikipedia.org/wiki/Symmetric_difference#Properties}.
 #'
 #' @examples
 #' x <- c(1, 2, 3, 4, 5)
@@ -3644,7 +3654,6 @@ symdiff <- function(x, y, z = NULL) {
 #'
 #' @export intersect.wNames
 intersect.wNames <- function(x, y, names = "x") {
-  # browser()
   stopifnot(
     is.vector(x), is.vector(y), names %in% c("x", "y")
   )
@@ -3916,7 +3925,7 @@ movingSEM <- function(x, oneSide = 5) {
 imovingSEM <- function(x, oneSide = 5) {
   # Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
   y <- NULL
-  for (i in 1:length(x)) {
+  for (i in seq_along(x)) {
     oneSideDynamic <- min(i - 1, oneSide, length(x) - i)
     oneSideDynamic
     indexx <- (i - oneSideDynamic):(i + oneSideDynamic)
@@ -3940,13 +3949,13 @@ imovingSEM <- function(x, oneSide = 5) {
 #' @return No return value. Outputs the vector with each element on a new line.
 #' @examples
 #' vec <- c(`0` = "ACyte", `1` = "Misp.1.DCN")
-#' pretty_dput(vec)
+#' dput_pretty(vec)
 #'
 #' @export
 dput_pretty <- pretty_dput <- function(vec) {
-  if (is.null(names(vec))) names(vec) <- 1:length(vec)
+  if (is.null(names(vec))) names(vec) <- seq_along(vec)
   cat("c(", sep = "")
-  for (i in 1:length(vec)) {
+  for (i in seq_along(vec)) {
     cat("\n`", vec[i], "` = \"", names(vec)[i], "\"",
       ifelse(i != length(vec), ",", ""),
       sep = ""
