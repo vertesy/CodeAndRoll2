@@ -2776,7 +2776,7 @@ merge_ls_of_named_vec_as_df_cols <- function(
   colnames(COMBINED)[-1] <- names(named_list)
   COMBINED[is.na(COMBINED)] <- missing_values
 
-  return(FirstCol2RowNames(COMBINED))
+  return(ReadWriter::column.2.row.names(COMBINED))
 }
 
 
@@ -2989,13 +2989,17 @@ df.remove.empty.rows.and.columns <- function(
       "cols" = pc_TRUE(csx == 0, percentify = FALSE)
     )
     names(Removal.Dimensions) <- c(rows, cols)
-    qbarplot(Removal.Dimensions,
-      label = percentage_formatter(Removal.Dimensions),
-      suffix = suffix,
-      xlab.angle = 45, xlab = "",
-      ylim = 0:1, ylab = "Fractions removed",
-      ...
-    )
+    if (requireNamespace("ggExpress", quietly = TRUE)) {
+      ggExpress::qbarplot(Removal.Dimensions,
+        label = percentage_formatter(Removal.Dimensions),
+        suffix = suffix,
+        xlab.angle = 45, xlab = "",
+        ylim = 0:1, ylab = "Fractions removed",
+        ...
+      )
+    } else {
+      warning("Package 'ggExpress' needed for plot_stats = TRUE; skipping plot.", call. = FALSE)
+    }
   }
 
   # Remove the empty rows and columns
