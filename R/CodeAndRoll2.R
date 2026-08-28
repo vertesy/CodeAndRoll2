@@ -2352,7 +2352,10 @@ sort_matrix_rows <- function(df, column = NULL, rownames = FALSE, decrease = FAL
     "na_last must be a single TRUE/FALSE" = is.logical(na_last) && length(na_last) == 1,
     "column is required and must be a single name/index when rownames = FALSE" =
       rownames || (!is.null(column) && length(column) == 1 && (is.character(column) || is.numeric(column))),
-    "column not found in colnames(df)" = rownames || !is.character(column) || column %in% colnames(df)
+    "column not found in colnames(df)" = rownames || !is.character(column) || column %in% colnames(df),
+    "column index must be a whole number between 1 and ncol(df)" =
+      rownames || !is.numeric(column) ||
+        (is.finite(column) && column == as.integer(column) && column >= 1 && column <= ncol(df))
   )
 
   message("Sorting by ", if (rownames) "rownames" else paste(column, "column"), " in ", if (decrease) "Decreasing" else "Increasing", " order.")
