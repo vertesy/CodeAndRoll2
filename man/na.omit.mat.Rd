@@ -20,7 +20,8 @@ Removes rows from a matrix based on the presence of NA values. Can remove rows w
 }
 \examples{
 mat <- matrix(c(1, NA, 3, 4, 5, NA, NA, NA, 9), ncol = 3)
-na.omit.mat(mat) # Default, any = TRUE
-na.omit.mat(mat, any = FALSE)
+class(mat) <- c("mat", class(mat)) # dispatch via the na.omit() S3 generic
+na.omit(mat) # Default, any = TRUE
+na.omit(mat, any = FALSE)
 
 }

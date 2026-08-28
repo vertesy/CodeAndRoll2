@@ -16,7 +16,8 @@ clip.outliers.at.percentile(
 \arguments{
 \item{x}{A vector of numeric values.}
 
-\item{high}{Clip above threshold? Default: TRUE}
+\item{high}{Currently unused (reserved). Both tails are always clipped regardless of this
+value. Default: TRUE}
 
 \item{percentiles}{At which percentiles to cut off?, Default: c(0.01, 0.99)}
 

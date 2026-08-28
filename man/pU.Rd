@@ -8,6 +8,8 @@ pU(x, head_n = 20)
 }
 \arguments{
 \item{x}{The object whose unique elements to print and return. Default: None.}
+
+\item{head_n}{Max number of unique elements to print. Default: 20}
 }
 \value{
 The input object \code{x}, unchanged.
