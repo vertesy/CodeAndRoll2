@@ -3526,20 +3526,24 @@ intermingle2vec <- function(V1, V2, wNames = TRUE, name_prefix = NULL) {
 #' element of a unified list. Useful for side-by-side comparisons, e.g. in wstripchart_list().
 #' @param df1 A data frame.
 #' @param df2 A data frame.
-#' @return A data frame that combines `df1` and `df2`, with the columns of `df1` alternating with the columns of `
+#' @return A matrix with matched rows and alternating columns from `df1` and `df2`.
 #'
 #' @export
 
 intermingle.cbind <- function(df1, df2) {
-  stopifnot(ncol(df1) == ncol(df2))
-  if (nrow(df1) != nrow(df2)) { # not equal rows: subset
+  stopifnot(
+    (is.data.frame(df1) || is.matrix(df1)), (is.data.frame(df2) || is.matrix(df2)),
+    !is.null(rownames(df1)), !is.null(rownames(df2)), ncol(df1) == ncol(df2)
+  )
+  if (nrow(df1) != nrow(df2) || !setequal(rownames(df1), rownames(df2))) { # not equal rows or names: subset
     print(symdiff(rownames(df2), rownames(df1)))
     CommonGenes <- intersect(rownames(df2), rownames(df1))
     print(length(CommonGenes))
-    df1 <- df1[CommonGenes, ]
-    df2 <- df2[CommonGenes, ]
+    df1 <- df1[CommonGenes, , drop = FALSE]
+    df2 <- df2[CommonGenes, , drop = FALSE]
   } else {
     CommonGenes <- rownames(df1)
+    df2 <- df2[CommonGenes, , drop = FALSE] # Align rows by name, not position.
   }
 
   # Create New column names
@@ -3549,7 +3553,7 @@ intermingle.cbind <- function(df1, df2) {
     NewColNames <- intermingle2vec(paste0("df1.", 1:ncol(df1)), paste0("df2.", 1:ncol(df2)))
   }
   NewMatr <- matrix.fromNames(rowname_vec = CommonGenes, colname_vec = NewColNames)
-  for (x in 1:(2 * length(df1))) {
+  for (x in seq_len(2L * ncol(df1))) {
     if (x %% 2) {
       NewMatr[, x] <- df1[, (x + 1) / 2]
     } else {
