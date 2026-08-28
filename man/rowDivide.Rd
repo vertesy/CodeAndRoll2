@@ -15,5 +15,6 @@ rowDivide(mat, vec = rowSums(mat))
 Divide by row.
 }
 \examples{
-rowDivide(rowMultiply(m, 1:3), 1:3)
+m <- matrix(1:8, nrow = 4, byrow = TRUE)
+rowDivide(rowMultiply(m, 1:4), 1:4)
 }

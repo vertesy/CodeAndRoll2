@@ -16,4 +16,5 @@ Convert a vector with names into a tibble, keeping the names as rownames.
 }
 \examples{
 as_tibble_from_namedVec()
+
 }
