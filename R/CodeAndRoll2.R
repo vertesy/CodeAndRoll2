@@ -2346,17 +2346,19 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 #' @export
 sort_matrix_rows <- function(df, column = NULL, rownames = FALSE, decrease = FALSE, na_last = TRUE) {
   stopifnot(
-    is.data.frame(df) || is.matrix(df),
-    is.character(column) || is.numeric(column) || if (rownames) is.null(column),
-    "cannot handle multi column sort" = length(column) == 1 || if (rownames) is.null(column),
-    is.logical(rownames), is.logical(decrease), is.logical(na_last),
-    (if (isFALSE(rownames) && is.character(column)) column %in% colnames(df) else TRUE)
+    "df must be a data.frame or matrix" = is.data.frame(df) || is.matrix(df),
+    "rownames must be a single TRUE/FALSE" = is.logical(rownames) && length(rownames) == 1,
+    "decrease must be a single TRUE/FALSE" = is.logical(decrease) && length(decrease) == 1,
+    "na_last must be a single TRUE/FALSE" = is.logical(na_last) && length(na_last) == 1,
+    "column is required and must be a single name/index when rownames = FALSE" =
+      rownames || (!is.null(column) && length(column) == 1 && (is.character(column) || is.numeric(column))),
+    "column not found in colnames(df)" = rownames || !is.character(column) || column %in% colnames(df)
   )
 
   message("Sorting by ", if (rownames) "rownames" else paste(column, "column"), " in ", if (decrease) "Decreasing" else "Increasing", " order.")
 
-  ordering_vakues <- if (rownames) rownames(df) else df[, column]
-  sorted_order <- order(rownames(df), decreasing = decrease, na.last = na_last)
+  ordering_values <- if (rownames) rownames(df) else df[, column]
+  sorted_order <- order(ordering_values, decreasing = decrease, na.last = na_last)
 
   df[sorted_order, ]
 }
