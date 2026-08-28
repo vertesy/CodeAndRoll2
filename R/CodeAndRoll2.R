@@ -2395,7 +2395,7 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
   rn1 <- rownames(matrix1)
   rn2 <- rownames(matrix2)
   idx <- intersect(rn1, rn2)
-  llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
+  iprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
   merged <- cbind(matrix1[idx, ], matrix2[idx, ])
   diffz <- symdiff(rn1, rn2)
   print("Missing Rows 1, 2")
