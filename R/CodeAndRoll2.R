@@ -3199,7 +3199,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
     outList <- lapply(outList, na.omit.strip)
   }
   if (zero.omit) {
-    outList <- lapply(outList, CodeAndRoll2::zero.omit)
+    outList <- lapply(outList, get("zero.omit", mode = "function"))
   }
   if (omit.empty) {
     outList <- outList[(lapply(outList, length)) > 0]
@@ -3229,7 +3229,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
     outList <- lapply(outList, na.omit.strip)
   }
   if (zero.omit) {
-    outList <- lapply(outList, CodeAndRoll2::zero.omit)
+    outList <- lapply(outList, get("zero.omit", mode = "function"))
   }
   if (omit.empty) {
     outList <- outList[(lapply(outList, length)) > 0]
