@@ -1251,7 +1251,7 @@ translate <- function(vec, old, new) {
   }
 
   vec_replaced <- vec
-  for (i in 1:length(old)) {
+  for (i in seq_along(old)) {
     oldval <- old[i]
     vec_replaced[vec == oldval] <- new[i]
     printEveryN(i = i, N = 1000)
@@ -1325,7 +1325,7 @@ flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
 #' @export
 sortbyitsnames <- function(vec_or_list, decreasing = FALSE, ...) {
   xx <- names(vec_or_list)
-  names(xx) <- 1:length(vec_or_list)
+  names(xx) <- seq_along(vec_or_list)
   order <- as.numeric(names(gtools::mixedsort(xx, decreasing = decreasing, ...)))
   vec_or_list[order]
 }
@@ -1470,7 +1470,7 @@ split_vec_to_list_by_N <- function(vec = 1:27, by = 9) {
   n_groups <- ceiling(length(vec) / by)
   assignment <- gl(n_groups, by, length = length(vec))
   lsX <- split(x = vec, f = assignment)
-  names(lsX) <- paste0("v", 1:length(lsX))
+  names(lsX) <- paste0("v", seq_along(lsX))
   lsX
 }
 # FORMERLY / aka: iterBy.over()
@@ -1482,7 +1482,7 @@ split_vec_to_list_by_N <- function(vec = 1:27, by = 9) {
 #' @param vec input vector, Default: 1:9
 #' @export
 zigzagger <- function(vec = 1:9) {
-  intermingle2vec(vec, rev(vec))[1:length(vec)]
+  intermingle2vec(vec, rev(vec))[seq_along(vec)]
 }
 
 
@@ -2421,7 +2421,7 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
 colsplit <- function(df, f = colnames(df)) {
   ListOfDFs <- NULL
   levelz <- unique(f)
-  for (i in 1:length(levelz)) {
+  for (i in seq_along(levelz)) {
     ListOfDFs[[i]] <- df[, which(f == levelz[i])]
   }
   names(ListOfDFs) <- levelz
@@ -2438,7 +2438,7 @@ colsplit <- function(df, f = colnames(df)) {
 rowsplit <- function(df, f = rownames(df)) {
   ListOfDFs <- NULL
   levelz <- unique(f)
-  for (i in 1:length(levelz)) {
+  for (i in seq_along(levelz)) {
     ListOfDFs[[i]] <- df[which(f == levelz[i]), ]
   }
   names(ListOfDFs) <- levelz
@@ -2652,7 +2652,7 @@ get.oddoreven <- function(df_ = NULL, rows = FALSE, odd = TRUE) {
 #' @importFrom plyr join_all
 merge_dfs_by_rn <- function(list_of_dfs) {
   if (length(names(list_of_dfs)) != length(list_of_dfs)) {
-    names(list_of_dfs) <- 1:length(list_of_dfs)
+    names(list_of_dfs) <- seq_along(list_of_dfs)
   }
 
   for (i in names(list_of_dfs)) {
@@ -2681,7 +2681,7 @@ merge_1col_dfs_by_rn <- function(list_of_dfs, FILLwith = 0, columnUSE = 1) {
   iprint("n rownames:", length(all.rn))
   df_new <- data.frame(matrix(data = FILLwith, nrow = length(all.rn), ncol = length(list_of_dfs)), row.names = all.rn)
   colnames(df_new) <- names(list_of_dfs)
-  for (i in 1:length(list_of_dfs)) {
+  for (i in seq_along(list_of_dfs)) {
     print(i)
     indf <- list_of_dfs[[i]]
     df_new[rownames(indf), i] <- indf[, columnUSE]
@@ -3129,7 +3129,7 @@ symdiff.ls <- function(ls, ...) {
     names(res) <- names(ls)
   } else {
     message("No names in list / some names missing. Numeric names will be used.")
-    names(res) <- 1:length(res)
+    names(res) <- seq_along(res)
   }
 
   return(res)
@@ -3256,7 +3256,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
 #' @importFrom gtools mixedsort
 reorder.list <- function(L, namesOrdered = gtools::mixedsort(names(L))) {
   Lout <- list(NA)
-  for (x in 1:length(namesOrdered)) {
+  for (x in seq_along(namesOrdered)) {
     Lout[[x]] <- L[[namesOrdered[x]]]
   }
   if (length(names(L))) {
@@ -3292,7 +3292,7 @@ intermingle2lists <- function(L1, L2) {
   Lout <- list(NA)
 
   # Create a new list with the combined elements of `L1` and `L2`
-  for (x in 1:(2 * length(L1))) {
+  for (x in seq_len(2L * length(L1))) {
     if (x %% 2) {
       Lout[[x]] <- L1[[((x + 1) / 2)]]
       names(Lout)[x] <- names(L1)[((x + 1) / 2)]
@@ -3325,7 +3325,7 @@ as.listalike <- function(vec, list_wannabe) {
   past <- 0
 
   # Iterate over the list, and fill in the elements with the corresponding elements from the vectorfor (v in 1:length(list_wannabe)) {
-  for (v in 1:length(list_wannabe)) {
+  for (v in seq_along(list_wannabe)) {
     lv <- length(list_wannabe[[v]])
     list_return[[v]] <- vec[(past + 1):(past + lv)]
     past <- past + lv
@@ -3916,7 +3916,7 @@ movingSEM <- function(x, oneSide = 5) {
 imovingSEM <- function(x, oneSide = 5) {
   # Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
   y <- NULL
-  for (i in 1:length(x)) {
+  for (i in seq_along(x)) {
     oneSideDynamic <- min(i - 1, oneSide, length(x) - i)
     oneSideDynamic
     indexx <- (i - oneSideDynamic):(i + oneSideDynamic)
@@ -3944,9 +3944,9 @@ imovingSEM <- function(x, oneSide = 5) {
 #'
 #' @export
 dput_pretty <- pretty_dput <- function(vec) {
-  if (is.null(names(vec))) names(vec) <- 1:length(vec)
+  if (is.null(names(vec))) names(vec) <- seq_along(vec)
   cat("c(", sep = "")
-  for (i in 1:length(vec)) {
+  for (i in seq_along(vec)) {
     cat("\n`", vec[i], "` = \"", names(vec)[i], "\"",
       ifelse(i != length(vec), ",", ""),
       sep = ""
