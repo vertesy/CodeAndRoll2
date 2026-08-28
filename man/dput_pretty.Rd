@@ -19,6 +19,6 @@ creating more readable output.
 }
 \examples{
 vec <- c(`0` = "ACyte", `1` = "Misp.1.DCN")
-pretty_dput(vec)
+dput_pretty(vec)
 
 }
