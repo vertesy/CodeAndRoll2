@@ -963,10 +963,7 @@ as.named.vector.table <- function(table, verbose = TRUE,
   stopifnot("table must be 1D" = length(dim(table)) <= 1)
   stopifnot(HasNames(table))
 
-  # v <- as.vector(unclass(table)); attributes(v) <- NULL; # Atomic vector with names
-  # names(v) <- dimnames(table)[[1]]
-  # Even after unclass(), the dim attribute remains, and is.vector() only returns TRUE if
-  # an object has no attributes other than names.
+  v <- c(table) # Atomic named vector, stripped of the table's class/dim attributes
 
   stopifnot(length(v) == length(table))
   return(v)
