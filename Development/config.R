@@ -3,14 +3,14 @@
 
 DESCRIPTION <- list(
   package.name = "CodeAndRoll2",
-  version = "2.8.5",
+  version = "2.8.6",
   title = "CodeAndRoll2 for vector, matrix and list manipulations",
   description = "CodeAndRoll2 is a set of more than 170 productivity functions for vector, matrix
   and list manipulations and math. Used by MarkdownReports, ggExpress, SeuratUtils, etc.",
 
   depends = "Stringendo",
-  imports = "dplyr, tibble, stringr, purrr, plyr, gplots, gtools, colorRamps, RColorBrewer, sessioninfo, rstudioapi", # graphics,
-  suggests = "sm, grDevices",
+  imports = "dplyr, tibble, stringr, purrr, plyr, gplots, gtools, colorRamps, RColorBrewer, sessioninfo, rstudioapi, ReadWriter", # graphics,
+  suggests = "sm, grDevices, ggExpress",
 
   author.given = "Abel",
   author.family = "Vertesy",
