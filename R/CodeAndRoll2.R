@@ -1915,7 +1915,7 @@ apply2 <- function(X, MARGIN, FUN, ...) {
   if (
     is.matrix(X) &&
       length(dim(X)) == 2 &&
-      identical(MARGIN, 1) &&
+      length(MARGIN) == 1 && MARGIN == 1 &&
       is.matrix(result)
   ) {
     result <- t(result)
