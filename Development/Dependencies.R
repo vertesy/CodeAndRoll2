@@ -1,4 +1,4 @@
-Dependency file generated on Tue Aug 25 16:10:31 2026 
+Dependency file generated on Sat Aug 29 11:34:34 2026
 
 #################################################################################################### 
 CodeAndRoll2.less.used.R
@@ -31,9 +31,12 @@ $`c("package:CodeAndRoll2", "package:stats")`
 $`c("package:CodeAndRoll2", "package:Stringendo")`
 [1] "percentage_formatter"
 
+$`package:ggExpress`
+[1] "qbarplot"
+
 $`character(0)`
-[1] "FirstCol2RowNames" "full_join"         "fun"               "is.tibble"        
-[5] "llprint"           "map"               "qbarplot"          "which.max.multi"  
+[1] "full_join"       "fun"             "is.tibble"       "llprint"
+[5] "map"             "which.max.multi"
 
 $`package:base`
   [1] ".Deprecated"      "abs"              "all"              "any"             
@@ -91,6 +94,9 @@ $`package:graphics`
 $`package:methods`
 [1] "is"
 
+$`package:ReadWriter`
+[1] "column.2.row.names"
+
 $`package:Stringendo`
 [1] "HasNames"           "imessage"           "iprint"             "kppws"             
 [5] "substitute_deparse" "warnif"             "warnifnot"         
@@ -102,11 +108,13 @@ $`package:utils`
 c("CodeAndRoll2", "base")
 c("CodeAndRoll2", "stats")
 c("CodeAndRoll2", "Stringendo")
+ggExpress
 character(0)
 base
 CodeAndRoll2
 graphics
 methods
+ReadWriter
 Stringendo
 utils
 #################################################################################################### 
