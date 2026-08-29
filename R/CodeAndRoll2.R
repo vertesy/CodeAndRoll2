@@ -1600,7 +1600,7 @@ checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = T
     iprint(percentage_formatter(overlap_len / max_len), "or", max_len, "of", namez[which.max(lengths)])
   }
 
-  pass <- overlap_len > required_overlap
+  pass <- overlap_len >= required_overlap
   if (!pass) {
     iprint(substitute(x), "-", head(x))
     iprint(substitute(y), "-", head(y))
