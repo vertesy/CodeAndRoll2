@@ -1296,15 +1296,14 @@ fractions <- function(vec, na_rm = TRUE) vec / sum(vec, na.rm = na_rm)
 #' @param silent Suppress printing info? Default: FALSE
 #' @export
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
-  if (!is.null(names(namedVector))) {
-    newvec <- names(namedVector)
-    if (NumericNames) {
-      newvec <- as.numeric(names(namedVector))
-    }
-    names(newvec) <- namedVector
-  } else {
-    Stringendo::iprint("Vector without names!", head(namedVector))
+  stopifnot("namedVector must have names (there is nothing to flip otherwise)" = !is.null(names(namedVector)))
+
+  newvec <- names(namedVector)
+  if (NumericNames) {
+    newvec <- as.numeric(names(namedVector))
   }
+  names(newvec) <- namedVector
+
   if (!silent) {
     if (any(duplicated(namedVector))) {
       Stringendo::iprint("New names contain duplicated elements", head(namedVector[which(duplicated(namedVector))]))
@@ -1915,7 +1914,7 @@ apply2 <- function(X, MARGIN, FUN, ...) {
   if (
     is.matrix(X) &&
       length(dim(X)) == 2 &&
-      identical(MARGIN, 1) &&
+      length(MARGIN) == 1 && MARGIN == 1 &&
       is.matrix(result)
   ) {
     result <- t(result)
@@ -2410,8 +2409,8 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
   merged <- cbind(matrix1[idx, ], matrix2[idx, ])
   diffz <- symdiff(rn1, rn2)
   print("Missing Rows 1, 2")
-  x1 <- rowSums(matrix1[diffz[[1]], ])
-  x2 <- rowSums(matrix2[diffz[[2]], ])
+  x1 <- rowSums(matrix1[diffz[[1]], , drop = FALSE])
+  x2 <- rowSums(matrix2[diffz[[2]], , drop = FALSE])
   print("")
   Stringendo::iprint("Values lost 1: ", round(sum(x1)), "or", Stringendo::percentage_formatter(sum(x1) / sum(merged)))
   print(tail(sort(x1), n = k))
@@ -2720,8 +2719,8 @@ merge_numeric_df_by_rn <- function(x, y) {
   merged[is.na(merged)] <- 0
 
   print("Uniq Rows (top 10 by sum)")
-  x1 <- rowSums(x[diffz[[1]], ])
-  x2 <- rowSums(y[diffz[[2]], ])
+  x1 <- rowSums(x[diffz[[1]], , drop = FALSE])
+  x2 <- rowSums(y[diffz[[2]], , drop = FALSE])
   print("")
   Stringendo::iprint("Values specific to 1: ", round(sum(x1)), "or", Stringendo::percentage_formatter(sum(x1) / sum(merged)))
   print(tail(sort(x1), n = 10))
