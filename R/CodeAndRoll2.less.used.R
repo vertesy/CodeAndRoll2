@@ -100,10 +100,10 @@ as.named.vector.df <- function(
 ) {
   .Deprecated(old = "as.named.vector.df", new = "df.col.2.named.vector or df.row.2.named.vector")
 
-  if (verbose) message("input df dimensions: ", kppc(idim(df)))
+  if (verbose) message("input df dimensions: ", Stringendo::kppc(idim(df)))
 
   name.selection <- dimnames(df)[[(3 - WhichDimNames)]][col.or.row.name.or.index]
-  if (verbose) iprint("Variable used:", name.selection)
+  if (verbose) Stringendo::iprint("Variable used:", name.selection)
 
   vecc <- if (WhichDimNames == 1) {
     as.vector(unlist(df[, col.or.row.name.or.index]), ...)
