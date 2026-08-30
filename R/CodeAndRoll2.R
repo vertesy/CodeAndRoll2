@@ -1296,15 +1296,14 @@ fractions <- function(vec, na_rm = TRUE) vec / sum(vec, na.rm = na_rm)
 #' @param silent Suppress printing info? Default: FALSE
 #' @export
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
-  if (!is.null(names(namedVector))) {
-    newvec <- names(namedVector)
-    if (NumericNames) {
-      newvec <- as.numeric(names(namedVector))
-    }
-    names(newvec) <- namedVector
-  } else {
-    iprint("Vector without names!", head(namedVector))
+  stopifnot("namedVector must have names (there is nothing to flip otherwise)" = !is.null(names(namedVector)))
+
+  newvec <- names(namedVector)
+  if (NumericNames) {
+    newvec <- as.numeric(names(namedVector))
   }
+  names(newvec) <- namedVector
+
   if (!silent) {
     if (any(duplicated(namedVector))) {
       iprint("New names contain duplicated elements", head(namedVector[which(duplicated(namedVector))]))
