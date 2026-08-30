@@ -3898,8 +3898,10 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 #' @export
 movingAve <- function(x, oneSide = 5) {
   y <- NULL
-  for (i in oneSide:length(x)) {
-    y[i] <- mean(x[(i - oneSide):(i + oneSide)])
+  for (i in seq_along(x)) {
+    oneSideDynamic <- min(i - 1, oneSide, length(x) - i)
+    indexx <- (i - oneSideDynamic):(i + oneSideDynamic)
+    y[i] <- mean(x[indexx])
   }
   return(y)
 }
@@ -3929,8 +3931,10 @@ movingAve2 <- function(x, n = 5) {
 movingSEM <- function(x, oneSide = 5) {
   # Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
   y <- NULL
-  for (i in oneSide:length(x)) {
-    y[i] <- sem(x[(i - oneSide):(i + oneSide)])
+  for (i in seq_along(x)) {
+    oneSideDynamic <- min(i - 1, oneSide, length(x) - i)
+    indexx <- (i - oneSideDynamic):(i + oneSideDynamic)
+    y[i] <- sem(x[indexx])
   }
   return(y)
 }
