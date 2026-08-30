@@ -3008,11 +3008,7 @@ df.remove.empty.rows.and.columns <- function(
         ...
       )
     } else {
-      message(
-        "Package 'ggExpress' is not installed; skipping the removal-fraction plot ",
-        "(plot_stats = TRUE). Install it with remotes::install_github('vertesy/ggExpress') ",
-        "to enable this plot."
-      )
+      warning("Package 'ggExpress' needed for plot_stats = TRUE; skipping plot.", call. = FALSE)
     }
   }
 
