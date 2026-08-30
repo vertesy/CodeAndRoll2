@@ -2935,8 +2935,8 @@ na.omit.mat <- function(mat, any = TRUE) {
 #' @param cols Cols to check for NAs, Default: 1:NCOL(mat)
 #' @export
 remove.na.rows <- function(mat, cols = 1:NCOL(mat)) {
-  mat2 <- mat[, cols]
-  idxOK <- which(rowSums(!apply(mat2, 2, is.na)) == NCOL(mat))
+  mat2 <- mat[, cols, drop = FALSE]
+  idxOK <- which(rowSums(!apply(mat2, 2, is.na)) == NCOL(mat2))
   mat[idxOK, ]
 }
 
