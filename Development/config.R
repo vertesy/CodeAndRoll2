@@ -9,7 +9,7 @@ DESCRIPTION <- list(
   and list manipulations and math. Used by MarkdownReports, ggExpress, SeuratUtils, etc.",
 
   depends = "Stringendo",
-  imports = "dplyr, tibble, stringr, purrr, plyr, gplots, gtools, colorRamps, RColorBrewer, sessioninfo, rstudioapi", # graphics,
+  imports = "dplyr, tibble, stringr, purrr, plyr, gplots, gtools, colorRamps, RColorBrewer, sessioninfo, rstudioapi, ReadWriter", # graphics,
   suggests = "sm, grDevices, ggExpress",
 
   author.given = "Abel",
