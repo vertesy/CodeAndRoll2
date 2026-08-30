@@ -3,7 +3,7 @@
 
 DESCRIPTION <- list(
   package.name = "CodeAndRoll2",
-  version = "2.8.6",
+  version = "2.8.13",
   title = "CodeAndRoll2 for vector, matrix and list manipulations",
   description = "CodeAndRoll2 is a set of more than 170 productivity functions for vector, matrix
   and list manipulations and math. Used by MarkdownReports, ggExpress, SeuratUtils, etc.",
@@ -18,4 +18,3 @@ DESCRIPTION <- list(
   github.user = "vertesy",
   license = "GPL-3 + file LICENSE"
 )
-

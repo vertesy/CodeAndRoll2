@@ -1296,15 +1296,14 @@ fractions <- function(vec, na_rm = TRUE) vec / sum(vec, na.rm = na_rm)
 #' @param silent Suppress printing info? Default: FALSE
 #' @export
 flip_value2name <- function(namedVector, NumericNames = FALSE, silent = FALSE) {
-  if (!is.null(names(namedVector))) {
-    newvec <- names(namedVector)
-    if (NumericNames) {
-      newvec <- as.numeric(names(namedVector))
-    }
-    names(newvec) <- namedVector
-  } else {
-    Stringendo::iprint("Vector without names!", head(namedVector))
+  stopifnot("namedVector must have names (there is nothing to flip otherwise)" = !is.null(names(namedVector)))
+
+  newvec <- names(namedVector)
+  if (NumericNames) {
+    newvec <- as.numeric(names(namedVector))
   }
+  names(newvec) <- namedVector
+
   if (!silent) {
     if (any(duplicated(namedVector))) {
       Stringendo::iprint("New names contain duplicated elements", head(namedVector[which(duplicated(namedVector))]))
@@ -1600,7 +1599,7 @@ checkMinOverlap <- function(x, y, min_overlap = 0.2, stop_it = TRUE, verbose = T
     Stringendo::iprint(Stringendo::percentage_formatter(overlap_len / max_len), "or", max_len, "of", namez[which.max(lengths)])
   }
 
-  pass <- overlap_len > required_overlap
+  pass <- overlap_len >= required_overlap
   if (!pass) {
     Stringendo::iprint(substitute(x), "-", head(x))
     Stringendo::iprint(substitute(y), "-", head(y))
@@ -1915,7 +1914,7 @@ apply2 <- function(X, MARGIN, FUN, ...) {
   if (
     is.matrix(X) &&
       length(dim(X)) == 2 &&
-      identical(MARGIN, 1) &&
+      length(MARGIN) == 1 && MARGIN == 1 &&
       is.matrix(result)
   ) {
     result <- t(result)
@@ -2352,17 +2351,22 @@ sortEachColumn <- function(data, ...) sapply(data, sort, ...) # Sort each column
 #' @export
 sort_matrix_rows <- function(df, column = NULL, rownames = FALSE, decrease = FALSE, na_last = TRUE) {
   stopifnot(
-    is.data.frame(df) || is.matrix(df),
-    is.character(column) || is.numeric(column) || if (rownames) is.null(column),
-    "cannot handle multi column sort" = length(column) == 1 || if (rownames) is.null(column),
-    is.logical(rownames), is.logical(decrease), is.logical(na_last),
-    (if (isFALSE(rownames) && is.character(column)) column %in% colnames(df) else TRUE)
+    "df must be a data.frame or matrix" = is.data.frame(df) || is.matrix(df),
+    "rownames must be a single TRUE/FALSE" = is.logical(rownames) && length(rownames) == 1,
+    "decrease must be a single TRUE/FALSE" = is.logical(decrease) && length(decrease) == 1,
+    "na_last must be a single TRUE/FALSE" = is.logical(na_last) && length(na_last) == 1,
+    "column is required and must be a single name/index when rownames = FALSE" =
+      rownames || (!is.null(column) && length(column) == 1 && (is.character(column) || is.numeric(column))),
+    "column not found in colnames(df)" = rownames || !is.character(column) || column %in% colnames(df),
+    "column index must be a whole number between 1 and ncol(df)" =
+      rownames || !is.numeric(column) ||
+        (is.finite(column) && column == as.integer(column) && column >= 1 && column <= ncol(df))
   )
 
   message("Sorting by ", if (rownames) "rownames" else paste(column, "column"), " in ", if (decrease) "Decreasing" else "Increasing", " order.")
 
-  ordering_vakues <- if (rownames) rownames(df) else df[, column]
-  sorted_order <- order(rownames(df), decreasing = decrease, na.last = na_last)
+  ordering_values <- if (rownames) rownames(df) else df[, column]
+  sorted_order <- order(ordering_values, decreasing = decrease, na.last = na_last)
 
   df[sorted_order, ]
 }
@@ -2405,8 +2409,8 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
   merged <- cbind(matrix1[idx, ], matrix2[idx, ])
   diffz <- symdiff(rn1, rn2)
   print("Missing Rows 1, 2")
-  x1 <- rowSums(matrix1[diffz[[1]], ])
-  x2 <- rowSums(matrix2[diffz[[2]], ])
+  x1 <- rowSums(matrix1[diffz[[1]], , drop = FALSE])
+  x2 <- rowSums(matrix2[diffz[[2]], , drop = FALSE])
   print("")
   Stringendo::iprint("Values lost 1: ", round(sum(x1)), "or", Stringendo::percentage_formatter(sum(x1) / sum(merged)))
   print(tail(sort(x1), n = k))
@@ -2715,8 +2719,8 @@ merge_numeric_df_by_rn <- function(x, y) {
   merged[is.na(merged)] <- 0
 
   print("Uniq Rows (top 10 by sum)")
-  x1 <- rowSums(x[diffz[[1]], ])
-  x2 <- rowSums(y[diffz[[2]], ])
+  x1 <- rowSums(x[diffz[[1]], , drop = FALSE])
+  x2 <- rowSums(y[diffz[[2]], , drop = FALSE])
   print("")
   Stringendo::iprint("Values specific to 1: ", round(sum(x1)), "or", Stringendo::percentage_formatter(sum(x1) / sum(merged)))
   print(tail(sort(x1), n = 10))
@@ -2776,7 +2780,10 @@ merge_ls_of_named_vec_as_df_cols <- function(
   colnames(COMBINED)[-1] <- names(named_list)
   COMBINED[is.na(COMBINED)] <- missing_values
 
-  return(ReadWriter::column.2.row.names(COMBINED))
+  # Move the merge-key column ("ind") into row names, then drop it
+  rownames(COMBINED) <- as.character(COMBINED[[1]])
+  COMBINED[[1]] <- NULL
+  return(COMBINED)
 }
 
 
@@ -2955,7 +2962,9 @@ remove.na.cols <- function(mat) {
 #' @param cols The name of the variable that will store the fraction of columns that were removed.
 #' @param thr.cell.empty The threshold value below a cell is considered "empty".
 #' @param plot_stats Whether to plot the fraction of rows and columns that were removed.
-#' @param ... Additional arguments to pass to `qbarplot`.
+#'   Requires the (Suggested, not required) `ggExpress` package; if it is not installed, the
+#'   plot is skipped with an informative message instead of erroring.
+#' @param ... Additional arguments to pass to `ggExpress::qbarplot`.
 #'
 #' @return A data frame with the empty rows and columns removed.
 #' @export
@@ -3212,7 +3221,7 @@ as.list.df.by.row <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
     outList <- lapply(outList, na.omit.strip)
   }
   if (zero.omit) {
-    outList <- lapply(outList, zero.omit)
+    outList <- lapply(outList, get("zero.omit", mode = "function"))
   }
   if (omit.empty) {
     outList <- outList[(lapply(outList, length)) > 0]
@@ -3242,7 +3251,7 @@ as.list.df.by.col <- function(dtf, na.omit = TRUE, zero.omit = FALSE, omit.empty
     outList <- lapply(outList, na.omit.strip)
   }
   if (zero.omit) {
-    outList <- lapply(outList, zero.omit)
+    outList <- lapply(outList, get("zero.omit", mode = "function"))
   }
   if (omit.empty) {
     outList <- outList[(lapply(outList, length)) > 0]
