@@ -965,7 +965,7 @@ as.named.vector.table <- function(table, verbose = TRUE,
 
   # Even after unclass(), the dim attribute remains, and is.vector() only returns TRUE if
   # an object has no attributes other than names.
-  v <- as.vector(unclass(table))
+  v <- as.vector(unclass(table), ...)
   attributes(v) <- NULL
   names(v) <- dimnames(table)[[1]]
 
