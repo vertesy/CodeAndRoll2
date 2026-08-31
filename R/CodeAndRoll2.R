@@ -3906,8 +3906,8 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 movingAve <- function(x, oneSide = 5, partial = TRUE) {
   stopifnot(
     "x must be a numeric vector" = is.numeric(x),
-    "oneSide must be a single non-negative number" = length(oneSide) == 1 && oneSide >= 0,
-    "partial must be TRUE or FALSE" = is.logical(partial) && length(partial) == 1
+    "oneSide must be a single non-negative whole number" = is.numeric(oneSide) && length(oneSide) == 1 && is.finite(oneSide) && oneSide >= 0 && oneSide == floor(oneSide),
+    "partial must be TRUE or FALSE" = is.logical(partial) && length(partial) == 1 && !is.na(partial)
   )
 
   n <- length(x)
@@ -3960,8 +3960,8 @@ movingAve2 <- function(x, n = 5) {
 movingSEM <- function(x, oneSide = 5, partial = TRUE) {
   stopifnot(
     "x must be a numeric vector" = is.numeric(x),
-    "oneSide must be a single non-negative number" = length(oneSide) == 1 && oneSide >= 0,
-    "partial must be TRUE or FALSE" = is.logical(partial) && length(partial) == 1
+    "oneSide must be a single non-negative whole number" = is.numeric(oneSide) && length(oneSide) == 1 && is.finite(oneSide) && oneSide >= 0 && oneSide == floor(oneSide),
+    "partial must be TRUE or FALSE" = is.logical(partial) && length(partial) == 1 && !is.na(partial)
   )
 
   n <- length(x)
