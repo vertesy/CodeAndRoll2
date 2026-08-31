@@ -14,4 +14,4 @@
 #'   if (!n) n <- stringr::str_count(string = string, pattern = pattern)
 #'   stringr::str_split_fixed(string, pattern = pattern, n = n)
 #'   }
-# "replace with str_split_1"
+# # TODO: replace with str_split_1
