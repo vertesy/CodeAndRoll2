@@ -963,6 +963,8 @@ as.named.vector.table <- function(table, verbose = TRUE,
   stopifnot("table must be 1D" = length(dim(table)) <= 1)
   stopifnot(Stringendo::HasNames(table))
 
+  # NOTE: BUG -- the lines that would actually build 'v' are commented out below,
+  # so 'v' is never defined; any call to this (deprecated) function errors.
   # v <- as.vector(unclass(table)); attributes(v) <- NULL; # Atomic vector with names
   # names(v) <- dimnames(table)[[1]]
   # Even after unclass(), the dim attribute remains, and is.vector() only returns TRUE if
@@ -1808,7 +1810,7 @@ pc_in_total_of_match <- function(vec_or_table, category, NA_omit = TRUE) {
         vec_or_table <- stats::na.omit(vec_or_table)
         Stringendo::iprint(sum(is.na(vec_or_table)), "NA are omitted from the vec_or_table of:", length(vec_or_table))
       }
-      "Not working completely: if NaN is stored as string, it does not detect it"
+      # NOTE: not working completely -- if NaN is stored as a string, it is not detected.
     }
 
     # Calculate the percentage
@@ -3642,6 +3644,9 @@ list.2.replicated.name.vec <- function(ListWithNames) {
 #'
 #' @export
 symdiff <- function(x, y, z = NULL) {
+  # A value that appears in 2+ of the (uniquified) input vectors shows up as a
+  # duplicate once they're all concatenated; removing those from each vector
+  # in turn leaves only what's unique to that one vector.
   big.vec <- c(unique(x), unique(y), unique(z))
   # ls <- list(x, y, z)
   ls <- Filter(function(l) !is.null(l), list(x, y, z))
