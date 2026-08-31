@@ -4,20 +4,28 @@
 \alias{movingAve}
 \title{Moving / rolling average}
 \usage{
-movingAve(x, oneSide = 5)
+movingAve(x, oneSide = 5, partial = TRUE)
 }
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{oneSide}{The size of the moving window. Defaults to 5.}
+\item{oneSide}{The number of elements on each side of the moving window. Defaults to 5.}
+
+\item{partial}{Should the window shrink near the edges instead of leaving them \code{NA}?
+Defaults to \code{TRUE}.}
 }
 \value{
-A vector of the moving averages.
+A vector of the same length as \code{x}, containing the moving average for each element.
 }
 \description{
-Calculates the moving / rolling average of a numeric vector.
+Calculates the moving / rolling average of a numeric vector. The window around
+element \code{i} spans \code{oneSide} elements on either side (window width \code{2 * oneSide + 1}).
+Near the edges of \code{x}, the window either shrinks to whatever data is available
+(\code{partial = TRUE}, the default) or is left as \code{NA} because a full window does not exist
+(\code{partial = FALSE}), mirroring \code{zoo::rollmean(..., partial = )}.
 }
 \examples{
 movingAve(1:5)
+movingAve(1:20, oneSide = 5, partial = FALSE)
 
 }
