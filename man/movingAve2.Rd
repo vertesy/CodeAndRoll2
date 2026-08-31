@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{movingAve2}
 \alias{movingAve2}
-\title{Moving / rolling average (v2, filter)}
+\title{Moving / rolling average (v2, filter) [Deprecated]}
 \usage{
 movingAve2(x, n = 5)
 }
@@ -16,6 +16,9 @@ A vector of the moving averages.
 }
 \description{
 Calculates the moving / rolling average of a numeric vector, using \code{filter()}.
+Deprecated in favor of \code{\link[=movingAve]{movingAve()}}, which offers the same shrinking- vs. fixed-window
+choice (via \code{partial}) in a single implementation. Note \code{n} here is the \emph{total} window
+width (unlike \code{movingAve()}'s \code{oneSide}, which is elements per side).
 }
 \examples{
 movingAve2(1:5)

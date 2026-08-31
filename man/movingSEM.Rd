@@ -4,16 +4,25 @@
 \alias{movingSEM}
 \title{movingSEM}
 \usage{
-movingSEM(x, oneSide = 5)
+movingSEM(x, oneSide = 5, partial = TRUE)
 }
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{oneSide}{The size of the moving window, in terms of the number of elements on either side of the current element.}
+\item{oneSide}{The number of elements on each side of the moving window, in terms of the number of elements on either side of the current element.}
+
+\item{partial}{Should the window shrink near the edges instead of leaving them \code{NA}?
+Defaults to \code{TRUE}.}
 }
 \value{
 A vector of the same length as \code{x}, containing the SEM for each element.
 }
 \description{
-Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
+Calculates the moving / rolling standard error of the mean (SEM) on a numeric
+vector. The window around element \code{i} spans \code{oneSide} elements on either side. Near the edges
+of \code{x}, the window either shrinks to whatever data is available (\code{partial = TRUE}, the
+default) or is left as \code{NA} because a full window does not exist (\code{partial = FALSE}).
+}
+\examples{
+movingSEM(1:5)
 }

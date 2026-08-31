@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{imovingSEM}
 \alias{imovingSEM}
-\title{imovingSEM}
+\title{imovingSEM [Deprecated]}
 \usage{
 imovingSEM(x, oneSide = 5)
 }
@@ -15,5 +15,7 @@ imovingSEM(x, oneSide = 5)
 A vector of the same length as \code{x}, containing the SEM for each element.
 }
 \description{
-Calculates the moving / rolling standard error of the mean (SEM). It computes values up to the edges of the vector using incrementally smaller window sizes.
+Calculates the moving / rolling standard error of the mean (SEM), shrinking the
+window near the edges. Deprecated: identical to \code{movingSEM(x, oneSide, partial = TRUE)}, use
+that instead.
 }
