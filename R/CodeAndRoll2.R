@@ -3927,7 +3927,7 @@ movingAve <- function(x, oneSide = 5, partial = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title Moving / rolling average (v2, filter) [Deprecated]
+#' @title Moving / rolling average (v2, filter) (Deprecated)
 #' @description Calculates the moving / rolling average of a numeric vector, using `filter()`.
 #' Deprecated in favor of [movingAve()], which offers the same shrinking- vs. fixed-window
 #' choice (via `partial`) in a single implementation. Note `n` here is the *total* window
@@ -3981,7 +3981,7 @@ movingSEM <- function(x, oneSide = 5, partial = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title imovingSEM [Deprecated]
+#' @title imovingSEM (Deprecated)
 #'
 #' @description Calculates the moving / rolling standard error of the mean (SEM), shrinking the
 #' window near the edges. Deprecated: identical to `movingSEM(x, oneSide, partial = TRUE)`, use
