@@ -3889,25 +3889,49 @@ mean_of_log <- function(x, k = 2, na.rm = TRUE) {
 # _________________________________________________________________________________________________
 #' @title Moving / rolling average
 #'
-#' @description Calculates the moving / rolling average of a numeric vector.
+#' @description Calculates the moving / rolling average of a numeric vector. The window around
+#' element `i` spans `oneSide` elements on either side (window width `2 * oneSide + 1`). Near the
+#' edges of `x`, the window either shrinks to whatever data is available (`partial = TRUE`,
+#' the default) or is left as `NA` because a full window does not exist (`partial = FALSE`),
+#' mirroring `zoo::rollmean(..., partial = )`.
 #' @param x A numeric vector.
-#' @param oneSide The size of the moving window. Defaults to 5.
-#' @return A vector of the moving averages.
+#' @param oneSide The number of elements on each side of the moving window. Defaults to 5.
+#' @param partial Should the window shrink near the edges instead of leaving them `NA`?
+#' Defaults to `TRUE`.
+#' @return A vector of the same length as `x`, containing the moving average for each element.
 #' @examples movingAve(1:5)
+#' movingAve(1:20, oneSide = 5, partial = FALSE)
 #'
 #' @export
-movingAve <- function(x, oneSide = 5) {
-  y <- NULL
-  for (i in oneSide:length(x)) {
-    y[i] <- mean(x[(i - oneSide):(i + oneSide)])
+movingAve <- function(x, oneSide = 5, partial = TRUE) {
+  stopifnot(
+    "x must be a numeric vector" = is.numeric(x),
+    "oneSide must be a single non-negative number" = length(oneSide) == 1 && oneSide >= 0,
+    "partial must be TRUE or FALSE" = is.logical(partial) && length(partial) == 1
+  )
+
+  n <- length(x)
+  y <- rep(NA_real_, n)
+  if (partial) {
+    for (i in seq_along(x)) {
+      oneSideDynamic <- min(i - 1, oneSide, n - i)
+      y[i] <- mean(x[(i - oneSideDynamic):(i + oneSideDynamic)])
+    }
+  } else {
+    if (2 * oneSide + 1 > n) warning("oneSide (", oneSide, ") is too large for a vector of length ", n, " - result is all-NA under fixed-window semantics (partial = FALSE).")
+    idx <- if (oneSide + 1 <= n - oneSide) seq.int(oneSide + 1, n - oneSide) else integer(0)
+    for (i in idx) y[i] <- mean(x[(i - oneSide):(i + oneSide)])
   }
   return(y)
 }
 
 
 # _________________________________________________________________________________________________
-#' @title Moving / rolling average (v2, filter)
+#' @title Moving / rolling average (v2, filter) [Deprecated]
 #' @description Calculates the moving / rolling average of a numeric vector, using `filter()`.
+#' Deprecated in favor of [movingAve()], which offers the same shrinking- vs. fixed-window
+#' choice (via `partial`) in a single implementation. Note `n` here is the *total* window
+#' width (unlike `movingAve()`'s `oneSide`, which is elements per side).
 #' @param x A numeric vector.
 #' @param n The size of the moving window. Defaults to 5.
 #' @return A vector of the moving averages.
@@ -3915,45 +3939,60 @@ movingAve <- function(x, oneSide = 5) {
 #'
 #' @export
 movingAve2 <- function(x, n = 5) {
+  .Deprecated("movingAve")
   filter(x, rep(1 / n, n), sides = 2)
 } # Calculates the moving / rolling average of a numeric vector, using filter().
 
 
 # _________________________________________________________________________________________________
 #' @title movingSEM
-#' @description Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
+#' @description Calculates the moving / rolling standard error of the mean (SEM) on a numeric
+#' vector. The window around element `i` spans `oneSide` elements on either side. Near the edges
+#' of `x`, the window either shrinks to whatever data is available (`partial = TRUE`, the
+#' default) or is left as `NA` because a full window does not exist (`partial = FALSE`).
 #' @param x A numeric vector.
-#' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
+#' @param oneSide The number of elements on each side of the moving window, in terms of the number of elements on either side of the current element.
+#' @param partial Should the window shrink near the edges instead of leaving them `NA`?
+#' Defaults to `TRUE`.
 #' @return A vector of the same length as `x`, containing the SEM for each element.
+#' @examples movingSEM(1:5)
 #' @export
-movingSEM <- function(x, oneSide = 5) {
-  # Calculates the moving / rolling standard error of the mean (SEM) on a numeric vector.
-  y <- NULL
-  for (i in oneSide:length(x)) {
-    y[i] <- sem(x[(i - oneSide):(i + oneSide)])
+movingSEM <- function(x, oneSide = 5, partial = TRUE) {
+  stopifnot(
+    "x must be a numeric vector" = is.numeric(x),
+    "oneSide must be a single non-negative number" = length(oneSide) == 1 && oneSide >= 0,
+    "partial must be TRUE or FALSE" = is.logical(partial) && length(partial) == 1
+  )
+
+  n <- length(x)
+  y <- rep(NA_real_, n)
+  if (partial) {
+    for (i in seq_along(x)) {
+      oneSideDynamic <- min(i - 1, oneSide, n - i)
+      y[i] <- sem(x[(i - oneSideDynamic):(i + oneSideDynamic)])
+    }
+  } else {
+    if (2 * oneSide + 1 > n) warning("oneSide (", oneSide, ") is too large for a vector of length ", n, " - result is all-NA under fixed-window semantics (partial = FALSE).")
+    idx <- if (oneSide + 1 <= n - oneSide) seq.int(oneSide + 1, n - oneSide) else integer(0)
+    for (i in idx) y[i] <- sem(x[(i - oneSide):(i + oneSide)])
   }
   return(y)
 }
 
 
 # _________________________________________________________________________________________________
-#' @title imovingSEM
+#' @title imovingSEM [Deprecated]
 #'
-#' @description Calculates the moving / rolling standard error of the mean (SEM). It computes values up to the edges of the vector using incrementally smaller window sizes.
+#' @description Calculates the moving / rolling standard error of the mean (SEM), shrinking the
+#' window near the edges. Deprecated: identical to `movingSEM(x, oneSide, partial = TRUE)`, use
+#' that instead.
 #' @param x A numeric vector.
 #' @param oneSide The size of the moving window, in terms of the number of elements on either side of the current element.
 #' @return A vector of the same length as `x`, containing the SEM for each element.
 #' @export
 imovingSEM <- function(x, oneSide = 5) {
-  # Calculates the moving / rolling standard error of the mean (SEM). It calculates it to the edge of the vector with incrementally smaller window-size.
-  y <- NULL
-  for (i in seq_along(x)) {
-    oneSideDynamic <- min(i - 1, oneSide, length(x) - i)
-    oneSideDynamic
-    indexx <- (i - oneSideDynamic):(i + oneSideDynamic)
-    y[i] <- sem(x[indexx])
-  }
-  return(y)
+  .Deprecated("movingSEM")
+  movingSEM(x, oneSide = oneSide, partial = TRUE)
 }
 
 
