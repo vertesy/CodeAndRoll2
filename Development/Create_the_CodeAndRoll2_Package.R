@@ -21,6 +21,19 @@ source(config.path)
 # Install your package ------------------------------------------------
 devtools::check_man(repository.dir)
 
+
+# Automated Codebase linting to tidyverse style ------------------------------------------------
+styler::style_pkg(repository.dir)
+
+
+# Replaces T with TRUE and F with FALSE ------------------------------------------------
+devtools::load_all("~/GitHub/Packages/PackageTools")
+(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
+for (scriptX in ls.scripts.full.path) {
+  PackageTools::replace_tf_with_true_false(scriptX)
+  PackageTools::replace_short_calls(scriptX)
+}
+
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 'git add commit push to remote'
 
@@ -44,9 +57,14 @@ checkres <- devtools::check(repository.dir, cran = FALSE)
 
 
 
-# Automated Codebase linting to tidyverse style ------------------------------------------------
-styler::style_pkg(repository.dir)
 
+# Replaces T with TRUE and F with FALSE ------------------------------------------------
+devtools::load_all("~/GitHub/Packages/PackageTools")
+(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
+for (scriptX in ls.scripts.full.path) {
+  PackageTools::replace_tf_with_true_false(scriptX)
+  PackageTools::replace_short_calls(scriptX)
+}
 
 # Extract package dependencies ------------------------------------------------
 PackageTools::extract_package_dependencies(repository.dir)
@@ -90,14 +108,6 @@ file.remove(paste0(repository.dir, "/R/list.of.functions.in.", package.name, ".d
 r$PackageTools()
 PackageTools::copy_github_badge("active") # Add badge to readme via clipboard
 file.edit(paste0(repository.dir, "README.md"))
-
-
-# Replaces T with TRUE and F with FALSE ------------------------------------------------
-(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
-for (scriptX in ls.scripts.full.path) {
-  PackageTools::replace_tf_with_true_false(scriptX)
-  PackageTools::replace_short_calls(scriptX)
-}
 
 
 

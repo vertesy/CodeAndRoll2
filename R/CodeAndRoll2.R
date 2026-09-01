@@ -179,7 +179,8 @@ savehistory_2rstudio <- function(history_file = "~/.local/share/rstudio/history_
 #' }
 #'
 #' @export
-savehistory_Rhist <- function() { current_dir <- getwd()
+savehistory_Rhist <- function() {
+  current_dir <- getwd()
 
   # Construct the file name using the current date and optionally the file name from RStudio
   script_name <- try(basename(rstudioapi::getSourceEditorContext()$path), silent = TRUE)
@@ -2503,7 +2504,7 @@ get_max_colname_per_row <- function(
   if (na.remove) mat[is.na(mat)] <- -Inf
 
   # Function to find the maximum indices (1 or more ) of values in a vector
-  .which.max.multi = function (x) which(x == max(x, na.rm = TRUE)) # unique formatting needed to avoid pattern matching.
+  .which.max.multi = function(x) which(x == max(x, na.rm = TRUE)) # unique formatting needed to avoid pattern matching.
 
   # Apply function to find the maximum indices to each row and return appropriate result
   max_indices_per_row <- lapply(seq_len(nrow(mat)), function(i) .which.max.multi(mat[i, ]))
