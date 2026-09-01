@@ -1094,7 +1094,7 @@ as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose
   stopifnot(!is.null(names(vec.w.names)))
 
   if (transpose) {
-    return(tibble::as_tibble_row(vec.w.names))
+    return(tibble::as_tibble_row(vec.w.names, .name_repair = "minimal"))
   }
 
   tibble::tibble(
