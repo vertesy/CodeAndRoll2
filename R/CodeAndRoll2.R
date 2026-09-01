@@ -834,7 +834,7 @@ table_decreasing_hybrid <- function(vec, first_elements = FALSE, useNA = "ifany"
 #' @export
 #' @examples getCategories(c("A" = 1, "B" = 1, "C" = 2, 3))
 getCategories <- function(named_categ_vec) {
-  named_categ_vec[names(unique(named_categ_vec))]
+  named_categ_vec[!duplicated(named_categ_vec)]
 }
 
 
