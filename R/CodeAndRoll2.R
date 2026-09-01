@@ -1049,7 +1049,8 @@ df.col.2.named.vector <- function(df, col, names = NULL) {
 df.row.2.named.vector <- function(df, row, names = NULL) {
   stopifnot(length(row) == 1)
 
-  vec <- as.vector(df[row, , drop = TRUE])
+  row_list <- lapply(df[row, , drop = TRUE], function(x) if (is.factor(x)) as.character(x) else x)
+  vec <- unlist(row_list, use.names = FALSE)
   names(vec) <- if (is.null(names)) colnames(df) else as.vector(unlist(df[names]))
   return(vec)
 }
