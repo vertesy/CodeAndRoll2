@@ -964,12 +964,11 @@ as.named.vector.table <- function(table, verbose = TRUE,
   stopifnot("table must be 1D" = length(dim(table)) <= 1)
   stopifnot(Stringendo::HasNames(table))
 
-  # NOTE: BUG -- the lines that would actually build 'v' are commented out below,
-  # so 'v' is never defined; any call to this (deprecated) function errors.
-  # v <- as.vector(unclass(table)); attributes(v) <- NULL; # Atomic vector with names
-  # names(v) <- dimnames(table)[[1]]
   # Even after unclass(), the dim attribute remains, and is.vector() only returns TRUE if
   # an object has no attributes other than names.
+  v <- as.vector(unclass(table), ...)
+  attributes(v) <- NULL
+  names(v) <- dimnames(table)[[1]]
 
   stopifnot(length(v) == length(table))
   return(v)
@@ -3928,7 +3927,7 @@ movingAve <- function(x, oneSide = 5, partial = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title Moving / rolling average (v2, filter) [Deprecated]
+#' @title Moving / rolling average (v2, filter) (Deprecated)
 #' @description Calculates the moving / rolling average of a numeric vector, using `filter()`.
 #' Deprecated in favor of [movingAve()], which offers the same shrinking- vs. fixed-window
 #' choice (via `partial`) in a single implementation. Note `n` here is the *total* window
@@ -3982,7 +3981,7 @@ movingSEM <- function(x, oneSide = 5, partial = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title imovingSEM [Deprecated]
+#' @title imovingSEM (Deprecated)
 #'
 #' @description Calculates the moving / rolling standard error of the mean (SEM), shrinking the
 #' window near the edges. Deprecated: identical to `movingSEM(x, oneSide, partial = TRUE)`, use

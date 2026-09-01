@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{imovingSEM}
 \alias{imovingSEM}
-\title{imovingSEM [Deprecated]}
+\title{imovingSEM (Deprecated)}
 \usage{
 imovingSEM(x, oneSide = 5)
 }
