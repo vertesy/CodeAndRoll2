@@ -1048,7 +1048,7 @@ df.col.2.named.vector <- function(df, col, names = NULL) {
 df.row.2.named.vector <- function(df, row, names = NULL) {
   stopifnot(length(row) == 1)
 
-  vec <- as.vector(df[row, , drop = TRUE])
+  vec <- unlist(df[row, , drop = TRUE], use.names = FALSE)
   names(vec) <- if (is.null(names)) colnames(df) else as.vector(unlist(df[names]))
   return(vec)
 }
