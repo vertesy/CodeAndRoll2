@@ -1092,15 +1092,15 @@ tibble_summary_to_namedVec <- function(
 #' @export
 as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose = TRUE) {
   stopifnot(!is.null(names(vec.w.names)))
-  # tbl <- dplyr::bind_rows(vec.w.names)
-  # if (transpose) t(tbl) else tbl
 
-  tbl <- tibble::tibble(
+  if (transpose) {
+    return(tibble::as_tibble_row(vec.w.names))
+  }
+
+  tibble::tibble(
     name = names(vec.w.names),
     value = unname(vec.w.names)
   )
-
-  if (transpose) t(as.matrix(tbl)) else tbl
 }
 
 
