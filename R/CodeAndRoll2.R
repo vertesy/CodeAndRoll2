@@ -2548,7 +2548,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All row IDs found")
     } # if
-    df <- df[true_rownames, ]
+    df <- df[true_rownames, , drop = FALSE]
   } # if
   if (length(ColIDs)) {
     true_colnames <- intersect(colnames(df), ColIDs)
@@ -2558,7 +2558,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All column IDs found")
     }
-    df <- df[, true_colnames]
+    df <- df[, true_colnames, drop = FALSE]
   } # if
   Stringendo::iprint(dim(df))
   return(df)
