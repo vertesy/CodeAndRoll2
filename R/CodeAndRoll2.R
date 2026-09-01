@@ -350,6 +350,7 @@ pLength <- function(x) {
 #' @param x The object whose unique elements to print and return. Default: None.
 #' @param head_n Max number of unique elements to print. Default: 20
 #' @return The input object `x`, unchanged.
+#' @export
 #' @examples
 #' results <- c(1, 2, 2, 3, 3, 3) |>
 #'   pU() |>
