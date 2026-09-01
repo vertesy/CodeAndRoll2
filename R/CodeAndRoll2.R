@@ -350,6 +350,7 @@ pLength <- function(x) {
 #' @param x The object whose unique elements to print and return. Default: None.
 #' @param head_n Max number of unique elements to print. Default: 20
 #' @return The input object `x`, unchanged.
+#' @export
 #' @examples
 #' results <- c(1, 2, 2, 3, 3, 3) |>
 #'   pU() |>
@@ -834,7 +835,7 @@ table_decreasing_hybrid <- function(vec, first_elements = FALSE, useNA = "ifany"
 #' @export
 #' @examples getCategories(c("A" = 1, "B" = 1, "C" = 2, 3))
 getCategories <- function(named_categ_vec) {
-  named_categ_vec[names(unique(named_categ_vec))]
+  named_categ_vec[!duplicated(named_categ_vec)]
 }
 
 
@@ -963,12 +964,11 @@ as.named.vector.table <- function(table, verbose = TRUE,
   stopifnot("table must be 1D" = length(dim(table)) <= 1)
   stopifnot(Stringendo::HasNames(table))
 
-  # NOTE: BUG -- the lines that would actually build 'v' are commented out below,
-  # so 'v' is never defined; any call to this (deprecated) function errors.
-  # v <- as.vector(unclass(table)); attributes(v) <- NULL; # Atomic vector with names
-  # names(v) <- dimnames(table)[[1]]
   # Even after unclass(), the dim attribute remains, and is.vector() only returns TRUE if
   # an object has no attributes other than names.
+  v <- as.vector(unclass(table), ...)
+  attributes(v) <- NULL
+  names(v) <- dimnames(table)[[1]]
 
   stopifnot(length(v) == length(table))
   return(v)
@@ -1049,7 +1049,8 @@ df.col.2.named.vector <- function(df, col, names = NULL) {
 df.row.2.named.vector <- function(df, row, names = NULL) {
   stopifnot(length(row) == 1)
 
-  vec <- as.vector(df[row, , drop = TRUE])
+  row_list <- lapply(df[row, , drop = TRUE], function(x) if (is.factor(x)) as.character(x) else x)
+  vec <- unlist(row_list, use.names = FALSE)
   names(vec) <- if (is.null(names)) colnames(df) else as.vector(unlist(df[names]))
   return(vec)
 }
@@ -1093,15 +1094,15 @@ tibble_summary_to_namedVec <- function(
 #' @export
 as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose = TRUE) {
   stopifnot(!is.null(names(vec.w.names)))
-  # tbl <- dplyr::bind_rows(vec.w.names)
-  # if (transpose) t(tbl) else tbl
 
-  tbl <- tibble::tibble(
+  if (transpose) {
+    return(tibble::as_tibble_row(vec.w.names, .name_repair = "minimal"))
+  }
+
+  tibble::tibble(
     name = names(vec.w.names),
     value = unname(vec.w.names)
   )
-
-  if (transpose) t(as.matrix(tbl)) else tbl
 }
 
 
@@ -1274,8 +1275,14 @@ translate <- function(vec, old, new) {
 #' @param upto max, Default: 100
 #' @export
 rescale <- function(vec, from = 0, upto = 100) {
-  vec <- vec - min(vec, na.rm = TRUE)
-  vec <- vec * ((upto - from) / max(vec, na.rm = TRUE))
+  vmin <- min(vec, na.rm = TRUE)
+  vmax <- max(vec, na.rm = TRUE)
+  if (vmax == vmin) {
+    vec[!is.na(vec)] <- from / 2 + upto / 2
+    return(vec)
+  }
+  vec <- vec - vmin
+  vec <- vec * ((upto - from) / (vmax - vmin))
   vec <- vec + from
   return(vec)
 } # fun
@@ -2548,7 +2555,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All row IDs found")
     } # if
-    df <- df[true_rownames, ]
+    df <- df[true_rownames, , drop = FALSE]
   } # if
   if (length(ColIDs)) {
     true_colnames <- intersect(colnames(df), ColIDs)
@@ -2558,7 +2565,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All column IDs found")
     }
-    df <- df[, true_colnames]
+    df <- df[, true_colnames, drop = FALSE]
   } # if
   Stringendo::iprint(dim(df))
   return(df)
@@ -3927,7 +3934,7 @@ movingAve <- function(x, oneSide = 5, partial = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title Moving / rolling average (v2, filter) [Deprecated]
+#' @title Moving / rolling average (v2, filter) (Deprecated)
 #' @description Calculates the moving / rolling average of a numeric vector, using `filter()`.
 #' Deprecated in favor of [movingAve()], which offers the same shrinking- vs. fixed-window
 #' choice (via `partial`) in a single implementation. Note `n` here is the *total* window
@@ -3981,7 +3988,7 @@ movingSEM <- function(x, oneSide = 5, partial = TRUE) {
 
 
 # _________________________________________________________________________________________________
-#' @title imovingSEM [Deprecated]
+#' @title imovingSEM (Deprecated)
 #'
 #' @description Calculates the moving / rolling standard error of the mean (SEM), shrinking the
 #' window near the edges. Deprecated: identical to `movingSEM(x, oneSide, partial = TRUE)`, use

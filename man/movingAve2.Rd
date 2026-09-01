@@ -2,7 +2,7 @@
 % Please edit documentation in R/CodeAndRoll2.R
 \name{movingAve2}
 \alias{movingAve2}
-\title{Moving / rolling average (v2, filter) [Deprecated]}
+\title{Moving / rolling average (v2, filter) (Deprecated)}
 \usage{
 movingAve2(x, n = 5)
 }
