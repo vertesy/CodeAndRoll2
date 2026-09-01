@@ -350,6 +350,7 @@ pLength <- function(x) {
 #' @param x The object whose unique elements to print and return. Default: None.
 #' @param head_n Max number of unique elements to print. Default: 20
 #' @return The input object `x`, unchanged.
+#' @export
 #' @examples
 #' results <- c(1, 2, 2, 3, 3, 3) |>
 #'   pU() |>
@@ -1048,7 +1049,8 @@ df.col.2.named.vector <- function(df, col, names = NULL) {
 df.row.2.named.vector <- function(df, row, names = NULL) {
   stopifnot(length(row) == 1)
 
-  vec <- as.vector(df[row, , drop = TRUE])
+  row_list <- lapply(df[row, , drop = TRUE], function(x) if (is.factor(x)) as.character(x) else x)
+  vec <- unlist(row_list, use.names = FALSE)
   names(vec) <- if (is.null(names)) colnames(df) else as.vector(unlist(df[names]))
   return(vec)
 }
@@ -1092,15 +1094,15 @@ tibble_summary_to_namedVec <- function(
 #' @export
 as_tibble_from_namedVec <- function(vec.w.names = c("a" = 1, "b" = 2), transpose = TRUE) {
   stopifnot(!is.null(names(vec.w.names)))
-  # tbl <- dplyr::bind_rows(vec.w.names)
-  # if (transpose) t(tbl) else tbl
 
-  tbl <- tibble::tibble(
+  if (transpose) {
+    return(tibble::as_tibble_row(vec.w.names, .name_repair = "minimal"))
+  }
+
+  tibble::tibble(
     name = names(vec.w.names),
     value = unname(vec.w.names)
   )
-
-  if (transpose) t(as.matrix(tbl)) else tbl
 }
 
 
@@ -2547,7 +2549,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All row IDs found")
     } # if
-    df <- df[true_rownames, ]
+    df <- df[true_rownames, , drop = FALSE]
   } # if
   if (length(ColIDs)) {
     true_colnames <- intersect(colnames(df), ColIDs)
@@ -2557,7 +2559,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All column IDs found")
     }
-    df <- df[, true_colnames]
+    df <- df[, true_colnames, drop = FALSE]
   } # if
   Stringendo::iprint(dim(df))
   return(df)
