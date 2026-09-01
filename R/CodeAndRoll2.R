@@ -1273,8 +1273,14 @@ translate <- function(vec, old, new) {
 #' @param upto max, Default: 100
 #' @export
 rescale <- function(vec, from = 0, upto = 100) {
-  vec <- vec - min(vec, na.rm = TRUE)
-  vec <- vec * ((upto - from) / max(vec, na.rm = TRUE))
+  vmin <- min(vec, na.rm = TRUE)
+  vmax <- max(vec, na.rm = TRUE)
+  if (vmax == vmin) {
+    vec[!is.na(vec)] <- (from + upto) / 2
+    return(vec)
+  }
+  vec <- vec - vmin
+  vec <- vec * ((upto - from) / (vmax - vmin))
   vec <- vec + from
   return(vec)
 } # fun
