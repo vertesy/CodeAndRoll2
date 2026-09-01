@@ -350,6 +350,7 @@ pLength <- function(x) {
 #' @param x The object whose unique elements to print and return. Default: None.
 #' @param head_n Max number of unique elements to print. Default: 20
 #' @return The input object `x`, unchanged.
+#' @export
 #' @examples
 #' results <- c(1, 2, 2, 3, 3, 3) |>
 #'   pU() |>
@@ -2553,7 +2554,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All row IDs found")
     } # if
-    df <- df[true_rownames, ]
+    df <- df[true_rownames, , drop = FALSE]
   } # if
   if (length(ColIDs)) {
     true_colnames <- intersect(colnames(df), ColIDs)
@@ -2563,7 +2564,7 @@ select_rows_and_columns <- function(df, RowIDs = NULL, ColIDs = NULL) {
     } else {
       Stringendo::iprint("All column IDs found")
     }
-    df <- df[, true_colnames]
+    df <- df[, true_colnames, drop = FALSE]
   } # if
   Stringendo::iprint(dim(df))
   return(df)
