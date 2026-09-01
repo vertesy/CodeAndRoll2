@@ -1278,7 +1278,7 @@ rescale <- function(vec, from = 0, upto = 100) {
   vmin <- min(vec, na.rm = TRUE)
   vmax <- max(vec, na.rm = TRUE)
   if (vmax == vmin) {
-    vec[!is.na(vec)] <- from + (upto - from) / 2
+    vec[!is.na(vec)] <- from / 2 + upto / 2
     return(vec)
   }
   vec <- vec - vmin
