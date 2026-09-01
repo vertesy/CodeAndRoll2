@@ -6,7 +6,7 @@
 \usage{
 df.remove.empty.rows.and.columns(
   df,
-  suffix = substitute_deparse(df),
+  suffix = Stringendo::substitute_deparse(df),
   rows = "rows",
   cols = "cols",
   thr.cell.empty = 0,

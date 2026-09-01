@@ -19,10 +19,10 @@ A vector of the same length as \code{x}, containing the moving average for each 
 }
 \description{
 Calculates the moving / rolling average of a numeric vector. The window around
-element \code{i} spans \code{oneSide} elements on either side (window width \code{2 * oneSide + 1}).
-Near the edges of \code{x}, the window either shrinks to whatever data is available
-(\code{partial = TRUE}, the default) or is left as \code{NA} because a full window does not exist
-(\code{partial = FALSE}), mirroring \code{zoo::rollmean(..., partial = )}.
+element \code{i} spans \code{oneSide} elements on either side (window width \code{2 * oneSide + 1}). Near the
+edges of \code{x}, the window either shrinks to whatever data is available (\code{partial = TRUE},
+the default) or is left as \code{NA} because a full window does not exist (\code{partial = FALSE}),
+mirroring \code{zoo::rollmean(..., partial = )}.
 }
 \examples{
 movingAve(1:5)
