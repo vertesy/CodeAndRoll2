@@ -38,11 +38,10 @@ Open each PR with a few bullets per major change: what was wrong, how it was fix
 - Scale the description to the change: a typo or comment-only fix needs one short line, not a paragraph.
 - Keep the whole description under 250 words; reserve that ceiling for genuinely complex PRs. If it doesn't fit, split the PR instead of writing more.
 
-### 4. Update the Source, Not Just the Documentation
+### 4.Update the Source, Not Just the Documentation
 
-Documentation is generated from upstream sources: `.Rd` files from roxygen annotations and `DESCRIPTION` from `Development/Dependencies.R` via `config.R`.
+Documentations rebuilt and overwritten from upstream sources: `.Rd` files from roxygen annotations and DESCRIPTION and NAMESPACE from  `config.R` by `PackageTools::document_and_create_package()` relying on  `devtools::document()`  when I manually, regularly run `/Development/CodeAndRoll2/Development/Create_the_CodeAndRoll2_Package.R")`. Thus  always update the upstream sources first, then fix the downstream documentations correspondingly.
 
-Package rebuilds overwrite these files, so always update the upstream source first, then regenerate the documentation.
 
 ## II: Repos of R function libraries
 
@@ -50,6 +49,7 @@ Package rebuilds overwrite these files, so always update the upstream source fir
 - Do not use tests.
 - Never update the package version unless the user explicitly requests a version change.
 - Do not raise code review findings that ask for a package version change.
+
 
 ## III: CodeAndRoll2 specific
 
