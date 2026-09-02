@@ -38,11 +38,11 @@ Open each PR with a few bullets per major change: what was wrong, how it was fix
 - Scale the description to the change: a typo or comment-only fix needs one short line, not a paragraph.
 - Keep the whole description under 250 words; reserve that ceiling for genuinely complex PRs. If it doesn't fit, split the PR instead of writing more.
 
-### 4. Update the Source, Not Just the Documentation
+### 4.Update the Source, Not Just the Documentation
 
-Documentation is generated from upstream sources: `.Rd` files from roxygen annotations and `DESCRIPTION` from `Development/Dependencies.R` via `config.R`.
+Documentations rebuilt and overwritten from upstream sources: `.Rd` files from roxygen annotations and DESCRIPTION and NAMESPACE from  `config.R` by `PackageTools::document_and_create_package()` relying on  `devtools::document()`  when I manually, regularly run `/Development/MYPACKAGE/Development/Create_the_MYPACKAGE_Package.R")`. Thus  always update the upstream sources first, then fix the downstream documentations correspondingly.
 
-Package rebuilds overwrite these files, so always update the upstream source first, then regenerate the documentation.
+
 
 ## II: Repos of R function libraries
 
@@ -50,6 +50,7 @@ Package rebuilds overwrite these files, so always update the upstream source fir
 - Do not use tests.
 - Never update the package version unless the user explicitly requests a version change.
 - Do not raise code review findings that ask for a package version change.
+- In `/Development/MYPACKAGE/Development/Create_the_MYPACKAGE_Package.R")`, `PackageTools::document_and_create_package()` recreates an R package’s metadata and documentation from a configuration file. It runs `devtools::document()` to regenerate package documentation, including the DESCRIPTION and NAMESPACE, from roxygen annotation and `config.R`. 
 
 ## III: CodeAndRoll2 specific
 
