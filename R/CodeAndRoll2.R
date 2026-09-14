@@ -251,8 +251,7 @@ pFilter <- function(x, cond, v = TRUE) {
       sum(mask), "/", length(x), " | Condition: ", deparse(cond_expr)
     )
   }
-
-  x[mask]
+  invisible(x[mask])
 }
 
 
@@ -316,7 +315,7 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
     message(size_msg, msg1)
     print(msg2)
   }
-  return(x) # Return value to the pipe
+  invisible(x) # Return value to the pipe
 }
 
 
@@ -340,7 +339,7 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
 pLength <- function(x) {
   stopifnot(!missing(x), is.atomic(x) || is.list(x))
   message("length: ", length(x))
-  return(x)
+  invisible(x)
 }
 
 
@@ -361,7 +360,7 @@ pU <- function(x, head_n = 20) {
   stopifnot(!missing(x), is.atomic(x) || is.list(x))
   sfx <- if (length(unique(x)) > head_n) " ..." else NULL
   Stringendo::imessage(length(unique(x)), "unique elements:", head(unique(x), head_n), sfx)
-  return(x)
+  invisible(x)
 }
 
 
