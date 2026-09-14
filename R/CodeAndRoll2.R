@@ -284,10 +284,10 @@ pSee <- function(x, head_vec = 100, head_df = 10) {
     "Input `x` must be supplied." = !missing(x),
     "Argument `head_vec` must be a positive whole-number numeric scalar." =
       length(head_vec) == 1L && is.numeric(head_vec) && is.finite(head_vec) &&
-        head_vec > 0 && head_vec == floor(head_vec),
+        head_vec >= 0 && head_vec == floor(head_vec),
     "Argument `head_df` must be a positive whole-number numeric scalar." =
       length(head_df) == 1L && is.numeric(head_df) && is.finite(head_df) &&
-        head_df > 0 && head_df == floor(head_df)
+        head_df >= 0 && head_df == floor(head_df)
   )
 
   # Check if object is complex (e.g., plot or S4) to avoid internal list printing
